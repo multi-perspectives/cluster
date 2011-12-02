@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.feature.cluster.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.feature.cluster.model.cluster.presentation.ClusterModelWizardID"
+            name="%_UI_ClusterModelWizard_label"
+            class="org.feature.cluster.model.cluster.presentation.ClusterModelWizard"
+            category="org.feature.cluster.category.ID"
+            icon="icons/full/obj16/ClusterModelFile.gif">
+         <description>%_UI_ClusterModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            class="org.feature.cluster.model.editor.editors.MultiPageEditor"
+            contributorClass="org.feature.cluster.model.editor.editors.MultiPageActionBarContributor"
+            default="true"
+            extensions="cluster"
+            icon="icons/full/obj16/ClusterModelFile.gif"
+            id="org.feature.cluster.model.editor.editors.MultiPageEditor"
+            name="Cluster Model Editor">
+      </editor>
+      <editor
+            class="org.feature.cluster.model.cluster.presentation.ClusterEditor"
+            contributorClass="org.feature.cluster.model.cluster.presentation.ClusterActionBarContributor"
+            default="false"
+            extensions="cluster"
+            icon="icons/full/obj16/ClusterModelFile.gif"
+            id="org.feature.cluster.model.cluster.presentation.ClusterEditorID"
+            name="%_UI_ClusterEditor_label">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:org.eclipse.ui.popup.any?before=additions">
+         <command
+               commandId="org.feature.cluster.model.editor.filterFeatureModel"
+               label="create filtered Featuremodel"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <iterate
+                     operator="and">
+                  <instanceof
+                        value="org.feature.cluster.model.cluster.ViewPoint">
+                  </instanceof>
+               </iterate>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.feature.cluster.model.editor.category"
+            defaultHandler="org.feature.cluster.model.editor.editors.FilterFeatureModelHandler"
+            id="org.feature.cluster.model.editor.filterFeatureModel"
+            name="filterFeatureModel">
+      </command>
+      <category
+            id="org.feature.cluster.model.editor.category"
+            name="filterFeatureModelCategory">
+      </category>
+   </extension>
+
+</plugin>
