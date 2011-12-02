@@ -133,7 +133,7 @@ public class FilteredFeatureModel {
 	 * check the viewpoint
 	 * @param viewPoint the view point
 	 * @param views the views
-	 * @param coreGroup 
+	 * @param coreGroup the coreGroup
 	 */
 	private View checkViewpoint(ViewPoint viewPoint, List<View> views, CoreGroup coreGroup,HashMap<EObject,View> viewMemory) {
 		EList<Group> containedInGroup = viewPoint.getContainedInGroup();
