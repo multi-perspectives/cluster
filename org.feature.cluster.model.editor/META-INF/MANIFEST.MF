@@ -27,5 +27,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.featuremapper.models.feature.editor;bundle-version="0.8.0",
  org.featuremapper.validation.owl;bundle-version="0.8.0",
  org.eclipse.emf.validation;bundle-version="1.4.0",
- org.eclipse.ui.console;bundle-version="3.5.100"
+ org.eclipse.ui.console;bundle-version="3.5.100",
+ org.featuremapper.common;bundle-version="0.8.8",
+ org.featuremapper.ui;bundle-version="0.8.8"
 Bundle-ActivationPolicy: lazy

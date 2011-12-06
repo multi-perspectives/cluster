@@ -5,10 +5,12 @@ package org.feature.cluster.model.editor.zest.view;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.ui.ViewerPane;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -40,6 +42,7 @@ import org.featuremapper.models.featuremapping.SolutionModelRef;
  *
  */
 public class ZestView  extends ViewerPane implements IZoomableWorkbenchPart {
+	Logger log = Logger.getLogger(ZestView.class);
 	public static final String ID = "de.vogella.zest.jface.view";
 	private GraphViewer viewer;
 	private MultiPageEditor multiPageEditor;
@@ -111,13 +114,24 @@ public class ZestView  extends ViewerPane implements IZoomableWorkbenchPart {
 				break;
 			}
 		}
+		if (featureMappingModel == null) {
+			log.error("Could not find a mapping.");
+			return;
+		}
 		EList<SolutionModelRef> solutionModels = featureMappingModel.getSolutionModels();
 		GroupModel groupModel = null;
 		for (SolutionModelRef solutionModelRef : solutionModels) {
 			EObject value = solutionModelRef.getValue();
+			EList<EObject> eContents = value.eContents();
+			boolean eIsProxy = value.eIsProxy();
+			EObject resolve = EcoreUtil.resolve(value, featureMappingModel.eResource());
 			if (value instanceof GroupModel) {
 				groupModel = (GroupModel) value;
 			}
+		}
+		if (groupModel == null) {
+			log.error("Could not find a Groupmodel in the mapping.");
+			return;
 		}
 		if (featureMappingModel != null && groupModel != null) {
 			nodeModelContentProvider = new NodeModelContentProvider(featureMappingModel,groupModel);

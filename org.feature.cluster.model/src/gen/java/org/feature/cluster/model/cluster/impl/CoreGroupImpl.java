@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -74,9 +75,24 @@ public class CoreGroupImpl extends EObjectImpl implements CoreGroup {
 	 */
 	public EList<Group> getGroups() {
 		if (groups == null) {
-			groups = new EObjectContainmentEList<Group>(Group.class, this, ClusterPackage.CORE_GROUP__GROUPS);
+			groups = new EObjectContainmentWithInverseEList<Group>(Group.class, this, ClusterPackage.CORE_GROUP__GROUPS, ClusterPackage.GROUP__PARENT_GROUP);
 		}
 		return groups;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ClusterPackage.CORE_GROUP__GROUPS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGroups()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**

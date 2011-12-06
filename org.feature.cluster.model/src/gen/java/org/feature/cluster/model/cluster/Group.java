@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.feature.cluster.model.cluster.Group#getViewPointReference <em>View Point Reference</em>}</li>
+ *   <li>{@link org.feature.cluster.model.cluster.Group#getParentGroup <em>Parent Group</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,6 +45,34 @@ public interface Group extends IGroupContainer, Element {
 	 * @generated
 	 */
 	EList<ViewPoint> getViewPointReference();
+
+	/**
+	 * Returns the value of the '<em><b>Parent Group</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.feature.cluster.model.cluster.IGroupContainer#getGroups <em>Groups</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parent Group</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parent Group</em>' container reference.
+	 * @see #setParentGroup(IGroupContainer)
+	 * @see org.feature.cluster.model.cluster.ClusterPackage#getGroup_ParentGroup()
+	 * @see org.feature.cluster.model.cluster.IGroupContainer#getGroups
+	 * @model opposite="groups" transient="false"
+	 * @generated
+	 */
+	IGroupContainer getParentGroup();
+
+	/**
+	 * Sets the value of the '{@link org.feature.cluster.model.cluster.Group#getParentGroup <em>Parent Group</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Parent Group</em>' container reference.
+	 * @see #getParentGroup()
+	 * @generated
+	 */
+	void setParentGroup(IGroupContainer value);
 
 	/**
 	 * <!-- begin-user-doc -->

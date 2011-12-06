@@ -11,14 +11,31 @@
   <foreignModel>cluster.ecore</foreignModel>
   <genPackages prefix="Cluster" basePackage="org.feature.cluster.model" disposableProviderFactory="true"
       ecorePackage="cluster.ecore#/">
-    <genClasses ecoreClass="cluster.ecore#//DefaultGroup">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//DefaultGroup/groups"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//DefaultGroup/clients"/>
+    <genClasses ecoreClass="cluster.ecore#//CoreGroup"/>
+    <genClasses ecoreClass="cluster.ecore#//Group">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cluster.ecore#//Group/viewPointReference"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cluster.ecore#//Group/parentGroup"/>
+      <genOperations ecoreOperation="cluster.ecore#//Group/checkForRedundantViewPoints">
+        <genParameters ecoreParameter="cluster.ecore#//Group/checkForRedundantViewPoints/eDiagnosticChain"/>
+        <genParameters ecoreParameter="cluster.ecore#//Group/checkForRedundantViewPoints/eMap"/>
+      </genOperations>
     </genClasses>
-    <genClasses ecoreClass="cluster.ecore#//Group"/>
-    <genClasses ecoreClass="cluster.ecore#//Client"/>
+    <genClasses ecoreClass="cluster.ecore#//ViewPoint">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference cluster.ecore#//ViewPoint/containedInGroup"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="cluster.ecore#//Element">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cluster.ecore#//Element/name"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="cluster.ecore#//IGroupContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//IGroupContainer/groups"/>
+    </genClasses>
+    <genClasses ecoreClass="cluster.ecore#//GroupModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//GroupModel/coreGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//GroupModel/viewPoints"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cluster.ecore#//IViewPointContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//IViewPointContainer/viewPoints"/>
+    </genClasses>
+    <genClasses ecoreClass="cluster.ecore#//ViewPointContainer"/>
   </genPackages>
 </genmodel:GenModel>

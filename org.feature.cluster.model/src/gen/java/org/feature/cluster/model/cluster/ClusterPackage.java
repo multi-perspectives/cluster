@@ -163,13 +163,22 @@ public interface ClusterPackage extends EPackage {
 	int GROUP__VIEW_POINT_REFERENCE = IGROUP_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Parent Group</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GROUP__PARENT_GROUP = IGROUP_CONTAINER_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Group</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GROUP_FEATURE_COUNT = IGROUP_CONTAINER_FEATURE_COUNT + 2;
+	int GROUP_FEATURE_COUNT = IGROUP_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -352,6 +361,17 @@ public interface ClusterPackage extends EPackage {
 	EReference getGroup_ViewPointReference();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.feature.cluster.model.cluster.Group#getParentGroup <em>Parent Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Parent Group</em>'.
+	 * @see org.feature.cluster.model.cluster.Group#getParentGroup()
+	 * @see #getGroup()
+	 * @generated
+	 */
+	EReference getGroup_ParentGroup();
+
+	/**
 	 * Returns the meta object for class '{@link org.feature.cluster.model.cluster.ViewPoint <em>View Point</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -526,6 +546,14 @@ public interface ClusterPackage extends EPackage {
 		 * @generated
 		 */
 		EReference GROUP__VIEW_POINT_REFERENCE = eINSTANCE.getGroup_ViewPointReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Parent Group</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GROUP__PARENT_GROUP = eINSTANCE.getGroup_ParentGroup();
 
 		/**
 		 * The meta object literal for the '{@link org.feature.cluster.model.cluster.impl.ViewPointImpl <em>View Point</em>}' class.

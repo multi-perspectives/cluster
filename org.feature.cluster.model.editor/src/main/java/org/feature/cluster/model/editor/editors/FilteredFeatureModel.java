@@ -63,9 +63,12 @@ public class FilteredFeatureModel {
 			}
 		}
 		EList<Mapping> mappings = featureMappingModel.getMappings();
-		long timeMillis = System.currentTimeMillis();
 		ViewCreater viewCreater = new ViewCreater(allFeatures,mappings,  groupModel.getCoreGroup());
 		List<View> views2 = viewCreater.getViews();
+		long timeMillis = System.currentTimeMillis();
+		new IncrementalAlgorithm(views2,groupModel);
+		log.debug("time: " + (System.currentTimeMillis() - timeMillis));
+		timeMillis = System.currentTimeMillis();
 		//view consistency check
 //		checkViews(views2);
 		Set<View> checkViewPoints = checkViewPoints(groupModel,views2);
@@ -124,7 +127,7 @@ public class FilteredFeatureModel {
 		HashMap<EObject,View> viewMemory = new HashMap<EObject, View>();
 		Set<View> viewPoints2 = new HashSet<View>();
 		for (ViewPoint viewPoint : viewPoints) {
-			log.debug("ViewPoint: " + viewPoint.getName());
+//			log.debug("ViewPoint: " + viewPoint.getName());
 			viewPoints2.add(checkViewpoint(viewPoint,views,groupModel.getCoreGroup(),viewMemory));
 		}
 		return viewPoints2;
@@ -140,8 +143,8 @@ public class FilteredFeatureModel {
 		Set<Set<View>> setOfPaths = new HashSet<Set<View>>();
 		for (Group group : containedInGroup) {
 			List<EObject> groups = getGroupPath(group,coreGroup);
-			log.debug("check path for: " + group.getName());
-//			viewMemory.clear(); // performance test without memory
+//			log.debug("check path for: " + group.getName());
+			viewMemory.clear(); // performance test without memory
 			Set<View> path = new HashSet<View>();
 			if (!viewMemory.containsKey(group)) {
 				path = checkPath(groups,views,viewMemory);
@@ -152,22 +155,22 @@ public class FilteredFeatureModel {
 			setOfPaths.add(path);
 		}
 		if (setOfPaths.isEmpty()) {
-			log.debug("check path for: coreGroup");
-			log.debug(views.get(0).group);
-//			views.get(0).isConsistent();
-			log.debug(views.get(0).isConsistent());
+//			log.debug("check path for: coreGroup");
+//			log.debug(views.get(0).group);
+			views.get(0).isConsistent();
+//			log.debug(views.get(0).isConsistent());
 			return views.get(0);
 		}else{
 			Set<Feature> features = new HashSet<Feature>();
 			for (Set<View> path : setOfPaths) {
 				for (View view : path) {
-					log.debug(view.isConsistent());
+//					log.debug(view.isConsistent());
 					features.addAll(view.features);
 				}
 			}
 			View view = new View(viewPoint, features);
 //			view.isConsistent();
-			log.debug(view.isConsistent() + "\n");
+//			log.debug(view.isConsistent() + "\n");
 			return view;
 		}
 	}
