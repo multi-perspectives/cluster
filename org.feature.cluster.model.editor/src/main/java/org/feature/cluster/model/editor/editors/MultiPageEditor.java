@@ -1411,7 +1411,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
 	 * @param viewPoint 
 	 */
 	public void createFilteredFeatureModel(ViewPoint viewPoint) {
-		new FilteredFeatureModel(mappingResource,viewPoint);
+		new FilteredFeatureModel(mappingResource,viewPoint,this);
 	}
 
 	/**

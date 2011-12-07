@@ -9,7 +9,10 @@ import java.util.Set;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.zest.core.widgets.GraphConnection;
 import org.eclipse.zest.core.widgets.GraphNode;
 import org.featuremapper.models.feature.Constraint;
@@ -123,5 +126,17 @@ public class Util {
 //			log.debug("\t" + feature.getName() + " is missing his parent: " + parentFeature.getName());
 			return false;
 		}
+	}
+	
+	/**
+	 * Opens a save Dialog.
+	 * @param defaultFileName a default file name.
+	 * @param shell the shell is a needed parent for the dialog.
+	 * @return the filename and path.
+	 */
+	public static String save(String defaultFileName, Shell shell) {
+		FileDialog fd = new FileDialog(shell,SWT.SAVE); //find shell
+		fd.setFileName(defaultFileName);
+		return fd.open();
 	}
 }

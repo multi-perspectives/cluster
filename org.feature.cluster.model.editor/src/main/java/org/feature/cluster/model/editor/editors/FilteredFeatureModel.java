@@ -18,6 +18,7 @@ import org.feature.cluster.model.cluster.GroupModel;
 import org.feature.cluster.model.cluster.ViewPoint;
 import org.feature.cluster.model.editor.editors.algorithms.BruteForceAlgorithm;
 import org.feature.cluster.model.editor.editors.algorithms.IncrementalAlgorithm;
+import org.feature.cluster.model.editor.util.Util;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.featuremapping.FeatureMappingModel;
 import org.featuremapper.models.featuremapping.FeatureModelRef;
@@ -32,13 +33,14 @@ import org.featuremapper.models.featuremapping.SolutionModelRef;
  */
 public class FilteredFeatureModel {
 	private static Logger log = Logger.getLogger(FilteredFeatureModel.class);
-	
+	private MultiPageEditor multiPageEditor;
 	/**
 	 * 
 	 * @param mappingResource
 	 * @param viewPoint
 	 */
-	public FilteredFeatureModel(Resource mappingResource, ViewPoint viewPoint) {
+	public FilteredFeatureModel(Resource mappingResource, ViewPoint viewPoint, MultiPageEditor multiPageEditor) {
+		this.multiPageEditor = multiPageEditor;
 		EList<EObject> contents = mappingResource.getContents();
 		FeatureMappingModel featureMappingModel = null;
 		for (EObject eObject : contents) {
@@ -100,7 +102,7 @@ public class FilteredFeatureModel {
 	 * @param view the features to the viewpoint
 	 */
 	private void createFeatureModel(FeatureMappingModel featureMappingModel, ViewPoint viewPoint, View view){
-		log.debug("#Features for a ViewPoint:  " + view.getFeatures().size());
+		log.info("#Features for a ViewPoint:  " + view.getFeatures().size());
 		Map<String, Feature> featureMap = new HashMap<String, Feature>();
 		Set<Feature> features = view.getFeatures();
 		for (Feature feature : features) {
@@ -110,13 +112,16 @@ public class FilteredFeatureModel {
 		Filter filter = new Filter(org,featureMap);
 		
 		log.debug(filter.fm);
-		ResourceSet rst = new ResourceSetImpl();//TODO Save Dialog
-		Resource resource = rst.createResource(URI.createPlatformResourceURI("/Test/" + featureMappingModel.getFeatureModel().getValue().getName() + "_" + viewPoint.getName() + ".feature",true));
-		resource.getContents().add(filter.fm);
-		try {
-			resource.save(Collections.EMPTY_MAP);
-		} catch (IOException e) {
-			log.error(e.getMessage());
+		String saveFileName = Util.save(featureMappingModel.getFeatureModel().getValue().getName() + "_" + viewPoint.getName() + ".feature",multiPageEditor.getSite().getShell());
+		if (saveFileName != null && !saveFileName.isEmpty()) {
+			ResourceSet rst = new ResourceSetImpl();
+			Resource resource = rst.createResource(URI.createPlatformResourceURI(saveFileName,true));
+			resource.getContents().add(filter.fm);
+			try {
+				resource.save(Collections.EMPTY_MAP);
+			} catch (IOException e) {
+				log.error(e.getMessage());
+			}
 		}
 	}
 
