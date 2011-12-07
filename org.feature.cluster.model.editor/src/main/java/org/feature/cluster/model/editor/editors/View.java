@@ -4,13 +4,19 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.feature.cluster.model.cluster.Group;
+import org.feature.cluster.model.cluster.GroupModel;
 import org.feature.cluster.model.editor.util.Util;
 import org.featuremapper.models.feature.Feature;
 
+/**
+ * This class represents a mapping between a {@link Group} from the {@link GroupModel} and a {@link Set} of {@link Feature}. 
+ * @author Tim Winkelmann
+ *
+ */
 public class View {
 //	private static Logger log = Logger.getLogger(View.class);
-	EObject group;
-	Set<Feature> features;
+	private EObject group;
+	private Set<Feature> features;
 	
 	/**
 	 * @param group
@@ -36,10 +42,24 @@ public class View {
 	}
 	
 	/**
-	 * checks the hierarchy of the features, the cardininalities and the constraint
-	 * @return
+	 * checks the hierarchy of the features, the cardinalities and the constraint.
+	 * @return true if no violation is found.
 	 */
 	public boolean isConsistent(){
 		return Util.isConsistent(features);
+	}
+
+	/**
+	 * @return the group
+	 */
+	public EObject getGroup() {
+		return group;
+	}
+
+	/**
+	 * @return the features
+	 */
+	public Set<Feature> getFeatures() {
+		return features;
 	}
 }

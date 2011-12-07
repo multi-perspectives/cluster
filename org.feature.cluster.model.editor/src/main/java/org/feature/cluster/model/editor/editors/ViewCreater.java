@@ -44,9 +44,9 @@ public class ViewCreater {
 		List<EObject> listOfGroups = createMapOfGroups();
 		views = createViews(listOfGroups);
 		for (View view : views) {
-			if (view.group.equals(coreGroup)) {
+			if (view.getGroup().equals(coreGroup)) {
 				allFeatures.removeAll(mappedFeatures);
-				view.features.addAll(allFeatures);
+				view.getFeatures().addAll(allFeatures);
 			}
 		}
 	}

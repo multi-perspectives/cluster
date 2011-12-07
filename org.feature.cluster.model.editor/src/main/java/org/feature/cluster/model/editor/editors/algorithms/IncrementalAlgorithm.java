@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.feature.cluster.model.editor.editors;
+package org.feature.cluster.model.editor.editors.algorithms;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,6 +16,7 @@ import org.feature.cluster.model.cluster.Group;
 import org.feature.cluster.model.cluster.GroupModel;
 import org.feature.cluster.model.cluster.IGroupContainer;
 import org.feature.cluster.model.cluster.ViewPoint;
+import org.feature.cluster.model.editor.editors.View;
 import org.feature.cluster.model.editor.util.Util;
 import org.featuremapper.models.feature.Feature;
 
@@ -40,7 +41,7 @@ public class IncrementalAlgorithm {
 	public IncrementalAlgorithm(List<View> views, GroupModel groupModel) {
 		HashMap<EObject, View> views2 = new HashMap<EObject, View>();
 		for (View view : views) {
-			views2.put(view.group, view);
+			views2.put(view.getGroup(), view);
 		}
 		this.views = views2;
 		this.groupModel = groupModel;
@@ -101,7 +102,7 @@ public class IncrementalAlgorithm {
 	 */
 	private Map<IGroupContainer,UsedGroup> createMSGM(Set<Group> groups) {
 		Map<IGroupContainer,UsedGroup> usedGroups = new HashMap<IGroupContainer, UsedGroup>();
-		ugCG = new UsedGroup(null, groupModel.getCoreGroup(),views.get(groupModel.getCoreGroup()).features);
+		ugCG = new UsedGroup(null, groupModel.getCoreGroup(),views.get(groupModel.getCoreGroup()).getFeatures());
 		ugCG.setDone();
 		ugCG.setConsistent(Util.isConsistent(ugCG.getFeatures()));
 		usedGroups.put(groupModel.getCoreGroup(), ugCG);
@@ -116,7 +117,7 @@ public class IncrementalAlgorithm {
 				
 				Set<Feature> features = new HashSet<Feature>();
 				features.addAll(ugParent.getFeatures());
-				features.addAll(views.get(group).features);
+				features.addAll(views.get(group).getFeatures());
 				UsedGroup ug = new UsedGroup(ugParent, group, features);
 				usedGroups.put(group, ug);
 			}
@@ -143,7 +144,7 @@ public class IncrementalAlgorithm {
 		
 		Set<Feature> features = new HashSet<Feature>();
 		features.addAll(ugParent.getFeatures());
-		features.addAll(views.get(group).features);
+		features.addAll(views.get(group).getFeatures());
 		UsedGroup ug = new UsedGroup(ugParent, group, features);
 		ugs.put(group, ug);
 		return ug;

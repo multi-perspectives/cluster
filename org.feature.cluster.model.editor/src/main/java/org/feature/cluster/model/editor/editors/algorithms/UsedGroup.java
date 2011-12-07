@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.feature.cluster.model.editor.editors;
+package org.feature.cluster.model.editor.editors.algorithms;
 
 
 import java.util.HashSet;
