@@ -10,7 +10,6 @@ import org.eclipse.emf.common.ui.ViewerPane;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -122,9 +121,6 @@ public class ZestView  extends ViewerPane implements IZoomableWorkbenchPart {
 		GroupModel groupModel = null;
 		for (SolutionModelRef solutionModelRef : solutionModels) {
 			EObject value = solutionModelRef.getValue();
-			EList<EObject> eContents = value.eContents();
-			boolean eIsProxy = value.eIsProxy();
-			EObject resolve = EcoreUtil.resolve(value, featureMappingModel.eResource());
 			if (value instanceof GroupModel) {
 				groupModel = (GroupModel) value;
 			}

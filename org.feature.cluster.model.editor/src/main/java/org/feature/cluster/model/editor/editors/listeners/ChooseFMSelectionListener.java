@@ -3,22 +3,14 @@
  */
 package org.feature.cluster.model.editor.editors.listeners;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.emf.common.ui.dialogs.WorkspaceResourceDialog;
-import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
 import org.feature.cluster.model.editor.editors.MultiPageEditor;
-import org.featuremapper.common.utils.FeatureMappingUtil;
-import org.featuremapper.ui.views.filter.FileExtensionViewerFilter;
 
 /**
  * Listener for the selection of the FeatureMapping.
@@ -47,7 +39,7 @@ public class ChooseFMSelectionListener implements SelectionListener {
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		// open FileDialog for workspace.
-		browseMapping();
+//		browseMapping();
 		
 		 FileDialog dialog = new FileDialog (parentComposite.getShell(),
 		 SWT.OPEN);
@@ -69,21 +61,21 @@ public class ChooseFMSelectionListener implements SelectionListener {
 	/**
 	 * opens a Dialog to choose a mapping.
 	 */
-	private void browseMapping() {
-		List<ViewerFilter> filters = new ArrayList<ViewerFilter>();
-		FileExtensionViewerFilter featureModelViewerFilter = new FileExtensionViewerFilter(
-				FeatureMappingUtil.getMappingModelExtensions());
-		filters.add(featureModelViewerFilter);
-		IFile[] selectedFiles = WorkspaceResourceDialog.openFileSelection(
-				parentComposite.getShell(), "Choose mapping",
-				"Please choose a mapping:", false, null, filters);
-
-		if (selectedFiles.length > 0) {
-			String path = selectedFiles[0].getFullPath().toFile().getPath();
-			log.debug(path);
-			mpe.setFeatureMapping(path);
-		}
-	}
+//	private void browseMapping() {
+//		List<ViewerFilter> filters = new ArrayList<ViewerFilter>();
+//		FileExtensionViewerFilter featureModelViewerFilter = new FileExtensionViewerFilter(
+//				FeatureMappingUtil.getMappingModelExtensions());
+//		filters.add(featureModelViewerFilter);
+//		IFile[] selectedFiles = WorkspaceResourceDialog.openFileSelection(
+//				parentComposite.getShell(), "Choose mapping",
+//				"Please choose a mapping:", false, null, filters);
+//
+//		if (selectedFiles.length > 0) {
+//			String path = selectedFiles[0].getFullPath().toFile().getPath();
+//			log.debug(path);
+//			mpe.setFeatureMapping(path);
+//		}
+//	}
 
 	/*
 	 * (non-Javadoc)

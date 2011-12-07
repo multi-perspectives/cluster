@@ -10,17 +10,14 @@ import java.util.Set;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.ui.console.ConsolePlugin;
-import org.eclipse.ui.console.IConsole;
-import org.eclipse.ui.console.IConsoleManager;
-import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.zest.core.widgets.GraphConnection;
 import org.eclipse.zest.core.widgets.GraphNode;
 import org.featuremapper.models.feature.Constraint;
 import org.featuremapper.models.feature.Feature;
 
 /**
- * @author winkelti
+ * Utility class for the cluster editor.
+ * @author Tim Winkelmann
  * 
  */
 public class Util {
@@ -30,26 +27,6 @@ public class Util {
 	public static final Color unattachedGraphConnectionLineColor = new Color(null, 192, 192, 192);
 	public static List<GraphNode> attachedGraphNodes = new LinkedList<GraphNode>();
 	public static List<GraphConnection> highlightedGraphConnections = new LinkedList<GraphConnection>();
-	public static final String consoleName = "Cluster";
-
-	/**
-	 * fins a console by a name.
-	 * 
-	 * @param name use the {@link Util}.consoleName
-	 * @return a Console
-	 */
-	public static MessageConsole findConsole(String name) {
-		ConsolePlugin plugin = ConsolePlugin.getDefault();
-		IConsoleManager conMan = plugin.getConsoleManager();
-		IConsole[] existing = conMan.getConsoles();
-		for (int i = 0; i < existing.length; i++)
-			if (name.equals(existing[i].getName()))
-				return (MessageConsole) existing[i];
-		// no console found, so create a new one
-		MessageConsole myConsole = new MessageConsole(name, null);
-		conMan.addConsoles(new IConsole[] { myConsole });
-		return myConsole;
-	}
 	
 	/**
 	 * checks the hierarchy of the features, the cardininalities and the constraint.

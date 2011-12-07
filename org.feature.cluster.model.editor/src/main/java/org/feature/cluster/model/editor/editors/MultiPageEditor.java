@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.WriterAppender;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -432,30 +431,15 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
 
 	private String mappingResourcePath;
 	private static Logger log = Logger.getLogger(MultiPageEditor.class);
-	private WriterAppender wa = null;
+	
 	/**
 	 * Creates a multi-page editor example.
 	 */
 	public MultiPageEditor() {
 		super();
-//		initLogger();
-		Log4JAppender app = Log4JAppender.app;
 		initializeEditingDomain();
 		FilterFeatureModelHandler.multiPageEditor = this;
 	}
-	
-//	/**
-//	 * initializes the logger to print on the target platfrom console.
-//	 */
-//	private void initLogger() {
-//		//add console to log4j
-//		if (wa == null) {
-//			MessageConsole findConsole = Util.findConsole(Util.consoleName);
-//			Layout layout = new SimpleLayout();
-//			wa = new WriterAppender(layout , findConsole.newMessageStream());
-//			log.addAppender(wa);
-//		}
-//	}
 
 	/**
 	 * This sets up the editing domain for the model editor.
@@ -499,7 +483,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
 						  });
 				 }
 			 });
-
+		
 		// Create the editing domain with a special command stack.
 		//
 		editingDomain = new AdapterFactoryEditingDomain(adapterFactory, commandStack, new HashMap<Resource, Boolean>());
