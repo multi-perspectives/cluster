@@ -89,7 +89,6 @@ public class Filter {
 	 * @return
 	 */
 	private Feature copyFeature(Feature orgFeature, Group parentGroup) {
-//		System.out.println("Copy Feature: " + orgFeature.getName());
 		Feature feature = EcoreUtil.copy(orgFeature);
 		copyGroups(feature.getGroups(), feature);
 		feature.setParentGroup(parentGroup);
@@ -102,14 +101,15 @@ public class Filter {
 	 * @return
 	 */
 	private void copyGroups(EList<Group> groups,Feature parentFeature) {
-		List<Feature> features = new LinkedList<Feature>();
-		
+		List<Feature> features = null;
+		boolean removeGroups = false;
+		List<Group> removeGroupsList = new LinkedList<Group>();
 		for (Group group : groups) {
+			features = new LinkedList<Feature>();
 			int numberOfOriginalFeatures = group.getChildFeatures().size();
 			List<Feature> childFeatures = new LinkedList<Feature>();
 			childFeatures.addAll(group.getChildFeatures());
 			for (Feature feature : childFeatures) {
-//				System.out.println("compare: " + feature.getName());
 				if (featureMap.containsKey(feature.getName())) {
 					Feature copyFeature = copyFeature(feature, group);
 					features.add(copyFeature);
@@ -118,8 +118,10 @@ public class Filter {
 			group.getChildFeatures().clear();
 			group.getChildFeatures().addAll(features);
 			group.setParentFeature(parentFeature);
-			if (group.getChildFeatures().size() < group.getMinCardinality()) {
-//				System.out.println("Group removed");
+			if (group.getChildFeatures().isEmpty()) {
+				removeGroups=true;//memory a group for removal.
+				removeGroupsList.add(group);
+				continue;
 			}
 			if (group.getMaxCardinality() > 0) { // max could be -1
 				group.setMaxCardinality(group.getMaxCardinality() - (numberOfOriginalFeatures - group.getChildFeatures().size()));
@@ -128,6 +130,9 @@ public class Filter {
 				}
 			}
 //			System.out.println(group.getMinCardinality() + ":" + group.getMaxCardinality());
+		}
+		if (removeGroups) {
+			groups.removeAll(removeGroupsList);
 		}
 	}
 }

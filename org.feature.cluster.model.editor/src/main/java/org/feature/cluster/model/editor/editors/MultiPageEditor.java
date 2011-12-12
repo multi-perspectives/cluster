@@ -43,7 +43,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
@@ -114,6 +113,7 @@ import org.feature.cluster.model.cluster.GroupModel;
 import org.feature.cluster.model.cluster.ViewPoint;
 import org.feature.cluster.model.cluster.presentation.ClusterEditorPlugin;
 import org.feature.cluster.model.cluster.provider.ClusterItemProviderAdapterFactory;
+import org.feature.cluster.model.editor.editors.algorithms.IncrementalAlgorithmHandler;
 import org.feature.cluster.model.editor.editors.listeners.ChooseFMSelectionListener;
 import org.feature.cluster.model.editor.editors.listeners.ReloadMappingButtonListener;
 import org.feature.cluster.model.editor.editors.listeners.ViewPointComboSelectionListener;
@@ -438,6 +438,8 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
 	public MultiPageEditor() {
 		super();
 		initializeEditingDomain();
+		log.debug("Init Handlers");
+		IncrementalAlgorithmHandler.multiPageEditor = this;
 		FilterFeatureModelHandler.multiPageEditor = this;
 	}
 
@@ -1374,7 +1376,8 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
 			refresh.setEnabled(true);
 		}
 		mappingResourcePath = mapping;
-		ResourceSet rst = new ResourceSetImpl();
+		ResourceSet rst = getEditingDomain().getResourceSet();
+		EcoreUtil.resolveAll(rst);
 		URI uri = URI.createFileURI(mapping);
 		mappingResource = rst.getResource(uri, true);
 		long timeStamp = mappingResource.getTimeStamp(); //compare timeStamp && URI with the one before
@@ -1382,7 +1385,8 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
 			mappingURI = uri;
 			mappingTimeStamp = timeStamp;
 			zestView.init(mappingResource);
-		}else if(uri.equals(mappingURI) && mappingTimeStamp == timeStamp){
+		}
+		else if(uri.equals(mappingURI) && mappingTimeStamp == timeStamp){
 			return;
 		}
 		mappingURI = uri;
@@ -1390,6 +1394,8 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
 		zestView.init(mappingResource);
 	}
 
+	
+	
 	/**
 	 * highlight the nodes and connections.
 	 * @param nodesForHighlighting

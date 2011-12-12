@@ -10,7 +10,7 @@ public class Connection {
 	private Node targetNode;
 	
 	/**
-	 * creates a connection between two node.
+	 * creates a connection between two nodes.
 	 * @param src the source {@link Node}.
 	 * @param target the target {@link Node}.
 	 */
@@ -21,20 +21,22 @@ public class Connection {
 	
 	/**
 	 * No Label required.
-	 * @return
+	 * @return an empty string.
 	 */
 	public String getLabel() {
 		return "";
 	}
 
 	/**
-	 * @return the sourceNode
+	 * get the source node.
+	 * @return the sourceNode.
 	 */
 	public Node getSourceNode() {
 		return sourceNode;
 	}
 
 	/**
+	 * get the target node.
 	 * @return the targetNode
 	 */
 	public Node getTargetNode() {

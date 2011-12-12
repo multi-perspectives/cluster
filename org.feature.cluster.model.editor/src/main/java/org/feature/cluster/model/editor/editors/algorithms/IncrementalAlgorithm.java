@@ -53,6 +53,7 @@ public class IncrementalAlgorithm {
 	 */
 	private void run() {
 		EList<ViewPoint> viewPoints = groupModel.getViewPoints().getViewPoints();
+		log.info("Number of ViewPoints: " + viewPoints.size());
 		Set<Group> groups = new HashSet<Group>();
 		//get important groups
 		for (ViewPoint viewPoint : viewPoints) {
@@ -69,13 +70,25 @@ public class IncrementalAlgorithm {
 				checkGroupModel(g,usedGroups);
 			}
 		}
-//		Collection<UsedGroup> values = usedGroups.values();
-//		log.debug("i: " + i);
-//		for (UsedGroup usedGroup : values) {
-//			if (!usedGroup.isDone()) {
-//				log.error("Group is not done! " + usedGroup.getGroup());
-//			}
-//		}//Test the algorithm
+		//Display results:
+		for (ViewPoint vp : viewPoints) {
+			log.info("Viewpoint: " + vp.getName());
+			boolean isCon = true;
+			EList<Group> groups2 = vp.getContainedInGroup();
+			for (Group group : groups2) {
+				UsedGroup usedGroup = usedGroups.get(group);
+				boolean consistent = usedGroup.isConsistent();
+				log.info("View: " + group.getName() + ":" + consistent);
+				if (isCon && !consistent) {
+					isCon = false;
+				}
+			}
+			if (isCon) {
+				log.info("Viewpoint: " + vp.getName() + " is consistent\n");
+			}else{
+				log.info("Viewpoint: " + vp.getName() + " is not consistent\n");
+			}
+		}
 	}
 
 	/**

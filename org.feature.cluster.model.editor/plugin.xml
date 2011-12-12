@@ -33,14 +33,14 @@
             extensions="cluster"
             icon="icons/full/obj16/ClusterModelFile.gif"
             id="org.feature.cluster.model.editor.editors.MultiPageEditor"
-            name="Cluster Model Editor">
+            name="%_UI_ClusterEditor_label">
       </editor>
       <editor
             class="org.feature.cluster.model.cluster.presentation.ClusterEditor"
             contributorClass="org.feature.cluster.model.cluster.presentation.ClusterActionBarContributor"
             default="false"
             extensions="cluster"
-            icon="icons/full/obj16/ClusterModelFile.gif"
+            icon="icons/full/wizban/NewCluster.gif"
             id="org.feature.cluster.model.cluster.presentation.ClusterEditorID"
             name="%_UI_ClusterEditor_label">
       </editor>
@@ -65,6 +65,18 @@
             </visibleWhen>
          </command>
       </menuContribution>
+      <menuContribution
+            allPopups="true"
+            locationURI="menu:org.eclipse.ui.main.menu?before=additions">
+         <menu
+               label="Cluster Editor">
+            <command
+                  commandId="org.feature.cluster.model.editor.incAlg"
+                  label="Viewpoint validation"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -77,6 +89,17 @@
       <category
             id="org.feature.cluster.model.editor.category"
             name="filterFeatureModelCategory">
+      </category>
+      <command
+            categoryId="org.feature.cluster.model.editor.algorithm"
+            defaultHandler="org.feature.cluster.model.editor.editors.algorithms.IncrementalAlgorithmHandler"
+            description="Starts the validaion of all ViewPoints"
+            id="org.feature.cluster.model.editor.incAlg"
+            name="incrementalAlgorithm">
+      </command>
+      <category
+            id="org.feature.cluster.model.editor.algorithm"
+            name="validationAlgorithms">
       </category>
    </extension>
 

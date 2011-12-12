@@ -115,7 +115,7 @@ public class FilteredFeatureModel {
 		String saveFileName = Util.save(featureMappingModel.getFeatureModel().getValue().getName() + "_" + viewPoint.getName() + ".feature",multiPageEditor.getSite().getShell());
 		if (saveFileName != null && !saveFileName.isEmpty()) {
 			ResourceSet rst = new ResourceSetImpl();
-			Resource resource = rst.createResource(URI.createPlatformResourceURI(saveFileName,true));
+			Resource resource = rst.createResource(URI.createFileURI(saveFileName));
 			resource.getContents().add(filter.fm);
 			try {
 				resource.save(Collections.EMPTY_MAP);
@@ -124,6 +124,4 @@ public class FilteredFeatureModel {
 			}
 		}
 	}
-
-
 }

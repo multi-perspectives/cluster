@@ -30,7 +30,7 @@ public class FilterFeatureModelHandler extends AbstractHandler {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.core.commands.AbstractHandler#isEnabled()
+	 * @see org.eclipse.core.combattmands.AbstractHandler#isEnabled()
 	 */
 	@Override
 	public boolean isEnabled() {
