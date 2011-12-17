@@ -48,6 +48,10 @@ public class Util {
 			EList<Constraint> constraints = feature.getConstraints();
 			for (Constraint constraint : constraints) {
 				// check constraint
+				//skip excludes
+				if (constraint.getExpression().toLowerCase().contains("not")) {
+					continue;
+				}
 				if(features.containsAll(constraint.getConstrainedFeatures())){
 					if (constraint.getLanguage().equals("OWL")) {
 						boolean exprCheck = false;
