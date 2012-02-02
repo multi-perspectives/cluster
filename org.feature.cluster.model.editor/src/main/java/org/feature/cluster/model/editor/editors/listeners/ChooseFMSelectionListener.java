@@ -8,14 +8,12 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.ui.dialogs.WorkspaceResourceDialog;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.FileDialog;
 import org.feature.cluster.model.editor.editors.MultiPageEditor;
 import org.featuremapper.common.utils.FeatureMappingUtil;
 import org.featuremapper.ui.views.filter.FileExtensionViewerFilter;
@@ -47,23 +45,23 @@ public class ChooseFMSelectionListener implements SelectionListener {
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		// open FileDialog for workspace.
-//		browseMapping();
-		
-		 FileDialog dialog = new FileDialog (parentComposite.getShell(),
-		 SWT.OPEN);
-		 String [] filterNames = new String [] {"FeatureMapping",
-		 "All Files (*)"};
-		 String [] filterExtensions = new String [] {"*.featuremapping", "*"};
-		 String filterPath =
-		 ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString();
-		 dialog.setFilterNames (filterNames);
-		 dialog.setFilterExtensions (filterExtensions);
-		 dialog.setFilterPath (filterPath);
-		 dialog.setFileName ("featureClusterMapping");
-		 // call mpe with the FeatureMapping
-		 String path = dialog.open();
-		 log.debug(path);
-		 mpe.setFeatureMapping(path);
+		browseMapping();
+//		 Old version of the file dialog. 
+//		 FileDialog dialog = new FileDialog (parentComposite.getShell(),
+//		 SWT.OPEN);
+//		 String [] filterNames = new String [] {"FeatureMapping",
+//		 "All Files (*)"};
+//		 String [] filterExtensions = new String [] {"*.featuremapping", "*"};
+//		 String filterPath =
+//		 ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString();
+//		 dialog.setFilterNames (filterNames);
+//		 dialog.setFilterExtensions (filterExtensions);
+//		 dialog.setFilterPath (filterPath);
+//		 dialog.setFileName ("featureClusterMapping");
+//		 // call mpe with the FeatureMapping
+//		 String path = dialog.open();
+//		 log.debug(path);
+//		 mpe.setFeatureMapping(path);
 	}
 	
 	/**
@@ -79,9 +77,10 @@ public class ChooseFMSelectionListener implements SelectionListener {
 				"Please choose a mapping:", false, null, filters);
 
 		if (selectedFiles.length > 0) {
-			String path = selectedFiles[0].getFullPath().toFile().getPath();
+			String path = selectedFiles[0].getFullPath().toString();
 			log.debug(path);
-			mpe.setFeatureMapping(path);
+			URI uri = URI.createPlatformResourceURI(path, true);
+			mpe.setFeatureMapping(uri.toString());
 		}
 	}
 

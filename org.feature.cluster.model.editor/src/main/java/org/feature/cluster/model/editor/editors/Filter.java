@@ -65,7 +65,13 @@ public class Filter {
 					break;
 				}
 			}
-			if (!this.featureMap.containsKey(constraint.getExpression().replaceAll("\"", ""))) {
+			String expr = constraint.getExpression();
+			expr = expr.replaceAll("\"", "");
+			int index = expr.toLowerCase().indexOf("not ", 0);
+			if (index == 0) {
+				expr = expr.substring(4);
+			}
+			if (!this.featureMap.containsKey(expr)) {
 				remove = true;
 			}
 			if (!remove) { //replace old references with new

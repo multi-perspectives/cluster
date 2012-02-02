@@ -121,11 +121,6 @@ public class ZestView  extends ViewerPane implements IZoomableWorkbenchPart {
 		GroupModel groupModel = null;
 		for (SolutionModelRef solutionModelRef : solutionModels) {
 			EObject value = solutionModelRef.getValue();
-			if(value.eIsProxy()){
-				
-				EObject test = org.eclipse.emf.ecore.util.EcoreUtil.resolve(value,res.getResourceSet());
-				test.eIsProxy();
-			}
 			if (value instanceof GroupModel) {
 				groupModel = (GroupModel) value;
 			}

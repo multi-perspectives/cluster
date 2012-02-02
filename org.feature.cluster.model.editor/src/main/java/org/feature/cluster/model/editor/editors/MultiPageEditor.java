@@ -1378,7 +1378,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
 		mappingResourcePath = mapping;
 		ResourceSet rst = getEditingDomain().getResourceSet();
 		EcoreUtil.resolveAll(rst);
-		URI uri = URI.createFileURI(mapping);
+		URI uri = URI.createURI(mapping);
 		mappingResource = rst.getResource(uri, true);
 		long timeStamp = mappingResource.getTimeStamp(); //compare timeStamp && URI with the one before
 		if (mappingTimeStamp == -1) {
