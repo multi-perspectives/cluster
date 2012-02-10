@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cluster:GroupModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:cluster="http://org.feature.cluster.model/schema/1.0">
+  <coreGroup>
+    <groups name="LongDistanceCall" viewPointReference="//@viewPoints/@viewPoints.1 //@viewPoints/@viewPoints.2 //@viewPoints/@viewPoints.4"/>
+    <groups name="InternalResource" viewPointReference="//@viewPoints/@viewPoints.0 //@viewPoints/@viewPoints.3">
+      <groups name="HumanResource" viewPointReference="//@viewPoints/@viewPoints.1 //@viewPoints/@viewPoints.2 //@viewPoints/@viewPoints.4"/>
+    </groups>
+    <groups name="Mission" viewPointReference="//@viewPoints/@viewPoints.1 //@viewPoints/@viewPoints.0 //@viewPoints/@viewPoints.2 //@viewPoints/@viewPoints.4"/>
+    <groups name="ITOption" viewPointReference="//@viewPoints/@viewPoints.0 //@viewPoints/@viewPoints.3">
+      <groups name="BackUpSystem" viewPointReference="//@viewPoints/@viewPoints.1 //@viewPoints/@viewPoints.4"/>
+    </groups>
+    <groups name="ExternalServicesUsed">
+      <groups name="GovermentalServices">
+        <groups name="Army" viewPointReference="//@viewPoints/@viewPoints.1 //@viewPoints/@viewPoints.2">
+          <groups name="TheArmy" viewPointReference="//@viewPoints/@viewPoints.0 //@viewPoints/@viewPoints.3 //@viewPoints/@viewPoints.4"/>
+        </groups>
+        <groups name="Police" viewPointReference="//@viewPoints/@viewPoints.1 //@viewPoints/@viewPoints.2 //@viewPoints/@viewPoints.4"/>
+        <groups name="FireDepartment" viewPointReference="//@viewPoints/@viewPoints.0 //@viewPoints/@viewPoints.3"/>
+      </groups>
+    </groups>
+  </coreGroup>
+  <viewPoints>
+    <viewPoints name="2" containedInGroup="//@coreGroup/@groups.1 //@coreGroup/@groups.2 //@coreGroup/@groups.3 //@coreGroup/@groups.4/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.4/@groups.0/@groups.2"/>
+    <viewPoints name="1" containedInGroup="//@coreGroup/@groups.0 //@coreGroup/@groups.1/@groups.0 //@coreGroup/@groups.2 //@coreGroup/@groups.3/@groups.0 //@coreGroup/@groups.4/@groups.0/@groups.0 //@coreGroup/@groups.4/@groups.0/@groups.1"/>
+    <viewPoints name="3" containedInGroup="//@coreGroup/@groups.0 //@coreGroup/@groups.1/@groups.0 //@coreGroup/@groups.2 //@coreGroup/@groups.4/@groups.0/@groups.0 //@coreGroup/@groups.4/@groups.0/@groups.1"/>
+    <viewPoints name="4" containedInGroup="//@coreGroup/@groups.1 //@coreGroup/@groups.3 //@coreGroup/@groups.4/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.4/@groups.0/@groups.2"/>
+    <viewPoints name="5" containedInGroup="//@coreGroup/@groups.0 //@coreGroup/@groups.1/@groups.0 //@coreGroup/@groups.2 //@coreGroup/@groups.3/@groups.0 //@coreGroup/@groups.4/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.4/@groups.0/@groups.1"/>
+  </viewPoints>
+</cluster:GroupModel>

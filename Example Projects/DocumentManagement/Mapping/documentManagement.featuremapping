@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="ASCII"?>
+<featuremapping:FeatureMappingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:featuremapping="http://www.tudresden.de/featuremapping" composerID="org.featuremapper.interpreter.emf.interpreter">
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../Cluster/documentManagement.cluster#//@coreGroup/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../FeatureModel/documentmanagement.feature#UnicodeTextType"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../Cluster/documentManagement.cluster#//@coreGroup/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../FeatureModel/documentmanagement.feature#AuthorIndex"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../FeatureModel/documentmanagement.feature#AuthorSearch"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../Cluster/documentManagement.cluster#//@coreGroup/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../FeatureModel/documentmanagement.feature#TitleIndex"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../FeatureModel/documentmanagement.feature#ContentIndex"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../FeatureModel/documentmanagement.feature#MetaDataIndex"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../FeatureModel/documentmanagement.feature#TitleSearch"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../FeatureModel/documentmanagement.feature#MetaDataSearch"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../FeatureModel/documentmanagement.feature#ContentSearch"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../Cluster/documentManagement.cluster#//@coreGroup/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../FeatureModel/documentmanagement.feature#ImageType"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../FeatureModel/documentmanagement.feature#OCR"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../FeatureModel/documentmanagement.feature#PDFOCR"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../FeatureModel/documentmanagement.feature#ImageOCR"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../Cluster/documentManagement.cluster#//@coreGroup/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../FeatureModel/documentmanagement.feature#ImageType"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../FeatureModel/documentmanagement.feature#PDFType"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../FeatureModel/documentmanagement.feature#GeneralIndex"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../FeatureModel/documentmanagement.feature#GeneralSearch"/>
+      </terms>
+    </term>
+  </mappings>
+  <featureModel>
+    <value href="../FeatureModel/documentmanagement.feature#/"/>
+  </featureModel>
+  <solutionModels>
+    <value href="../Cluster/documentManagement.cluster#/"/>
+  </solutionModels>
+</featuremapping:FeatureMappingModel>

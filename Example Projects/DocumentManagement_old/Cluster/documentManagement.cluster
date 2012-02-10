@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cluster:GroupModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:cluster="http://org.feature.cluster.model/schema/1.0">
+  <coreGroup>
+    <groups name="Basic">
+      <groups name="Customized" viewPointReference="//@viewPoints/@viewPoints.0"/>
+    </groups>
+    <groups name="Premium" viewPointReference="//@viewPoints/@viewPoints.0">
+      <groups name="Silver"/>
+      <groups name="Gold"/>
+    </groups>
+  </coreGroup>
+  <viewPoints>
+    <viewPoints name="SpecialUser" containedInGroup="//@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.1"/>
+  </viewPoints>
+</cluster:GroupModel>
