@@ -12,7 +12,8 @@ import org.eclipse.core.expressions.EvaluationContext;
 import org.feature.cluster.model.cluster.ViewPoint;
 
 /**
- * @author winkelti
+ * 
+ * @author Tim Winkelmann
  *
  */
 public class FilterFeatureModelHandler extends AbstractHandler {
