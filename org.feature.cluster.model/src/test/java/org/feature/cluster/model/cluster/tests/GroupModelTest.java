@@ -22,72 +22,72 @@ import org.feature.cluster.model.cluster.GroupModel;
 public class GroupModelTest extends TestCase {
 
 	/**
-	 * The fixture for this Group Model test case.
-	 * <!-- begin-user-doc -->
+    * The fixture for this Group Model test case.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	protected GroupModel fixture = null;
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public static void main(String[] args) {
-		TestRunner.run(GroupModelTest.class);
-	}
+      TestRunner.run(GroupModelTest.class);
+   }
 
 	/**
-	 * Constructs a new Group Model test case with the given name.
-	 * <!-- begin-user-doc -->
+    * Constructs a new Group Model test case with the given name.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public GroupModelTest(String name) {
-		super(name);
-	}
+      super(name);
+   }
 
 	/**
-	 * Sets the fixture for this Group Model test case.
-	 * <!-- begin-user-doc -->
+    * Sets the fixture for this Group Model test case.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	protected void setFixture(GroupModel fixture) {
-		this.fixture = fixture;
-	}
+      this.fixture = fixture;
+   }
 
 	/**
-	 * Returns the fixture for this Group Model test case.
-	 * <!-- begin-user-doc -->
+    * Returns the fixture for this Group Model test case.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	protected GroupModel getFixture() {
-		return fixture;
-	}
+      return fixture;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#setUp()
-	 * @generated
-	 */
+    * @see junit.framework.TestCase#setUp()
+    * @generated
+    */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(ClusterFactory.eINSTANCE.createGroupModel());
-	}
+      setFixture(ClusterFactory.eINSTANCE.createGroupModel());
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#tearDown()
-	 * @generated
-	 */
+    * @see junit.framework.TestCase#tearDown()
+    * @generated
+    */
 	@Override
 	protected void tearDown() throws Exception {
-		setFixture(null);
-	}
+      setFixture(null);
+   }
 
 } //GroupModelTest

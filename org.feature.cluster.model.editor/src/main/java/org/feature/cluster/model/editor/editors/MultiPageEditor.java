@@ -112,6 +112,7 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
 import org.eclipse.zest.core.viewers.ZoomContributionViewItem;
 import org.feature.cluster.model.cluster.GroupModel;
 import org.feature.cluster.model.cluster.ViewPoint;
+import org.feature.cluster.model.cluster.ViewPointContainer;
 import org.feature.cluster.model.cluster.presentation.ClusterEditorPlugin;
 import org.feature.cluster.model.cluster.provider.ClusterItemProviderAdapterFactory;
 import org.feature.cluster.model.editor.editors.algorithms.IncrementalAlgorithmHandler;
@@ -716,8 +717,9 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
 			Notifier notifier = allContents.next();
 			if (notifier instanceof GroupModel) {
 				GroupModel groupModel = (GroupModel) notifier;
-				if (groupModel.getViewPoints() != null) {
-					EList<ViewPoint> viewPoints = groupModel.getViewPoints().getViewPoints();
+				ViewPointContainer viewpointContainer = groupModel.getViewPointContainer();
+				if (viewpointContainer != null) {
+					EList<ViewPoint> viewPoints = viewpointContainer.getViewPoints();
 					for (ViewPoint viewPoint : viewPoints) {
 						viewPointNames.add(viewPoint.getName());
 					}

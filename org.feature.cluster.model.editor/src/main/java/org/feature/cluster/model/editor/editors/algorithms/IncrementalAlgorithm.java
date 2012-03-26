@@ -52,7 +52,7 @@ public class IncrementalAlgorithm {
 	 * 
 	 */
 	private void run() {
-		EList<ViewPoint> viewPoints = groupModel.getViewPoints().getViewPoints();
+		EList<ViewPoint> viewPoints = groupModel.getViewPointContainer().getViewPoints();
 		log.info("Number of ViewPoints: " + viewPoints.size());
 		Set<Group> groups = new HashSet<Group>();
 		//get important groups

@@ -31,15 +31,15 @@
         eType="#//Group" containment="true" eOpposite="#//Group/parentGroup"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GroupModel">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="coreGroup" eType="#//CoreGroup"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="viewPoints" eType="#//ViewPointContainer"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="coreGroup" lowerBound="1"
+        eType="#//CoreGroup" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="viewPointContainer" lowerBound="1"
+        eType="#//ViewPointContainer" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IViewPointContainer" abstract="true"
-      interface="true">
+      interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ViewPointContainer" eSuperTypes="#//IViewPointContainer">
     <eStructuralFeatures xsi:type="ecore:EReference" name="viewPoints" upperBound="-1"
         eType="#//ViewPoint" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ViewPointContainer" eSuperTypes="#//IViewPointContainer"/>
 </ecore:EPackage>

@@ -42,7 +42,7 @@ public class BruteForceAlgorithm {
 	 * @param views2 contains all views
 	 */
 	private Set<View> checkViewPoints() {
-		EList<ViewPoint> viewPoints = groupModel.getViewPoints().getViewPoints();
+		EList<ViewPoint> viewPoints = groupModel.getViewPointContainer().getViewPoints();
 		HashMap<EObject,View> viewMemory = new HashMap<EObject, View>();
 		Set<View> viewPoints2 = new HashSet<View>();
 		for (ViewPoint viewPoint : viewPoints) {

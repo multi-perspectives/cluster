@@ -31,11 +31,11 @@
     </genClasses>
     <genClasses ecoreClass="cluster.ecore#//GroupModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//GroupModel/coreGroup"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//GroupModel/viewPoints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//GroupModel/viewPointContainer"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="cluster.ecore#//IViewPointContainer">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//IViewPointContainer/viewPoints"/>
+    <genClasses image="false" ecoreClass="cluster.ecore#//IViewPointContainer"/>
+    <genClasses ecoreClass="cluster.ecore#//ViewPointContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//ViewPointContainer/viewPoints"/>
     </genClasses>
-    <genClasses ecoreClass="cluster.ecore#//ViewPointContainer"/>
   </genPackages>
 </genmodel:GenModel>

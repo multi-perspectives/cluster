@@ -204,7 +204,7 @@ public class NodeModelContentProvider {
 		// create group nodes
 		createGroupNodes(groupModel.getCoreGroup().getGroups());
 		// create viewPoint nodes
-		createViewPointNodes(groupModel.getViewPoints().getViewPoints());
+		createViewPointNodes(groupModel.getViewPointContainer().getViewPoints());
 		for (GroupNode groupNode : groupdNodes.values()) {
 			EList<ViewPoint> viewPointReference = groupNode.getGroup().getViewPointReference();
 			for (ViewPoint viewPoint : viewPointReference) {
