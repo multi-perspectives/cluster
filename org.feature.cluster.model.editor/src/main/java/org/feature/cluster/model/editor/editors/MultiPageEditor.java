@@ -27,6 +27,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
@@ -552,6 +553,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
 			savedResources.clear();
 		}
 	}
+	
 	/**
 	 * Handles what to do with changed resources on activation.
 	 * <!-- begin-user-doc -->
