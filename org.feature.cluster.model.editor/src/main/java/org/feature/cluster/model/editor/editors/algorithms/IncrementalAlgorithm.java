@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.feature.cluster.model.cluster.Group;
 import org.feature.cluster.model.cluster.GroupModel;
-import org.feature.cluster.model.cluster.IGroupContainer;
+import org.feature.cluster.model.cluster.IGroup;
 import org.feature.cluster.model.cluster.ViewPoint;
 import org.feature.cluster.model.editor.editors.View;
 import org.feature.cluster.model.editor.util.Util;
@@ -59,7 +59,7 @@ public class IncrementalAlgorithm {
 		for (ViewPoint viewPoint : viewPoints) {
 			groups.addAll(viewPoint.getContainedInGroup());
 		}
-		Map<IGroupContainer,UsedGroup> usedGroups = createMSGM(groups);
+		Map<IGroup,UsedGroup> usedGroups = createMSGM(groups);
 		//
 		for (Group g : ugCG.getGroup().getGroups()) {
 			if (usedGroups.containsKey(g)) {
@@ -96,7 +96,7 @@ public class IncrementalAlgorithm {
 	 * @param group
 	 * @param usedGroups
 	 */
-	private void checkGroupModel(Group group, Map<IGroupContainer,UsedGroup> usedGroups) {
+	private void checkGroupModel(Group group, Map<IGroup,UsedGroup> usedGroups) {
 		for(Group g : group.getGroups()){
 			if (usedGroups.containsKey(g)) {
 				UsedGroup ug = usedGroups.get(g);
@@ -113,8 +113,8 @@ public class IncrementalAlgorithm {
 	 * @param groups most specific groups
 	 * @return
 	 */
-	private Map<IGroupContainer,UsedGroup> createMSGM(Set<Group> groups) {
-		Map<IGroupContainer,UsedGroup> usedGroups = new HashMap<IGroupContainer, UsedGroup>();
+	private Map<IGroup,UsedGroup> createMSGM(Set<Group> groups) {
+		Map<IGroup,UsedGroup> usedGroups = new HashMap<IGroup, UsedGroup>();
 		ugCG = new UsedGroup(null, groupModel.getCoreGroup(),views.get(groupModel.getCoreGroup()).getFeatures());
 		ugCG.setDone();
 		ugCG.setConsistent(Util.isConsistent(ugCG.getFeatures()));
@@ -144,7 +144,7 @@ public class IncrementalAlgorithm {
 	 * @param ugs a list of most specific group.
 	 * @return the most specific group.
 	 */
-	private UsedGroup createMSG(Group group,Map<IGroupContainer,UsedGroup> ugs) {
+	private UsedGroup createMSG(Group group,Map<IGroup,UsedGroup> ugs) {
 		if (ugs.containsKey(group)) {
 			return ugs.get(group);
 		}

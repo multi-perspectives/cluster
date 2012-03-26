@@ -60,34 +60,34 @@ public interface ClusterPackage extends EPackage {
 	ClusterPackage eINSTANCE = org.feature.cluster.model.cluster.impl.ClusterPackageImpl.init();
 
 	/**
-    * The meta object id for the '{@link org.feature.cluster.model.cluster.IGroupContainer <em>IGroup Container</em>}' class.
+    * The meta object id for the '{@link org.feature.cluster.model.cluster.IGroup <em>IGroup</em>}' class.
     * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-    * @see org.feature.cluster.model.cluster.IGroupContainer
-    * @see org.feature.cluster.model.cluster.impl.ClusterPackageImpl#getIGroupContainer()
+    * <!-- end-user-doc -->
+    * @see org.feature.cluster.model.cluster.IGroup
+    * @see org.feature.cluster.model.cluster.impl.ClusterPackageImpl#getIGroup()
     * @generated
     */
-	int IGROUP_CONTAINER = 4;
+   int IGROUP = 4;
 
-	/**
+   /**
     * The feature id for the '<em><b>Groups</b></em>' containment reference list.
     * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+    * <!-- end-user-doc -->
     * @generated
     * @ordered
     */
-	int IGROUP_CONTAINER__GROUPS = 0;
+   int IGROUP__GROUPS = 0;
 
-	/**
-    * The number of structural features of the '<em>IGroup Container</em>' class.
+   /**
+    * The number of structural features of the '<em>IGroup</em>' class.
     * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+    * <!-- end-user-doc -->
     * @generated
     * @ordered
     */
-	int IGROUP_CONTAINER_FEATURE_COUNT = 1;
+   int IGROUP_FEATURE_COUNT = 1;
 
-	/**
+   /**
     * The meta object id for the '{@link org.feature.cluster.model.cluster.impl.CoreGroupImpl <em>Core Group</em>}' class.
     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -104,7 +104,7 @@ public interface ClusterPackage extends EPackage {
     * @generated
     * @ordered
     */
-	int CORE_GROUP__GROUPS = IGROUP_CONTAINER__GROUPS;
+	int CORE_GROUP__GROUPS = IGROUP__GROUPS;
 
 	/**
     * The number of structural features of the '<em>Core Group</em>' class.
@@ -113,7 +113,7 @@ public interface ClusterPackage extends EPackage {
     * @generated
     * @ordered
     */
-	int CORE_GROUP_FEATURE_COUNT = IGROUP_CONTAINER_FEATURE_COUNT + 0;
+	int CORE_GROUP_FEATURE_COUNT = IGROUP_FEATURE_COUNT + 0;
 
 	/**
     * The meta object id for the '{@link org.feature.cluster.model.cluster.impl.ElementImpl <em>Element</em>}' class.
@@ -142,7 +142,7 @@ public interface ClusterPackage extends EPackage {
     * @generated
     * @ordered
     */
-	int GROUP__GROUPS = IGROUP_CONTAINER__GROUPS;
+	int GROUP__GROUPS = IGROUP__GROUPS;
 
 	/**
     * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -151,7 +151,7 @@ public interface ClusterPackage extends EPackage {
     * @generated
     * @ordered
     */
-	int GROUP__NAME = IGROUP_CONTAINER_FEATURE_COUNT + 0;
+	int GROUP__NAME = IGROUP_FEATURE_COUNT + 0;
 
 	/**
     * The feature id for the '<em><b>View Point Reference</b></em>' reference list.
@@ -160,7 +160,7 @@ public interface ClusterPackage extends EPackage {
     * @generated
     * @ordered
     */
-	int GROUP__VIEW_POINT_REFERENCE = IGROUP_CONTAINER_FEATURE_COUNT + 1;
+	int GROUP__VIEW_POINT_REFERENCE = IGROUP_FEATURE_COUNT + 1;
 
 	/**
     * The feature id for the '<em><b>Parent Group</b></em>' container reference.
@@ -169,7 +169,7 @@ public interface ClusterPackage extends EPackage {
     * @generated
     * @ordered
     */
-	int GROUP__PARENT_GROUP = IGROUP_CONTAINER_FEATURE_COUNT + 2;
+	int GROUP__PARENT_GROUP = IGROUP_FEATURE_COUNT + 2;
 
 	/**
     * The number of structural features of the '<em>Group</em>' class.
@@ -178,7 +178,7 @@ public interface ClusterPackage extends EPackage {
     * @generated
     * @ordered
     */
-	int GROUP_FEATURE_COUNT = IGROUP_CONTAINER_FEATURE_COUNT + 3;
+	int GROUP_FEATURE_COUNT = IGROUP_FEATURE_COUNT + 3;
 
 	/**
     * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -405,27 +405,27 @@ public interface ClusterPackage extends EPackage {
 	EAttribute getElement_Name();
 
 	/**
-    * Returns the meta object for class '{@link org.feature.cluster.model.cluster.IGroupContainer <em>IGroup Container</em>}'.
+    * Returns the meta object for class '{@link org.feature.cluster.model.cluster.IGroup <em>IGroup</em>}'.
     * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-    * @return the meta object for class '<em>IGroup Container</em>'.
-    * @see org.feature.cluster.model.cluster.IGroupContainer
+    * <!-- end-user-doc -->
+    * @return the meta object for class '<em>IGroup</em>'.
+    * @see org.feature.cluster.model.cluster.IGroup
     * @generated
     */
-	EClass getIGroupContainer();
+   EClass getIGroup();
 
-	/**
-    * Returns the meta object for the containment reference list '{@link org.feature.cluster.model.cluster.IGroupContainer#getGroups <em>Groups</em>}'.
+   /**
+    * Returns the meta object for the containment reference list '{@link org.feature.cluster.model.cluster.IGroup#getGroups <em>Groups</em>}'.
     * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+    * <!-- end-user-doc -->
     * @return the meta object for the containment reference list '<em>Groups</em>'.
-    * @see org.feature.cluster.model.cluster.IGroupContainer#getGroups()
-    * @see #getIGroupContainer()
+    * @see org.feature.cluster.model.cluster.IGroup#getGroups()
+    * @see #getIGroup()
     * @generated
     */
-	EReference getIGroupContainer_Groups();
+   EReference getIGroup_Groups();
 
-	/**
+   /**
     * Returns the meta object for class '{@link org.feature.cluster.model.cluster.GroupModel <em>Group Model</em>}'.
     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -583,24 +583,24 @@ public interface ClusterPackage extends EPackage {
 		EAttribute ELEMENT__NAME = eINSTANCE.getElement_Name();
 
 		/**
-       * The meta object literal for the '{@link org.feature.cluster.model.cluster.IGroupContainer <em>IGroup Container</em>}' class.
+       * The meta object literal for the '{@link org.feature.cluster.model.cluster.IGroup <em>IGroup</em>}' class.
        * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-       * @see org.feature.cluster.model.cluster.IGroupContainer
-       * @see org.feature.cluster.model.cluster.impl.ClusterPackageImpl#getIGroupContainer()
+       * <!-- end-user-doc -->
+       * @see org.feature.cluster.model.cluster.IGroup
+       * @see org.feature.cluster.model.cluster.impl.ClusterPackageImpl#getIGroup()
        * @generated
        */
-		EClass IGROUP_CONTAINER = eINSTANCE.getIGroupContainer();
+      EClass IGROUP = eINSTANCE.getIGroup();
 
-		/**
+      /**
        * The meta object literal for the '<em><b>Groups</b></em>' containment reference list feature.
        * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+       * <!-- end-user-doc -->
        * @generated
        */
-		EReference IGROUP_CONTAINER__GROUPS = eINSTANCE.getIGroupContainer_Groups();
+      EReference IGROUP__GROUPS = eINSTANCE.getIGroup_Groups();
 
-		/**
+      /**
        * The meta object literal for the '{@link org.feature.cluster.model.cluster.impl.GroupModelImpl <em>Group Model</em>}' class.
        * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->

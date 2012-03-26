@@ -9,9 +9,7 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.feature.cluster.model.cluster,
  org.feature.cluster.model.cluster.impl,
- org.feature.cluster.model.cluster.tests,
- org.feature.cluster.model.cluster.util,
- org.feature.cluster.model.tests
+ org.feature.cluster.model.cluster.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,

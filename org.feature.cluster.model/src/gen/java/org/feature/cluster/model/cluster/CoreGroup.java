@@ -17,5 +17,5 @@ package org.feature.cluster.model.cluster;
  * @model
  * @generated
  */
-public interface CoreGroup extends IGroupContainer {
+public interface CoreGroup extends IGroup {
 } // CoreGroup

@@ -130,7 +130,7 @@ public class GroupItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
       if (childrenFeatures == null) {
          super.getChildrenFeatures(object);
-         childrenFeatures.add(ClusterPackage.Literals.IGROUP_CONTAINER__GROUPS);
+         childrenFeatures.add(ClusterPackage.Literals.IGROUP__GROUPS);
       }
       return childrenFeatures;
    }
@@ -208,7 +208,7 @@ public class GroupItemProvider
 
       newChildDescriptors.add
          (createChildParameter
-            (ClusterPackage.Literals.IGROUP_CONTAINER__GROUPS,
+            (ClusterPackage.Literals.IGROUP__GROUPS,
              ClusterFactory.eINSTANCE.createGroup()));
    }
 

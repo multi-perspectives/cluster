@@ -7,6 +7,7 @@
 package org.feature.cluster.model.cluster;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 
 /**
@@ -25,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ViewPointContainer extends IViewPointContainer {
+public interface ViewPointContainer extends EObject{
 
    /**
     * Returns the value of the '<em><b>View Points</b></em>' containment reference list.

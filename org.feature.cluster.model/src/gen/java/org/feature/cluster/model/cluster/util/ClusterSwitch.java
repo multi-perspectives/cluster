@@ -73,14 +73,14 @@ public class ClusterSwitch<T> extends Switch<T> {
          case ClusterPackage.CORE_GROUP: {
             CoreGroup coreGroup = (CoreGroup)theEObject;
             T result = caseCoreGroup(coreGroup);
-            if (result == null) result = caseIGroupContainer(coreGroup);
+            if (result == null) result = caseIGroup(coreGroup);
             if (result == null) result = defaultCase(theEObject);
             return result;
          }
          case ClusterPackage.GROUP: {
             Group group = (Group)theEObject;
             T result = caseGroup(group);
-            if (result == null) result = caseIGroupContainer(group);
+            if (result == null) result = caseIGroup(group);
             if (result == null) result = caseElement(group);
             if (result == null) result = defaultCase(theEObject);
             return result;
@@ -98,9 +98,9 @@ public class ClusterSwitch<T> extends Switch<T> {
             if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case ClusterPackage.IGROUP_CONTAINER: {
-            IGroupContainer iGroupContainer = (IGroupContainer)theEObject;
-            T result = caseIGroupContainer(iGroupContainer);
+         case ClusterPackage.IGROUP: {
+            IGroup iGroup = (IGroup)theEObject;
+            T result = caseIGroup(iGroup);
             if (result == null) result = defaultCase(theEObject);
             return result;
          }
@@ -110,16 +110,10 @@ public class ClusterSwitch<T> extends Switch<T> {
             if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case ClusterPackage.IVIEW_POINT_CONTAINER: {
-            IViewPointContainer iViewPointContainer = (IViewPointContainer)theEObject;
-            T result = caseIViewPointContainer(iViewPointContainer);
-            if (result == null) result = defaultCase(theEObject);
-            return result;
-         }
          case ClusterPackage.VIEW_POINT_CONTAINER: {
             ViewPointContainer viewPointContainer = (ViewPointContainer)theEObject;
             T result = caseViewPointContainer(viewPointContainer);
-            if (result == null) result = caseIViewPointContainer(viewPointContainer);
+            if (result == null) result = caseViewPointContainer(viewPointContainer);
             if (result == null) result = defaultCase(theEObject);
             return result;
          }
@@ -188,21 +182,21 @@ public class ClusterSwitch<T> extends Switch<T> {
    }
 
 	/**
-    * Returns the result of interpreting the object as an instance of '<em>IGroup Container</em>'.
+    * Returns the result of interpreting the object as an instance of '<em>IGroup</em>'.
     * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>IGroup Container</em>'.
+    * @return the result of interpreting the object as an instance of '<em>IGroup</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-	public T caseIGroupContainer(IGroupContainer object) {
+   public T caseIGroup(IGroup object) {
       return null;
    }
 
-	/**
+   /**
     * Returns the result of interpreting the object as an instance of '<em>Group Model</em>'.
     * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -214,21 +208,6 @@ public class ClusterSwitch<T> extends Switch<T> {
     * @generated
     */
 	public T caseGroupModel(GroupModel object) {
-      return null;
-   }
-
-	/**
-    * Returns the result of interpreting the object as an instance of '<em>IView Point Container</em>'.
-    * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-    * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>IView Point Container</em>'.
-    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-    * @generated
-    */
-	public T caseIViewPointContainer(IViewPointContainer object) {
       return null;
    }
 

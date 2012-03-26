@@ -105,12 +105,10 @@ public class ClusterValidator extends EObjectValidator {
             return validateViewPoint((ViewPoint)value, diagnostics, context);
          case ClusterPackage.ELEMENT:
             return validateElement((Element)value, diagnostics, context);
-         case ClusterPackage.IGROUP_CONTAINER:
-            return validateIGroupContainer((IGroupContainer)value, diagnostics, context);
+         case ClusterPackage.IGROUP:
+            return validateIGroup((IGroup)value, diagnostics, context);
          case ClusterPackage.GROUP_MODEL:
             return validateGroupModel((GroupModel)value, diagnostics, context);
-         case ClusterPackage.IVIEW_POINT_CONTAINER:
-            return validateIViewPointContainer((IViewPointContainer)value, diagnostics, context);
          case ClusterPackage.VIEW_POINT_CONTAINER:
             return validateViewPointContainer((ViewPointContainer)value, diagnostics, context);
          default:
@@ -176,14 +174,14 @@ public class ClusterValidator extends EObjectValidator {
 
 	/**
     * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+    * <!-- end-user-doc -->
     * @generated
     */
-	public boolean validateIGroupContainer(IGroupContainer iGroupContainer, DiagnosticChain diagnostics, Map<Object, Object> context) {
-      return validate_EveryDefaultConstraint(iGroupContainer, diagnostics, context);
+   public boolean validateIGroup(IGroup iGroup, DiagnosticChain diagnostics, Map<Object, Object> context) {
+      return validate_EveryDefaultConstraint(iGroup, diagnostics, context);
    }
 
-	/**
+   /**
     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
     * @generated
@@ -192,15 +190,7 @@ public class ClusterValidator extends EObjectValidator {
       return validate_EveryDefaultConstraint(groupModel, diagnostics, context);
    }
 
-	/**
-    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-    * @generated
-    */
-	public boolean validateIViewPointContainer(IViewPointContainer iViewPointContainer, DiagnosticChain diagnostics, Map<Object, Object> context) {
-      return validate_EveryDefaultConstraint(iViewPointContainer, diagnostics, context);
-   }
-
+	
 	/**
     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

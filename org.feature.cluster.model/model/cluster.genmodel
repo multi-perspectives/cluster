@@ -26,8 +26,8 @@
     <genClasses image="false" ecoreClass="cluster.ecore#//Element">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cluster.ecore#//Element/name"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="cluster.ecore#//IGroupContainer">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//IGroupContainer/groups"/>
+    <genClasses image="false" ecoreClass="cluster.ecore#//IGroup">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//IGroup/groups"/>
     </genClasses>
     <genClasses ecoreClass="cluster.ecore#//GroupModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//GroupModel/coreGroup"/>

@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Group extends IGroupContainer, Element {
+public interface Group extends IGroup, Element {
 
 	/**
     * Returns the value of the '<em><b>View Point Reference</b></em>' reference list.
@@ -48,7 +48,7 @@ public interface Group extends IGroupContainer, Element {
 
 	/**
     * Returns the value of the '<em><b>Parent Group</b></em>' container reference.
-    * It is bidirectional and its opposite is '{@link org.feature.cluster.model.cluster.IGroupContainer#getGroups <em>Groups</em>}'.
+    * It is bidirectional and its opposite is '{@link org.feature.cluster.model.cluster.IGroup#getGroups <em>Groups</em>}'.
     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parent Group</em>' container reference isn't clear,
@@ -56,25 +56,25 @@ public interface Group extends IGroupContainer, Element {
 	 * </p>
 	 * <!-- end-user-doc -->
     * @return the value of the '<em>Parent Group</em>' container reference.
-    * @see #setParentGroup(IGroupContainer)
+    * @see #setParentGroup(IGroup)
     * @see org.feature.cluster.model.cluster.ClusterPackage#getGroup_ParentGroup()
-    * @see org.feature.cluster.model.cluster.IGroupContainer#getGroups
+    * @see org.feature.cluster.model.cluster.IGroup#getGroups
     * @model opposite="groups" transient="false"
     * @generated
     */
-	IGroupContainer getParentGroup();
+	IGroup getParentGroup();
 
 	/**
     * Sets the value of the '{@link org.feature.cluster.model.cluster.Group#getParentGroup <em>Parent Group</em>}' container reference.
     * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+    * <!-- end-user-doc -->
     * @param value the new value of the '<em>Parent Group</em>' container reference.
     * @see #getParentGroup()
     * @generated
     */
-	void setParentGroup(IGroupContainer value);
+   void setParentGroup(IGroup value);
 
-	/**
+   /**
     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
     * @model required="true" eDiagnosticChainRequired="true" eMapRequired="true"

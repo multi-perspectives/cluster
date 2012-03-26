@@ -88,16 +88,12 @@ public class ClusterAdapterFactory extends AdapterFactoryImpl {
             return createElementAdapter();
          }
          @Override
-         public Adapter caseIGroupContainer(IGroupContainer object) {
-            return createIGroupContainerAdapter();
+         public Adapter caseIGroup(IGroup object) {
+            return createIGroupAdapter();
          }
          @Override
          public Adapter caseGroupModel(GroupModel object) {
             return createGroupModelAdapter();
-         }
-         @Override
-         public Adapter caseIViewPointContainer(IViewPointContainer object) {
-            return createIViewPointContainerAdapter();
          }
          @Override
          public Adapter caseViewPointContainer(ViewPointContainer object) {
@@ -180,20 +176,20 @@ public class ClusterAdapterFactory extends AdapterFactoryImpl {
    }
 
 	/**
-    * Creates a new adapter for an object of class '{@link org.feature.cluster.model.cluster.IGroupContainer <em>IGroup Container</em>}'.
+    * Creates a new adapter for an object of class '{@link org.feature.cluster.model.cluster.IGroup <em>IGroup</em>}'.
     * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
     * @return the new adapter.
-    * @see org.feature.cluster.model.cluster.IGroupContainer
+    * @see org.feature.cluster.model.cluster.IGroup
     * @generated
     */
-	public Adapter createIGroupContainerAdapter() {
+   public Adapter createIGroupAdapter() {
       return null;
    }
 
-	/**
+   /**
     * Creates a new adapter for an object of class '{@link org.feature.cluster.model.cluster.GroupModel <em>Group Model</em>}'.
     * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;

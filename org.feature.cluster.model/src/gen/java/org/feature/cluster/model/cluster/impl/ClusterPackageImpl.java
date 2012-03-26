@@ -20,8 +20,7 @@ import org.feature.cluster.model.cluster.CoreGroup;
 import org.feature.cluster.model.cluster.Element;
 import org.feature.cluster.model.cluster.Group;
 import org.feature.cluster.model.cluster.GroupModel;
-import org.feature.cluster.model.cluster.IGroupContainer;
-import org.feature.cluster.model.cluster.IViewPointContainer;
+import org.feature.cluster.model.cluster.IGroup;
 import org.feature.cluster.model.cluster.ViewPoint;
 import org.feature.cluster.model.cluster.ViewPointContainer;
 import org.feature.cluster.model.cluster.util.ClusterValidator;
@@ -63,12 +62,12 @@ public class ClusterPackageImpl extends EPackageImpl implements ClusterPackage {
 
 	/**
     * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+    * <!-- end-user-doc -->
     * @generated
     */
-	private EClass iGroupContainerEClass = null;
+   private EClass iGroupEClass = null;
 
-	/**
+   /**
     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
     * @generated
@@ -233,23 +232,23 @@ public class ClusterPackageImpl extends EPackageImpl implements ClusterPackage {
 
 	/**
     * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+    * <!-- end-user-doc -->
     * @generated
     */
-	public EClass getIGroupContainer() {
-      return iGroupContainerEClass;
+   public EClass getIGroup() {
+      return iGroupEClass;
    }
 
-	/**
+   /**
     * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+    * <!-- end-user-doc -->
     * @generated
     */
-	public EReference getIGroupContainer_Groups() {
-      return (EReference)iGroupContainerEClass.getEStructuralFeatures().get(0);
+   public EReference getIGroup_Groups() {
+      return (EReference)iGroupEClass.getEStructuralFeatures().get(0);
    }
 
-	/**
+   /**
     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
     * @generated
@@ -343,8 +342,8 @@ public class ClusterPackageImpl extends EPackageImpl implements ClusterPackage {
       elementEClass = createEClass(ELEMENT);
       createEAttribute(elementEClass, ELEMENT__NAME);
 
-      iGroupContainerEClass = createEClass(IGROUP_CONTAINER);
-      createEReference(iGroupContainerEClass, IGROUP_CONTAINER__GROUPS);
+      iGroupEClass = createEClass(IGROUP);
+      createEReference(iGroupEClass, IGROUP__GROUPS);
 
       groupModelEClass = createEClass(GROUP_MODEL);
       createEReference(groupModelEClass, GROUP_MODEL__CORE_GROUP);
@@ -384,8 +383,8 @@ public class ClusterPackageImpl extends EPackageImpl implements ClusterPackage {
       // Set bounds for type parameters
 
       // Add supertypes to classes
-      coreGroupEClass.getESuperTypes().add(this.getIGroupContainer());
-      groupEClass.getESuperTypes().add(this.getIGroupContainer());
+      coreGroupEClass.getESuperTypes().add(this.getIGroup());
+      groupEClass.getESuperTypes().add(this.getIGroup());
       groupEClass.getESuperTypes().add(this.getElement());
       viewPointEClass.getESuperTypes().add(this.getElement());
       viewPointContainerEClass.getESuperTypes().add(this.getIViewPointContainer());
@@ -395,7 +394,7 @@ public class ClusterPackageImpl extends EPackageImpl implements ClusterPackage {
 
       initEClass(groupEClass, Group.class, "Group", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
       initEReference(getGroup_ViewPointReference(), this.getViewPoint(), null, "viewPointReference", null, 0, -1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEReference(getGroup_ParentGroup(), this.getIGroupContainer(), this.getIGroupContainer_Groups(), "parentGroup", null, 0, 1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEReference(getGroup_ParentGroup(), this.getIGroup(), this.getIGroup_Groups(), "parentGroup", null, 0, 1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
       EOperation op = addEOperation(groupEClass, ecorePackage.getEBoolean(), "checkForRedundantViewPoints", 1, 1, IS_UNIQUE, IS_ORDERED);
       addEParameter(op, ecorePackage.getEDiagnosticChain(), "eDiagnosticChain", 1, 1, IS_UNIQUE, IS_ORDERED);
@@ -412,14 +411,12 @@ public class ClusterPackageImpl extends EPackageImpl implements ClusterPackage {
       initEClass(elementEClass, Element.class, "Element", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
       initEAttribute(getElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-      initEClass(iGroupContainerEClass, IGroupContainer.class, "IGroupContainer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-      initEReference(getIGroupContainer_Groups(), this.getGroup(), this.getGroup_ParentGroup(), "groups", null, 0, -1, IGroupContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEClass(iGroupEClass, IGroup.class, "IGroup", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+      initEReference(getIGroup_Groups(), this.getGroup(), this.getGroup_ParentGroup(), "groups", null, 0, -1, IGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
       initEClass(groupModelEClass, GroupModel.class, "GroupModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
       initEReference(getGroupModel_CoreGroup(), this.getCoreGroup(), null, "coreGroup", null, 1, 1, GroupModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
       initEReference(getGroupModel_ViewPointContainer(), this.getViewPointContainer(), null, "viewPointContainer", null, 1, 1, GroupModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-      initEClass(iViewPointContainerEClass, IViewPointContainer.class, "IViewPointContainer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
       initEClass(viewPointContainerEClass, ViewPointContainer.class, "ViewPointContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
       initEReference(getViewPointContainer_ViewPoints(), this.getViewPoint(), null, "viewPoints", null, 0, -1, ViewPointContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
