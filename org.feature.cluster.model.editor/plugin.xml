@@ -69,6 +69,7 @@
             allPopups="true"
             locationURI="menu:org.eclipse.ui.main.menu?before=additions">
          <menu
+               id="org.feature.cluster.model.editor"
                label="Cluster Editor">
             <command
                   commandId="org.feature.cluster.model.editor.incAlg"
