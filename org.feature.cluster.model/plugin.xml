@@ -12,7 +12,7 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://org.feature.cluster.model/1.0"
+            uri="http://org.feature.cluster.model/schema/1.0"
             class="org.feature.cluster.model.cluster.ClusterPackage"
             genModel="model/cluster.genmodel"/>
    </extension>
