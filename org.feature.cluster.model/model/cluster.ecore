@@ -36,9 +36,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="viewPointContainer" lowerBound="1"
         eType="#//ViewPointContainer" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IViewPointContainer" abstract="true"
-      interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ViewPointContainer" eSuperTypes="#//IViewPointContainer">
+  <eClassifiers xsi:type="ecore:EClass" name="ViewPointContainer">
     <eStructuralFeatures xsi:type="ecore:EReference" name="viewPoints" upperBound="-1"
         eType="#//ViewPoint" containment="true"/>
   </eClassifiers>

@@ -273,25 +273,6 @@ public interface ClusterPackage extends EPackage {
 	int GROUP_MODEL_FEATURE_COUNT = 2;
 
 	/**
-    * The meta object id for the '{@link org.feature.cluster.model.cluster.IViewPointContainer <em>IView Point Container</em>}' class.
-    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-    * @see org.feature.cluster.model.cluster.IViewPointContainer
-    * @see org.feature.cluster.model.cluster.impl.ClusterPackageImpl#getIViewPointContainer()
-    * @generated
-    */
-	int IVIEW_POINT_CONTAINER = 6;
-
-	/**
-    * The number of structural features of the '<em>IView Point Container</em>' class.
-    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-    * @generated
-    * @ordered
-    */
-	int IVIEW_POINT_CONTAINER_FEATURE_COUNT = 0;
-
-	/**
     * The meta object id for the '{@link org.feature.cluster.model.cluster.impl.ViewPointContainerImpl <em>View Point Container</em>}' class.
     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -299,7 +280,7 @@ public interface ClusterPackage extends EPackage {
     * @see org.feature.cluster.model.cluster.impl.ClusterPackageImpl#getViewPointContainer()
     * @generated
     */
-	int VIEW_POINT_CONTAINER = 7;
+	int VIEW_POINT_CONTAINER = 6;
 
 	/**
     * The feature id for the '<em><b>View Points</b></em>' containment reference list.
@@ -308,7 +289,7 @@ public interface ClusterPackage extends EPackage {
     * @generated
     * @ordered
     */
-	int VIEW_POINT_CONTAINER__VIEW_POINTS = IVIEW_POINT_CONTAINER_FEATURE_COUNT + 0;
+	int VIEW_POINT_CONTAINER__VIEW_POINTS = 0;
 
 	/**
     * The number of structural features of the '<em>View Point Container</em>' class.
@@ -317,7 +298,7 @@ public interface ClusterPackage extends EPackage {
     * @generated
     * @ordered
     */
-	int VIEW_POINT_CONTAINER_FEATURE_COUNT = IVIEW_POINT_CONTAINER_FEATURE_COUNT + 1;
+	int VIEW_POINT_CONTAINER_FEATURE_COUNT = 1;
 
 
 	/**
@@ -458,16 +439,6 @@ public interface ClusterPackage extends EPackage {
    EReference getGroupModel_ViewPointContainer();
 
    /**
-    * Returns the meta object for class '{@link org.feature.cluster.model.cluster.IViewPointContainer <em>IView Point Container</em>}'.
-    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-    * @return the meta object for class '<em>IView Point Container</em>'.
-    * @see org.feature.cluster.model.cluster.IViewPointContainer
-    * @generated
-    */
-	EClass getIViewPointContainer();
-
-	/**
     * Returns the meta object for class '{@link org.feature.cluster.model.cluster.ViewPointContainer <em>View Point Container</em>}'.
     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -627,16 +598,6 @@ public interface ClusterPackage extends EPackage {
       EReference GROUP_MODEL__VIEW_POINT_CONTAINER = eINSTANCE.getGroupModel_ViewPointContainer();
 
       /**
-       * The meta object literal for the '{@link org.feature.cluster.model.cluster.IViewPointContainer <em>IView Point Container</em>}' class.
-       * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-       * @see org.feature.cluster.model.cluster.IViewPointContainer
-       * @see org.feature.cluster.model.cluster.impl.ClusterPackageImpl#getIViewPointContainer()
-       * @generated
-       */
-		EClass IVIEW_POINT_CONTAINER = eINSTANCE.getIViewPointContainer();
-
-		/**
        * The meta object literal for the '{@link org.feature.cluster.model.cluster.impl.ViewPointContainerImpl <em>View Point Container</em>}' class.
        * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->

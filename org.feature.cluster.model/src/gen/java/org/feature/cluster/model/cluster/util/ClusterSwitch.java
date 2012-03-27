@@ -113,7 +113,6 @@ public class ClusterSwitch<T> extends Switch<T> {
          case ClusterPackage.VIEW_POINT_CONTAINER: {
             ViewPointContainer viewPointContainer = (ViewPointContainer)theEObject;
             T result = caseViewPointContainer(viewPointContainer);
-            if (result == null) result = caseViewPointContainer(viewPointContainer);
             if (result == null) result = defaultCase(theEObject);
             return result;
          }

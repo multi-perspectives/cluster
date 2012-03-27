@@ -79,13 +79,6 @@ public class ClusterPackageImpl extends EPackageImpl implements ClusterPackage {
 	 * <!-- end-user-doc -->
     * @generated
     */
-	private EClass iViewPointContainerEClass = null;
-
-	/**
-    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-    * @generated
-    */
 	private EClass viewPointContainerEClass = null;
 
 	/**
@@ -280,15 +273,6 @@ public class ClusterPackageImpl extends EPackageImpl implements ClusterPackage {
 	 * <!-- end-user-doc -->
     * @generated
     */
-	public EClass getIViewPointContainer() {
-      return iViewPointContainerEClass;
-   }
-
-	/**
-    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-    * @generated
-    */
 	public EClass getViewPointContainer() {
       return viewPointContainerEClass;
    }
@@ -349,8 +333,6 @@ public class ClusterPackageImpl extends EPackageImpl implements ClusterPackage {
       createEReference(groupModelEClass, GROUP_MODEL__CORE_GROUP);
       createEReference(groupModelEClass, GROUP_MODEL__VIEW_POINT_CONTAINER);
 
-      iViewPointContainerEClass = createEClass(IVIEW_POINT_CONTAINER);
-
       viewPointContainerEClass = createEClass(VIEW_POINT_CONTAINER);
       createEReference(viewPointContainerEClass, VIEW_POINT_CONTAINER__VIEW_POINTS);
    }
@@ -387,7 +369,6 @@ public class ClusterPackageImpl extends EPackageImpl implements ClusterPackage {
       groupEClass.getESuperTypes().add(this.getIGroup());
       groupEClass.getESuperTypes().add(this.getElement());
       viewPointEClass.getESuperTypes().add(this.getElement());
-      viewPointContainerEClass.getESuperTypes().add(this.getIViewPointContainer());
 
       // Initialize classes and features; add operations and parameters
       initEClass(coreGroupEClass, CoreGroup.class, "CoreGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

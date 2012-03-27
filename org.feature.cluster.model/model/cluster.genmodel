@@ -33,7 +33,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//GroupModel/coreGroup"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//GroupModel/viewPointContainer"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="cluster.ecore#//IViewPointContainer"/>
     <genClasses ecoreClass="cluster.ecore#//ViewPointContainer">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cluster.ecore#//ViewPointContainer/viewPoints"/>
     </genClasses>

@@ -204,20 +204,6 @@ public class ClusterAdapterFactory extends AdapterFactoryImpl {
    }
 
 	/**
-    * Creates a new adapter for an object of class '{@link org.feature.cluster.model.cluster.IViewPointContainer <em>IView Point Container</em>}'.
-    * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-    * @return the new adapter.
-    * @see org.feature.cluster.model.cluster.IViewPointContainer
-    * @generated
-    */
-	public Adapter createIViewPointContainerAdapter() {
-      return null;
-   }
-
-	/**
     * Creates a new adapter for an object of class '{@link org.feature.cluster.model.cluster.ViewPointContainer <em>View Point Container</em>}'.
     * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
