@@ -14,9 +14,10 @@ import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
+import org.feature.cluster.model.cluster.GroupModel;
+import org.feature.cluster.model.editor.editors.ClusterMappingFilter;
 import org.feature.cluster.model.editor.editors.MultiPageEditor;
 import org.featuremapper.common.utils.FeatureMappingUtil;
-import org.featuremapper.ui.views.filter.FileExtensionViewerFilter;
 
 /**
  * Listener for the selection of the FeatureMapping.
@@ -25,73 +26,59 @@ import org.featuremapper.ui.views.filter.FileExtensionViewerFilter;
  * 
  */
 public class ChooseFMSelectionListener implements SelectionListener {
-	Logger log = Logger.getLogger(ChooseFMSelectionListener.class);
-	private Composite parentComposite;
-	private MultiPageEditor mpe;
 
-	public ChooseFMSelectionListener(Composite composite,
-			MultiPageEditor multiPageEditor) {
-		this.parentComposite = composite;
-		this.mpe = multiPageEditor;
-	}
+   Logger log = Logger.getLogger(ChooseFMSelectionListener.class);
+   private Composite parentComposite;
+   private MultiPageEditor mpe;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.events.SelectionListener#widgetSelected(org.eclipse.swt
-	 * .events.SelectionEvent)
-	 */
-	@Override
-	public void widgetSelected(SelectionEvent e) {
-		// open FileDialog for workspace.
-		browseMapping();
-//		 Old version of the file dialog. 
-//		 FileDialog dialog = new FileDialog (parentComposite.getShell(),
-//		 SWT.OPEN);
-//		 String [] filterNames = new String [] {"FeatureMapping",
-//		 "All Files (*)"};
-//		 String [] filterExtensions = new String [] {"*.featuremapping", "*"};
-//		 String filterPath =
-//		 ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString();
-//		 dialog.setFilterNames (filterNames);
-//		 dialog.setFilterExtensions (filterExtensions);
-//		 dialog.setFilterPath (filterPath);
-//		 dialog.setFileName ("featureClusterMapping");
-//		 // call mpe with the FeatureMapping
-//		 String path = dialog.open();
-//		 log.debug(path);
-//		 mpe.setFeatureMapping(path);
-	}
-	
-	/**
-	 * opens a Dialog to choose a mapping.
-	 */
-	private void browseMapping() {
-		List<ViewerFilter> filters = new ArrayList<ViewerFilter>();
-		FileExtensionViewerFilter featureModelViewerFilter = new FileExtensionViewerFilter(
-				FeatureMappingUtil.getMappingModelExtensions());
-		filters.add(featureModelViewerFilter);
-		IFile[] selectedFiles = WorkspaceResourceDialog.openFileSelection(
-				parentComposite.getShell(), "Choose mapping",
-				"Please choose a mapping:", false, null, filters);
+   public ChooseFMSelectionListener(Composite composite, MultiPageEditor multiPageEditor) {
+      this.parentComposite = composite;
+      this.mpe = multiPageEditor;
+   }
 
-		if (selectedFiles.length > 0) {
-			String path = selectedFiles[0].getFullPath().toString();
-			log.debug(path);
-			URI uri = URI.createPlatformResourceURI(path, true);
-			mpe.setFeatureMapping(uri.toString());
-		}
-	}
+   /*
+    * (non-Javadoc)
+    * 
+    * @see org.eclipse.swt.events.SelectionListener#widgetSelected(org.eclipse.swt .events.SelectionEvent)
+    */
+   @Override
+   public void widgetSelected(SelectionEvent e) {
+      // open FileDialog for workspace.
+      browseMapping();
+   }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.events.SelectionListener#widgetDefaultSelected(org.eclipse
-	 * .swt.events.SelectionEvent)
-	 */
-	@Override
-	public void widgetDefaultSelected(SelectionEvent e) {
-	}
+   /**
+    * opens a Dialog to choose a mapping.
+    */
+   private void browseMapping() {
+      List<ViewerFilter> filters = new ArrayList<ViewerFilter>();
+      // FileExtensionViewerFilter featureModelViewerFilter = new FileExtensionViewerFilter(
+      // FeatureMappingUtil.getMappingModelExtensions());
+      // filters.add(featureModelViewerFilter);
+      ArrayList<String> extensions = FeatureMappingUtil.getMappingModelExtensions();
+      List<GroupModel> groupModels = mpe.getGroupModels();
+      for (GroupModel groupModel : groupModels) {
+         ClusterMappingFilter filter = new ClusterMappingFilter(extensions, groupModel);
+         filters.add(filter);
+      }
+
+      IFile[] selectedFiles =
+         WorkspaceResourceDialog.openFileSelection(parentComposite.getShell(), "Choose mapping", "Please choose a mapping:", false, null,
+                                                   filters);
+
+      if (selectedFiles.length > 0) {
+         String path = selectedFiles[0].getFullPath().toString();
+         log.debug(path);
+         URI uri = URI.createPlatformResourceURI(path, true);
+         mpe.setFeatureMapping(uri.toString());
+      }
+   }
+
+   /*
+    * (non-Javadoc)
+    * 
+    * @see org.eclipse.swt.events.SelectionListener#widgetDefaultSelected(org.eclipse .swt.events.SelectionEvent)
+    */
+   @Override
+   public void widgetDefaultSelected(SelectionEvent e) {}
 }
