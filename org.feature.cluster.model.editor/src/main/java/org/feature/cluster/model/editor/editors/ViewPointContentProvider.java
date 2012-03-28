@@ -173,7 +173,7 @@ public class ViewPointContentProvider implements ITreeContentProvider{
 	 * @return subset of groups
 	 */
 	private Group[] catchSubGroup(EList<Group> groups) {
-		List<Group> listOfGroupsToRemove = new LinkedList<Group>();
+		Set<Group> listOfGroupsToRemove = new HashSet<Group>();
 		for (Group group : groups) {
 			EObject eContainer = group.eContainer();
 			while (eContainer instanceof Group) {
