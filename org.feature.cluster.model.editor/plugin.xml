@@ -35,15 +35,6 @@
             id="org.feature.cluster.model.editor.editors.MultiPageEditor"
             name="%_UI_ClusterEditor_label">
       </editor>
-      <editor
-            class="org.feature.cluster.model.cluster.presentation.ClusterEditor"
-            contributorClass="org.feature.cluster.model.cluster.presentation.ClusterActionBarContributor"
-            default="false"
-            extensions="cluster"
-            icon="icons/full/wizban/NewCluster.gif"
-            id="org.feature.cluster.model.cluster.presentation.ClusterEditorID"
-            name="%_UI_ClusterEditor_label">
-      </editor>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -73,7 +64,7 @@
                label="Cluster Editor">
             <command
                   commandId="org.feature.cluster.model.editor.incAlg"
-                  label="Viewpoint validation"
+                  label="Validate Viewpoints"
                   style="push">
             </command>
          </menu>
