@@ -26,102 +26,108 @@ import org.featuremapper.models.featuremapping.Mapping;
 import org.featuremapper.models.featuremapping.SolutionModelRef;
 
 /**
- * create the filtered feature model and validates it.
- * also validates all view points.
+ * create the filtered feature model and validates it. also validates all view points.
+ * 
  * @author Tim Winkelmann
- *
+ * 
  */
 public class FilteredFeatureModel {
-	private static Logger log = Logger.getLogger(FilteredFeatureModel.class);
-	private ClusterMultiPageEditor multiPageEditor;
-	/**
-	 * 
-	 * @param mappingResource
-	 * @param viewPoint
-	 */
-	public FilteredFeatureModel(Resource mappingResource, ViewPoint viewPoint, ClusterMultiPageEditor multiPageEditor) {
-		this.multiPageEditor = multiPageEditor;
-		EList<EObject> contents = mappingResource.getContents();
-		FeatureMappingModel featureMappingModel = null;
-		for (EObject eObject : contents) {
-			if (eObject instanceof FeatureMappingModel) {
-				featureMappingModel = (FeatureMappingModel) eObject;
-				break;
-			}
-		}
-		EList<Feature> allFeatures = featureMappingModel.getFeatureModel().getValue().getAllFeatures();
 
-		log.info("#allFeatures: " + allFeatures.size());
-		//create views
-		EList<SolutionModelRef> solutionModels = featureMappingModel.getSolutionModels();
-		GroupModel groupModel = null;
-		for (SolutionModelRef solutionModelRef : solutionModels) {
-			EObject value = solutionModelRef.getValue();
-			if (value instanceof GroupModel) {
-				groupModel = (GroupModel) value;
-				break;
-			}
-		}
-		EList<Mapping> mappings = featureMappingModel.getMappings();
-		ViewCreater viewCreater = new ViewCreater(allFeatures,mappings,  groupModel.getCoreGroup(),featureMappingModel.getFeatureModel().getValue());
-		List<View> views = viewCreater.getViews();
-		long timeMillis = System.currentTimeMillis();
-		
-		new IncrementalAlgorithm(views,groupModel,featureMappingModel.getFeatureModel().getValue());
+   private static Logger log = Logger.getLogger(FilteredFeatureModel.class);
+   private ClusterMultiPageEditor multiPageEditor;
 
-		log.debug("time: " + (System.currentTimeMillis() - timeMillis));
-		timeMillis = System.currentTimeMillis();
+   /**
+    * 
+    * @param mappingResource
+    * @param viewPoint
+    */
+   public FilteredFeatureModel(Resource mappingResource, ViewPoint viewPoint, ClusterMultiPageEditor multiPageEditor) {
+      this.multiPageEditor = multiPageEditor;
+      EList<EObject> contents = mappingResource.getContents();
+      FeatureMappingModel featureMappingModel = null;
+      for (EObject eObject : contents) {
+         if (eObject instanceof FeatureMappingModel) {
+            featureMappingModel = (FeatureMappingModel) eObject;
+            break;
+         }
+      }
+      EList<Feature> allFeatures = featureMappingModel.getFeatureModel().getValue().getAllFeatures();
 
-		BruteForceAlgorithm bfa = new BruteForceAlgorithm(groupModel,views,featureMappingModel.getFeatureModel().getValue());
-		Set<View> checkViewPoints = bfa.getViewPoints();
+      log.info("#allFeatures: " + allFeatures.size());
+      // create views
+      EList<SolutionModelRef> solutionModels = featureMappingModel.getSolutionModels();
+      GroupModel groupModel = null;
+      for (SolutionModelRef solutionModelRef : solutionModels) {
+         EObject value = solutionModelRef.getValue();
+         if (value instanceof GroupModel) {
+            groupModel = (GroupModel) value;
+            break;
+         }
+      }
+      EList<Mapping> mappings = featureMappingModel.getMappings();
+      ViewCreater viewCreater =
+         new ViewCreater(allFeatures, mappings, groupModel.getCoreGroup(), featureMappingModel.getFeatureModel().getValue());
+      List<View> views = viewCreater.getViews();
+      long timeMillis = System.currentTimeMillis();
 
-		log.debug("time: " + (System.currentTimeMillis() - timeMillis));
+      IncrementalAlgorithm algorithm = new IncrementalAlgorithm(views, groupModel, featureMappingModel.getFeatureModel().getValue());
+      algorithm.run();
+      log.debug("time: " + (System.currentTimeMillis() - timeMillis));
+      timeMillis = System.currentTimeMillis();
 
-		//Find specific ViewPoint
-		View viewP = null;
-		for (View view : checkViewPoints) {
-			if (view.getGroup() instanceof ViewPoint) {
-				ViewPoint vp = (ViewPoint) view.getGroup();
-				if (vp.getName().equals(viewPoint.getName())) {
-					viewP = view;
-					break;
-				}
-			}
-		}
-		if (viewP != null) {
-			createFeatureModel(featureMappingModel,viewPoint,viewP);
-		}else{
-			log.error("Could not create ViewPoint");
-		}
-	}
-	
-	/**
-	 * creates the feature model and persist it in a file.
-	 * @param featureMappingModel the mapping
-	 * @param viewPoint the viewpoint
-	 * @param view the features to the viewpoint
-	 */
-	private void createFeatureModel(FeatureMappingModel featureMappingModel, ViewPoint viewPoint, View view){
-		log.info("#Features for a ViewPoint:  " + view.getFeatures().size());
-		Map<String, Feature> featureMap = new HashMap<String, Feature>();
-		Set<Feature> features = view.getFeatures();
-		for (Feature feature : features) {
-			featureMap.put(feature.getName(), feature);
-		}
-		FeatureModelRef org = featureMappingModel.getFeatureModel();
-		Filter filter = new Filter(org,featureMap);
-		
-		log.debug(filter.fm);
-		String saveFileName = Util.save(featureMappingModel.getFeatureModel().getValue().getName() + "_" + viewPoint.getName() + ".feature",multiPageEditor.getSite().getShell());
-		if (saveFileName != null && !saveFileName.isEmpty()) {
-			ResourceSet rst = new ResourceSetImpl();
-			Resource resource = rst.createResource(URI.createFileURI(saveFileName));
-			resource.getContents().add(filter.fm);
-			try {
-				resource.save(Collections.EMPTY_MAP);
-			} catch (IOException e) {
-				log.error(e.getMessage());
-			}
-		}
-	}
+      BruteForceAlgorithm bfa = new BruteForceAlgorithm(groupModel, views, featureMappingModel.getFeatureModel().getValue());
+      Set<View> checkViewPoints = bfa.getViewPoints();
+
+      log.debug("time: " + (System.currentTimeMillis() - timeMillis));
+
+      // Find specific ViewPoint
+      View viewP = null;
+      for (View view : checkViewPoints) {
+         if (view.getGroup() instanceof ViewPoint) {
+            ViewPoint vp = (ViewPoint) view.getGroup();
+            if (vp.getName().equals(viewPoint.getName())) {
+               viewP = view;
+               break;
+            }
+         }
+      }
+      if (viewP != null) {
+         createFeatureModel(featureMappingModel, viewPoint, viewP);
+      } else {
+         log.error("Could not create ViewPoint");
+      }
+   }
+
+   /**
+    * creates the feature model and persist it in a file.
+    * 
+    * @param featureMappingModel the mapping
+    * @param viewPoint the viewpoint
+    * @param view the features to the viewpoint
+    */
+   private void createFeatureModel(FeatureMappingModel featureMappingModel, ViewPoint viewPoint, View view) {
+      log.info("#Features for a ViewPoint:  " + view.getFeatures().size());
+      Map<String, Feature> featureMap = new HashMap<String, Feature>();
+      Set<Feature> features = view.getFeatures();
+      for (Feature feature : features) {
+         featureMap.put(feature.getName(), feature);
+      }
+      FeatureModelRef org = featureMappingModel.getFeatureModel();
+      Filter filter = new Filter(org, featureMap);
+
+      log.debug(filter.fm);
+      String saveFileName =
+         Util.save(featureMappingModel.getFeatureModel().getValue().getName() + "_" + viewPoint.getName() + ".feature", multiPageEditor
+            .getSite().getShell());
+      if (saveFileName != null && !saveFileName.isEmpty()) {
+         ResourceSet rst = new ResourceSetImpl();
+         Resource resource = rst.createResource(URI.createFileURI(saveFileName));
+         resource.getContents().add(filter.fm);
+         try {
+            resource.save(Collections.EMPTY_MAP);
+         } catch (IOException e) {
+            log.error(e.getMessage());
+         }
+      }
+   }
 }

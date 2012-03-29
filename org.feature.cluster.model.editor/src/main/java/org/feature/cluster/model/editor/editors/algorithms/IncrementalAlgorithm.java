@@ -48,7 +48,6 @@ public class IncrementalAlgorithm {
       this.views = views2;
       this.groupModel = groupModel;
       this.featureModel = featureModel;
-      run();
    }
 
    /**
