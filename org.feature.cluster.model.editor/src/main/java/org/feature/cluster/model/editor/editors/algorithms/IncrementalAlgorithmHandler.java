@@ -10,11 +10,13 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.feature.cluster.model.cluster.GroupModel;
 import org.feature.cluster.model.editor.editors.MultiPageEditor;
 import org.feature.cluster.model.editor.editors.View;
 import org.feature.cluster.model.editor.editors.ViewCreater;
 import org.featuremapper.models.feature.Feature;
+import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.featuremapping.FeatureMappingModel;
 import org.featuremapper.models.featuremapping.Mapping;
 import org.featuremapper.models.featuremapping.SolutionModelRef;
@@ -48,9 +50,10 @@ public class IncrementalAlgorithmHandler extends AbstractHandler{
 		}
 		EList<Feature> allFeatures = featureMappingModel.getFeatureModel().getValue().getAllFeatures();
 		EList<Mapping> mappings = featureMappingModel.getMappings();
-		List<View> views = new ViewCreater(allFeatures, mappings, groupModel.getCoreGroup()).getViews();
-		new IncrementalAlgorithm(views, groupModel);
-		return null;
+		
+		List<View> views = new ViewCreater(allFeatures, mappings, groupModel.getCoreGroup(),featureMappingModel.getFeatureModel().getValue()).getViews();
+		new IncrementalAlgorithm(views, groupModel,featureMappingModel.getFeatureModel().getValue());
+		return null; // No return value needed.
 	}
 
 	/* (non-Javadoc)

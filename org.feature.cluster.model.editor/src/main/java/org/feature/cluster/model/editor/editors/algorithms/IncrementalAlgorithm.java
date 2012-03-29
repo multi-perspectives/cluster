@@ -20,6 +20,7 @@ import org.feature.cluster.model.cluster.ViewPointContainer;
 import org.feature.cluster.model.editor.editors.View;
 import org.feature.cluster.model.editor.util.Util;
 import org.featuremapper.models.feature.Feature;
+import org.featuremapper.models.feature.FeatureModel;
 
 /**
  * @author Tim Winkelmann
@@ -31,7 +32,7 @@ public class IncrementalAlgorithm {
    private HashMap<EObject, View> views;
    private GroupModel groupModel;
    private UsedGroup ugCG;
-
+   private FeatureModel featureModel;
    // private int i = 0; //used for tests
 
    /**
@@ -39,13 +40,14 @@ public class IncrementalAlgorithm {
     * @param views
     * @param groupModel
     */
-   public IncrementalAlgorithm(List<View> views, GroupModel groupModel) {
+   public IncrementalAlgorithm(List<View> views, GroupModel groupModel,FeatureModel featureModel) {
       HashMap<EObject, View> views2 = new HashMap<EObject, View>();
       for (View view : views) {
          views2.put(view.getGroup(), view);
       }
       this.views = views2;
       this.groupModel = groupModel;
+      this.featureModel = featureModel;
       run();
    }
 

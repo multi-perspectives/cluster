@@ -17,6 +17,7 @@ import org.eclipse.zest.core.widgets.GraphConnection;
 import org.eclipse.zest.core.widgets.GraphNode;
 import org.featuremapper.models.feature.Constraint;
 import org.featuremapper.models.feature.Feature;
+import org.featuremapper.models.feature.FeatureModel;
 
 /**
  * Utility class for the cluster editor.
@@ -30,6 +31,19 @@ public class Util {
 	public static final Color unattachedGraphConnectionLineColor = new Color(null, 192, 192, 192);
 	public static List<GraphNode> attachedGraphNodes = new LinkedList<GraphNode>();
 	public static List<GraphConnection> highlightedGraphConnections = new LinkedList<GraphConnection>();
+	
+	
+	/**
+	 * creates a view from the {@link FeatureModel}
+	 * @param featureModel the original {@link FeatureModel}
+	 * @param features which are part of the view.
+	 * @return a view from a {@link FeatureModel}
+	 */
+	public static FeatureModel createFeatureModel(FeatureModel featureModel, Set<Feature> features){
+		//TODO implementieren. HF!
+		
+		return null;
+	}
 	
 	/**
 	 * checks the hierarchy of the features, the cardininalities and the constraint.

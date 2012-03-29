@@ -18,6 +18,7 @@ import org.feature.cluster.model.cluster.GroupModel;
 import org.feature.cluster.model.cluster.ViewPoint;
 import org.feature.cluster.model.editor.editors.View;
 import org.featuremapper.models.feature.Feature;
+import org.featuremapper.models.feature.FeatureModel;
 
 /**
  * This class represent the BruteForceAlgorithm which validates the {@link ViewPoint}
@@ -28,13 +29,16 @@ public class BruteForceAlgorithm {
 	private Logger log = Logger.getLogger(BruteForceAlgorithm.class);
 	private Set<View> viewPoints;
 	private GroupModel groupModel;
-	private  List<View> views;
+	private List<View> views;
+	private FeatureModel featureModel;
 	
-	public BruteForceAlgorithm(GroupModel groupModel, List<View> views) {
+	public BruteForceAlgorithm(GroupModel groupModel, List<View> views,FeatureModel featureModel) {
 		this.groupModel = groupModel;
 		this.views = views;
+		this.featureModel = featureModel;
 		viewPoints = checkViewPoints();
 	}
+	
 	/**
 	 * iterate over each view point and there groups.
 	 * checks then there combined view consistency
@@ -82,13 +86,14 @@ public class BruteForceAlgorithm {
 			return views.get(0);
 		}else{
 			Set<Feature> features = new HashSet<Feature>();
+			
 			for (Set<View> path : setOfPaths) {
 				for (View view : path) {
 //					log.debug(view.isConsistent());
 					features.addAll(view.getFeatures());
 				}
 			}
-			View view = new View(viewPoint, features);
+			View view = new View(viewPoint, features,this.featureModel);
 //			view.isConsistent();
 //			log.debug(view.isConsistent() + "\n");
 			return view;
@@ -128,7 +133,7 @@ public class BruteForceAlgorithm {
 				features.addAll(v.getFeatures());
 			}
 			if (!features.isEmpty()) {//check if there is something to combine
-				view = new View(group, features);
+				view = new View(group, features,this.featureModel);
 			}
 //			log.debug("add: " + group);
 			pathViews.add(view);

@@ -7,6 +7,7 @@ import org.feature.cluster.model.cluster.Group;
 import org.feature.cluster.model.cluster.GroupModel;
 import org.feature.cluster.model.editor.util.Util;
 import org.featuremapper.models.feature.Feature;
+import org.featuremapper.models.feature.FeatureModel;
 
 /**
  * This class represents a mapping between a {@link Group} from the {@link GroupModel} and a {@link Set} of {@link Feature}. 
@@ -17,15 +18,16 @@ public class View {
 //	private static Logger log = Logger.getLogger(View.class);
 	private EObject group;
 	private Set<Feature> features;
-	
+	private FeatureModel featureModel;
 	/**
 	 * @param group
 	 * @param features
 	 */
-	public View(EObject group, Set<Feature> features) {
+	public View(EObject group, Set<Feature> features, FeatureModel featureModel) {
 		super();
 		this.group = group;
 		this.features = features;
+		this.featureModel = featureModel;
 	}
 	
 	/**
@@ -61,5 +63,12 @@ public class View {
 	 */
 	public Set<Feature> getFeatures() {
 		return features;
+	}
+
+	/**
+	 * @return the featureModel
+	 */
+	public FeatureModel getFeatureModel() {
+		return featureModel;
 	}
 }

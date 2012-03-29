@@ -63,16 +63,16 @@ public class FilteredFeatureModel {
 			}
 		}
 		EList<Mapping> mappings = featureMappingModel.getMappings();
-		ViewCreater viewCreater = new ViewCreater(allFeatures,mappings,  groupModel.getCoreGroup());
+		ViewCreater viewCreater = new ViewCreater(allFeatures,mappings,  groupModel.getCoreGroup(),featureMappingModel.getFeatureModel().getValue());
 		List<View> views = viewCreater.getViews();
 		long timeMillis = System.currentTimeMillis();
 		
-		new IncrementalAlgorithm(views,groupModel);
+		new IncrementalAlgorithm(views,groupModel,featureMappingModel.getFeatureModel().getValue());
 
 		log.debug("time: " + (System.currentTimeMillis() - timeMillis));
 		timeMillis = System.currentTimeMillis();
 
-		BruteForceAlgorithm bfa = new BruteForceAlgorithm(groupModel,views);
+		BruteForceAlgorithm bfa = new BruteForceAlgorithm(groupModel,views,featureMappingModel.getFeatureModel().getValue());
 		Set<View> checkViewPoints = bfa.getViewPoints();
 
 		log.debug("time: " + (System.currentTimeMillis() - timeMillis));

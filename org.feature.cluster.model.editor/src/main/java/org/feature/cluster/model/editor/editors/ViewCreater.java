@@ -14,6 +14,7 @@ import org.feature.cluster.model.cluster.CoreGroup;
 import org.feature.cluster.model.cluster.Group;
 import org.feature.cluster.model.cluster.GroupModel;
 import org.featuremapper.models.feature.Feature;
+import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.featuremapping.And;
 import org.featuremapper.models.featuremapping.ElementMapping;
 import org.featuremapper.models.featuremapping.FeatureRef;
@@ -36,13 +37,14 @@ public class ViewCreater {
 	 * @param mappings the mapping
 	 * @param coreGroup the core Group
 	 * @param featureModel the feature model
+	 * @throws NoFeatureModelFoundException 
 	 */
-	public ViewCreater(EList<Feature> allFeatures,EList<Mapping> mappings,CoreGroup coreGroup) {
+	public ViewCreater(EList<Feature> allFeatures,EList<Mapping> mappings,CoreGroup coreGroup, FeatureModel featureModel) {
 		this.coreGroup = coreGroup;
 		this.mappings = mappings;
 		//<Name of Group,  {@link Group}||{@link DefaultGroup}>
 		List<EObject> listOfGroups = createMapOfGroups();
-		views = createViews(listOfGroups);
+		views = createViews(listOfGroups,featureModel);
 		for (View view : views) {
 			if (view.getGroup().equals(coreGroup)) {
 				allFeatures.removeAll(mappedFeatures);
@@ -50,15 +52,15 @@ public class ViewCreater {
 			}
 		}
 	}
-	
+
 	/**
 	 * create the views
 	 * @param mapOfGroups
 	 */
-	private List<View> createViews(List<EObject> groups) {
+	private List<View> createViews(List<EObject> groups,FeatureModel featureModel) {
 		List<View> views = new LinkedList<View>();
 		for (EObject group : groups) {
-			views.add(new View(group, getFeatures(group)));
+			views.add(new View(group, getFeatures(group),featureModel));
 		}
 		return views;
 	}
