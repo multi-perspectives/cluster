@@ -3,12 +3,14 @@
  */
 package org.feature.cluster.model.editor.util;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.FileDialog;
@@ -18,6 +20,7 @@ import org.eclipse.zest.core.widgets.GraphNode;
 import org.featuremapper.models.feature.Constraint;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
+import org.featuremapper.models.feature.Group;
 
 /**
  * Utility class for the cluster editor.
@@ -40,9 +43,51 @@ public class Util {
 	 * @return a view from a {@link FeatureModel}
 	 */
 	public static FeatureModel createFeatureModel(FeatureModel featureModel, Set<Feature> features){
-		//TODO implementieren. HF!
-		
-		return null;
+		FeatureModel view = EcoreUtil.copy(featureModel);
+		traverseFeatureModelAndRemoveFeatures(view.getRoot(),features);
+		assert view.getAllFeatures().size() == features.size();
+		return view;
+	}
+	
+	/**
+	 * removes all {@link Feature} from the {@link FeatureModel} which are not in the {@link Set}.
+	 * @param parentFeature a parent {@link Feature}. First call with root {@link Feature}.
+	 * @param features {@link Feature} which are part of the view.
+	 */
+	private static void traverseFeatureModelAndRemoveFeatures(Feature parentFeature,Set<Feature> features) {
+		if (features.contains(parentFeature)) {
+			EList<Group> groups = parentFeature.getGroups();
+			for (Group group : groups) {
+				EList<Feature> childFeatures = group.getChildFeatures();
+				Set<Feature> featuresToRemove = new HashSet<Feature>();
+				for (Feature feature : childFeatures) {
+					if (features.contains(feature)) {
+						traverseFeatureModelAndRemoveFeatures(feature, features);
+					}else{//Remove feature
+						featuresToRemove.add(feature);
+					}
+				}
+				for (Feature feature : featuresToRemove) {
+					if (feature.getMinCardinality() == 1) { //mandatory feature
+						if (group.getMinCardinality() > 1) {
+							group.setMinCardinality(group.getMinCardinality() -1);
+						}
+					}
+					if (group.getMaxCardinality() > 1) {
+						group.setMaxCardinality(group.getMaxCardinality() -1);
+					}
+					group.getChildFeatures().remove(feature);
+				}
+				if (group.getMinCardinality() > group.getChildFeatures().size()) {//TODO mit Julia diskutieren
+					group.setMinCardinality(group.getChildFeatures().size());
+				}
+			}
+		}
+	}
+
+	public static boolean isConsistent(FeatureModel view){
+		//TODO call csp.
+		return false;
 	}
 	
 	/**
