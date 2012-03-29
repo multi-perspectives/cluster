@@ -26,7 +26,7 @@ import org.eclipse.zest.layouts.LayoutAlgorithm;
 import org.eclipse.zest.layouts.LayoutStyles;
 import org.eclipse.zest.layouts.algorithms.GridLayoutAlgorithm;
 import org.feature.cluster.model.cluster.GroupModel;
-import org.feature.cluster.model.editor.editors.MultiPageEditor;
+import org.feature.cluster.model.editor.editors.ClusterMultiPageEditor;
 import org.feature.cluster.model.editor.editors.listeners.ViewPointNodeMouseListener;
 import org.feature.cluster.model.editor.util.Util;
 import org.feature.cluster.model.editor.zest.model.Node;
@@ -44,14 +44,14 @@ public class ZestView  extends ViewerPane implements IZoomableWorkbenchPart {
 	Logger log = Logger.getLogger(ZestView.class);
 	public static final String ID = "de.vogella.zest.jface.view";
 	private GraphViewer viewer;
-	private MultiPageEditor multiPageEditor;
+	private ClusterMultiPageEditor multiPageEditor;
 	private NodeModelContentProvider nodeModelContentProvider;
 	
 	/**
 	 * 
 	 * @param model
 	 */
-	public ZestView(IWorkbenchPage page, IWorkbenchPart part, Composite parent, MultiPageEditor multiPageEditor) {
+	public ZestView(IWorkbenchPage page, IWorkbenchPart part, Composite parent, ClusterMultiPageEditor multiPageEditor) {
 		super(page, part);
 		this.multiPageEditor = multiPageEditor;
 	}

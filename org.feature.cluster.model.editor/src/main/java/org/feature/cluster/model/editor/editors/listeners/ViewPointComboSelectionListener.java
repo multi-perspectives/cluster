@@ -11,7 +11,7 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Combo;
 import org.feature.cluster.model.cluster.CoreGroup;
 import org.feature.cluster.model.cluster.ViewPoint;
-import org.feature.cluster.model.editor.editors.MultiPageEditor;
+import org.feature.cluster.model.editor.editors.ClusterMultiPageEditor;
 import org.feature.cluster.model.editor.util.Matrix;
 
 /**
@@ -21,9 +21,9 @@ import org.feature.cluster.model.editor.util.Matrix;
  */
 public class ViewPointComboSelectionListener implements SelectionListener {
 
-	private MultiPageEditor multiPageEditor;
+	private ClusterMultiPageEditor multiPageEditor;
 	
-	public ViewPointComboSelectionListener(MultiPageEditor multiPageEditor) {
+	public ViewPointComboSelectionListener(ClusterMultiPageEditor multiPageEditor) {
 		this.multiPageEditor = multiPageEditor;
 	}
 

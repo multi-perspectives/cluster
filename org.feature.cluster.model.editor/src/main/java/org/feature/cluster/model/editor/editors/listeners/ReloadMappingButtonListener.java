@@ -5,15 +5,15 @@ package org.feature.cluster.model.editor.editors.listeners;
 
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.feature.cluster.model.editor.editors.MultiPageEditor;
+import org.feature.cluster.model.editor.editors.ClusterMultiPageEditor;
 
 /**
  * @author winkelti
  *
  */
 public class ReloadMappingButtonListener implements SelectionListener {
-	MultiPageEditor multiPageEditor;
-	public ReloadMappingButtonListener(MultiPageEditor multiPageEditor) {
+	ClusterMultiPageEditor multiPageEditor;
+	public ReloadMappingButtonListener(ClusterMultiPageEditor multiPageEditor) {
 		this.multiPageEditor = multiPageEditor;
 	}
 

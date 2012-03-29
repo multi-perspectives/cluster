@@ -33,13 +33,13 @@ import org.featuremapper.models.featuremapping.SolutionModelRef;
  */
 public class FilteredFeatureModel {
 	private static Logger log = Logger.getLogger(FilteredFeatureModel.class);
-	private MultiPageEditor multiPageEditor;
+	private ClusterMultiPageEditor multiPageEditor;
 	/**
 	 * 
 	 * @param mappingResource
 	 * @param viewPoint
 	 */
-	public FilteredFeatureModel(Resource mappingResource, ViewPoint viewPoint, MultiPageEditor multiPageEditor) {
+	public FilteredFeatureModel(Resource mappingResource, ViewPoint viewPoint, ClusterMultiPageEditor multiPageEditor) {
 		this.multiPageEditor = multiPageEditor;
 		EList<EObject> contents = mappingResource.getContents();
 		FeatureMappingModel featureMappingModel = null;

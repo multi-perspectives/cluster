@@ -54,7 +54,7 @@ public class IncrementalAlgorithm {
    /**
 	 * 
 	 */
-   private void run() {
+   public void run() {
       ViewPointContainer container = groupModel.getViewPointContainer();
       if (container != null) {
          EList<ViewPoint> viewPoints = container.getViewPoints();

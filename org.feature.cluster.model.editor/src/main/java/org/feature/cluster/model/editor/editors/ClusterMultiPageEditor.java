@@ -131,7 +131,7 @@ import org.feature.cluster.model.editor.zest.view.ZestView;
  * 
  * @author Tim Winkelmann
  */
-public class MultiPageEditor extends MultiPageEditorPart implements IEditingDomainProvider, IMenuListener, ISelectionProvider {
+public class ClusterMultiPageEditor extends MultiPageEditorPart implements IEditingDomainProvider, IMenuListener, ISelectionProvider {
 
    /**
     * This keeps track of the editing domain that is used to track all changes to the model. <!-- begin-user-doc -->
@@ -306,7 +306,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
                   public void run() {
                      removedResources.addAll(visitor.getRemovedResources());
                      if (!isDirty()) {
-                        getSite().getPage().closeEditor(MultiPageEditor.this, false);
+                        getSite().getPage().closeEditor(ClusterMultiPageEditor.this, false);
                      }
                   }
                });
@@ -317,7 +317,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
 
                   public void run() {
                      changedResources.addAll(visitor.getChangedResources());
-                     if (getSite().getPage().getActiveEditor() == MultiPageEditor.this) {
+                     if (getSite().getPage().getActiveEditor() == ClusterMultiPageEditor.this) {
                         handleActivate();
                      }
                   }
@@ -338,10 +338,10 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
       public void partActivated(IWorkbenchPart p) {
          if (p instanceof PropertySheet) {
             if (((PropertySheet) p).getCurrentPage() == propertySheetPage) {
-               getActionBarContributor().setActiveEditor(MultiPageEditor.this);
+               getActionBarContributor().setActiveEditor(ClusterMultiPageEditor.this);
                handleActivate();
             }
-         } else if (p == MultiPageEditor.this) {
+         } else if (p == ClusterMultiPageEditor.this) {
             handleActivate();
          }
       }
@@ -419,17 +419,15 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
    private Button refresh;
 
    private String mappingResourcePath;
-   private static Logger log = Logger.getLogger(MultiPageEditor.class);
+   private static Logger log = Logger.getLogger(ClusterMultiPageEditor.class);
 
    /**
     * Creates a multi-page editor example.
     */
-   public MultiPageEditor() {
+   public ClusterMultiPageEditor() {
       super();
       initializeEditingDomain();
       log.debug("Init Handlers");
-      IncrementalAlgorithmHandler.multiPageEditor = this;
-      FilterFeatureModelHandler.multiPageEditor = this;
    }
 
    /**
@@ -490,8 +488,8 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
 
             @Override
             public void setSelectionToViewer(List< ? > selection) {
-               MultiPageEditor.this.setSelectionToViewer(selection);
-               MultiPageEditor.this.setFocus();
+               ClusterMultiPageEditor.this.setSelectionToViewer(selection);
+               ClusterMultiPageEditor.this.setFocus();
             }
 
             @Override
@@ -524,7 +522,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
 
       if (!removedResources.isEmpty()) {
          if (handleDirtyConflict()) {
-            getSite().getPage().closeEditor(MultiPageEditor.this, false);
+            getSite().getPage().closeEditor(ClusterMultiPageEditor.this, false);
          } else {
             removedResources.clear();
             changedResources.clear();
@@ -638,7 +636,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
       mainComposite.setLayoutData(new GridData(GridData.FILL_BOTH));
       FillLayout layout = new FillLayout();
       mainComposite.setLayout(layout);
-      ViewerPane viewerPane = new ViewerPane(getSite().getPage(), MultiPageEditor.this) {
+      ViewerPane viewerPane = new ViewerPane(getSite().getPage(), ClusterMultiPageEditor.this) {
 
          @Override
          public Viewer createViewer(Composite composite) {
@@ -781,7 +779,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
       FillLayout layout = new FillLayout();
       mainComposite.setLayout(layout);
 
-      zestView = new ZestView(getSite().getPage(), MultiPageEditor.this, mainComposite, this);
+      zestView = new ZestView(getSite().getPage(), ClusterMultiPageEditor.this, mainComposite, this);
       zestView.createControl(mainComposite);
       fillToolBar();
       int index = addPage(composite);
@@ -873,7 +871,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements IEditingDoma
     * creates the view for the group view
     */
    private void createGroupView() {
-      ViewerPane viewerPane = new ViewerPane(getSite().getPage(), MultiPageEditor.this) {
+      ViewerPane viewerPane = new ViewerPane(getSite().getPage(), ClusterMultiPageEditor.this) {
 
          @Override
          public Viewer createViewer(Composite composite) {
