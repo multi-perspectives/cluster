@@ -26,19 +26,19 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ViewPoint extends Element {
 	/**
-    * Returns the value of the '<em><b>Contained In Group</b></em>' reference list.
-    * The list contents are of type {@link org.feature.cluster.model.cluster.Group}.
-    * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Contained In Group</b></em>' reference list.
+	 * The list contents are of type {@link org.feature.cluster.model.cluster.Group}.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Contained In Group</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-    * @return the value of the '<em>Contained In Group</em>' reference list.
-    * @see org.feature.cluster.model.cluster.ClusterPackage#getViewPoint_ContainedInGroup()
-    * @model changeable="false"
-    * @generated
-    */
+	 * @return the value of the '<em>Contained In Group</em>' reference list.
+	 * @see org.feature.cluster.model.cluster.ClusterPackage#getViewPoint_ContainedInGroup()
+	 * @model changeable="false"
+	 * @generated
+	 */
 	EList<Group> getContainedInGroup();
 
 } // ViewPoint

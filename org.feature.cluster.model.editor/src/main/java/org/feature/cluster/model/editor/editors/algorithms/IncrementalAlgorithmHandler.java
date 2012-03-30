@@ -67,12 +67,8 @@ public class IncrementalAlgorithmHandler extends AbstractHandler {
                      EList<Feature> allFeatures = featureMappingModel.getFeatureModel().getValue().getAllFeatures();
                      EList<Mapping> mappings = featureMappingModel.getMappings();
 
-                     List<View> views =
-                        new ViewCreater(allFeatures, mappings, groupModel.getCoreGroup(), featureMappingModel.getFeatureModel().getValue())
-                           .getViews();
-                     IncrementalAlgorithm algorithm =
-                        new IncrementalAlgorithm(views, groupModel, featureMappingModel.getFeatureModel().getValue());
-                     algorithm.run();
+                     List<View> views = new ViewCreater(allFeatures, mappings, groupModel.getCoreGroup(), featureMappingModel.getFeatureModel().getValue()).getViews();
+                     new IncrementalAlgorithm(views, groupModel, featureMappingModel.getFeatureModel().getValue());
                   }
                }
             }
@@ -80,5 +76,4 @@ public class IncrementalAlgorithmHandler extends AbstractHandler {
       }
       return null; // No return value needed.
    }
-
 }

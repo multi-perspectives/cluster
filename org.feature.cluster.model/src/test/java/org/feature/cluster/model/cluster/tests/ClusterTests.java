@@ -20,32 +20,32 @@ import junit.textui.TestRunner;
 public class ClusterTests extends TestSuite {
 
    /**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
    public static void main(String[] args) {
-      TestRunner.run(suite());
-   }
+		TestRunner.run(suite());
+	}
 
    /**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
    public static Test suite() {
-      TestSuite suite = new ClusterTests("cluster Tests");
-      suite.addTestSuite(GroupTest.class);
-      return suite;
-   }
+		TestSuite suite = new ClusterTests("cluster Tests");
+		suite.addTestSuite(GroupTest.class);
+		return suite;
+	}
 
    /**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
    public ClusterTests(String name) {
-      super(name);
-   }
+		super(name);
+	}
 
 } //ClusterTests

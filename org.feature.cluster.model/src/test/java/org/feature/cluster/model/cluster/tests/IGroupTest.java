@@ -19,41 +19,41 @@ import org.feature.cluster.model.cluster.IGroup;
 public abstract class IGroupTest extends TestCase {
 
    /**
-    * The fixture for this IGroup test case.
-    * <!-- begin-user-doc -->
+	 * The fixture for this IGroup test case.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
    protected IGroup fixture = null;
 
    /**
-    * Constructs a new IGroup test case with the given name.
-    * <!-- begin-user-doc -->
+	 * Constructs a new IGroup test case with the given name.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
    public IGroupTest(String name) {
-      super(name);
-   }
+		super(name);
+	}
 
    /**
-    * Sets the fixture for this IGroup test case.
-    * <!-- begin-user-doc -->
+	 * Sets the fixture for this IGroup test case.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
    protected void setFixture(IGroup fixture) {
-      this.fixture = fixture;
-   }
+		this.fixture = fixture;
+	}
 
    /**
-    * Returns the fixture for this IGroup test case.
-    * <!-- begin-user-doc -->
+	 * Returns the fixture for this IGroup test case.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
    protected IGroup getFixture() {
-      return fixture;
-   }
+		return fixture;
+	}
 
 } //IGroupTest

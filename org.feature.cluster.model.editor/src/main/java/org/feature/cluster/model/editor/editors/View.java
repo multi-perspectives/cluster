@@ -48,7 +48,9 @@ public class View {
 	 * @return true if no violation is found.
 	 */
 	public boolean isConsistent(){
-		return Util.isConsistent(features);
+//		return Util.isConsistent(features);
+		FeatureModel view = Util.createFeatureModel(featureModel, features);
+		return Util.isConsistent(view);
 	}
 
 	/**

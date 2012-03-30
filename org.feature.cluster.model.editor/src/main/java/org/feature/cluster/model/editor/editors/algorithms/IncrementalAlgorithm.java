@@ -53,7 +53,7 @@ public class IncrementalAlgorithm {
    /**
 	 * 
 	 */
-   public void run() {
+   private void run() {
       ViewPointContainer container = groupModel.getViewPointContainer();
       if (container != null) {
          EList<ViewPoint> viewPoints = container.getViewPoints();
@@ -68,7 +68,9 @@ public class IncrementalAlgorithm {
          for (Group g : ugCG.getGroup().getGroups()) {
             if (usedGroups.containsKey(g)) {
                UsedGroup msg = usedGroups.get(g);
-               msg.setConsistent(Util.isConsistent(msg.getFeatures()));
+               FeatureModel view = Util.createFeatureModel(featureModel, msg.getFeatures());
+               msg.setConsistent(Util.isConsistent(view));
+//               msg.setConsistent(Util.isConsistent(msg.getFeatures()));
                msg.setDone();
                // i++;//used for tests
                checkGroupModel(g, usedGroups);
@@ -97,7 +99,7 @@ public class IncrementalAlgorithm {
          log.info("There are no viewpoints defined yet.");
       }
    }
-
+   
    /**
     * 
     * @param group
@@ -107,14 +109,15 @@ public class IncrementalAlgorithm {
       for (Group g : group.getGroups()) {
          if (usedGroups.containsKey(g)) {
             UsedGroup ug = usedGroups.get(g);
-            ug.setConsistent(Util.isConsistent(ug.getFeatures()));
+            FeatureModel view = Util.createFeatureModel(featureModel, ug.getFeatures());
+            ug.setConsistent(Util.isConsistent(view));
+//            ug.setConsistent(Util.isConsistent(ug.getFeatures()));
             ug.setDone();
             // i++;//used for tests
             checkGroupModel(g, usedGroups);
          }
       }
    }
-
    /**
     * uses the most specific groups to create a new group model
     * 
@@ -125,7 +128,9 @@ public class IncrementalAlgorithm {
       Map<IGroup, UsedGroup> usedGroups = new HashMap<IGroup, UsedGroup>();
       ugCG = new UsedGroup(null, groupModel.getCoreGroup(), views.get(groupModel.getCoreGroup()).getFeatures());
       ugCG.setDone();
-      ugCG.setConsistent(Util.isConsistent(ugCG.getFeatures()));
+      FeatureModel view = Util.createFeatureModel(featureModel, ugCG.getFeatures());
+      ugCG.setConsistent(Util.isConsistent(view));
+//      ugCG.setConsistent(Util.isConsistent(ugCG.getFeatures()));
       usedGroups.put(groupModel.getCoreGroup(), ugCG);
       for (Group group : groups) {
          if (!usedGroups.containsKey(group)) {
@@ -145,7 +150,7 @@ public class IncrementalAlgorithm {
       }
       return usedGroups;
    }
-
+   
    /**
     * create a {@link UsedGroup} and his parents (except the ugCG) from the {@link Group} and adds it and his parents to
     * the list.

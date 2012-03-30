@@ -22,72 +22,72 @@ import org.feature.cluster.model.cluster.ViewPointContainer;
 public class ViewPointContainerTest extends TestCase {
 
    /**
-    * The fixture for this View Point Container test case.
-    * <!-- begin-user-doc -->
+	 * The fixture for this View Point Container test case.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
    protected ViewPointContainer fixture = null;
 
    /**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
    public static void main(String[] args) {
-      TestRunner.run(ViewPointContainerTest.class);
-   }
+		TestRunner.run(ViewPointContainerTest.class);
+	}
 
    /**
-    * Constructs a new View Point Container test case with the given name.
-    * <!-- begin-user-doc -->
+	 * Constructs a new View Point Container test case with the given name.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
    public ViewPointContainerTest(String name) {
-      super(name);
-   }
+		super(name);
+	}
 
    /**
-    * Sets the fixture for this View Point Container test case.
-    * <!-- begin-user-doc -->
+	 * Sets the fixture for this View Point Container test case.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
    protected void setFixture(ViewPointContainer fixture) {
-      this.fixture = fixture;
-   }
+		this.fixture = fixture;
+	}
 
    /**
-    * Returns the fixture for this View Point Container test case.
-    * <!-- begin-user-doc -->
+	 * Returns the fixture for this View Point Container test case.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
    protected ViewPointContainer getFixture() {
-      return fixture;
-   }
+		return fixture;
+	}
 
    /**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @see junit.framework.TestCase#setUp()
-    * @generated
-    */
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
    @Override
    protected void setUp() throws Exception {
-      setFixture(ClusterFactory.eINSTANCE.createViewPointContainer());
-   }
+		setFixture(ClusterFactory.eINSTANCE.createViewPointContainer());
+	}
 
    /**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @see junit.framework.TestCase#tearDown()
-    * @generated
-    */
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
    @Override
    protected void tearDown() throws Exception {
-      setFixture(null);
-   }
+		setFixture(null);
+	}
 
 } //ViewPointContainerTest
