@@ -84,7 +84,7 @@
       </category>
       <command
             categoryId="org.feature.cluster.model.editor.algorithm"
-            defaultHandler="org.feature.cluster.model.editor.editors.algorithms.IncrementalAlgorithmHandler"
+            defaultHandler="org.feature.cluster.model.editor.editors.algorithms.ConsistencyCheckHandler"
             description="Starts the validaion of all ViewPoints"
             id="org.feature.cluster.model.editor.incAlg"
             name="incrementalAlgorithm">
