@@ -161,7 +161,7 @@ public class Util {
 				operand1 = nested.getOperand();
 			}
 			if (operand2 instanceof Nested) {
-				Nested nested = (Nested) operand1;
+				Nested nested = (Nested) operand2;
 				operand2 = nested.getOperand();
 			}
 			if (operand1 instanceof Not && operand2 instanceof FeatureRef) {
