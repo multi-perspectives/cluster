@@ -16,7 +16,7 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
 import org.feature.cluster.model.cluster.GroupModel;
 import org.feature.cluster.model.editor.editors.ClusterMappingFilter;
-import org.feature.cluster.model.editor.editors.MultiPageEditor;
+import org.feature.cluster.model.editor.editors.ClusterMultiPageEditor;
 import org.featuremapper.common.utils.FeatureMappingUtil;
 
 /**
@@ -29,9 +29,9 @@ public class ChooseFMSelectionListener implements SelectionListener {
 
    Logger log = Logger.getLogger(ChooseFMSelectionListener.class);
    private Composite parentComposite;
-   private MultiPageEditor mpe;
+   private ClusterMultiPageEditor mpe;
 
-   public ChooseFMSelectionListener(Composite composite, MultiPageEditor multiPageEditor) {
+   public ChooseFMSelectionListener(Composite composite, ClusterMultiPageEditor multiPageEditor) {
       this.parentComposite = composite;
       this.mpe = multiPageEditor;
    }
@@ -52,9 +52,6 @@ public class ChooseFMSelectionListener implements SelectionListener {
     */
    private void browseMapping() {
       List<ViewerFilter> filters = new ArrayList<ViewerFilter>();
-      // FileExtensionViewerFilter featureModelViewerFilter = new FileExtensionViewerFilter(
-      // FeatureMappingUtil.getMappingModelExtensions());
-      // filters.add(featureModelViewerFilter);
       ArrayList<String> extensions = FeatureMappingUtil.getMappingModelExtensions();
       List<GroupModel> groupModels = mpe.getGroupModels();
       for (GroupModel groupModel : groupModels) {

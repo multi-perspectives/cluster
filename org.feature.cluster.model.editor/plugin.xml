@@ -27,7 +27,7 @@
 
    <extension point="org.eclipse.ui.editors">
       <editor
-            class="org.feature.cluster.model.editor.editors.MultiPageEditor"
+            class="org.feature.cluster.model.editor.editors.ClusterMultiPageEditor"
             contributorClass="org.feature.cluster.model.editor.editors.MultiPageActionBarContributor"
             default="true"
             extensions="cluster"

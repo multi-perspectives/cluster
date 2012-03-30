@@ -22,32 +22,32 @@ import org.feature.cluster.model.cluster.tests.ClusterTests;
 public class ClusterAllTests extends TestSuite {
 
    /**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
    public static void main(String[] args) {
-      TestRunner.run(suite());
-   }
+		TestRunner.run(suite());
+	}
 
    /**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
    public static Test suite() {
-      TestSuite suite = new ClusterAllTests("Cluster Tests");
-      suite.addTest(ClusterTests.suite());
-      return suite;
-   }
+		TestSuite suite = new ClusterAllTests("Cluster Tests");
+		suite.addTest(ClusterTests.suite());
+		return suite;
+	}
 
    /**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
    public ClusterAllTests(String name) {
-      super(name);
-   }
+		super(name);
+	}
 
 } //ClusterAllTests

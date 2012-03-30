@@ -24,120 +24,120 @@ import org.feature.cluster.model.cluster.*;
  */
 public class ClusterFactoryImpl extends EFactoryImpl implements ClusterFactory {
 	/**
-    * Creates the default factory implementation.
-    * <!-- begin-user-doc -->
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	public static ClusterFactory init() {
-      try {
-         ClusterFactory theClusterFactory = (ClusterFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.feature.cluster.model/schema/1.0"); 
-         if (theClusterFactory != null) {
-            return theClusterFactory;
-         }
-      }
-      catch (Exception exception) {
-         EcorePlugin.INSTANCE.log(exception);
-      }
-      return new ClusterFactoryImpl();
-   }
+		try {
+			ClusterFactory theClusterFactory = (ClusterFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.feature.cluster.model/schema/1.0"); 
+			if (theClusterFactory != null) {
+				return theClusterFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new ClusterFactoryImpl();
+	}
 
 	/**
-    * Creates an instance of the factory.
-    * <!-- begin-user-doc -->
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	public ClusterFactoryImpl() {
-      super();
-   }
+		super();
+	}
 
 	/**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	@Override
 	public EObject create(EClass eClass) {
-      switch (eClass.getClassifierID()) {
-         case ClusterPackage.CORE_GROUP: return createCoreGroup();
-         case ClusterPackage.GROUP: return createGroup();
-         case ClusterPackage.VIEW_POINT: return createViewPoint();
-         case ClusterPackage.GROUP_MODEL: return createGroupModel();
-         case ClusterPackage.VIEW_POINT_CONTAINER: return createViewPointContainer();
-         default:
-            throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-      }
-   }
+		switch (eClass.getClassifierID()) {
+			case ClusterPackage.CORE_GROUP: return createCoreGroup();
+			case ClusterPackage.GROUP: return createGroup();
+			case ClusterPackage.VIEW_POINT: return createViewPoint();
+			case ClusterPackage.GROUP_MODEL: return createGroupModel();
+			case ClusterPackage.VIEW_POINT_CONTAINER: return createViewPointContainer();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
 
 	/**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	public CoreGroup createCoreGroup() {
-      CoreGroupImpl coreGroup = new CoreGroupImpl();
-      return coreGroup;
-   }
+		CoreGroupImpl coreGroup = new CoreGroupImpl();
+		return coreGroup;
+	}
 
 	/**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	public Group createGroup() {
-      GroupImpl group = new GroupImpl();
-      return group;
-   }
+		GroupImpl group = new GroupImpl();
+		return group;
+	}
 
 	/**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	public ViewPoint createViewPoint() {
-      ViewPointImpl viewPoint = new ViewPointImpl();
-      return viewPoint;
-   }
+		ViewPointImpl viewPoint = new ViewPointImpl();
+		return viewPoint;
+	}
 
 	/**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	public GroupModel createGroupModel() {
-      GroupModelImpl groupModel = new GroupModelImpl();
-      return groupModel;
-   }
+		GroupModelImpl groupModel = new GroupModelImpl();
+		return groupModel;
+	}
 
 	/**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	public ViewPointContainer createViewPointContainer() {
-      ViewPointContainerImpl viewPointContainer = new ViewPointContainerImpl();
-      return viewPointContainer;
-   }
+		ViewPointContainerImpl viewPointContainer = new ViewPointContainerImpl();
+		return viewPointContainer;
+	}
 
 	/**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	public ClusterPackage getClusterPackage() {
-      return (ClusterPackage)getEPackage();
-   }
+		return (ClusterPackage)getEPackage();
+	}
 
 	/**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @deprecated
-    * @generated
-    */
+	 * @deprecated
+	 * @generated
+	 */
 	@Deprecated
 	public static ClusterPackage getPackage() {
-      return ClusterPackage.eINSTANCE;
-   }
+		return ClusterPackage.eINSTANCE;
+	}
 
 } //ClusterFactoryImpl

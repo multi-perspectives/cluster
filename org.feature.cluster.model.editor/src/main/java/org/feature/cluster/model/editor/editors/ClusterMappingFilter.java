@@ -8,6 +8,7 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.viewers.Viewer;
 import org.feature.cluster.model.cluster.GroupModel;
 import org.featuremapper.models.featuremapping.FeatureMappingModel;
@@ -23,12 +24,12 @@ import org.js.model.utilities.ResourceUtil;
  */
 public class ClusterMappingFilter extends FileExtensionViewerFilter {
 
-   private final GroupModel groupmodel;
+   private final ResourceSet resourceSet;
    private final IFile groupmodelFile;
 
    public ClusterMappingFilter(List<String> extensions, GroupModel groupmodel) {
       super(extensions);
-      this.groupmodel = groupmodel;
+      this.resourceSet = groupmodel.eResource().getResourceSet();
       this.groupmodelFile = ResourceUtil.getFile(groupmodel.eResource());
    }
 
@@ -38,7 +39,7 @@ public class ClusterMappingFilter extends FileExtensionViewerFilter {
       if (select) {
          if (element instanceof IFile) {
             IFile file = (IFile) element;
-            EObject model = ResourceUtil.getModel(file);
+            EObject model = ResourceUtil.getModel(file, resourceSet);
             if (model instanceof FeatureMappingModel) {
                FeatureMappingModel mapping = (FeatureMappingModel) model;
                EList<SolutionModelRef> solutionModels = mapping.getSolutionModels();

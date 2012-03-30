@@ -39,117 +39,117 @@ import org.feature.cluster.model.cluster.ViewPointContainer;
  */
 public class ViewPointContainerImpl extends EObjectImpl implements ViewPointContainer {
 	/**
-    * The cached value of the '{@link #getViewPoints() <em>View Points</em>}' containment reference list.
-    * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getViewPoints() <em>View Points</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @see #getViewPoints()
-    * @generated
-    * @ordered
-    */
+	 * @see #getViewPoints()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<ViewPoint> viewPoints;
 	/**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	protected ViewPointContainerImpl() {
-      super();
-   }
+		super();
+	}
 
 	/**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-      return ClusterPackage.Literals.VIEW_POINT_CONTAINER;
-   }
+		return ClusterPackage.Literals.VIEW_POINT_CONTAINER;
+	}
 
 	/**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	public EList<ViewPoint> getViewPoints() {
-      if (viewPoints == null) {
-         viewPoints = new EObjectContainmentEList<ViewPoint>(ViewPoint.class, this, ClusterPackage.VIEW_POINT_CONTAINER__VIEW_POINTS);
-      }
-      return viewPoints;
-   }
+		if (viewPoints == null) {
+			viewPoints = new EObjectContainmentEList<ViewPoint>(ViewPoint.class, this, ClusterPackage.VIEW_POINT_CONTAINER__VIEW_POINTS);
+		}
+		return viewPoints;
+	}
 
 	/**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-      switch (featureID) {
-         case ClusterPackage.VIEW_POINT_CONTAINER__VIEW_POINTS:
-            return ((InternalEList<?>)getViewPoints()).basicRemove(otherEnd, msgs);
-      }
-      return super.eInverseRemove(otherEnd, featureID, msgs);
-   }
+		switch (featureID) {
+			case ClusterPackage.VIEW_POINT_CONTAINER__VIEW_POINTS:
+				return ((InternalEList<?>)getViewPoints()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-      switch (featureID) {
-         case ClusterPackage.VIEW_POINT_CONTAINER__VIEW_POINTS:
-            return getViewPoints();
-      }
-      return super.eGet(featureID, resolve, coreType);
-   }
+		switch (featureID) {
+			case ClusterPackage.VIEW_POINT_CONTAINER__VIEW_POINTS:
+				return getViewPoints();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-      switch (featureID) {
-         case ClusterPackage.VIEW_POINT_CONTAINER__VIEW_POINTS:
-            getViewPoints().clear();
-            getViewPoints().addAll((Collection<? extends ViewPoint>)newValue);
-            return;
-      }
-      super.eSet(featureID, newValue);
-   }
+		switch (featureID) {
+			case ClusterPackage.VIEW_POINT_CONTAINER__VIEW_POINTS:
+				getViewPoints().clear();
+				getViewPoints().addAll((Collection<? extends ViewPoint>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-      switch (featureID) {
-         case ClusterPackage.VIEW_POINT_CONTAINER__VIEW_POINTS:
-            getViewPoints().clear();
-            return;
-      }
-      super.eUnset(featureID);
-   }
+		switch (featureID) {
+			case ClusterPackage.VIEW_POINT_CONTAINER__VIEW_POINTS:
+				getViewPoints().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-    * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @generated
-    */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-      switch (featureID) {
-         case ClusterPackage.VIEW_POINT_CONTAINER__VIEW_POINTS:
-            return viewPoints != null && !viewPoints.isEmpty();
-      }
-      return super.eIsSet(featureID);
-   }
+		switch (featureID) {
+			case ClusterPackage.VIEW_POINT_CONTAINER__VIEW_POINTS:
+				return viewPoints != null && !viewPoints.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //ViewPointContainerImpl

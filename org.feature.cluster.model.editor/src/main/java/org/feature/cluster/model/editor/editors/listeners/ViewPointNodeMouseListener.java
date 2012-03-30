@@ -16,7 +16,7 @@ import org.eclipse.zest.core.viewers.GraphViewer;
 import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.GraphNode;
 import org.feature.cluster.model.cluster.Group;
-import org.feature.cluster.model.editor.editors.MultiPageEditor;
+import org.feature.cluster.model.editor.editors.ClusterMultiPageEditor;
 import org.feature.cluster.model.editor.util.Util;
 import org.feature.cluster.model.editor.zest.model.CoreGroupNode;
 import org.feature.cluster.model.editor.zest.model.FeatureNode;
@@ -29,10 +29,10 @@ import org.feature.cluster.model.editor.zest.model.ViewPointNode;
  *
  */
 public class ViewPointNodeMouseListener implements IDoubleClickListener {
-	private MultiPageEditor multiPageEditor;
+	private ClusterMultiPageEditor multiPageEditor;
 	private List<Node> nodesForHighlighting;
 	
-	public ViewPointNodeMouseListener(MultiPageEditor multiPageEditor) {
+	public ViewPointNodeMouseListener(ClusterMultiPageEditor multiPageEditor) {
 		this.multiPageEditor = multiPageEditor;
 	}
 

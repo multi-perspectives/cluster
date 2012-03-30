@@ -100,7 +100,7 @@ public class IncrementalAlgorithm {
          log.info("There are no viewpoints defined yet.");
       }
    }
-
+   
    /**
     * 
     * @param group
@@ -119,7 +119,6 @@ public class IncrementalAlgorithm {
          }
       }
    }
-
    /**
     * uses the most specific groups to create a new group model
     * 
@@ -152,7 +151,7 @@ public class IncrementalAlgorithm {
       }
       return usedGroups;
    }
-
+   
    /**
     * create a {@link UsedGroup} and his parents (except the ugCG) from the {@link Group} and adds it and his parents to
     * the list.

@@ -29,7 +29,6 @@ import org.featuremapper.models.feature.Constraint;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.feature.Group;
-import org.featuremapper.models.featuremapping.impl.FeatureRefImpl;
 import org.js.model.csp.TextExpressionParser;
 import org.js.model.csp.analyze.FeatureModelAnalyzer;
 
