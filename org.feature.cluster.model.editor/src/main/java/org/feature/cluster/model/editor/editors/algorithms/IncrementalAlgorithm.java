@@ -56,6 +56,7 @@ public class IncrementalAlgorithm {
    public void run() {
 //	   long time = System.currentTimeMillis();
       ViewPointContainer container = groupModel.getViewPointContainer();
+      log.debug("GroupModel " + groupModel.eResource().toString());
       if (container != null) {
          EList<ViewPoint> viewPoints = container.getViewPoints();
 //         log.info("Number of ViewPoints: " + viewPoints.size());
@@ -90,11 +91,11 @@ public class IncrementalAlgorithm {
                   isCon = false;
                }
             }
-//            if (isCon) {
-//               log.info("Viewpoint: " + vp.getName() + " is consistent\n");
-//            } else {
-//               log.info("Viewpoint: " + vp.getName() + " is not consistent\n");
-//            }
+            if (isCon) {
+               log.info("Viewpoint: " + vp.getName() + " is consistent\n");
+            } else {
+               log.info("Viewpoint: " + vp.getName() + " is not consistent\n");
+            }
          }
       } else{
          log.info("There are no viewpoints defined yet.");
