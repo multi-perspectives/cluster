@@ -69,8 +69,8 @@ public class Util {
 	 * @param featureModel the full {@link FeatureModel}.
 	 */
 	private static void removeUnusedConstrtaints(FeatureModel view, FeatureModel featureModel) {
-		log.debug("view features:\t" + view.getAllFeatures().size());
-		log.debug("featureModel features:\t" + featureModel.getAllFeatures().size());
+//		log.debug("view features:\t" + view.getAllFeatures().size());
+//		log.debug("featureModel features:\t" + featureModel.getAllFeatures().size());
 		EList<Constraint> constraints = view.getConstraints();
 		List<org.emftext.term.propositional.expression.Term> orgConstraints = TextExpressionParser.parseExpressions(featureModel);
 		Set<Constraint> constraintsToRemove = new HashSet<Constraint>();
@@ -113,7 +113,7 @@ public class Util {
 			}
 		}
 		view.getConstraints().removeAll(constraintsToRemove);
-		log.debug("Constraints removed: " + constraintsToRemove.size());
+//		log.debug("Constraints removed: " + constraintsToRemove.size());
 	}
 
 	/**
@@ -123,8 +123,8 @@ public class Util {
 	 */
 	private static boolean isExclusion(Term term) {
 		boolean isExclusion = false;
-		if (term instanceof And) {
-			And and = (And) term;
+		if (term instanceof Or) {
+			Or and = (Or) term;
 			Term operand1 = and.getOperand1();
 			Term operand2 = and.getOperand2();
 			if (operand1 instanceof Nested) {
@@ -132,12 +132,13 @@ public class Util {
 				operand1 = nested.getOperand();
 			}
 			if (operand2 instanceof Nested) {
-				Nested nested = (Nested) operand1;
+				Nested nested = (Nested) operand2;
 				operand2 = nested.getOperand();
 			}
-			if (operand1 instanceof Not && operand2 instanceof FeatureRef) {
-				Not not = (Not) operand1;
-				if (not.getOperand() instanceof FeatureRef) {
+			if (operand1 instanceof Not && operand2 instanceof Not) {
+				Not not1 = (Not) operand1;
+				Not not2 = (Not) operand2;
+				if (not1.getOperand() instanceof FeatureRef && not2.getOperand() instanceof FeatureRef ) {
 					isExclusion = true;
 				}
 			}
@@ -205,7 +206,7 @@ public class Util {
 				if (group.getChildFeatures().isEmpty()) {
 					groupsToRemove.add(group);
 				}
-//				if (group.getMinCardinality() > group.getChildFeatures().size()) {//TODO mit Julia diskutieren
+//				if (group.getMinCardinality() > group.getChildFeatures().size()) {
 //					group.setMinCardinality(group.getChildFeatures().size());
 //				}
 			}
@@ -222,9 +223,13 @@ public class Util {
 	 * @return true if the name of the {@link Feature} is equal to one in the set.
 	 */
 	private static boolean contains(Feature feature, Collection<Feature> features){
-		for (Feature feature2 : features) {
-			if (feature.getName().equals(feature2.getName())) {
-				return true;
+		if (feature != null && feature.getName() != null) {
+			for (Feature feature2 : features) {
+				if (feature2 != null && feature2.getName() != null) {
+					if (feature.getName().equals(feature2.getName())) {
+						return true;
+					}
+				}
 			}
 		}
 		return false;
@@ -237,7 +242,7 @@ public class Util {
 	 */
 	public static boolean isConsistent(FeatureModel view){
 		FeatureModelAnalyzer featureModelAnalyzer = new FeatureModelAnalyzer(view);
-		return !featureModelAnalyzer.getDerivableVariants().isEmpty();
+		return featureModelAnalyzer.isSatisfiable();
 	}
 	
 	/**

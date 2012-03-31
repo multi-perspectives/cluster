@@ -54,10 +54,11 @@ public class IncrementalAlgorithm {
 	 * 
 	 */
    public void run() {
+//	   long time = System.currentTimeMillis();
       ViewPointContainer container = groupModel.getViewPointContainer();
       if (container != null) {
          EList<ViewPoint> viewPoints = container.getViewPoints();
-         log.info("Number of ViewPoints: " + viewPoints.size());
+//         log.info("Number of ViewPoints: " + viewPoints.size());
          Set<Group> groups = new HashSet<Group>();
          // get important groups
          for (ViewPoint viewPoint : viewPoints) {
@@ -78,26 +79,27 @@ public class IncrementalAlgorithm {
          }
          // Display results:
          for (ViewPoint vp : viewPoints) {
-            log.info("Viewpoint: " + vp.getName());
+//            log.info("Viewpoint: " + vp.getName());
             boolean isCon = true;
             EList<Group> groups2 = vp.getContainedInGroup();
             for (Group group : groups2) {
                UsedGroup usedGroup = usedGroups.get(group);
                boolean consistent = usedGroup.isConsistent();
-               log.info("View: " + group.getName() + ":" + consistent);
+//               log.info("View: " + group.getName() + ":" + consistent);
                if (isCon && !consistent) {
                   isCon = false;
                }
             }
-            if (isCon) {
-               log.info("Viewpoint: " + vp.getName() + " is consistent\n");
-            } else {
-               log.info("Viewpoint: " + vp.getName() + " is not consistent\n");
-            }
+//            if (isCon) {
+//               log.info("Viewpoint: " + vp.getName() + " is consistent\n");
+//            } else {
+//               log.info("Viewpoint: " + vp.getName() + " is not consistent\n");
+//            }
          }
       } else{
          log.info("There are no viewpoints defined yet.");
       }
+//      log.debug("Inc: " + (System.currentTimeMillis() - time));
    }
    
    /**

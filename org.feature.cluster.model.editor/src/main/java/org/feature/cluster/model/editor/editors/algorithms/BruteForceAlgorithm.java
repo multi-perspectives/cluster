@@ -47,6 +47,7 @@ public class BruteForceAlgorithm {
     * @param views2 contains all views
     */
    public Set<View> checkViewPoints() {
+//	   long time = System.currentTimeMillis();
       EList<ViewPoint> viewPointsToCheck = groupModel.getViewPointContainer().getViewPoints();
       HashMap<EObject, View> viewMemory = new HashMap<EObject, View>();
       viewPoints = new HashSet<View>();
@@ -54,6 +55,7 @@ public class BruteForceAlgorithm {
          // log.debug("ViewPoint: " + viewPoint.getName());
          viewPoints.add(checkViewpoint(viewPoint, views, groupModel.getCoreGroup(), viewMemory));
       }
+//      log.debug("BF: " + (System.currentTimeMillis()-time));
       return viewPoints;
    }
 
@@ -96,7 +98,7 @@ public class BruteForceAlgorithm {
             }
          }
          View view = new View(viewPoint, features, this.featureModel);
-         // view.isConsistent();
+          view.isConsistent();
          // log.debug(view.isConsistent() + "\n");
          return view;
       }
