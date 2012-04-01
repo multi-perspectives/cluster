@@ -138,7 +138,7 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       printCollection("NumberFeatures    ", numberFeatures);
       printCollection("NumberConstraints ", numberConstraints);
       printCollection("NumberViewpoints  ", numberViewPoints);
-      printCollection("NumberViews       ", numberViews);
+      //printCollection("NumberViews       ", numberViews);
       printCollection("Time Bruteforce   ", bruteforceTimeList);
       printCollection("Time Heuristic    ", heuristicTimeList);
       printStringCollection("Group TreeHeight  ", groupTreeHeight);
