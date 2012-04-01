@@ -5,6 +5,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.feature.cluster.model.cluster.Group;
 import org.feature.cluster.model.cluster.GroupModel;
+import org.feature.cluster.model.editor.util.Flag;
 import org.feature.cluster.model.editor.util.Util;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
@@ -56,8 +57,13 @@ public class View {
     * @return true if no violation is found.
     */
    private boolean checkConsistency() {
-      FeatureModel view = Util.createFeatureModel(featureModel, features);
-      isConsistent = Util.isConsistent(view);
+      Flag f = new Flag();
+      FeatureModel view = Util.createFeatureModel(featureModel, features, f);
+      if (f.isChanged() && f.isFlagged()) {
+         isConsistent = false;
+      } else {
+         isConsistent = Util.isConsistent(view);
+      }
       return isConsistent();
    }
 

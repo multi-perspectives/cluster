@@ -1,6 +1,7 @@
 package org.feature.cluster.model.editor.editors;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -76,7 +77,7 @@ public class FilteredFeatureModel {
       timeMillis = System.currentTimeMillis();
 
       BruteForceAlgorithm bfa = new BruteForceAlgorithm(groupModel, views, featureMappingModel.getFeatureModel().getValue());
-      Set<View> checkViewPoints = bfa.getViewPoints();
+      Collection<View> checkViewPoints = bfa.getViewPoints();
 
       log.debug("time: " + (System.currentTimeMillis() - timeMillis));
 

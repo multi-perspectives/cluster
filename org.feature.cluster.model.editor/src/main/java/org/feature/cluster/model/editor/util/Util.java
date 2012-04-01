@@ -57,20 +57,20 @@ public class Util {
     * @param features which are part of the view.
     * @return a view from a {@link FeatureModel}
     */
-   public static FeatureModel createFeatureModel(FeatureModel featureModel, Set<Feature> features) {
+   public static FeatureModel createFeatureModel(FeatureModel featureModel, Set<Feature> features, Flag canBeConsistent) {
       if (featureModel.getAllFeatures().size() == features.size()) {
          return featureModel;
       }
       URI uri = featureModel.eResource().getURI().trimFileExtension().trimFragment();
       ResourceSet resourceSet = featureModel.eResource().getResourceSet();
       String uriString = uri.toString() + System.currentTimeMillis();
-      //log.debug("FeaturemodelURI: " + uriString);
+      // log.debug("FeaturemodelURI: " + uriString);
       uri = URI.createURI(uriString);
       uri = uri.appendFileExtension("feature");
       Resource resource = resourceSet.createResource(uri);
       FeatureModel view = EcoreUtil.copy(featureModel);
       traverseFeatureModelAndRemoveFeatures(view.getRoot(), features);
-      removeUnusedConstrtaints(view, featureModel);
+      removeUnusedConstrtaints(view, featureModel, canBeConsistent);
       assert view.getAllFeatures().size() == features.size();
       resource.getContents().add(view);
       return view;
@@ -82,10 +82,12 @@ public class Util {
     * 
     * @param view a subset of the {@link FeatureModel}.
     * @param featureModel the full {@link FeatureModel}.
+    * @param canBeConsistent if an implies constraint can never be fulfilled.
     */
-   private static void removeUnusedConstrtaints(FeatureModel view, FeatureModel featureModel) {
+   private static void removeUnusedConstrtaints(FeatureModel view, FeatureModel featureModel, Flag canBeConsistent) {
       // log.debug("view features:\t" + view.getAllFeatures().size());
-      // log.debug("featureModel features:\t" + featureModel.getAllFeatures().size());
+      // log.debug("featureModel features:\t" +
+      // featureModel.getAllFeatures().size());
       EList<Constraint> constraints = view.getConstraints();
       List<org.emftext.term.propositional.expression.Term> orgConstraints = TextExpressionParser.parseExpressions(featureModel);
       Set<Constraint> constraintsToRemove = new HashSet<Constraint>();
@@ -100,23 +102,28 @@ public class Util {
                minOneFeatureIsMissig = true;
             }
          }
-         boolean remove = false;
-         if (minOneFeatureIsMissig) {
-            Set<Feature> implication = isImplication(term);
-            if (implication.isEmpty()) {
-               // exclusion
-               if (isExclusion(term)) {// remove constraint by missing of one feature.
-                  remove = true;
-               }
-            } else {// remove constraint by missing of the right feature.
-               for (Feature feature : implication) {
-                  if (contains(feature, featuresFromTerm)) {
-                     remove = true;
+         if (!allFeaturesMissing && minOneFeatureIsMissig) {
+            if (featuresFromTerm.size() > 2) {
+               canBeConsistent.setFlagged(true);
+            } else {
+               Set<Feature> implication = isImplication(term);
+               if (implication.isEmpty()) {
+                  // exclusion
+                  // if (isExclusion(term)) {// remove constraint by
+                  // missing of one feature.
+                  // remove = true;
+                  // }
+               } else {// remove constraint by missing of the right
+                       // feature.
+                  for (Feature feature : implication) {
+                     if (!contains(feature, view.getAllFeatures())) {
+                        canBeConsistent.setFlagged(true);
+                     }
                   }
                }
             }
          }
-         if (allFeaturesMissing || remove) {// remove
+         if (allFeaturesMissing || minOneFeatureIsMissig) {// remove
             // find constraint
             Constraint constraint = constraints.get(orgConstraints.indexOf(term));
             if (constraint != null) {
@@ -193,7 +200,7 @@ public class Util {
    /**
     * removes all {@link Feature} from the {@link FeatureModel} which are not in the {@link Set}.
     * 
-    * @param parentFeature a parent {@link Feature}. First call with root {@link Feature}.
+    * @param parentFeature a parent {@link Feature}. First call with root {@link Feature} .
     * @param features {@link Feature} which are part of the view.
     */
    private static void traverseFeatureModelAndRemoveFeatures(Feature parentFeature, Set<Feature> features) {
@@ -211,7 +218,8 @@ public class Util {
                }
             }
             for (Feature feature : featuresToRemove) {
-               // if (feature.getMinCardinality() == 1) { //mandatory feature
+               // if (feature.getMinCardinality() == 1) { //mandatory
+               // feature
                // if (group.getMinCardinality() > 1) {
                // group.setMinCardinality(group.getMinCardinality() -1);
                // }
@@ -224,7 +232,8 @@ public class Util {
             if (group.getChildFeatures().isEmpty()) {
                groupsToRemove.add(group);
             }
-            // if (group.getMinCardinality() > group.getChildFeatures().size()) {
+            // if (group.getMinCardinality() >
+            // group.getChildFeatures().size()) {
             // group.setMinCardinality(group.getChildFeatures().size());
             // }
          }
@@ -329,7 +338,8 @@ public class Util {
                   }
                }
                if (i < fGroup.getMinCardinality()) {
-                  // log.debug("Cardinalitycheck: " + feature.getName() + " l:" + fGroup.getMinCardinality() + " l':" +
+                  // log.debug("Cardinalitycheck: " + feature.getName() +
+                  // " l:" + fGroup.getMinCardinality() + " l':" +
                   // i);
                   return false;
                }
@@ -367,7 +377,8 @@ public class Util {
       if (features.contains(parentFeature)) {
          return checkAncestors(parentFeature, features);
       } else {
-         // log.debug("\t" + feature.getName() + " is missing his parent: " + parentFeature.getName());
+         // log.debug("\t" + feature.getName() + " is missing his parent: " +
+         // parentFeature.getName());
          return false;
       }
    }

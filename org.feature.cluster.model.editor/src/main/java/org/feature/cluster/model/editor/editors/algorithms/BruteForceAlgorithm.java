@@ -3,10 +3,12 @@
  */
 package org.feature.cluster.model.editor.editors.algorithms;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -29,7 +31,7 @@ import org.featuremapper.models.feature.FeatureModel;
 public class BruteForceAlgorithm {
 
    private Logger log = Logger.getLogger(BruteForceAlgorithm.class);
-   private Set<View> viewPoints;
+   private Map<ViewPoint, View> viewPoints;
    private GroupModel groupModel;
    private List<View> views;
    private FeatureModel featureModel;
@@ -46,16 +48,16 @@ public class BruteForceAlgorithm {
     * @param groupModel contains the view points
     * @param views2 contains all views
     */
-   public Set<View> checkViewPoints() {
-//	   long time = System.currentTimeMillis();
+   public Map<ViewPoint, View> checkViewPoints() {
+      // long time = System.currentTimeMillis();
       EList<ViewPoint> viewPointsToCheck = groupModel.getViewPointContainer().getViewPoints();
       HashMap<EObject, View> viewMemory = new HashMap<EObject, View>();
-      viewPoints = new HashSet<View>();
+      viewPoints = new HashMap<ViewPoint, View>();
       for (ViewPoint viewPoint : viewPointsToCheck) {
          // log.debug("ViewPoint: " + viewPoint.getName());
-         viewPoints.add(checkViewpoint(viewPoint, views, groupModel.getCoreGroup(), viewMemory));
+         viewPoints.put(viewPoint, checkViewpoint(viewPoint, views, groupModel.getCoreGroup(), viewMemory));
       }
-//      log.debug("BF: " + (System.currentTimeMillis()-time));
+      // log.debug("BF: " + (System.currentTimeMillis()-time));
       return viewPoints;
    }
 
@@ -98,7 +100,7 @@ public class BruteForceAlgorithm {
             }
          }
          View view = new View(viewPoint, features, this.featureModel);
-          view.isConsistent();
+         view.isConsistent();
          // log.debug(view.isConsistent() + "\n");
          return view;
       }
@@ -194,8 +196,8 @@ public class BruteForceAlgorithm {
    /**
     * @return the viewPoints
     */
-   public Set<View> getViewPoints() {
-      return viewPoints;
+   public Collection<View> getViewPoints() {
+      return viewPoints.values();
    }
 
 }

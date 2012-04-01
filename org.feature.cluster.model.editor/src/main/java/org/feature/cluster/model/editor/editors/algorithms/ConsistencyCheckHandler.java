@@ -6,6 +6,8 @@ package org.feature.cluster.model.editor.editors.algorithms;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,6 +26,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.feature.cluster.model.cluster.GroupModel;
+import org.feature.cluster.model.cluster.ViewPoint;
 import org.feature.cluster.model.cluster.ViewPointContainer;
 import org.feature.cluster.model.editor.editors.View;
 import org.feature.cluster.model.editor.editors.ViewCreater;
@@ -130,8 +133,8 @@ public class ConsistencyCheckHandler extends AbstractHandler {
    }
 
    private void printPerformanceMeasure() {
-      //TODO: avg. time algorithm
-      //TODO: ratio inconsistent/ consistent vps
+      // TODO: avg. time algorithm
+      // TODO: ratio inconsistent/ consistent vps
       printCollection("NumberFeatures    ", numberFeatures);
       printCollection("NumberConstraints ", numberConstraints);
       printCollection("NumberViewpoints  ", numberViewPoints);
@@ -209,12 +212,24 @@ public class ConsistencyCheckHandler extends AbstractHandler {
 
    private void runHeuristic(List<View> views, GroupModel groupModel, FeatureModel featureModel) {
       IncrementalAlgorithm algorithm = new IncrementalAlgorithm(views, groupModel, featureModel);
-      algorithm.run();
+      List<String> run = algorithm.run();
+      String s = " Heuristical: {";
+      for (String vp : run) {
+         s = s + vp + ", ";
+      }
+      s = s + "};";
+      log.debug(s);
    }
 
    private void runIncremental(List<View> views, GroupModel groupModel, FeatureModel featureModel) {
       BruteForceAlgorithm algorithm = new BruteForceAlgorithm(groupModel, views, featureModel);
-      algorithm.checkViewPoints();
+      Map<ViewPoint, View> checkViewPoints = algorithm.checkViewPoints();
+      String s = " BruteForce: {";
+      for (ViewPoint vp : checkViewPoints.keySet()) {
+         s = s + vp.getName() + ":" + checkViewPoints.get(vp).isConsistent() + ", ";
+      }
+      s = s + "};";
+      log.debug(s);
    }
 
 }
