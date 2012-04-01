@@ -212,10 +212,10 @@ public class ConsistencyCheckHandler extends AbstractHandler {
 
    private void runHeuristic(List<View> views, GroupModel groupModel, FeatureModel featureModel) {
       IncrementalAlgorithm algorithm = new IncrementalAlgorithm(views, groupModel, featureModel);
-      List<String> run = algorithm.run();
+      Map<ViewPoint, Boolean> eval = algorithm.run();
       String s = " Heuristical: {";
-      for (String vp : run) {
-         s = s + vp + ", ";
+      for (ViewPoint vp : eval.keySet()) {
+         s = s + vp.getName() + ":" + eval.get(vp).booleanValue()+ ", ";
       }
       s = s + "};";
       log.debug(s);

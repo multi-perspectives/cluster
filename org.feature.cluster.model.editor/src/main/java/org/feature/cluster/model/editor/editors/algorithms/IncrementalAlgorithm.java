@@ -56,8 +56,8 @@ public class IncrementalAlgorithm {
    /**
 	 * 
 	 */
-   public List<String> run() {
-      List<String> viewPointConsistency = new LinkedList<String>();
+   public Map<ViewPoint, Boolean> run() {
+      Map<ViewPoint, Boolean> viewPointConsistency = new HashMap<ViewPoint, Boolean>();
       // long time = System.currentTimeMillis();
       ViewPointContainer container = groupModel.getViewPointContainer();
       log.debug("GroupModel " + groupModel.eResource().toString());
@@ -101,10 +101,10 @@ public class IncrementalAlgorithm {
                }
             }
             if (isCon) {
-               viewPointConsistency.add(vp.getName() + ":" + true);
+               viewPointConsistency.put(vp, true);
                // log.info("Viewpoint: " + vp.getName() + " is consistent\n");
             } else {
-               viewPointConsistency.add(vp.getName() + ":" + false);
+               viewPointConsistency.put(vp,false);
                // log.info("Viewpoint: " + vp.getName() + " is not consistent\n");
             }
          }
