@@ -13,6 +13,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.feature.cluster.model.cluster.CoreGroup;
 import org.feature.cluster.model.cluster.Group;
 import org.feature.cluster.model.cluster.GroupModel;
 import org.feature.cluster.model.cluster.IGroup;
@@ -31,10 +32,11 @@ import org.featuremapper.models.feature.FeatureModel;
 public class IncrementalAlgorithm {
 
    private static Logger log = Logger.getLogger(IncrementalAlgorithm.class);
-   private HashMap<EObject, View> views;
+   private HashMap<EObject, View> viewMap;
    private GroupModel groupModel;
    private UsedGroup ugCG;
    private FeatureModel featureModel;
+   private final List<View> views;
 
    // private int i = 0; //used for tests
 
@@ -44,11 +46,11 @@ public class IncrementalAlgorithm {
     * @param groupModel
     */
    public IncrementalAlgorithm(List<View> views, GroupModel groupModel, FeatureModel featureModel) {
-      HashMap<EObject, View> views2 = new HashMap<EObject, View>();
+      this.views = views;
+      viewMap = new HashMap<EObject, View>();
       for (View view : views) {
-         views2.put(view.getGroup(), view);
+         viewMap.put(view.getGroup(), view);
       }
-      this.views = views2;
       this.groupModel = groupModel;
       this.featureModel = featureModel;
    }
@@ -99,6 +101,15 @@ public class IncrementalAlgorithm {
                   isCon = false;
                }
             }
+            if (!isCon){
+               //run bruteforce
+               BruteForceAlgorithm bruteForce = new BruteForceAlgorithm(groupModel, views, featureModel);
+               HashMap<EObject, View> viewMemory = new HashMap<EObject, View>();
+               CoreGroup coreGroup = groupModel.getCoreGroup();
+               View view = bruteForce.checkViewpoint(vp, views, coreGroup, viewMemory);
+               isCon = view.isConsistent();
+            }
+            
             ViewPointWrapper wrapper = new ViewPointWrapper(vp.getName(), isCon);
             viewPointConsistency.add(wrapper);
          }
@@ -141,7 +152,7 @@ public class IncrementalAlgorithm {
     */
    private Map<IGroup, UsedGroup> createMSGM(Set<Group> groups) {
       Map<IGroup, UsedGroup> usedGroups = new HashMap<IGroup, UsedGroup>();
-      ugCG = new UsedGroup(null, groupModel.getCoreGroup(), views.get(groupModel.getCoreGroup()).getFeatures());
+      ugCG = new UsedGroup(null, groupModel.getCoreGroup(), viewMap.get(groupModel.getCoreGroup()).getFeatures());
       ugCG.setDone();
       Flag f = new Flag();
       FeatureModel view = Util.createFeatureModel(featureModel, ugCG.getFeatures(), f);
@@ -162,7 +173,7 @@ public class IncrementalAlgorithm {
             }
             Set<Feature> features = new HashSet<Feature>();
             features.addAll(ugParent.getFeatures());
-            features.addAll(views.get(group).getFeatures());
+            features.addAll(viewMap.get(group).getFeatures());
             UsedGroup ug = new UsedGroup(ugParent, group, features);
             usedGroups.put(group, ug);
          }
@@ -191,7 +202,7 @@ public class IncrementalAlgorithm {
 
       Set<Feature> features = new HashSet<Feature>();
       features.addAll(ugParent.getFeatures());
-      features.addAll(views.get(group).getFeatures());
+      features.addAll(viewMap.get(group).getFeatures());
       UsedGroup ug = new UsedGroup(ugParent, group, features);
       ugs.put(group, ug);
       return ug;

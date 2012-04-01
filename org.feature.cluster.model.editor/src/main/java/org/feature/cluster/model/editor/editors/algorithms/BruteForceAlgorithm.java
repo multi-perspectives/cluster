@@ -74,7 +74,7 @@ public class BruteForceAlgorithm {
     * @param views the views
     * @param coreGroup the coreGroup
     */
-   private View checkViewpoint(ViewPoint viewPoint, List<View> views, CoreGroup coreGroup, HashMap<EObject, View> viewMemory) {
+   public View checkViewpoint(ViewPoint viewPoint, List<View> views, CoreGroup coreGroup, HashMap<EObject, View> viewMemory) {
       EList<Group> containedInGroup = viewPoint.getContainedInGroup();
       Set<Set<View>> setOfPaths = new HashSet<Set<View>>();
       for (Group group : containedInGroup) {
