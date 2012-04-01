@@ -3,6 +3,7 @@
  */
 package org.feature.cluster.model.editor.editors.algorithms;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -58,9 +59,8 @@ public class ConsistencyCheckHandler extends AbstractHandler {
    List<String> groupMaxChildren = new LinkedList<String>();
    List<String> groupsPerVP = new LinkedList<String>();
    List<String> featuresPerGroup = new LinkedList<String>();
-
-   // List<ViewPointWrapper> bruteForceViewPoints = new ArrayList<ViewPointWrapper>();
-   // List<ViewPointWrapper> heuristicViewPoints = new ArrayList<ViewPointWrapper>();
+   List<String> bruteForceConsistentVPRatio = new LinkedList<String>();
+   List<String> heuristicConsistentVPRatio = new LinkedList<String>();
 
    public void resetLists() {
       bruteforceTimeList = new LinkedList<Long>();
@@ -73,6 +73,8 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       groupMaxChildren = new LinkedList<String>();
       groupsPerVP = new LinkedList<String>();
       featuresPerGroup = new LinkedList<String>();
+      bruteForceConsistentVPRatio = new LinkedList<String>();
+      heuristicConsistentVPRatio = new LinkedList<String>();
    }
 
    @Override
@@ -146,6 +148,8 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       printStringCollection("Group MaxChildren ", groupMaxChildren);
       printStringCollection("Groups per VP     ", groupsPerVP);
       printStringCollection("Features per Group", featuresPerGroup);
+      printStringCollection("ConsistentRatio Bruteforce", bruteForceConsistentVPRatio);
+      printStringCollection("ConsistentRatio Heuristic ", heuristicConsistentVPRatio);
    }
 
    private void printStringCollection(String description, List<String> list) {
@@ -194,9 +198,11 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       }
       s.append("};");
       log.debug(s);
+   }
 
-      s = new StringBuffer();
-
+   
+   private String getRatio(List<ViewPointWrapper> list){
+      StringBuffer s = new StringBuffer();
       List<ViewPointWrapper> consistent = new ArrayList<ViewPointWrapper>(list.size());
 
       for (ViewPointWrapper viewPointWrapper : list) {
@@ -205,15 +211,12 @@ public class ConsistencyCheckHandler extends AbstractHandler {
          }
       }
 
-      int ratio = consistent.size() / list.size();
-
-      s.append(description + " Ratio");
-      s.append("{");
-      s.append(ratio);
-      s.append("};");
-      log.debug(s);
+      double ratio = consistent.size()*1.00 / list.size();
+      DecimalFormat df =   new DecimalFormat  ( "0.00" );
+      return df.format(ratio);
    }
-
+   
+   
    private void checkConsistency(FeatureMappingModel featureMapping, ResourceSet resourceSet) {
       GroupModel groupModel = FeatureMappingUtil.getSolutionClusterModel(featureMapping, resourceSet);
       FeatureModelRef fmRef = featureMapping.getFeatureModel();
@@ -237,11 +240,13 @@ public class ConsistencyCheckHandler extends AbstractHandler {
          List<ViewPointWrapper> bfViewPoints = runBruteForce(views, groupModel, featureModel);
          bruteforceTimeList.add(System.currentTimeMillis() - time);
          printVPCollection("BruteForce VPs", bfViewPoints);
-
+         bruteForceConsistentVPRatio.add(getRatio(bfViewPoints));
+         
          time = System.currentTimeMillis();
          List<ViewPointWrapper> hViewPoints = runHeuristic(views, groupModel, featureModel);
          heuristicTimeList.add(System.currentTimeMillis() - time);
          printVPCollection("Heuristic VPs ", hViewPoints);
+         heuristicConsistentVPRatio.add(getRatio(hViewPoints));
 
          log.debug("-------------------------------");
       }
