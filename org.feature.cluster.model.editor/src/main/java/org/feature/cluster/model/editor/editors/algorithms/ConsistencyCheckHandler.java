@@ -6,8 +6,6 @@ package org.feature.cluster.model.editor.editors.algorithms;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,7 +24,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.feature.cluster.model.cluster.GroupModel;
-import org.feature.cluster.model.cluster.ViewPoint;
 import org.feature.cluster.model.cluster.ViewPointContainer;
 import org.feature.cluster.model.editor.editors.View;
 import org.feature.cluster.model.editor.editors.ViewCreater;
@@ -60,6 +57,9 @@ public class ConsistencyCheckHandler extends AbstractHandler {
    List<String> groupMaxChildren = new LinkedList<String>();
    List<String> groupsPerVP = new LinkedList<String>();
    List<String> featuresPerGroup = new LinkedList<String>();
+
+   // List<ViewPointWrapper> bruteForceViewPoints = new ArrayList<ViewPointWrapper>();
+   // List<ViewPointWrapper> heuristicViewPoints = new ArrayList<ViewPointWrapper>();
 
    public void resetLists() {
       bruteforceTimeList = new LinkedList<Long>();
@@ -183,6 +183,18 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       log.debug(s);
    }
 
+   private void printVPCollection(String description, List<ViewPointWrapper> list) {
+      StringBuffer s = new StringBuffer();
+      s.append(description);
+      s.append("{");
+      for (ViewPointWrapper l : list) {
+         s.append(l);
+         s.append(", ");
+      }
+      s.append("};");
+      log.debug(s);
+   }
+
    private void checkConsistency(FeatureMappingModel featureMapping, ResourceSet resourceSet) {
       GroupModel groupModel = FeatureMappingUtil.getSolutionClusterModel(featureMapping, resourceSet);
       FeatureModelRef fmRef = featureMapping.getFeatureModel();
@@ -190,7 +202,8 @@ public class ConsistencyCheckHandler extends AbstractHandler {
          FeatureModel featureModel = fmRef.getValue();
          ViewCreater viewCreator = new ViewCreater(groupModel, featureMapping, featureModel);
          List<View> views = viewCreator.getViews();
-
+         log.debug("GroupModel " + groupModel.eResource().getURI());
+ 
          ViewPointContainer container = groupModel.getViewPointContainer();
          int viewpoints = 0;
          if (container != null) {
@@ -202,34 +215,29 @@ public class ConsistencyCheckHandler extends AbstractHandler {
          numberViews.add(views.size());
 
          long time = System.currentTimeMillis();
-         runIncremental(views, groupModel, featureModel);
+         List<ViewPointWrapper> bfViewPoints = runBruteForce(views, groupModel, featureModel);
          bruteforceTimeList.add(System.currentTimeMillis() - time);
+         printVPCollection("BruteForce VPs", bfViewPoints);
+
          time = System.currentTimeMillis();
-         runHeuristic(views, groupModel, featureModel);
+         List<ViewPointWrapper> hViewPoints = runHeuristic(views, groupModel, featureModel);
          heuristicTimeList.add(System.currentTimeMillis() - time);
+         printVPCollection("Heuristic VPs ", hViewPoints);
+
+         log.debug("-------------------------------");
       }
    }
 
-   private void runHeuristic(List<View> views, GroupModel groupModel, FeatureModel featureModel) {
+   private List<ViewPointWrapper> runHeuristic(List<View> views, GroupModel groupModel, FeatureModel featureModel) {
       IncrementalAlgorithm algorithm = new IncrementalAlgorithm(views, groupModel, featureModel);
-      List<String> run = algorithm.run();
-      String s = " Heuristical: {";
-      for (String vp : run) {
-         s = s + vp + ", ";
-      }
-      s = s + "};";
-      log.debug(s);
+      List<ViewPointWrapper> viewpoints = algorithm.checkViewpoints();
+      return viewpoints;
    }
 
-   private void runIncremental(List<View> views, GroupModel groupModel, FeatureModel featureModel) {
+   private List<ViewPointWrapper> runBruteForce(List<View> views, GroupModel groupModel, FeatureModel featureModel) {
       BruteForceAlgorithm algorithm = new BruteForceAlgorithm(groupModel, views, featureModel);
-      Map<ViewPoint, View> checkViewPoints = algorithm.checkViewPoints();
-      String s = " BruteForce: {";
-      for (ViewPoint vp : checkViewPoints.keySet()) {
-         s = s + vp.getName() + ":" + checkViewPoints.get(vp).isConsistent() + ", ";
-      }
-      s = s + "};";
-      log.debug(s);
+      List<ViewPointWrapper> viewPoints = algorithm.checkViewPoints();
+      return viewPoints;
    }
 
 }

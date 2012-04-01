@@ -3,9 +3,9 @@
  */
 package org.feature.cluster.model.editor.editors.algorithms;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -56,11 +56,10 @@ public class IncrementalAlgorithm {
    /**
 	 * 
 	 */
-   public List<String> run() {
-      List<String> viewPointConsistency = new LinkedList<String>();
+   public List<ViewPointWrapper> checkViewpoints() {
+      List<ViewPointWrapper> viewPointConsistency = new ArrayList<ViewPointWrapper>();
       // long time = System.currentTimeMillis();
       ViewPointContainer container = groupModel.getViewPointContainer();
-      log.debug("GroupModel " + groupModel.eResource().toString());
       if (container != null) {
          EList<ViewPoint> viewPoints = container.getViewPoints();
          // log.info("Number of ViewPoints: " + viewPoints.size());
@@ -100,13 +99,8 @@ public class IncrementalAlgorithm {
                   isCon = false;
                }
             }
-            if (isCon) {
-               viewPointConsistency.add(vp.getName() + ":" + true);
-               // log.info("Viewpoint: " + vp.getName() + " is consistent\n");
-            } else {
-               viewPointConsistency.add(vp.getName() + ":" + false);
-               // log.info("Viewpoint: " + vp.getName() + " is not consistent\n");
-            }
+            ViewPointWrapper wrapper = new ViewPointWrapper(vp.getName(), isCon);
+            viewPointConsistency.add(wrapper);
          }
       } else {
          log.info("There are no viewpoints defined yet.");

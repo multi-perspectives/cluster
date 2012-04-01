@@ -72,7 +72,7 @@ public class FilteredFeatureModel {
       long timeMillis = System.currentTimeMillis();
 
       IncrementalAlgorithm algorithm = new IncrementalAlgorithm(views, groupModel, featureMappingModel.getFeatureModel().getValue());
-      algorithm.run();
+      algorithm.checkViewpoints();
       log.debug("time: " + (System.currentTimeMillis() - timeMillis));
       timeMillis = System.currentTimeMillis();
 

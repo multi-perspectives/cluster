@@ -69,7 +69,7 @@ public class IncrementalAlgorithmHandler extends AbstractHandler {
 
                      List<View> views = new ViewCreater(allFeatures, mappings, groupModel.getCoreGroup(), featureMappingModel.getFeatureModel().getValue()).getViews();
                      IncrementalAlgorithm algorithm = new IncrementalAlgorithm(views, groupModel, featureMappingModel.getFeatureModel().getValue());
-                     algorithm.run();
+                     algorithm.checkViewpoints();
                   }
                }
             }
