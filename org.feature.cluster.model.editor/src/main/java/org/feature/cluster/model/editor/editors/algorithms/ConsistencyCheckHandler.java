@@ -116,7 +116,6 @@ public class ConsistencyCheckHandler extends AbstractHandler {
 
    private void determineInfo(List<String> paramList, String param, IFile file) {
       String fileName = file.getName();
-
       // example:
       // documentmanagement.feature_balanced_height2_countChildren2_vpCount10_groupsVP1_2012-03-31-082230484.cluster_FCount_2012-03-31-082231424.featuremapping
       String regex = param + "([0-9])*";
@@ -131,6 +130,8 @@ public class ConsistencyCheckHandler extends AbstractHandler {
    }
 
    private void printPerformanceMeasure() {
+      //TODO: avg. time algorithm
+      //TODO: ratio inconsistent/ consistent vps
       printCollection("NumberFeatures    ", numberFeatures);
       printCollection("NumberConstraints ", numberConstraints);
       printCollection("NumberViewpoints  ", numberViewPoints);
