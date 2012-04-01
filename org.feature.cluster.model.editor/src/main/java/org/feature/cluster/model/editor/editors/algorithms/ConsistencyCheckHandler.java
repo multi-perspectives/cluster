@@ -3,6 +3,7 @@
  */
 package org.feature.cluster.model.editor.editors.algorithms;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -138,7 +139,7 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       printCollection("NumberFeatures    ", numberFeatures);
       printCollection("NumberConstraints ", numberConstraints);
       printCollection("NumberViewpoints  ", numberViewPoints);
-      //printCollection("NumberViews       ", numberViews);
+      // printCollection("NumberViews       ", numberViews);
       printCollection("Time Bruteforce   ", bruteforceTimeList);
       printCollection("Time Heuristic    ", heuristicTimeList);
       printStringCollection("Group TreeHeight  ", groupTreeHeight);
@@ -193,6 +194,24 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       }
       s.append("};");
       log.debug(s);
+
+      s = new StringBuffer();
+
+      List<ViewPointWrapper> consistent = new ArrayList<ViewPointWrapper>(list.size());
+
+      for (ViewPointWrapper viewPointWrapper : list) {
+         if (viewPointWrapper.isConsistent) {
+            consistent.add(viewPointWrapper);
+         }
+      }
+
+      int ratio = consistent.size() / list.size();
+
+      s.append(description + " Ratio");
+      s.append("{");
+      s.append(ratio);
+      s.append("};");
+      log.debug(s);
    }
 
    private void checkConsistency(FeatureMappingModel featureMapping, ResourceSet resourceSet) {
@@ -203,7 +222,7 @@ public class ConsistencyCheckHandler extends AbstractHandler {
          ViewCreater viewCreator = new ViewCreater(groupModel, featureMapping, featureModel);
          List<View> views = viewCreator.getViews();
          log.debug("GroupModel " + groupModel.eResource().getURI());
- 
+
          ViewPointContainer container = groupModel.getViewPointContainer();
          int viewpoints = 0;
          if (container != null) {
