@@ -118,11 +118,22 @@ public class IncrementalAlgorithm {
          Map<Group, UsedGroup> groupFeatureModel = buildGroupFeatureModel(viewPoints);
          for (ViewPoint viewPoint : viewPoints) {
             boolean isCon = true;
+            Set<Feature> combinedFeaturesForViewPoint = new HashSet<Feature>();
             for (Group group : viewPoint.getContainedInGroup()) {
                UsedGroup usedGroup = groupFeatureModel.get(group);
+               combinedFeaturesForViewPoint.addAll(usedGroup.getFeatures());
                boolean consistent = usedGroup.isConsistent();
                if (isCon && !consistent) {
                   isCon = false;
+               }
+            }
+            if (!isCon) {
+               log.debug("recheck");
+               Flag flag = new Flag();
+               FeatureModel view = Util.createFeatureModel(featureModel, combinedFeaturesForViewPoint, flag);
+               if (!flag.isChanged() && !flag.isFlagged()) {
+                  isCon = Util.isConsistent(view);
+                  log.debug(isCon);
                }
             }
             ViewPointWrapper wrapper = new ViewPointWrapper(viewPoint.getName(), isCon);
