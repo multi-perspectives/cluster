@@ -71,8 +71,11 @@ public class Util {
       FeatureModel view = EcoreUtil.copy(featureModel);
       traverseFeatureModelAndRemoveFeatures(view.getRoot(), features);
       removeUnusedConstrtaints(view, featureModel, canBeConsistent);
-      assert view.getAllFeatures().size() == features.size();
-      resource.getContents().add(view);
+      if (view.getAllFeatures().size() == features.size()) {
+         resource.getContents().add(view);
+      } else {
+         view = null;
+      }
       return view;
    }
 
@@ -270,8 +273,12 @@ public class Util {
     * @return true if there is at least one variant.
     */
    public static boolean isConsistent(FeatureModel view) {
-      FeatureModelAnalyzer featureModelAnalyzer = new FeatureModelAnalyzer(view);
-      return featureModelAnalyzer.isSatisfiable();
+      boolean result = false;
+      if (view != null) {
+         FeatureModelAnalyzer featureModelAnalyzer = new FeatureModelAnalyzer(view);
+         result = featureModelAnalyzer.isSatisfiable();
+      }
+      return result;
    }
 
    /**
