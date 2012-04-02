@@ -3,6 +3,7 @@
  */
 package org.feature.cluster.model.editor.editors.algorithms;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -43,22 +44,27 @@ public class BruteForceAlgorithm {
    }
 
    /**
-    * iterate over each view point and there groups. checks then there combined view consistency
+    * iterate over each view point and there groups. checks then the combined view consistency
     * 
     * @param groupModel contains the view points
     * @param views2 contains all views
     */
-   public Map<ViewPoint, View> checkViewPoints() {
-      // long time = System.currentTimeMillis();
+   public List<ViewPointWrapper> checkViewPoints() {
+      List<ViewPointWrapper> vpWrapper = new ArrayList<ViewPointWrapper>();
+
       EList<ViewPoint> viewPointsToCheck = groupModel.getViewPointContainer().getViewPoints();
       HashMap<EObject, View> viewMemory = new HashMap<EObject, View>();
       viewPoints = new HashMap<ViewPoint, View>();
       for (ViewPoint viewPoint : viewPointsToCheck) {
          // log.debug("ViewPoint: " + viewPoint.getName());
-         viewPoints.put(viewPoint, checkViewpoint(viewPoint, views, groupModel.getCoreGroup(), viewMemory));
+         View view = checkViewpoint(viewPoint, views, groupModel.getCoreGroup(), viewMemory);
+         viewPoints.put(viewPoint, view);
+         boolean isConsistent = view.isConsistent();
+         ViewPointWrapper wrapper = new ViewPointWrapper(viewPoint.getName(), isConsistent);
+         vpWrapper.add(wrapper);
       }
       // log.debug("BF: " + (System.currentTimeMillis()-time));
-      return viewPoints;
+      return vpWrapper;
    }
 
    /**
@@ -68,7 +74,7 @@ public class BruteForceAlgorithm {
     * @param views the views
     * @param coreGroup the coreGroup
     */
-   private View checkViewpoint(ViewPoint viewPoint, List<View> views, CoreGroup coreGroup, HashMap<EObject, View> viewMemory) {
+   public View checkViewpoint(ViewPoint viewPoint, List<View> views, CoreGroup coreGroup, HashMap<EObject, View> viewMemory) {
       EList<Group> containedInGroup = viewPoint.getContainedInGroup();
       Set<Set<View>> setOfPaths = new HashSet<Set<View>>();
       for (Group group : containedInGroup) {
