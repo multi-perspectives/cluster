@@ -111,6 +111,7 @@ public class ConsistencyCheckHandler extends AbstractHandler {
                         if (mapping != null) {
                            determineInfo(file);
                            checkConsistency(mapping, resourceSet);
+                           //checkCoreVPConsistency(mapping, resourceSet);
                         }
                      }
                   }
@@ -125,6 +126,39 @@ public class ConsistencyCheckHandler extends AbstractHandler {
          }
       }
       return null;
+   }
+
+   private void checkCoreVPConsistency(FeatureMappingModel featureMapping, ResourceSet resourceSet) {
+      GroupModel groupModel = FeatureMappingUtil.getSolutionClusterModel(featureMapping, resourceSet);
+      FeatureModelRef fmRef = featureMapping.getFeatureModel();
+      if (fmRef != null) {
+         FeatureModel featureModel = fmRef.getValue();
+         checkCoreVPConsistency(groupModel, featureMapping, featureModel);
+      }
+   }
+
+   private void checkCoreVPConsistency(GroupModel groupModel, FeatureMappingModel featureMapping, FeatureModel featureModel) {
+      boolean result = false;
+      ViewCreater viewCreator = new ViewCreater(groupModel, featureMapping, featureModel);
+      List<View> views = viewCreator.getViews();
+
+      BruteForceAlgorithm bruteForce = new BruteForceAlgorithm(groupModel, views, featureModel);
+      ViewPointContainer container = groupModel.getViewPointContainer();
+      ViewPoint coreVP = null;
+      for (ViewPoint vp : container.getViewPoints()) {
+         if ("V_Core".equals(vp.getName())) {
+            coreVP = vp;
+            break;
+         }
+      }
+      if (coreVP != null) {
+         CoreGroup coreGroup = groupModel.getCoreGroup();
+
+         HashMap<EObject, View> viewMemory = new HashMap<EObject, View>();
+         View view = bruteForce.checkViewpoint(coreVP, views, coreGroup, viewMemory);
+         result = view.isConsistent();
+         log.debug("V_Core is valid: " + result);
+      }
    }
 
    private void determineInfo(IFile file) {
@@ -277,7 +311,6 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       List<ViewPointWrapper> viewpoints = algorithm.checkViewpoints();
       return viewpoints;
    }
-
 
    private List<ViewPointWrapper> runBruteForce(List<View> views, GroupModel groupModel, FeatureModel featureModel) {
       BruteForceAlgorithm algorithm = new BruteForceAlgorithm(groupModel, views, featureModel);
