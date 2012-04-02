@@ -102,11 +102,13 @@ public class NodeModelContentProvider {
             if (term instanceof FeatureRef) {
                FeatureRef featureRef = (FeatureRef) term;
                GroupNode groupNode = groupdNodes.get(group);
-               FeatureNode featureNode = featureNodes.get(featureRef.getFeature());
-               Connection connection = new Connection(groupNode, featureNode);
-               groupNode.getConnectedTo().add(featureNode);
-               featureNode.getConnectedTo().add(groupNode);
-               connections.add(connection);
+               if (!(group instanceof CoreGroup)) {
+                  FeatureNode featureNode = featureNodes.get(featureRef.getFeature());
+                  Connection connection = new Connection(groupNode, featureNode);
+                  groupNode.getConnectedTo().add(featureNode);
+                  featureNode.getConnectedTo().add(groupNode);
+                  connections.add(connection);
+               }
             }
          }
       }
