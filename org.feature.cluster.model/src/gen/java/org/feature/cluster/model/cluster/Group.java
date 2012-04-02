@@ -48,26 +48,28 @@ public interface Group extends Element {
 	EList<ViewPoint> getViewPointReference();
 
 	/**
-    * Returns the value of the '<em><b>Parent Group</b></em>' reference.
+    * Returns the value of the '<em><b>Parent Group</b></em>' container reference.
+    * It is bidirectional and its opposite is '{@link org.feature.cluster.model.cluster.Group#getGroups <em>Groups</em>}'.
     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parent Group</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-    * @return the value of the '<em>Parent Group</em>' reference.
+    * @return the value of the '<em>Parent Group</em>' container reference.
     * @see #setParentGroup(Group)
     * @see org.feature.cluster.model.cluster.ClusterPackage#getGroup_ParentGroup()
-    * @model
+    * @see org.feature.cluster.model.cluster.Group#getGroups
+    * @model opposite="groups" transient="false"
     * @generated
     */
 	Group getParentGroup();
 
 	/**
-    * Sets the value of the '{@link org.feature.cluster.model.cluster.Group#getParentGroup <em>Parent Group</em>}' reference.
+    * Sets the value of the '{@link org.feature.cluster.model.cluster.Group#getParentGroup <em>Parent Group</em>}' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @param value the new value of the '<em>Parent Group</em>' reference.
+    * @param value the new value of the '<em>Parent Group</em>' container reference.
     * @see #getParentGroup()
     * @generated
     */
@@ -76,6 +78,7 @@ public interface Group extends Element {
    /**
     * Returns the value of the '<em><b>Groups</b></em>' containment reference list.
     * The list contents are of type {@link org.feature.cluster.model.cluster.Group}.
+    * It is bidirectional and its opposite is '{@link org.feature.cluster.model.cluster.Group#getParentGroup <em>Parent Group</em>}'.
     * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Groups</em>' containment reference list isn't clear,
@@ -84,7 +87,8 @@ public interface Group extends Element {
     * <!-- end-user-doc -->
     * @return the value of the '<em>Groups</em>' containment reference list.
     * @see org.feature.cluster.model.cluster.ClusterPackage#getGroup_Groups()
-    * @model containment="true"
+    * @see org.feature.cluster.model.cluster.Group#getParentGroup
+    * @model opposite="parentGroup" containment="true"
     * @generated
     */
    EList<Group> getGroups();

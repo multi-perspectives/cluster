@@ -16,9 +16,10 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="viewPointReference" upperBound="-1"
         eType="#//ViewPoint"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentGroup" eType="#//Group"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentGroup" eType="#//Group"
+        eOpposite="#//Group/groups"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="groups" upperBound="-1"
-        eType="#//Group" containment="true"/>
+        eType="#//Group" containment="true" eOpposite="#//Group/parentGroup"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ViewPoint" eSuperTypes="#//Element">
     <eStructuralFeatures xsi:type="ecore:EReference" name="containedInGroup" upperBound="-1"

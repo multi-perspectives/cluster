@@ -126,7 +126,7 @@ public interface ClusterPackage extends EPackage {
 	int GROUP__VIEW_POINT_REFERENCE = ELEMENT_FEATURE_COUNT + 0;
 
    /**
-    * The feature id for the '<em><b>Parent Group</b></em>' reference.
+    * The feature id for the '<em><b>Parent Group</b></em>' container reference.
     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
     * @generated
@@ -171,7 +171,7 @@ public interface ClusterPackage extends EPackage {
    int CORE_GROUP__VIEW_POINT_REFERENCE = GROUP__VIEW_POINT_REFERENCE;
 
    /**
-    * The feature id for the '<em><b>Parent Group</b></em>' reference.
+    * The feature id for the '<em><b>Parent Group</b></em>' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * @generated
@@ -332,10 +332,10 @@ public interface ClusterPackage extends EPackage {
 	EReference getGroup_ViewPointReference();
 
 	/**
-    * Returns the meta object for the reference '{@link org.feature.cluster.model.cluster.Group#getParentGroup <em>Parent Group</em>}'.
+    * Returns the meta object for the container reference '{@link org.feature.cluster.model.cluster.Group#getParentGroup <em>Parent Group</em>}'.
     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-    * @return the meta object for the reference '<em>Parent Group</em>'.
+    * @return the meta object for the container reference '<em>Parent Group</em>'.
     * @see org.feature.cluster.model.cluster.Group#getParentGroup()
     * @see #getGroup()
     * @generated
@@ -499,7 +499,7 @@ public interface ClusterPackage extends EPackage {
 		EReference GROUP__VIEW_POINT_REFERENCE = eINSTANCE.getGroup_ViewPointReference();
 
 		/**
-       * The meta object literal for the '<em><b>Parent Group</b></em>' reference feature.
+       * The meta object literal for the '<em><b>Parent Group</b></em>' container reference feature.
        * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
        * @generated

@@ -356,8 +356,8 @@ public class ClusterPackageImpl extends EPackageImpl implements ClusterPackage {
 
       initEClass(groupEClass, Group.class, "Group", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
       initEReference(getGroup_ViewPointReference(), this.getViewPoint(), null, "viewPointReference", null, 0, -1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEReference(getGroup_ParentGroup(), this.getGroup(), null, "parentGroup", null, 0, 1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEReference(getGroup_Groups(), this.getGroup(), null, "groups", null, 0, -1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEReference(getGroup_ParentGroup(), this.getGroup(), this.getGroup_Groups(), "parentGroup", null, 0, 1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEReference(getGroup_Groups(), this.getGroup(), this.getGroup_ParentGroup(), "groups", null, 0, -1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
       EOperation op = addEOperation(groupEClass, ecorePackage.getEBoolean(), "checkForRedundantViewPoints", 1, 1, IS_UNIQUE, IS_ORDERED);
       addEParameter(op, ecorePackage.getEDiagnosticChain(), "eDiagnosticChain", 1, 1, IS_UNIQUE, IS_ORDERED);
