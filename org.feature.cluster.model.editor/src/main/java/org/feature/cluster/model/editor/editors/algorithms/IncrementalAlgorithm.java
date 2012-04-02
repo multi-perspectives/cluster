@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.feature.cluster.model.cluster.CoreGroup;
 import org.feature.cluster.model.cluster.Group;
 import org.feature.cluster.model.cluster.GroupModel;
-import org.feature.cluster.model.cluster.IGroup;
 import org.feature.cluster.model.cluster.ViewPoint;
 import org.feature.cluster.model.cluster.ViewPointContainer;
 import org.feature.cluster.model.editor.editors.View;
@@ -70,7 +69,7 @@ public class IncrementalAlgorithm {
          for (ViewPoint viewPoint : viewPoints) {
             groups.addAll(viewPoint.getContainedInGroup());
          }
-         Map<IGroup, UsedGroup> usedGroups = createMSGM(groups);
+         Map<Group, UsedGroup> usedGroups = createMSGM(groups);
          //
          for (Group g : ugCG.getGroup().getGroups()) {
             if (usedGroups.containsKey(g)) {
@@ -101,15 +100,15 @@ public class IncrementalAlgorithm {
                   isCon = false;
                }
             }
-            if (!isCon){
-               //run bruteforce
-               BruteForceAlgorithm bruteForce = new BruteForceAlgorithm(groupModel, views, featureModel);
-               HashMap<EObject, View> viewMemory = new HashMap<EObject, View>();
-               CoreGroup coreGroup = groupModel.getCoreGroup();
-               View view = bruteForce.checkViewpoint(vp, views, coreGroup, viewMemory);
-               isCon = view.isConsistent();
-            }
-            
+//            if (!isCon) {
+//               // run bruteforce
+//               BruteForceAlgorithm bruteForce = new BruteForceAlgorithm(groupModel, views, featureModel);
+//               HashMap<EObject, View> viewMemory = new HashMap<EObject, View>();
+//               CoreGroup coreGroup = groupModel.getCoreGroup();
+//               View view = bruteForce.checkViewpoint(vp, views, coreGroup, viewMemory);
+//               isCon = view.isConsistent();
+//            }
+
             ViewPointWrapper wrapper = new ViewPointWrapper(vp.getName(), isCon);
             viewPointConsistency.add(wrapper);
          }
@@ -125,7 +124,7 @@ public class IncrementalAlgorithm {
     * @param group
     * @param usedGroups
     */
-   private void checkGroupModel(Group group, Map<IGroup, UsedGroup> usedGroups) {
+   private void checkGroupModel(Group group, Map<Group, UsedGroup> usedGroups) {
       for (Group g : group.getGroups()) {
          if (usedGroups.containsKey(g)) {
             UsedGroup ug = usedGroups.get(g);
@@ -150,8 +149,8 @@ public class IncrementalAlgorithm {
     * @param groups most specific groups
     * @return
     */
-   private Map<IGroup, UsedGroup> createMSGM(Set<Group> groups) {
-      Map<IGroup, UsedGroup> usedGroups = new HashMap<IGroup, UsedGroup>();
+   private Map<Group, UsedGroup> createMSGM(Set<Group> groups) {
+      Map<Group, UsedGroup> usedGroups = new HashMap<Group, UsedGroup>();
       ugCG = new UsedGroup(null, groupModel.getCoreGroup(), viewMap.get(groupModel.getCoreGroup()).getFeatures());
       ugCG.setDone();
       Flag f = new Flag();
@@ -165,17 +164,20 @@ public class IncrementalAlgorithm {
       usedGroups.put(groupModel.getCoreGroup(), ugCG);
       for (Group group : groups) {
          if (!usedGroups.containsKey(group)) {
-            UsedGroup ugParent;
-            if (group.getParentGroup().equals(groupModel.getCoreGroup())) {
-               ugParent = ugCG;
-            } else {
-               ugParent = createMSG((Group) group.getParentGroup(), usedGroups);
-            }
             Set<Feature> features = new HashSet<Feature>();
-            features.addAll(ugParent.getFeatures());
             features.addAll(viewMap.get(group).getFeatures());
-            UsedGroup ug = new UsedGroup(ugParent, group, features);
-            usedGroups.put(group, ug);
+
+            UsedGroup ugParent = null;
+            if (group.getParentGroup() != null) {
+               if (group.getParentGroup().equals(groupModel.getCoreGroup())) {
+                  ugParent = ugCG;
+               } else {
+                  ugParent = createMSG((Group) group.getParentGroup(), usedGroups);
+               }
+               features.addAll(ugParent.getFeatures());
+            }
+               UsedGroup ug = new UsedGroup(ugParent, group, features);
+               usedGroups.put(group, ug);
          }
       }
       return usedGroups;
@@ -189,7 +191,7 @@ public class IncrementalAlgorithm {
     * @param ugs a list of most specific group.
     * @return the most specific group.
     */
-   private UsedGroup createMSG(Group group, Map<IGroup, UsedGroup> ugs) {
+   private UsedGroup createMSG(Group group, Map<Group, UsedGroup> ugs) {
       if (ugs.containsKey(group)) {
          return ugs.get(group);
       }

@@ -6,6 +6,7 @@ package org.feature.cluster.model.editor.editors.algorithms;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.MatchResult;
@@ -23,9 +24,12 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.feature.cluster.model.cluster.CoreGroup;
 import org.feature.cluster.model.cluster.GroupModel;
+import org.feature.cluster.model.cluster.ViewPoint;
 import org.feature.cluster.model.cluster.ViewPointContainer;
 import org.feature.cluster.model.editor.editors.View;
 import org.feature.cluster.model.editor.editors.ViewCreater;
@@ -45,6 +49,10 @@ import org.js.model.utilities.FeatureModelUtil;
 public class ConsistencyCheckHandler extends AbstractHandler {
 
    private static String generatedProject = "generatedProject";
+   // private static String[] genProjects = new String[] { "car", "cd_od", "crisis", "dell", "dms", "eCNF500",
+   // "electronic", "graph", "printer", "weather" };
+   private static String[] genProjects = new String[] { "dms" };
+
    protected static String mappingFolder = FeatureMappingPackage.eNS_PREFIX;
 
    private static Logger log = Logger.getLogger(ConsistencyCheckHandler.class);
@@ -79,33 +87,39 @@ public class ConsistencyCheckHandler extends AbstractHandler {
 
    @Override
    public Object execute(ExecutionEvent event) throws ExecutionException {
-      resetLists();
-      log.debug("-------------------------------");
-      log.debug("check consistency");
       IWorkspace workspace = ResourcesPlugin.getWorkspace();
-      IProject project = workspace.getRoot().getProject(generatedProject);
-      if (project.exists()) {
-         IFolder projectFolder = project.getFolder(mappingFolder);
-         if (projectFolder.exists()) {
-            ResourceSet resourceSet = new ResourceSetImpl();
-            IResource[] members;
-            try {
-               members = projectFolder.members();
-               for (IResource iResource : members) {
-                  if (iResource instanceof IFile) {
-                     IFile file = (IFile) iResource;
-                     FeatureMappingModel mapping = FeatureMappingUtil.getFeatureMapping(file, resourceSet);
-                     if (mapping != null) {
-                        determineInfo(file);
-                        checkConsistency(mapping, resourceSet);
+      for (int i = 0; i < genProjects.length; i++) {
+         log.debug("-------------------------------");
+         // String projectPart = genProjects[i];
+         // String projectName = generatedProject + "_" + projectPart;
+         String projectName = generatedProject;
+         log.debug("check consistency of " + projectName);
+
+         IProject project = workspace.getRoot().getProject(projectName);
+         if (project.exists()) {
+            resetLists();
+            IFolder projectFolder = project.getFolder(mappingFolder);
+            if (projectFolder.exists()) {
+               ResourceSet resourceSet = new ResourceSetImpl();
+               IResource[] members;
+               try {
+                  members = projectFolder.members();
+                  for (IResource iResource : members) {
+                     if (iResource instanceof IFile) {
+                        IFile file = (IFile) iResource;
+                        FeatureMappingModel mapping = FeatureMappingUtil.getFeatureMapping(file, resourceSet);
+                        if (mapping != null) {
+                           determineInfo(file);
+                           checkConsistency(mapping, resourceSet);
+                        }
                      }
                   }
+                  if (log.isDebugEnabled()) {
+                     printPerformanceMeasure();
+                  }
+               } catch (CoreException e) {
+                  log.error("Could not determine children of folder " + projectFolder);
                }
-               if (log.isDebugEnabled()) {
-                  printPerformanceMeasure();
-               }
-            } catch (CoreException e) {
-               log.error("Could not determine children of folder " + projectFolder);
             }
 
          }
@@ -200,8 +214,7 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       log.debug(s);
    }
 
-   
-   private String getRatio(List<ViewPointWrapper> list){
+   private String getRatio(List<ViewPointWrapper> list) {
       StringBuffer s = new StringBuffer();
       List<ViewPointWrapper> consistent = new ArrayList<ViewPointWrapper>(list.size());
 
@@ -211,12 +224,11 @@ public class ConsistencyCheckHandler extends AbstractHandler {
          }
       }
 
-      double ratio = consistent.size()*1.00 / list.size();
-      DecimalFormat df =   new DecimalFormat  ( "0.00" );
+      double ratio = consistent.size() * 1.00 / list.size();
+      DecimalFormat df = new DecimalFormat("0.00");
       return df.format(ratio);
    }
-   
-   
+
    private void checkConsistency(FeatureMappingModel featureMapping, ResourceSet resourceSet) {
       GroupModel groupModel = FeatureMappingUtil.getSolutionClusterModel(featureMapping, resourceSet);
       FeatureModelRef fmRef = featureMapping.getFeatureModel();
@@ -236,18 +248,26 @@ public class ConsistencyCheckHandler extends AbstractHandler {
          numberConstraints.add(FeatureModelUtil.getConstraints(featureModel, FeatureModelUtil.cps_constraintLanguage).size());
          numberViews.add(views.size());
 
-         long time = System.currentTimeMillis();
+         long startB = System.currentTimeMillis();
          List<ViewPointWrapper> bfViewPoints = runBruteForce(views, groupModel, featureModel);
-         bruteforceTimeList.add(System.currentTimeMillis() - time);
-         printVPCollection("BruteForce VPs", bfViewPoints);
-         bruteForceConsistentVPRatio.add(getRatio(bfViewPoints));
-         
-         time = System.currentTimeMillis();
-         List<ViewPointWrapper> hViewPoints = runHeuristic(views, groupModel, featureModel);
-         heuristicTimeList.add(System.currentTimeMillis() - time);
-         printVPCollection("Heuristic VPs ", hViewPoints);
-         heuristicConsistentVPRatio.add(getRatio(hViewPoints));
+         long endB = System.currentTimeMillis();
+         long timeB = endB - startB;
+         bruteforceTimeList.add(timeB);
 
+         printVPCollection("BruteForce VPs", bfViewPoints);
+         String bRatio = getRatio(bfViewPoints);
+         bruteForceConsistentVPRatio.add(bRatio);
+
+         long startH = System.currentTimeMillis();
+         List<ViewPointWrapper> hViewPoints = runHeuristic(views, groupModel, featureModel);
+         long endH = System.currentTimeMillis();
+         long timeH = endH - startH;
+         heuristicTimeList.add(timeH);
+         printVPCollection("Heuristic VPs ", hViewPoints);
+         String hRatio = getRatio(hViewPoints);
+         heuristicConsistentVPRatio.add(hRatio);
+
+         log.debug("Bruteforce [" + bRatio + "] " + timeB + "ms , Heuristic [" + hRatio + "]" + timeH + "ms");
          log.debug("-------------------------------");
       }
    }
@@ -257,6 +277,7 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       List<ViewPointWrapper> viewpoints = algorithm.checkViewpoints();
       return viewpoints;
    }
+
 
    private List<ViewPointWrapper> runBruteForce(List<View> views, GroupModel groupModel, FeatureModel featureModel) {
       BruteForceAlgorithm algorithm = new BruteForceAlgorithm(groupModel, views, featureModel);

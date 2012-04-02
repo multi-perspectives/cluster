@@ -42,104 +42,74 @@ import org.feature.cluster.model.cluster.util.ClusterValidator;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.feature.cluster.model.cluster.impl.GroupImpl#getGroups <em>Groups</em>}</li>
- *   <li>{@link org.feature.cluster.model.cluster.impl.GroupImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.feature.cluster.model.cluster.impl.GroupImpl#getViewPointReference <em>View Point Reference</em>}</li>
  *   <li>{@link org.feature.cluster.model.cluster.impl.GroupImpl#getParentGroup <em>Parent Group</em>}</li>
+ *   <li>{@link org.feature.cluster.model.cluster.impl.GroupImpl#getGroups <em>Groups</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class GroupImpl extends EObjectImpl implements Group {
+public class GroupImpl extends ElementImpl implements Group {
 	/**
-	 * The cached value of the '{@link #getGroups() <em>Groups</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getViewPointReference() <em>View Point Reference</em>}' reference list.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGroups()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Group> groups;
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-	/**
-	 * The cached value of the '{@link #getViewPointReference() <em>View Point Reference</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getViewPointReference()
-	 * @generated
-	 * @ordered
-	 */
+    * @see #getViewPointReference()
+    * @generated
+    * @ordered
+    */
 	protected EList<ViewPoint> viewPointReference;
 
 	/**
-	 * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getParentGroup() <em>Parent Group</em>}' reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @see #getParentGroup()
+    * @generated
+    * @ordered
+    */
+   protected Group parentGroup;
+   /**
+    * The cached value of the '{@link #getGroups() <em>Groups</em>}' containment reference list.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @see #getGroups()
+    * @generated
+    * @ordered
+    */
+	protected EList<Group> groups;
+
+   /**
+    * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+    * @generated
+    */
 	protected GroupImpl() {
-		super();
-	}
+      super();
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	protected EClass eStaticClass() {
-		return ClusterPackage.Literals.GROUP;
-	}
+      return ClusterPackage.Literals.GROUP;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public EList<Group> getGroups() {
-		if (groups == null) {
-			groups = new EObjectContainmentWithInverseEList<Group>(Group.class, this, ClusterPackage.GROUP__GROUPS, ClusterPackage.GROUP__PARENT_GROUP);
-		}
-		return groups;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClusterPackage.GROUP__NAME, oldName, name));
-	}
+      if (groups == null) {
+         groups = new EObjectContainmentEList<Group>(Group.class, this, ClusterPackage.GROUP__GROUPS);
+      }
+      return groups;
+   }
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -174,45 +144,42 @@ public class GroupImpl extends EObjectImpl implements Group {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public IGroup getParentGroup() {
-		if (eContainerFeatureID() != ClusterPackage.GROUP__PARENT_GROUP) return null;
-		return (IGroup)eContainer();
-	}
+    * @generated
+    */
+	public Group getParentGroup() {
+      if (parentGroup != null && parentGroup.eIsProxy()) {
+         InternalEObject oldParentGroup = (InternalEObject)parentGroup;
+         parentGroup = (Group)eResolveProxy(oldParentGroup);
+         if (parentGroup != oldParentGroup) {
+            if (eNotificationRequired())
+               eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClusterPackage.GROUP__PARENT_GROUP, oldParentGroup, parentGroup));
+         }
+      }
+      return parentGroup;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @generated
-	 */
-   public NotificationChain basicSetParentGroup(IGroup newParentGroup, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParentGroup, ClusterPackage.GROUP__PARENT_GROUP, msgs);
-		return msgs;
-	}
+    * @generated
+    */
+   public Group basicGetParentGroup() {
+      return parentGroup;
+   }
 
    /**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @generated
-	 */
-   public void setParentGroup(IGroup newParentGroup) {
-		if (newParentGroup != eInternalContainer() || (eContainerFeatureID() != ClusterPackage.GROUP__PARENT_GROUP && newParentGroup != null)) {
-			if (EcoreUtil.isAncestor(this, newParentGroup))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newParentGroup != null)
-				msgs = ((InternalEObject)newParentGroup).eInverseAdd(this, ClusterPackage.IGROUP__GROUPS, IGroup.class, msgs);
-			msgs = basicSetParentGroup(newParentGroup, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClusterPackage.GROUP__PARENT_GROUP, newParentGroup, newParentGroup));
-	}
+    * @generated
+    */
+   public void setParentGroup(Group newParentGroup) {
+      Group oldParentGroup = parentGroup;
+      parentGroup = newParentGroup;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, ClusterPackage.GROUP__PARENT_GROUP, oldParentGroup, parentGroup));
+   }
 
    /**
 	 * <!-- begin-user-doc -->
@@ -271,53 +238,18 @@ public class GroupImpl extends EObjectImpl implements Group {
 	}
 	
 /**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ClusterPackage.GROUP__GROUPS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGroups()).basicAdd(otherEnd, msgs);
-			case ClusterPackage.GROUP__PARENT_GROUP:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetParentGroup((IGroup)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ClusterPackage.GROUP__GROUPS:
-				return ((InternalEList<?>)getGroups()).basicRemove(otherEnd, msgs);
-			case ClusterPackage.GROUP__PARENT_GROUP:
-				return basicSetParentGroup(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case ClusterPackage.GROUP__PARENT_GROUP:
-				return eInternalContainer().eInverseRemove(this, ClusterPackage.IGROUP__GROUPS, IGroup.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
+      switch (featureID) {
+         case ClusterPackage.GROUP__GROUPS:
+            return ((InternalEList<?>)getGroups()).basicRemove(otherEnd, msgs);
+      }
+      return super.eInverseRemove(otherEnd, featureID, msgs);
+   }
 
 	/**
 	 * returns true if a {@link ViewPoint} found in a sub {@link Group}.
@@ -371,142 +303,85 @@ public class GroupImpl extends EObjectImpl implements Group {
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ClusterPackage.GROUP__GROUPS:
-				return getGroups();
-			case ClusterPackage.GROUP__NAME:
-				return getName();
-			case ClusterPackage.GROUP__VIEW_POINT_REFERENCE:
-				return getViewPointReference();
-			case ClusterPackage.GROUP__PARENT_GROUP:
-				return getParentGroup();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+      switch (featureID) {
+         case ClusterPackage.GROUP__VIEW_POINT_REFERENCE:
+            return getViewPointReference();
+         case ClusterPackage.GROUP__PARENT_GROUP:
+            if (resolve) return getParentGroup();
+            return basicGetParentGroup();
+         case ClusterPackage.GROUP__GROUPS:
+            return getGroups();
+      }
+      return super.eGet(featureID, resolve, coreType);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case ClusterPackage.GROUP__GROUPS:
-				getGroups().clear();
-				getGroups().addAll((Collection<? extends Group>)newValue);
-				return;
-			case ClusterPackage.GROUP__NAME:
-				setName((String)newValue);
-				return;
-			case ClusterPackage.GROUP__VIEW_POINT_REFERENCE:
-				getViewPointReference().clear();
-				getViewPointReference().addAll((Collection<? extends ViewPoint>)newValue);
-				return;
-			case ClusterPackage.GROUP__PARENT_GROUP:
-				setParentGroup((IGroup)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+      switch (featureID) {
+         case ClusterPackage.GROUP__VIEW_POINT_REFERENCE:
+            getViewPointReference().clear();
+            getViewPointReference().addAll((Collection<? extends ViewPoint>)newValue);
+            return;
+         case ClusterPackage.GROUP__PARENT_GROUP:
+            setParentGroup((Group)newValue);
+            return;
+         case ClusterPackage.GROUP__GROUPS:
+            getGroups().clear();
+            getGroups().addAll((Collection<? extends Group>)newValue);
+            return;
+      }
+      super.eSet(featureID, newValue);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case ClusterPackage.GROUP__GROUPS:
-				getGroups().clear();
-				return;
-			case ClusterPackage.GROUP__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case ClusterPackage.GROUP__VIEW_POINT_REFERENCE:
-				getViewPointReference().clear();
-				return;
-			case ClusterPackage.GROUP__PARENT_GROUP:
-				setParentGroup((IGroup)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+      switch (featureID) {
+         case ClusterPackage.GROUP__VIEW_POINT_REFERENCE:
+            getViewPointReference().clear();
+            return;
+         case ClusterPackage.GROUP__PARENT_GROUP:
+            setParentGroup((Group)null);
+            return;
+         case ClusterPackage.GROUP__GROUPS:
+            getGroups().clear();
+            return;
+      }
+      super.eUnset(featureID);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ClusterPackage.GROUP__GROUPS:
-				return groups != null && !groups.isEmpty();
-			case ClusterPackage.GROUP__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case ClusterPackage.GROUP__VIEW_POINT_REFERENCE:
-				return viewPointReference != null && !viewPointReference.isEmpty();
-			case ClusterPackage.GROUP__PARENT_GROUP:
-				return getParentGroup() != null;
-		}
-		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == Element.class) {
-			switch (derivedFeatureID) {
-				case ClusterPackage.GROUP__NAME: return ClusterPackage.ELEMENT__NAME;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == Element.class) {
-			switch (baseFeatureID) {
-				case ClusterPackage.ELEMENT__NAME: return ClusterPackage.GROUP__NAME;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
-	}
+      switch (featureID) {
+         case ClusterPackage.GROUP__VIEW_POINT_REFERENCE:
+            return viewPointReference != null && !viewPointReference.isEmpty();
+         case ClusterPackage.GROUP__PARENT_GROUP:
+            return parentGroup != null;
+         case ClusterPackage.GROUP__GROUPS:
+            return groups != null && !groups.isEmpty();
+      }
+      return super.eIsSet(featureID);
+   }
 
 } //GroupImpl

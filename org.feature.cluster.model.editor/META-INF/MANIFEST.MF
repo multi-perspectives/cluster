@@ -8,7 +8,9 @@ Bundle-Activator: org.feature.cluster.model.cluster.presentation.ClusterEditorPl
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.feature.cluster.model.cluster.presentation
+Export-Package: org.feature.cluster.model.cluster.presentation,
+ org.feature.cluster.model.editor.editors,
+ org.feature.cluster.model.editor.editors.algorithms
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources;visibility:=reexport,
  org.feature.cluster.model.edit;visibility:=reexport,

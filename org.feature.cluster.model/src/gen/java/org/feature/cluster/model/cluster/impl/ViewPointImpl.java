@@ -31,72 +31,72 @@ import org.feature.cluster.model.cluster.ViewPoint;
  */
 public class ViewPointImpl extends ElementImpl implements ViewPoint {
 	/**
-	 * The cached value of the '{@link #getContainedInGroup() <em>Contained In Group</em>}' reference list.
-	 * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getContainedInGroup() <em>Contained In Group</em>}' reference list.
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getContainedInGroup()
-	 * @generated
-	 * @ordered
-	 */
+    * @see #getContainedInGroup()
+    * @generated
+    * @ordered
+    */
 	protected EList<Group> containedInGroup;
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	protected ViewPointImpl() {
-		super();
-	}
+      super();
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	protected EClass eStaticClass() {
-		return ClusterPackage.Literals.VIEW_POINT;
-	}
+      return ClusterPackage.Literals.VIEW_POINT;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	public EList<Group> getContainedInGroup() {
-		if (containedInGroup == null) {
-			containedInGroup = new EObjectResolvingEList<Group>(Group.class, this, ClusterPackage.VIEW_POINT__CONTAINED_IN_GROUP);
-		}
-		return containedInGroup;
-	}
+      if (containedInGroup == null) {
+         containedInGroup = new EObjectResolvingEList<Group>(Group.class, this, ClusterPackage.VIEW_POINT__CONTAINED_IN_GROUP);
+      }
+      return containedInGroup;
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ClusterPackage.VIEW_POINT__CONTAINED_IN_GROUP:
-				return getContainedInGroup();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+      switch (featureID) {
+         case ClusterPackage.VIEW_POINT__CONTAINED_IN_GROUP:
+            return getContainedInGroup();
+      }
+      return super.eGet(featureID, resolve, coreType);
+   }
 
 	/**
-	 * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+    * @generated
+    */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ClusterPackage.VIEW_POINT__CONTAINED_IN_GROUP:
-				return containedInGroup != null && !containedInGroup.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+      switch (featureID) {
+         case ClusterPackage.VIEW_POINT__CONTAINED_IN_GROUP:
+            return containedInGroup != null && !containedInGroup.isEmpty();
+      }
+      return super.eIsSet(featureID);
+   }
 
 } //ViewPointImpl
