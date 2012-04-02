@@ -55,9 +55,9 @@ public class IncrementalAlgorithm {
    }
 
    /**
-    * 
-    * @param viewPoint
-    * @return
+    * Single check of a {@link ViewPoint}.
+    * @param viewPoint the {@link ViewPoint} for the check.
+    * @return true if all direct connected groups are consistent.
     */
    public boolean checkViewPoint(ViewPoint viewPoint) {
       List<ViewPoint> vps = new ArrayList<ViewPoint>();
