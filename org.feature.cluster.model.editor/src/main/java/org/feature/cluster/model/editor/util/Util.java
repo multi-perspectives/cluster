@@ -71,8 +71,8 @@ public class Util {
       FeatureModel view = EcoreUtil.copy(featureModel);
       traverseFeatureModelAndRemoveFeatures(view.getRoot(), features);
       if (view.getAllFeatures().size() == features.size()) {
-         resource.getContents().add(view);
          removeUnusedConstrtaints(view, featureModel, canBeConsistent);
+         resource.getContents().add(view);
       } else {
          view = null;
       }
