@@ -155,7 +155,7 @@ public class ConsistencyCheckHandler extends AbstractHandler {
          CoreGroup coreGroup = groupModel.getCoreGroup();
 
          HashMap<EObject, View> viewMemory = new HashMap<EObject, View>();
-         View view = bruteForce.checkViewpoint(coreVP, views, coreGroup, viewMemory);
+         View view = bruteForce.checkViewpoint(coreVP, coreGroup, viewMemory);
          result = view.isConsistent();
          log.debug("V_Core is valid: " + result);
       }
@@ -189,7 +189,7 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       printCollection("NumberFeatures    ", numberFeatures);
       printCollection("NumberConstraints ", numberConstraints);
       printCollection("NumberViewpoints  ", numberViewPoints);
-      // printCollection("NumberViews       ", numberViews);
+      printCollection("NumberViews       ", numberViews);
       printCollection("Time Bruteforce   ", bruteforceTimeList);
       printCollection("Time Heuristic    ", heuristicTimeList);
       printStringCollection("Group TreeHeight  ", groupTreeHeight);

@@ -57,7 +57,7 @@ public class BruteForceAlgorithm {
       viewPoints = new HashMap<ViewPoint, View>();
       for (ViewPoint viewPoint : viewPointsToCheck) {
          // log.debug("ViewPoint: " + viewPoint.getName());
-         View view = checkViewpoint(viewPoint, views, groupModel.getCoreGroup(), viewMemory);
+         View view = checkViewpoint(viewPoint, groupModel.getCoreGroup(), viewMemory);
          viewPoints.put(viewPoint, view);
          boolean isConsistent = view.isConsistent();
          ViewPointWrapper wrapper = new ViewPointWrapper(viewPoint.getName(), isConsistent);
@@ -74,7 +74,7 @@ public class BruteForceAlgorithm {
     * @param views the views
     * @param coreGroup the coreGroup
     */
-   public View checkViewpoint(ViewPoint viewPoint, List<View> views, CoreGroup coreGroup, HashMap<EObject, View> viewMemory) {
+   public View checkViewpoint(ViewPoint viewPoint, CoreGroup coreGroup, HashMap<EObject, View> viewMemory) {
       EList<Group> containedInGroup = viewPoint.getContainedInGroup();
       Set<Set<View>> setOfPaths = new HashSet<Set<View>>();
       for (Group group : containedInGroup) {
