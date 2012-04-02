@@ -38,7 +38,7 @@ public class ViewCreater {
    private List<Feature> mappedFeatures = new LinkedList<Feature>();
 
 
-   public ViewCreater(GroupModel groupModel, FeatureMappingModel mapping, FeatureModel featureModel) {
+   public ViewCreater(GroupModel groupModel, FeatureMappingModel mapping, FeatureModel featureModel) { //TODO removed featureModel
       init(groupModel, mapping, featureModel);
    }
 
@@ -62,7 +62,7 @@ public class ViewCreater {
       }
    }
 
-  public List<Feature> getUnmappedFeatures(FeatureModel featureModel, FeatureModel featuremodel){
+  public List<Feature> getUnmappedFeatures(FeatureModel featureModel){
      List<Feature> unmapped = FeatureModelUtil.getAllFeatures(featureModel);
      unmapped.removeAll(mappedFeatures);
      return unmapped;
