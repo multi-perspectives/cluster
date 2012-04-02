@@ -63,7 +63,7 @@ public class Util {
       }
       URI uri = featureModel.eResource().getURI().trimFileExtension().trimFragment();
       ResourceSet resourceSet = featureModel.eResource().getResourceSet();
-      String uriString = uri.toString() + System.currentTimeMillis();
+      String uriString = uri.toString() + System.currentTimeMillis() + features.hashCode();
       // log.debug("FeaturemodelURI: " + uriString);
       uri = URI.createURI(uriString);
       uri = uri.appendFileExtension("feature");

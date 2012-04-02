@@ -7,6 +7,7 @@ package org.feature.cluster.model.editor.editors.algorithms;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.feature.cluster.model.cluster.Group;
 import org.feature.cluster.model.cluster.IGroup;
 import org.featuremapper.models.feature.Feature;
 
@@ -16,7 +17,7 @@ import org.featuremapper.models.feature.Feature;
  */
 public class UsedGroup {
 	private UsedGroup parentGroup;
-	private IGroup group;
+	private Group group;
 	private Set<Feature> features = new HashSet<Feature>();
 	private boolean consistent = false;
 	private boolean done = false;
@@ -27,7 +28,7 @@ public class UsedGroup {
 	 * @param features
 	 */
 	public UsedGroup(UsedGroup parentGroup,
-			IGroup group, Set<Feature> features) {
+			Group group, Set<Feature> features) {
 		super();
 		this.parentGroup = parentGroup;
 		this.group = group;
@@ -51,13 +52,13 @@ public class UsedGroup {
 	/**
 	 * @return the group
 	 */
-	public IGroup getGroup() {
+	public Group getGroup() {
 		return group;
 	}
 	/**
 	 * @param group the group to set
 	 */
-	public void setGroup(IGroup group) {
+	public void setGroup(Group group) {
 		this.group = group;
 	}
 	/**
