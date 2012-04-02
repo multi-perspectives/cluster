@@ -3,6 +3,7 @@
  */
 package org.feature.cluster.model.editor.editors;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,19 +37,6 @@ public class ViewCreater {
    private List<View> views;
    private List<Feature> mappedFeatures = new LinkedList<Feature>();
 
-   /**
-    * initializes the attributes
-    * 
-    * @param mappings the mapping
-    * @param coreGroup the core Group
-    * @param featureModel the feature model
-    * @throws NoFeatureModelFoundException
-    */
-   public ViewCreater(EList<Feature> allFeatures, EList<Mapping> mappings, CoreGroup coreGroup, FeatureModel featureModel) {
-      this.setCoreGroup(coreGroup);
-      this.setMappings(mappings);
-      initViews(featureModel, allFeatures);
-   }
 
    public ViewCreater(GroupModel groupModel, FeatureMappingModel mapping, FeatureModel featureModel) {
       init(groupModel, mapping, featureModel);
@@ -74,6 +62,12 @@ public class ViewCreater {
       }
    }
 
+  public List<Feature> getUnmappedFeatures(FeatureModel featureModel, FeatureModel featuremodel){
+     List<Feature> unmapped = FeatureModelUtil.getAllFeatures(featureModel);
+     unmapped.removeAll(mappedFeatures);
+     return unmapped;
+  } 
+   
    /**
     * create the views
     * 

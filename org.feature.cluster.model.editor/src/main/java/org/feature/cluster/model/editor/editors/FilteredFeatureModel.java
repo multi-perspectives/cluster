@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -53,7 +54,8 @@ public class FilteredFeatureModel {
          }
       }
       EList<Feature> allFeatures = featureMappingModel.getFeatureModel().getValue().getAllFeatures();
-
+      
+      
       log.info("#allFeatures: " + allFeatures.size());
       // create views
       EList<SolutionModelRef> solutionModels = featureMappingModel.getSolutionModels();
@@ -65,9 +67,7 @@ public class FilteredFeatureModel {
             break;
          }
       }
-      EList<Mapping> mappings = featureMappingModel.getMappings();
-      ViewCreater viewCreater =
-         new ViewCreater(allFeatures, mappings, groupModel.getCoreGroup(), featureMappingModel.getFeatureModel().getValue());
+      ViewCreater viewCreater = new ViewCreater(groupModel, featureMappingModel, featureMappingModel.getFeatureModel().getValue());
       List<View> views = viewCreater.getViews();
       long timeMillis = System.currentTimeMillis();
 
