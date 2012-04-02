@@ -106,7 +106,6 @@ public class BruteForceAlgorithm {
             }
          }
          View view = new View(viewPoint, features, this.featureModel);
-         view.isConsistent();
          // log.debug(view.isConsistent() + "\n");
          return view;
       }
