@@ -128,12 +128,12 @@ public class IncrementalAlgorithm {
                }
             }
             if (!isCon) {
-               log.debug("recheck");
+//               log.debug("recheck");
                Flag flag = new Flag();
                FeatureModel view = Util.createFeatureModel(featureModel, combinedFeaturesForViewPoint, flag);
                if (!flag.isChanged() && !flag.isFlagged()) {
                   isCon = Util.isConsistent(view);
-                  log.debug(isCon);
+//                  log.debug(isCon);
                }
             }
             ViewPointWrapper wrapper = new ViewPointWrapper(viewPoint.getName(), isCon);
