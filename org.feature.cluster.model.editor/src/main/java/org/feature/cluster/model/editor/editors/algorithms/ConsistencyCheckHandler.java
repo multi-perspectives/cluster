@@ -67,8 +67,12 @@ public class ConsistencyCheckHandler extends AbstractHandler {
    List<String> groupMaxChildren = new LinkedList<String>();
    List<String> groupsPerVP = new LinkedList<String>();
    List<String> featuresPerGroup = new LinkedList<String>();
-   List<String> bruteForceConsistentVPRatio = new LinkedList<String>();
-   List<String> heuristicConsistentVPRatio = new LinkedList<String>();
+   List<Double> bruteForceConsistentVPRatio = new LinkedList<Double>();
+   List<Double> heuristicConsistentVPRatio = new LinkedList<Double>();
+
+   public List<Double> getBruteForceConsistentVPRatio() {
+      return bruteForceConsistentVPRatio;
+   }
 
    public void resetLists() {
       bruteforceTimeList = new LinkedList<Long>();
@@ -81,8 +85,8 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       groupMaxChildren = new LinkedList<String>();
       groupsPerVP = new LinkedList<String>();
       featuresPerGroup = new LinkedList<String>();
-      bruteForceConsistentVPRatio = new LinkedList<String>();
-      heuristicConsistentVPRatio = new LinkedList<String>();
+      bruteForceConsistentVPRatio = new LinkedList<Double>();
+      heuristicConsistentVPRatio = new LinkedList<Double>();
    }
 
    @Override
@@ -111,7 +115,7 @@ public class ConsistencyCheckHandler extends AbstractHandler {
                         if (mapping != null) {
                            determineInfo(file);
                            checkConsistency(mapping, resourceSet);
-                           //checkCoreVPConsistency(mapping, resourceSet);
+                           // checkCoreVPConsistency(mapping, resourceSet);
                         }
                      }
                   }
@@ -196,8 +200,22 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       printStringCollection("Group MaxChildren ", groupMaxChildren);
       printStringCollection("Groups per VP     ", groupsPerVP);
       printStringCollection("Features per Group", featuresPerGroup);
-      printStringCollection("ConsistentRatio Bruteforce", bruteForceConsistentVPRatio);
-      printStringCollection("ConsistentRatio Heuristic ", heuristicConsistentVPRatio);
+      printDoubleCollection("ConsistentRatio Bruteforce", bruteForceConsistentVPRatio);
+      printDoubleCollection("ConsistentRatio Heuristic ", heuristicConsistentVPRatio);
+   }
+
+   private void printDoubleCollection(String description, List<Double> bruteForceConsistentVPRatio2) {
+      StringBuffer s = new StringBuffer();
+      s.append(description);
+      s.append("{");
+      for (Double ratio : bruteForceConsistentVPRatio2) {
+         DecimalFormat df = new DecimalFormat("0.00");
+         String ratioStr = df.format(ratio);
+         s.append(ratioStr);
+         s.append(", ");
+      }
+      s.append("}");
+      log.debug(s);
    }
 
    private void printStringCollection(String description, List<String> list) {
@@ -248,7 +266,7 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       log.debug(s);
    }
 
-   private String getRatio(List<ViewPointWrapper> list) {
+   private double getRatio(List<ViewPointWrapper> list) {
       StringBuffer s = new StringBuffer();
       List<ViewPointWrapper> consistent = new ArrayList<ViewPointWrapper>(list.size());
 
@@ -259,8 +277,7 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       }
 
       double ratio = consistent.size() * 1.00 / list.size();
-      DecimalFormat df = new DecimalFormat("0.00");
-      return df.format(ratio);
+      return ratio;
    }
 
    private void checkConsistency(FeatureMappingModel featureMapping, ResourceSet resourceSet) {
@@ -289,7 +306,7 @@ public class ConsistencyCheckHandler extends AbstractHandler {
          bruteforceTimeList.add(timeB);
 
          printVPCollection("BruteForce VPs", bfViewPoints);
-         String bRatio = getRatio(bfViewPoints);
+         double bRatio = getRatio(bfViewPoints);
          bruteForceConsistentVPRatio.add(bRatio);
 
          long startH = System.currentTimeMillis();
@@ -298,7 +315,7 @@ public class ConsistencyCheckHandler extends AbstractHandler {
          long timeH = endH - startH;
          heuristicTimeList.add(timeH);
          printVPCollection("Heuristic VPs ", hViewPoints);
-         String hRatio = getRatio(hViewPoints);
+         double hRatio = getRatio(hViewPoints);
          heuristicConsistentVPRatio.add(hRatio);
 
          log.debug("Bruteforce [" + bRatio + "] " + timeB + "ms , Heuristic [" + hRatio + "]" + timeH + "ms");
