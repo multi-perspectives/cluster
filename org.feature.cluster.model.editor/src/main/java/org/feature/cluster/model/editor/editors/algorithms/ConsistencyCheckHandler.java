@@ -49,9 +49,7 @@ import org.js.model.utilities.FeatureModelUtil;
 public class ConsistencyCheckHandler extends AbstractHandler {
 
    private static String generatedProject = "generatedProject";
-   // private static String[] genProjects = new String[] { "car", "cd_od", "crisis", "dell", "dms", "eCNF500",
-   // "electronic", "graph", "printer", "weather" };
-   private static String[] genProjects = new String[] { "dms" };
+   private static String[] genProjects = new String[] {"cd_od", "dms", "weather" };
 
    protected static String mappingFolder = FeatureMappingPackage.eNS_PREFIX;
 
@@ -94,9 +92,9 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       IWorkspace workspace = ResourcesPlugin.getWorkspace();
       for (int i = 0; i < genProjects.length; i++) {
          log.debug("-------------------------------");
-         // String projectPart = genProjects[i];
-         // String projectName = generatedProject + "_" + projectPart;
-         String projectName = generatedProject;
+         String projectPart = genProjects[i];
+         String projectName = generatedProject + "_" + projectPart;
+         //String projectName = generatedProject;
          log.debug("check consistency of " + projectName);
 
          IProject project = workspace.getRoot().getProject(projectName);
@@ -115,7 +113,6 @@ public class ConsistencyCheckHandler extends AbstractHandler {
                         if (mapping != null) {
                            determineInfo(file);
                            checkConsistency(mapping, resourceSet);
-                           // checkCoreVPConsistency(mapping, resourceSet);
                         }
                      }
                   }
