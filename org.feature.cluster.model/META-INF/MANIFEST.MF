@@ -1,15 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: org.feature.cluster.model;singleton:=true
+Bundle-SymbolicName: org.feature.multi.perspective.model;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.feature.cluster.model.cluster,
- org.feature.cluster.model.cluster.impl,
- org.feature.cluster.model.cluster.util
+Export-Package: org.feature.multi.perspective.model.cluster,
+ org.feature.multi.perspective.model.cluster.impl,
+ org.feature.multi.perspective.model.cluster.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,

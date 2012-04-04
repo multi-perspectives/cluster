@@ -12,13 +12,13 @@
 
    <extension point="org.eclipse.ui.newWizards">
       <category
-            id="org.feature.cluster.category.ID"
+            id="org.feature.multi.perspective.category.ID"
             name="%_UI_Wizard_category"/>
       <wizard
-            id="org.feature.cluster.model.cluster.presentation.ClusterModelWizardID"
+            id="org.feature.multi.perspective.model.cluster.presentation.ClusterModelWizardID"
             name="%_UI_ClusterModelWizard_label"
-            class="org.feature.cluster.model.cluster.presentation.ClusterModelWizard"
-            category="org.feature.cluster.category.ID"
+            class="org.feature.multi.perspective.model.cluster.presentation.ClusterModelWizard"
+            category="org.feature.multi.perspective.category.ID"
             icon="icons/full/obj16/ClusterModelFile.gif">
          <description>%_UI_ClusterModelWizard_description</description>
          <selection class="org.eclipse.core.resources.IResource"/>
@@ -27,12 +27,12 @@
 
    <extension point="org.eclipse.ui.editors">
       <editor
-            class="org.feature.cluster.model.editor.editors.ClusterMultiPageEditor"
-            contributorClass="org.feature.cluster.model.editor.editors.MultiPageActionBarContributor"
+            class="org.feature.multi.perspective.model.editor.editors.ClusterMultiPageEditor"
+            contributorClass="org.feature.multi.perspective.model.editor.editors.MultiPageActionBarContributor"
             default="true"
             extensions="cluster"
             icon="icons/full/obj16/ClusterModelFile.gif"
-            id="org.feature.cluster.model.editor.editors.MultiPageEditor"
+            id="org.feature.multi.perspective.model.editor.editors.MultiPageEditor"
             name="%_UI_ClusterEditor_label">
       </editor>
    </extension>
@@ -42,7 +42,7 @@
             allPopups="true"
             locationURI="popup:org.eclipse.ui.popup.any?before=additions">
          <command
-               commandId="org.feature.cluster.model.editor.filterFeatureModel"
+               commandId="org.feature.multi.perspective.model.editor.filterFeatureModel"
                label="Create Perspective"
                style="push">
             <visibleWhen
@@ -50,7 +50,7 @@
                <iterate
                      operator="and">
                   <instanceof
-                        value="org.feature.cluster.model.cluster.ViewPoint">
+                        value="org.feature.multi.perspective.model.cluster.ViewPoint">
                   </instanceof>
                </iterate>
             </visibleWhen>
@@ -60,15 +60,15 @@
             allPopups="true"
             locationURI="menu:org.eclipse.ui.main.menu?before=additions">
          <menu
-               id="org.feature.cluster.model.editor"
-               label="Cluster Editor">
+               id="org.feature.multi.perspective.model.editor"
+               label="Multi-Perspective Editor">
             <command
-                  commandId="org.feature.cluster.model.editor.incAlg"
+                  commandId="org.feature.multi.perspective.model.editor.incAlg"
                   label="Validate Viewpoints"
                   style="push">
                <visibleWhen>
                   <reference
-                        definitionId="org.feature.cluster.model.editor.activeClusterModelEditor">
+                        definitionId="org.feature.multi.perspective.model.editor.activeClusterModelEditor">
                   </reference>
                </visibleWhen>
             </command>
@@ -78,35 +78,35 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            categoryId="org.feature.cluster.model.editor.category"
-            defaultHandler="org.feature.cluster.model.editor.editors.FilterFeatureModelHandler"
-            id="org.feature.cluster.model.editor.filterFeatureModel"
+            categoryId="org.feature.multi.perspective.model.editor.category"
+            defaultHandler="org.feature.multi.perspective.model.editor.editors.FilterFeatureModelHandler"
+            id="org.feature.multi.perspective.model.editor.filterFeatureModel"
             name="filterFeatureModel">
       </command>
       <category
-            id="org.feature.cluster.model.editor.category"
+            id="org.feature.multi.perspective.model.editor.category"
             name="filterFeatureModelCategory">
       </category>
       <command
-            categoryId="org.feature.cluster.model.editor.algorithm"
-            defaultHandler="org.feature.cluster.model.editor.editors.algorithms.IncrementalAlgorithmHandler"
+            categoryId="org.feature.multi.perspective.model.editor.algorithm"
+            defaultHandler="org.feature.multi.perspective.model.editor.editors.algorithms.IncrementalAlgorithmHandler"
             description="Validate all Viewpoints"
-            id="org.feature.cluster.model.editor.incAlg"
+            id="org.feature.multi.perspective.model.editor.incAlg"
             name="incrementalAlgorithm">
       </command>
       <category
-            id="org.feature.cluster.model.editor.algorithm"
+            id="org.feature.multi.perspective.model.editor.algorithm"
             name="validationAlgorithms">
       </category>
    </extension>
    <extension
          point="org.eclipse.core.expressions.definitions">
 <definition
-            id="org.feature.cluster.model.editor.activeClusterModelEditor">
+            id="org.feature.multi.perspective.model.editor.activeClusterModelEditor">
          <with
                variable="activeEditorId">
             <equals
-                  value="org.feature.cluster.model.editor.editors.MultiPageEditor">
+                  value="org.feature.multi.perspective.model.editor.editors.MultiPageEditor">
             </equals>
          </with>
       </definition>

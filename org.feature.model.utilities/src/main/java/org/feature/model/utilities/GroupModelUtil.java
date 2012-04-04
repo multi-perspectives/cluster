@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.feature.cluster.model.cluster.CoreGroup;
-import org.feature.cluster.model.cluster.Group;
-import org.feature.cluster.model.cluster.GroupModel;
+import org.feature.multi.perspective.model.cluster.CoreGroup;
+import org.feature.multi.perspective.model.cluster.Group;
+import org.feature.multi.perspective.model.cluster.GroupModel;
 
 /**
  * 

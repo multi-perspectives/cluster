@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.feature.cluster.feature"
-      label="Cluster Feature"
+      id="org.feature.multi.perspective.feature"
+      label="Multi-Perspective Feature"
       version="0.3.0.qualifier">
 
    <description url="http://www.example.com/description">
@@ -40,21 +40,21 @@
    </requires>
 
    <plugin
-         id="org.feature.cluster.model"
+         id="org.feature.multi.perspective.model"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.feature.cluster.model.edit"
+         id="org.feature.multi.perspective.model.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.feature.cluster.model.editor"
+         id="org.feature.multi.perspective.model.editor"
          download-size="0"
          install-size="0"
          version="0.0.0"

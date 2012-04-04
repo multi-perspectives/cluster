@@ -1,19 +1,19 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: org.feature.cluster.model.editor;singleton:=true
+Bundle-SymbolicName: org.feature.multi.perspective.model.editor;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-Activator: org.feature.cluster.model.cluster.presentation.ClusterEditorPlugin$Implementation
+Bundle-Activator: org.feature.multi.perspective.model.cluster.presentation.ClusterEditorPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.feature.cluster.model.cluster.presentation,
- org.feature.cluster.model.editor.editors,
- org.feature.cluster.model.editor.editors.algorithms
+Export-Package: org.feature.multi.perspective.model.cluster.presentation,
+ org.feature.multi.perspective.model.editor.editors,
+ org.feature.multi.perspective.model.editor.editors.algorithms,
+ org.feature.multi.perspective.model.editor.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources;visibility:=reexport,
- org.feature.cluster.model.edit;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.edit.ui;visibility:=reexport,
  org.eclipse.ui.ide;visibility:=reexport,
@@ -32,6 +32,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.feature.model.utilities;bundle-version="1.0.0",
  org.feature.model.csp;bundle-version="1.0.0",
  org.emftext.term.propositional.expression.resource.expression;bundle-version="1.0.0",
- org.emftext.term.propositional;bundle-version="1.0.0"
+ org.emftext.term.propositional;bundle-version="1.0.0",
+ org.feature.multi.perspective.model.edit;bundle-version="1.0.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Import-Package: org.featuremapper.ui.views.filter
