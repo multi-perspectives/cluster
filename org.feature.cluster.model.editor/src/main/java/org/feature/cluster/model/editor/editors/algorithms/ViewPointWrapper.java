@@ -3,17 +3,19 @@
  */
 package org.feature.cluster.model.editor.editors.algorithms;
 
+import org.feature.cluster.model.cluster.ViewPoint;
+
 /**
  * @author <a href=mailto:info@juliaschroeter.de>Julia Schroeter</a>
  * 
  */
 public class ViewPointWrapper {
 
-   String vpName;
    boolean isConsistent;
+   private final ViewPoint viewpoint;
 
-   public ViewPointWrapper(String vpName, boolean isConsistent) {
-      this.vpName = vpName;
+   public ViewPointWrapper(ViewPoint viewpoint, boolean isConsistent) {
+      this.viewpoint = viewpoint;
       this.isConsistent = isConsistent;
    }
 
@@ -22,7 +24,7 @@ public class ViewPointWrapper {
     * @return
     */
    public String getVpName() {
-      return vpName;
+      return viewpoint.getName();
    }
 
    /**
@@ -35,7 +37,7 @@ public class ViewPointWrapper {
 
    @Override
    public String toString() {
-      return vpName + "[" + isConsistent + "]";
+      return getVpName() + "[" + isConsistent + "]";
    }
 
 }

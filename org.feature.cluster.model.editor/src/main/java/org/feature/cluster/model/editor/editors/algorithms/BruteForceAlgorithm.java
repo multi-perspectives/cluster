@@ -60,7 +60,7 @@ public class BruteForceAlgorithm {
          View view = checkViewpoint(viewPoint, groupModel.getCoreGroup(), viewMemory);
          viewPoints.put(viewPoint, view);
          boolean isConsistent = view.isConsistent();
-         ViewPointWrapper wrapper = new ViewPointWrapper(viewPoint.getName(), isConsistent);
+         ViewPointWrapper wrapper = new ViewPointWrapper(viewPoint, isConsistent);
          vpWrapper.add(wrapper);
       }
       // log.debug("BF: " + (System.currentTimeMillis()-time));

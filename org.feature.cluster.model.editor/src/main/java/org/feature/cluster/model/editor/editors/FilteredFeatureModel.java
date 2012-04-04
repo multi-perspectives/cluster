@@ -9,10 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -21,11 +18,12 @@ import org.feature.cluster.model.cluster.ViewPoint;
 import org.feature.cluster.model.editor.editors.algorithms.BruteForceAlgorithm;
 import org.feature.cluster.model.editor.editors.algorithms.IncrementalAlgorithm;
 import org.feature.cluster.model.editor.util.Util;
+import org.feature.model.utilities.FeatureMappingUtil;
+import org.feature.model.utilities.FeatureModelUtil;
 import org.featuremapper.models.feature.Feature;
+import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.featuremapping.FeatureMappingModel;
 import org.featuremapper.models.featuremapping.FeatureModelRef;
-import org.featuremapper.models.featuremapping.Mapping;
-import org.featuremapper.models.featuremapping.SolutionModelRef;
 
 /**
  * create the filtered feature model and validates it. also validates all view points.
@@ -45,33 +43,18 @@ public class FilteredFeatureModel {
     */
    public FilteredFeatureModel(Resource mappingResource, ViewPoint viewPoint, ClusterMultiPageEditor multiPageEditor) {
       this.multiPageEditor = multiPageEditor;
-      EList<EObject> contents = mappingResource.getContents();
-      FeatureMappingModel featureMappingModel = null;
-      for (EObject eObject : contents) {
-         if (eObject instanceof FeatureMappingModel) {
-            featureMappingModel = (FeatureMappingModel) eObject;
-            break;
-         }
-      }
-      EList<Feature> allFeatures = featureMappingModel.getFeatureModel().getValue().getAllFeatures();
-      
-      
+      FeatureMappingModel featureMappingModel = FeatureMappingUtil.getFeatureMapping(mappingResource);
+      FeatureModel featureModel = FeatureMappingUtil.getFeatureModel(featureMappingModel);
+      List<Feature> allFeatures = FeatureModelUtil.getAllFeatures(featureModel);
+
       log.info("#allFeatures: " + allFeatures.size());
       // create views
-      EList<SolutionModelRef> solutionModels = featureMappingModel.getSolutionModels();
-      GroupModel groupModel = null;
-      for (SolutionModelRef solutionModelRef : solutionModels) {
-         EObject value = solutionModelRef.getValue();
-         if (value instanceof GroupModel) {
-            groupModel = (GroupModel) value;
-            break;
-         }
-      }
-      ViewCreater viewCreater = new ViewCreater(groupModel, featureMappingModel, featureMappingModel.getFeatureModel().getValue());
+      GroupModel groupModel = FeatureMappingUtil.getSolutionGroupModel(featureMappingModel);
+      ViewCreator viewCreater = new ViewCreator(featureMappingModel);
       List<View> views = viewCreater.getViews();
+      
       long timeMillis = System.currentTimeMillis();
-
-      IncrementalAlgorithm algorithm = new IncrementalAlgorithm(views, groupModel, featureMappingModel.getFeatureModel().getValue());
+      IncrementalAlgorithm algorithm = new IncrementalAlgorithm(views, featureMappingModel);
       algorithm.checkViewpoints();
       log.debug("time: " + (System.currentTimeMillis() - timeMillis));
       timeMillis = System.currentTimeMillis();

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionUIMetaInformation" id="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="expression" icon="icons/editor_icon.gif" id="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionEditor" name="EMFText expression Editor">
+			<contentTypeBinding contentTypeId="org.emftext.term.propositional.expression.resource.expression">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Expression Text Editor" id="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionPreferencePage" class="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionSyntaxColoringPreferencePage" class="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionSyntaxColoringPreferencePage" category="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionBracketPreferencePage" class="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionBracketPreferencePage" category="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionNewFileWizard" id="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionNewFileWizard" name="EMFText .expression file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionNewProjectWizard" id="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionNewProjectWizard" name="EMFText expression project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionMarkerResolutionGenerator" markerType="org.emftext.term.propositional.expression.resource.expression.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.term.propositional.expression.resource.expression.ui.ExpressionAnnotationModelFactory" extensions="expression">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.term.propositional.expression.resource.expression" name=".expression File" base-type="org.eclipse.core.runtime.text" file-extensions="expression">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="expression" id="org.emftext.term.propositional.expression.resource.expression.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.term.propositional.expression.resource.expression.ui.occurences">
+		</type>
+		<type name="org.emftext.term.propositional.expression.resource.expression.ui.occurences.declaration" super="org.emftext.term.propositional.expression.resource.expression.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.term.propositional.expression.resource.expression.ui.occurences" label="Occurrences (in .expression files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="expression.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="expression.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="expression.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="expression.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="expression.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="expression.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="expression.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="expression.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="expression.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.emftext.term.propositional.expression.resource.expression.ui.occurences.declaration" label="Declarations (in .expression files)" textPreferenceKey="expression.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="expression.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="expression.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="expression.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="expression.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="expression.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+</plugin>

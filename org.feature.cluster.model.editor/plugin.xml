@@ -66,6 +66,11 @@
                   commandId="org.feature.cluster.model.editor.incAlg"
                   label="Validate Viewpoints"
                   style="push">
+               <visibleWhen>
+                  <reference
+                        definitionId="org.feature.cluster.model.editor.activeClusterModelEditor">
+                  </reference>
+               </visibleWhen>
             </command>
          </menu>
       </menuContribution>
@@ -84,8 +89,8 @@
       </category>
       <command
             categoryId="org.feature.cluster.model.editor.algorithm"
-            defaultHandler="org.feature.cluster.model.editor.editors.algorithms.ConsistencyCheckHandler"
-            description="Starts the validaion of all ViewPoints"
+            defaultHandler="org.feature.cluster.model.editor.editors.algorithms.IncrementalAlgorithmHandler"
+            description="Validate all Viewpoints"
             id="org.feature.cluster.model.editor.incAlg"
             name="incrementalAlgorithm">
       </command>
@@ -93,6 +98,18 @@
             id="org.feature.cluster.model.editor.algorithm"
             name="validationAlgorithms">
       </category>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.definitions">
+<definition
+            id="org.feature.cluster.model.editor.activeClusterModelEditor">
+         <with
+               variable="activeEditorId">
+            <equals
+                  value="org.feature.cluster.model.editor.editors.MultiPageEditor">
+            </equals>
+         </with>
+      </definition>
    </extension>
 
 </plugin>

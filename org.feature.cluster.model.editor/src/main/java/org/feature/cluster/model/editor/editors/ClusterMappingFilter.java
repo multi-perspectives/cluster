@@ -11,10 +11,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.viewers.Viewer;
 import org.feature.cluster.model.cluster.GroupModel;
+import org.feature.model.utilities.ResourceUtil;
 import org.featuremapper.models.featuremapping.FeatureMappingModel;
 import org.featuremapper.models.featuremapping.SolutionModelRef;
 import org.featuremapper.ui.views.filter.FileExtensionViewerFilter;
-import org.js.model.utilities.ResourceUtil;
 
 /**
  * This filter displays only featuremappings that have a given cluster model set as a solutionspace model.

@@ -27,12 +27,12 @@ import org.emftext.term.propositional.expression.Nested;
 import org.emftext.term.propositional.expression.Not;
 import org.emftext.term.propositional.expression.Or;
 import org.emftext.term.propositional.expression.Term;
+import org.feature.model.csp.TextExpressionParser;
+import org.feature.model.csp.analyze.FeatureModelAnalyzer;
 import org.featuremapper.models.feature.Constraint;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.feature.Group;
-import org.js.model.csp.TextExpressionParser;
-import org.js.model.csp.analyze.FeatureModelAnalyzer;
 
 /**
  * Utility class for the cluster editor.

@@ -29,8 +29,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.featuremapper.models.feature.editor;bundle-version="0.8.0",
  org.eclipse.emf.validation;bundle-version="1.4.0",
  org.featuremapper.common;bundle-version="0.8.0",
- org.js.model.utilities;bundle-version="1.0.0",
- org.js.model.csp;bundle-version="1.0.0",
+ org.feature.model.utilities;bundle-version="1.0.0",
+ org.feature.model.csp;bundle-version="1.0.0",
  org.emftext.term.propositional.expression.resource.expression;bundle-version="1.0.0",
  org.emftext.term.propositional;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy

@@ -19,10 +19,13 @@ import org.feature.cluster.model.cluster.GroupModel;
 import org.feature.cluster.model.cluster.ViewPoint;
 import org.feature.cluster.model.cluster.ViewPointContainer;
 import org.feature.cluster.model.editor.editors.View;
+import org.feature.cluster.model.editor.editors.ViewCreator;
 import org.feature.cluster.model.editor.util.Flag;
 import org.feature.cluster.model.editor.util.Util;
+import org.feature.model.utilities.FeatureMappingUtil;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
+import org.featuremapper.models.featuremapping.FeatureMappingModel;
 
 /**
  * @author Tim Winkelmann
@@ -35,25 +38,43 @@ public class IncrementalAlgorithm {
    private GroupModel groupModel;
    private UsedGroup usedGroupCoreGroup;
    private FeatureModel featureModel;
-   private final List<View> views;
+   
+   private boolean checkRun = false;
+   private List<ViewPoint> inConsistentViewpoints = new ArrayList<ViewPoint>();
 
    // private int i = 0; //used for tests
 
+   
+   /**
+    * Constructor that initializes views for the given featuremapping.
+    * @param mapping
+    */
+   public IncrementalAlgorithm(FeatureMappingModel mapping) {
+      this.featureModel = FeatureMappingUtil.getFeatureModel(mapping);
+      this.groupModel = FeatureMappingUtil.getSolutionGroupModel(mapping);
+      ViewCreator viewCreater = new ViewCreator(mapping);
+      List<View> views = viewCreater.getViews();
+      initViewMap(views);
+   }
+   
    /**
     * 
     * @param views
     * @param groupModel
     */
-   public IncrementalAlgorithm(List<View> views, GroupModel groupModel, FeatureModel featureModel) {
-      this.views = views;
-      viewMap = new HashMap<EObject, View>();
+   public IncrementalAlgorithm(List<View> views, FeatureMappingModel mapping) {
+      this.featureModel = FeatureMappingUtil.getFeatureModel(mapping);
+      this.groupModel = FeatureMappingUtil.getSolutionGroupModel(mapping);
+      initViewMap(views);
+   }
+
+   private void initViewMap(List<View> views){
+      this.viewMap = new HashMap<EObject, View>();
       for (View view : views) {
          viewMap.put(view.getGroup(), view);
       }
-      this.groupModel = groupModel;
-      this.featureModel = featureModel;
    }
-
+   
    /**
     * Single check of a {@link ViewPoint}.
     * @param viewPoint the {@link ViewPoint} for the check.
@@ -136,15 +157,32 @@ public class IncrementalAlgorithm {
 //                  log.debug(isCon);
                }
             }
-            ViewPointWrapper wrapper = new ViewPointWrapper(viewPoint.getName(), isCon);
+           
+            ViewPointWrapper wrapper = new ViewPointWrapper(viewPoint, isCon);
             viewPointConsistency.add(wrapper);
+            if (!isCon){
+               inConsistentViewpoints.add(viewPoint);
+            }
          }
       } else {
          log.info("There are no viewpoints defined yet.");
       }
+      checkRun = true;
       return viewPointConsistency;
    }
 
+   
+   /**
+    * return all inconsistent viewpoints.
+    * @return
+    */
+   public List<ViewPoint> getInConsistentViewpoints(){
+      if (!checkRun){
+         checkViewpoints();
+      }
+      return inConsistentViewpoints;
+   }
+   
    /**
     * 
     * @param group
