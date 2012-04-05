@@ -417,7 +417,7 @@ public class ClusterMultiPageEditor extends MultiPageEditorPart implements IEdit
 
    private Button refresh;
 
-   private String mappingResourcePath;
+   private URI mappingResourcePath;
    private static Logger log = Logger.getLogger(ClusterMultiPageEditor.class);
 
    /**
@@ -812,15 +812,14 @@ public class ClusterMultiPageEditor extends MultiPageEditorPart implements IEdit
    public Diagnostic analyzeResourceProblems(Resource resource, Exception exception) {
       if (!resource.getErrors().isEmpty() || !resource.getWarnings().isEmpty()) {
          BasicDiagnostic basicDiagnostic =
-            new BasicDiagnostic(Diagnostic.ERROR, "org.feature.multi.perspective.model.editor", 0, getString("_UI_CreateModelError_message",
-                                                                                                   resource.getURI()),
-                                new Object[] { exception == null ? (Object) resource : exception });
+            new BasicDiagnostic(Diagnostic.ERROR, "org.feature.multi.perspective.model.editor", 0,
+                                getString("_UI_CreateModelError_message", resource.getURI()), new Object[] { exception == null
+                                      ? (Object) resource : exception });
          basicDiagnostic.merge(EcoreUtil.computeDiagnostic(resource, true));
          return basicDiagnostic;
       } else if (exception != null) {
-         return new BasicDiagnostic(Diagnostic.ERROR, "org.feature.multi.perspective.model.editor", 0, getString("_UI_CreateModelError_message",
-                                                                                                       resource.getURI()),
-                                    new Object[] { exception });
+         return new BasicDiagnostic(Diagnostic.ERROR, "org.feature.multi.perspective.model.editor", 0,
+                                    getString("_UI_CreateModelError_message", resource.getURI()), new Object[] { exception });
       } else {
          return Diagnostic.OK_INSTANCE;
       }
@@ -860,9 +859,9 @@ public class ClusterMultiPageEditor extends MultiPageEditorPart implements IEdit
       createModel();
       // Only creates the other pages if there is something that can be edited
       if (!getEditingDomain().getResourceSet().getResources().isEmpty()) {
-         createClusterView();
          createGroupView();
          createViewPointView();
+         createClusterView();
       }
    }
 
@@ -1183,7 +1182,8 @@ public class ClusterMultiPageEditor extends MultiPageEditorPart implements IEdit
    protected void updateProblemIndication() {
       if (updateProblemIndication) {
          BasicDiagnostic diagnostic =
-            new BasicDiagnostic(Diagnostic.OK, "org.feature.multi.perspective.model.editor", 0, null, new Object[] { editingDomain.getResourceSet() });
+            new BasicDiagnostic(Diagnostic.OK, "org.feature.multi.perspective.model.editor", 0, null,
+                                new Object[] { editingDomain.getResourceSet() });
          for (Diagnostic childDiagnostic : resourceToDiagnosticMap.values()) {
             if (childDiagnostic.getSeverity() != Diagnostic.OK) {
                diagnostic.add(childDiagnostic);
@@ -1342,29 +1342,27 @@ public class ClusterMultiPageEditor extends MultiPageEditorPart implements IEdit
     * 
     * @param mapping the mapping
     */
-   public void setFeatureMapping(String mapping) {
-      if (mapping == null || mapping.isEmpty()) {
-         return;
-      }// cancelled open file dialog
-      if (mappingResourcePath == null && mapping != null) {
-         refresh.setEnabled(true);
-      }
-      mappingResourcePath = mapping;
-      ResourceSet rst = getEditingDomain().getResourceSet();
-      EcoreUtil.resolveAll(rst);
-      URI uri = URI.createURI(mapping);
-      mappingResource = rst.getResource(uri, true);
-      long timeStamp = mappingResource.getTimeStamp(); // compare timeStamp && URI with the one before
-      if (mappingTimeStamp == -1) {
-         mappingURI = uri;
+   public void setFeatureMapping(URI mapping) {
+      if (mapping != null) {
+
+         if (mappingResourcePath == null) {
+            refresh.setEnabled(true);
+         }
+         mappingResourcePath = mapping;
+         ResourceSet rst = getEditingDomain().getResourceSet();
+         mappingResource = rst.getResource(mappingResourcePath, true);
+         long timeStamp = mappingResource.getTimeStamp(); // compare timeStamp && URI with the one before
+         if (mappingTimeStamp == -1) {
+            mappingURI = mappingResourcePath;
+            mappingTimeStamp = timeStamp;
+            zestView.init(mappingResource);
+         } else if (mappingResourcePath.equals(mappingURI) && mappingTimeStamp == timeStamp) {
+            return;
+         }
+         mappingURI = mappingResourcePath;
          mappingTimeStamp = timeStamp;
          zestView.init(mappingResource);
-      } else if (uri.equals(mappingURI) && mappingTimeStamp == timeStamp) {
-         return;
       }
-      mappingURI = uri;
-      mappingTimeStamp = timeStamp;
-      zestView.init(mappingResource);
    }
 
    /**
@@ -1403,7 +1401,7 @@ public class ClusterMultiPageEditor extends MultiPageEditorPart implements IEdit
    /**
     * @return the mappingResourcePath
     */
-   public String getMappingResourcePath() {
+   public URI getMappingResourcePath() {
       return mappingResourcePath;
    }
 }

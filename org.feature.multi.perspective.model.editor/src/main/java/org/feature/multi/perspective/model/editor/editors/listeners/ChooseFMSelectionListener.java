@@ -67,7 +67,7 @@ public class ChooseFMSelectionListener implements SelectionListener {
          String path = selectedFiles[0].getFullPath().toString();
          log.debug(path);
          URI uri = URI.createPlatformResourceURI(path, true);
-         mpe.setFeatureMapping(uri.toString());
+         mpe.setFeatureMapping(uri);
       }
    }
 
