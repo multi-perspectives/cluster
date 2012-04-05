@@ -68,6 +68,28 @@ public class BruteForceAlgorithm {
    }
 
    /**
+    * determine if the given viewpoint is consistent.
+    * @param viewpoint
+    * @return
+    */
+   public boolean isViewpointConsistent(ViewPoint viewpoint) {
+      View view = checkViewpoint(viewpoint);
+      return view.isConsistent();
+   }
+
+   /**
+    * check a viewpoint and return the according view.
+    * @param viewpoint
+    * @return
+    */
+   public View checkViewpoint(ViewPoint viewpoint) {
+      HashMap<EObject, View> viewMemory = new HashMap<EObject, View>();
+      CoreGroup coreGroup = groupModel.getCoreGroup();
+      View view = checkViewpoint(viewpoint, coreGroup, viewMemory);
+      return view;
+   }
+
+   /**
     * check the viewpoint
     * 
     * @param viewPoint the view point

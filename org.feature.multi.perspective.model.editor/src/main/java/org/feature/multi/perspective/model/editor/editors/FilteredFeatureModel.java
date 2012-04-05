@@ -1,7 +1,6 @@
 package org.feature.multi.perspective.model.editor.editors;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +12,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.feature.model.utilities.FeatureMappingUtil;
 import org.feature.model.utilities.FeatureModelUtil;
 import org.feature.multi.perspective.model.cluster.GroupModel;
@@ -52,34 +54,56 @@ public class FilteredFeatureModel {
       GroupModel groupModel = FeatureMappingUtil.getSolutionGroupModel(featureMappingModel);
       ViewCreator viewCreater = new ViewCreator(featureMappingModel);
       List<View> views = viewCreater.getViews();
-      
+
       long timeMillis = System.currentTimeMillis();
       IncrementalAlgorithm algorithm = new IncrementalAlgorithm(views, featureMappingModel);
       algorithm.checkViewpoints();
       log.debug("time: " + (System.currentTimeMillis() - timeMillis));
       timeMillis = System.currentTimeMillis();
 
-      BruteForceAlgorithm bfa = new BruteForceAlgorithm(groupModel, views, featureMappingModel.getFeatureModel().getValue());
-      Collection<View> checkViewPoints = bfa.getViewPoints();
+      BruteForceAlgorithm bruteForce = new BruteForceAlgorithm(groupModel, views, featureMappingModel.getFeatureModel().getValue());
+      View view = bruteForce.checkViewpoint(viewPoint);
 
-      log.debug("time: " + (System.currentTimeMillis() - timeMillis));
-
+      boolean consistent = view.isConsistent();
       // Find specific ViewPoint
-      View viewP = null;
-      for (View view : checkViewPoints) {
-         if (view.getGroup() instanceof ViewPoint) {
-            ViewPoint vp = (ViewPoint) view.getGroup();
-            if (vp.getName().equals(viewPoint.getName())) {
-               viewP = view;
-               break;
-            }
-         }
-      }
-      if (viewP != null) {
-         createFeatureModel(featureMappingModel, viewPoint, viewP);
+      if (view != null && consistent) {
+         log.debug("time: " + (System.currentTimeMillis() - timeMillis));
+         createFeatureModel(featureMappingModel, viewPoint, view);
       } else {
          log.error("Could not create ViewPoint");
       }
+      showMessage(viewPoint, consistent);
+   }
+
+   private void showMessage(ViewPoint viewpoint, boolean consistent) {
+      String msg = "";
+      if (consistent) {
+         msg += "The perspective is created successfully.";
+      } else {
+         msg += "Could not create perspective ";
+      }
+      if (!consistent) {
+         msg += "because viewpoint " + viewpoint.getName() + " is ";
+         msg += "inconsistent.";
+      }
+
+      int style = SWT.OK;
+      if (consistent) {
+         style = SWT.OK | SWT.ICON_INFORMATION;
+      } else {
+         style = SWT.OK | SWT.ICON_WARNING;
+      }
+
+      Shell shell = getShell();
+      MessageBox msgBox = new MessageBox(shell, style);
+      msgBox.setText("Viewpoint Validation");
+      msgBox.setMessage(msg);
+      msgBox.open();
+   }
+
+   private Shell getShell() {
+      Shell shell = multiPageEditor.getSite().getShell();
+      return shell;
    }
 
    /**
