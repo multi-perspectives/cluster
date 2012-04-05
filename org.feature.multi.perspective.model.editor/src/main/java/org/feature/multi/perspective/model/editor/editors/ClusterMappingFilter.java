@@ -6,14 +6,12 @@ package org.feature.multi.perspective.model.editor.editors;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.viewers.Viewer;
+import org.feature.model.utilities.FeatureMappingUtil;
 import org.feature.model.utilities.ResourceUtil;
 import org.feature.multi.perspective.model.cluster.GroupModel;
 import org.featuremapper.models.featuremapping.FeatureMappingModel;
-import org.featuremapper.models.featuremapping.SolutionModelRef;
 import org.featuremapper.ui.views.filter.FileExtensionViewerFilter;
 
 /**
@@ -35,24 +33,15 @@ public class ClusterMappingFilter extends FileExtensionViewerFilter {
 
    @Override
    public boolean select(Viewer viewer, Object parentElement, Object element) {
-      boolean select = super.select(viewer, parentElement, element);
+      boolean select = false;
       if (select) {
          if (element instanceof IFile) {
             IFile file = (IFile) element;
-            EObject model = ResourceUtil.getModel(file, resourceSet);
-            if (model instanceof FeatureMappingModel) {
-               FeatureMappingModel mapping = (FeatureMappingModel) model;
-               EList<SolutionModelRef> solutionModels = mapping.getSolutionModels();
-               for (SolutionModelRef solutionModelRef : solutionModels) {
-                  EObject solution = solutionModelRef.getValue();
-                  if (solution instanceof GroupModel) {
-                     GroupModel gModel = (GroupModel) solution;
-                     IFile modelFile = ResourceUtil.getFile(gModel.eResource());
-                     select = groupmodelFile.equals(modelFile);
-                  }
-               }
-            } else {
-               select = false;
+            FeatureMappingModel mapping = FeatureMappingUtil.getFeatureMapping(file, resourceSet);
+            GroupModel groupModel = FeatureMappingUtil.getSolutionGroupModel(mapping);
+            if (groupModel != null) {
+               IFile modelFile = ResourceUtil.getFile(groupModel.eResource());
+               select = groupmodelFile.equals(modelFile);
             }
          }
       }
