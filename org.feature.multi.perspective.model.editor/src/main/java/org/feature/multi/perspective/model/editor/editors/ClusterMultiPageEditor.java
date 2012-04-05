@@ -108,6 +108,7 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 import org.eclipse.zest.core.viewers.ZoomContributionViewItem;
+import org.feature.model.utilities.GroupModelUtil;
 import org.feature.multi.perspective.model.cluster.GroupModel;
 import org.feature.multi.perspective.model.cluster.ViewPoint;
 import org.feature.multi.perspective.model.cluster.ViewPointContainer;
@@ -426,7 +427,6 @@ public class ClusterMultiPageEditor extends MultiPageEditorPart implements IEdit
    public ClusterMultiPageEditor() {
       super();
       initializeEditingDomain();
-      log.debug("Init Handlers");
    }
 
    /**
@@ -655,8 +655,7 @@ public class ClusterMultiPageEditor extends MultiPageEditorPart implements IEdit
       viewPointViewer = (TreeViewer) viewerPane.getViewer();
       ViewPointContentProvider = new ViewPointContentProvider();
       viewPointViewer.setContentProvider(ViewPointContentProvider);
-      viewPointViewer.setLabelProvider(new AdapterFactoryLabelProvider.FontProvider(adapterFactory, groupViewer));
-      viewerPane.setTitle(editingDomain.getResourceSet());
+      viewPointViewer.setLabelProvider(new AdapterFactoryLabelProvider.FontProvider(adapterFactory, viewPointViewer));
 
       new AdapterFactoryTreeEditor(viewPointViewer.getTree(), adapterFactory);
       createContextMenuFor(viewPointViewer);
@@ -679,17 +678,19 @@ public class ClusterMultiPageEditor extends MultiPageEditorPart implements IEdit
       }
    }
 
-   public List<GroupModel> getGroupModels() {
-      List<GroupModel> models = new ArrayList<GroupModel>();
-      TreeIterator<Notifier> allContents = editingDomain.getResourceSet().getAllContents();
-      while (allContents.hasNext()) {
-         Notifier notifier = allContents.next();
-         if (notifier instanceof GroupModel) {
-            GroupModel groupModel = (GroupModel) notifier;
-            models.add(groupModel);
-         }
+   /**
+    * get the group model associated with this editor.
+    * 
+    * @return
+    */
+   public GroupModel getGroupModel() {
+      GroupModel groupModel = null;
+      EList<Resource> resources = editingDomain.getResourceSet().getResources();
+      for (Resource resource : resources) {
+         groupModel = GroupModelUtil.getGroupModel(resource);
+         break;
       }
-      return models;
+      return groupModel;
    }
 
    /**
@@ -699,14 +700,12 @@ public class ClusterMultiPageEditor extends MultiPageEditorPart implements IEdit
     */
    private String[] getViewPoints() {
       List<String> viewPointNames = new LinkedList<String>();
-      List<GroupModel> groupModels = getGroupModels();
-      for (GroupModel model : groupModels) {
-         ViewPointContainer viewpointContainer = model.getViewPointContainer();
-         if (viewpointContainer != null) {
-            EList<ViewPoint> viewPoints = viewpointContainer.getViewPoints();
-            for (ViewPoint viewPoint : viewPoints) {
-               viewPointNames.add(viewPoint.getName());
-            }
+      GroupModel model = getGroupModel();
+      ViewPointContainer viewpointContainer = model.getViewPointContainer();
+      if (viewpointContainer != null) {
+         EList<ViewPoint> viewPoints = viewpointContainer.getViewPoints();
+         for (ViewPoint viewPoint : viewPoints) {
+            viewPointNames.add(viewPoint.getName());
          }
       }
       String[] viewPointNamesArray = new String[viewPointNames.size()];
@@ -890,9 +889,9 @@ public class ClusterMultiPageEditor extends MultiPageEditorPart implements IEdit
       groupViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
 
       groupViewer.setLabelProvider(new AdapterFactoryLabelProvider.FontProvider(adapterFactory, groupViewer));
+     // groupViewer.setInput(getGroupModel());
       groupViewer.setInput(editingDomain.getResourceSet());
       groupViewer.setSelection(new StructuredSelection(editingDomain.getResourceSet().getResources().get(0)), true);
-      viewerPane.setTitle(editingDomain.getResourceSet());
 
       new AdapterFactoryTreeEditor(groupViewer.getTree(), adapterFactory);
 

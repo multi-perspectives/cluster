@@ -84,20 +84,7 @@ public final class ResourceUtil {
       return file;
    }
 
-   /**
-    * initialize a featuremodel from an Ifile.
-    * 
-    * @param file
-    * @return
-    */
-   public static FeatureModel getFeatureModel(IFile file, ResourceSet resourceSet) {
-      FeatureModel featuremodel = null;
-      EObject object = getModel(file, resourceSet);
-      if (object instanceof FeatureModel) {
-         featuremodel = (FeatureModel) object;
-      }
-      return featuremodel;
-   }
+
 
    /**
     * Generic method to load a model from a file.

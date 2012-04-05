@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.feature.multi.perspective.model.cluster.CoreGroup;
 import org.feature.multi.perspective.model.cluster.Group;
 import org.feature.multi.perspective.model.cluster.GroupModel;
@@ -45,4 +47,23 @@ public final class GroupModelUtil {
       return result;
    }
 
+   /**
+    * get the Ecore GroupModel instance from a GroupModel resource.
+    * @param resource
+    * @return
+    */
+   public static GroupModel getGroupModel(Resource resource){
+      GroupModel groupModel = null;
+      if (resource.isLoaded()){
+         EList<EObject> contents = resource.getContents();
+         for (EObject eObject : contents) {
+            if (eObject instanceof GroupModel) {
+               groupModel = (GroupModel) eObject;
+               break;
+            }
+         }
+      }
+      return groupModel;
+   }
+   
 }

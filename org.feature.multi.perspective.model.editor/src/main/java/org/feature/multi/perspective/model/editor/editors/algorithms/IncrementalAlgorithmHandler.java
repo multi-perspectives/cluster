@@ -13,9 +13,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
-import org.feature.multi.perspective.model.cluster.ViewPoint;
 import org.feature.model.utilities.FeatureMappingUtil;
 import org.feature.model.utilities.WorkbenchUtil;
+import org.feature.multi.perspective.model.cluster.ViewPoint;
 import org.feature.multi.perspective.model.editor.editors.ClusterMultiPageEditor;
 import org.featuremapper.models.featuremapping.FeatureMappingModel;
 
@@ -31,53 +31,66 @@ public class IncrementalAlgorithmHandler extends AbstractHandler {
    public Object execute(ExecutionEvent event) throws ExecutionException {
 
       FeatureMappingModel featureMappingModel = getFeatureMapping();
-
-      IncrementalAlgorithm algorithm = new IncrementalAlgorithm(featureMappingModel);
-      List<ViewPoint> viewpoints = algorithm.getInConsistentViewpoints();
-      showMessage(viewpoints);
-      
+      if (featureMappingModel != null) {
+         IncrementalAlgorithm algorithm = new IncrementalAlgorithm(featureMappingModel);
+         List<ViewPoint> viewpoints = algorithm.getInConsistentViewpoints();
+         showMessage(viewpoints);
+      } else {
+         showLoadClusterMsg();
+      }
       return null; // No return value needed.
    }
 
-   
-   private void showMessage(List<ViewPoint> viewpoints){
+   private void showLoadClusterMsg() {
+      MessageBox msgBox = new MessageBox(getShell(), SWT.OK | SWT.ICON_INFORMATION);
+      String msg = "Cannot validate viewpoints. No Featuremapping loaded yet.";
+      msgBox.setMessage(msg);
+      msgBox.open();
+   }
+
+   private void showMessage(List<ViewPoint> viewpoints) {
       String msg = "";
       int size = viewpoints.size();
-      if (0 == size){
+      if (0 == size) {
          msg = "All viewpoints are consistent.";
       } else {
          msg += size + " ";
-         if (1 == size ){
-         msg += "viewpoint is";
+         if (1 == size) {
+            msg += "viewpoint is";
          } else {
-            msg+= "viewpoints are";
+            msg += "viewpoints are";
          }
          msg += " inconsistent: ";
          String inconsistentVPs = "";
          for (ViewPoint viewPoint : viewpoints) {
-            if (inconsistentVPs.length() > 0){
+            if (inconsistentVPs.length() > 0) {
                inconsistentVPs += ", ";
             }
             String vpName = viewPoint.getName();
-            inconsistentVPs += vpName; 
+            inconsistentVPs += vpName;
          }
          msg += inconsistentVPs;
       }
-      
+
       int style = SWT.OK;
-      if(0 == size){
+      if (0 == size) {
          style = SWT.OK | SWT.ICON_INFORMATION;
       } else {
          style = SWT.OK | SWT.ICON_WARNING;
       }
-      
-      Shell shell = getActiveMultiPageEditor().getSite().getShell();
+
+      Shell shell = getShell();
       MessageBox msgBox = new MessageBox(shell, style);
       msgBox.setText("Viewpoint Validation");
       msgBox.setMessage(msg);
       msgBox.open();
    }
-   
+
+   private Shell getShell() {
+      Shell shell = getActiveMultiPageEditor().getSite().getShell();
+      return shell;
+   }
+
    private FeatureMappingModel getFeatureMapping() {
       FeatureMappingModel featureMappingModel = null;
       ClusterMultiPageEditor multiPageEditor = getActiveMultiPageEditor();
@@ -98,9 +111,9 @@ public class IncrementalAlgorithmHandler extends AbstractHandler {
       return mPageEditor;
    }
 
-   @Override
-   public boolean isEnabled() {
-      return getFeatureMapping() != null;
-   }
-   
+   // @Override
+   // public boolean isEnabled() {
+   // return getFeatureMapping() != null;
+   // }
+
 }

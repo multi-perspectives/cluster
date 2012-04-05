@@ -53,11 +53,10 @@ public class ChooseFMSelectionListener implements SelectionListener {
    private void browseMapping() {
       List<ViewerFilter> filters = new ArrayList<ViewerFilter>();
       ArrayList<String> extensions = FeatureMappingUtil.getMappingModelExtensions();
-      List<GroupModel> groupModels = mpe.getGroupModels();
-      for (GroupModel groupModel : groupModels) {
-         ClusterMappingFilter filter = new ClusterMappingFilter(extensions, groupModel);
-         filters.add(filter);
-      }
+      GroupModel groupModel = mpe.getGroupModel();
+
+      ClusterMappingFilter filter = new ClusterMappingFilter(extensions, groupModel);
+      filters.add(filter);
 
       IFile[] selectedFiles =
          WorkspaceResourceDialog.openFileSelection(parentComposite.getShell(), "Choose mapping", "Please choose a mapping:", false, null,

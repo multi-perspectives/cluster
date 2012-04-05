@@ -276,7 +276,6 @@ public class FeatureModelAnalyzer {
       if (cspModel == null) {
          CSPModelBuilder modelBuilder = new CSPModelBuilder();
          cspModel = modelBuilder.getCSPModel(model);
-         // log.debug("CSPModel: " + cspModel.pretty());
       }
       return cspModel;
    }
@@ -286,7 +285,6 @@ public class FeatureModelAnalyzer {
       CPSolver solver = new CPSolver();
       Model problemModel = getCSPModel();
       solver.read(problemModel);
-      // log.debug("Solver: " + solver.pretty());
       log.debug("------------------------------------------");
       int j = 0;
       if (solver.solve()) {

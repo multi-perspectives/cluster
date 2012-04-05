@@ -7,10 +7,12 @@ import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -330,4 +332,20 @@ public final class FeatureModelUtil {
       return languageConstraints;
    }
 
+   
+   /**
+    * initialize a featuremodel from an Ifile.
+    * 
+    * @param file
+    * @return
+    */
+   public static FeatureModel getFeatureModel(IFile file, ResourceSet resourceSet) {
+      FeatureModel featuremodel = null;
+      EObject object = ResourceUtil.getModel(file, resourceSet);
+      if (object instanceof FeatureModel) {
+         featuremodel = (FeatureModel) object;
+      }
+      return featuremodel;
+   }
+   
 }
