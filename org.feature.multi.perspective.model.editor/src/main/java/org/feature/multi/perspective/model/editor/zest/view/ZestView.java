@@ -42,7 +42,6 @@ import org.featuremapper.models.featuremapping.SolutionModelRef;
  */
 public class ZestView  extends ViewerPane implements IZoomableWorkbenchPart {
 	Logger log = Logger.getLogger(ZestView.class);
-	public static final String ID = "de.vogella.zest.jface.view";
 	private GraphViewer viewer;
 	private ClusterMultiPageEditor multiPageEditor;
 	private NodeModelContentProvider nodeModelContentProvider;
