@@ -15,7 +15,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.feature.multi.perspective.model.cluster.ViewPoint;
 import org.feature.model.utilities.FeatureMappingUtil;
-import org.feature.model.utilities.WorkspaceUtil;
+import org.feature.model.utilities.WorkbenchUtil;
 import org.feature.multi.perspective.model.editor.editors.ClusterMultiPageEditor;
 import org.featuremapper.models.featuremapping.FeatureMappingModel;
 
@@ -90,7 +90,7 @@ public class IncrementalAlgorithmHandler extends AbstractHandler {
 
    private ClusterMultiPageEditor getActiveMultiPageEditor() {
       ClusterMultiPageEditor mPageEditor = null;
-      IEditorPart activeEditor = WorkspaceUtil.getActiveEditor();
+      IEditorPart activeEditor = WorkbenchUtil.getActiveEditor();
       if (activeEditor instanceof ClusterMultiPageEditor) {
          mPageEditor = (ClusterMultiPageEditor) activeEditor;
 

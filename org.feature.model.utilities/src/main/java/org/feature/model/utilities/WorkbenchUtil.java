@@ -10,12 +10,12 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * workspace utility class to access teh eclipse workspace.
+ * workspace utility class to access the eclipse workspace.
  * 
  * @author <a href="mailto:info@juliaschroeter.de">Julia Schroeter</a>
  * 
  */
-public class WorkspaceUtil {
+public class WorkbenchUtil {
 
    /**
     * find the currently active editor. May return null, if no editor is active.
