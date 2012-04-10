@@ -2,6 +2,7 @@ package org.feature.model.utilities;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -348,4 +349,23 @@ public final class FeatureModelUtil {
       return featuremodel;
    }
    
+   
+   public static void makeFeatureNamesUnique(List<Feature> allFeatures){
+      List<String> sortedFeatures = new ArrayList<String>(allFeatures.size()
+            );
+      for (Feature feature : allFeatures) {
+         String featureName = feature.getName();
+         sortedFeatures.add(featureName);
+      }
+
+      Collections.sort(sortedFeatures);
+      
+      
+      int featureSize = sortedFeatures.size();
+      int j=1;
+      for (int i = 0; i < featureSize; i++) {
+         String currFeature = sortedFeatures.get(i);
+         String nextFeature = sortedFeatures.get(j);
+      }
+   }
 }

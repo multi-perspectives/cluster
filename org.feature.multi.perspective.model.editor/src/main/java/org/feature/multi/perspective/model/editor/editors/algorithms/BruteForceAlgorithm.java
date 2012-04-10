@@ -128,7 +128,15 @@ public class BruteForceAlgorithm {
             }
          }
          View view = new View(viewPoint, features, this.featureModel);
-         // log.debug(view.isConsistent() + "\n");
+         
+         String logMsg = "BruteForceAlg ";
+         logMsg += viewPoint.getName();
+         logMsg += " contained in ";
+         EList<Group> conInGroup = viewPoint.getContainedInGroup();
+         for (Group group : conInGroup) {
+            logMsg += group.getName() + ", ";
+         }
+         log.debug(logMsg);
          return view;
       }
    }

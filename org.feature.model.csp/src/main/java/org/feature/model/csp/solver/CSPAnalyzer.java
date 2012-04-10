@@ -1,6 +1,11 @@
 package org.feature.model.csp.solver;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -8,6 +13,8 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.feature.model.csp.analyze.FeatureModelAnalyzer;
 import org.feature.model.utilities.FeatureModelUtil;
+import org.featuremapper.models.feature.Attribute;
+import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 
 public class CSPAnalyzer {
@@ -77,11 +84,40 @@ public class CSPAnalyzer {
          // int derivableVariants = analyzer.getNumberOfDerivableVariants();
          // log.info("Number of derivable variants     : " + derivableVariants);
 
-         // log.info("--------------------------------------");
+         logFeatureNames(analyzer);
+         
          // log.info("--------------------------------------");
          // log.info("--------------------------------------");
       } else {
          log.info("The file" + file.getName() + " does not represent a feature model");
       }
    }
+   
+   private static void logFeatureNames(FeatureModelAnalyzer analyzer){
+      log.info("--------------------------------------");
+      log.info("All Features");
+
+      List<Feature> allFeatures = analyzer.getAllFeatures();
+      List<String> sortedFeatures = new ArrayList<String>(allFeatures.size()
+            );
+      for (Feature feature : allFeatures) {
+         String id = "";
+         Attribute idAttribute = FeatureModelUtil.getAttribute(feature, FeatureModelUtil.attribute_id);
+         if (idAttribute != null) {
+            id = idAttribute.getValue();
+         }
+         String featureName = "Feature " + feature.getName() + "[id=" + id + "]";
+         sortedFeatures.add(featureName);
+      }
+
+      Collections.sort(sortedFeatures);
+      for (String string : sortedFeatures) {
+         log.info(string);
+      }
+      
+      
+      
+   }
+   
+   
 }

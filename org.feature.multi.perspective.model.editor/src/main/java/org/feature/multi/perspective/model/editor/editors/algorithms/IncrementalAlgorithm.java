@@ -137,6 +137,17 @@ public class IncrementalAlgorithm {
          EList<ViewPoint> viewPoints = container.getViewPoints();
          Map<Group, UsedGroup> groupFeatureModel = buildGroupFeatureModel(viewPoints);
          for (ViewPoint viewPoint : viewPoints) {
+            
+            String logMsg = "Heuristic ";
+            logMsg += viewPoint.getName();
+            logMsg += " contained in ";
+            EList<Group> containedInGroup = viewPoint.getContainedInGroup();
+            for (Group group : containedInGroup) {
+               logMsg += group.getName() + ", ";
+            }
+            log.debug(logMsg);
+            
+            
             boolean isCon = true;
             Set<Feature> combinedFeaturesForViewPoint = new HashSet<Feature>();
             for (Group group : viewPoint.getContainedInGroup()) {

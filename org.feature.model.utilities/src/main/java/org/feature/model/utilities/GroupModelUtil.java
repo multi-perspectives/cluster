@@ -55,7 +55,7 @@ public final class GroupModelUtil {
    * @param groupModel
    * @return
    */
-   public ViewPoint getViewpointByName(String viewpointName, GroupModel groupModel) {
+   public static ViewPoint getViewpointByName(String viewpointName, GroupModel groupModel) {
       ViewPoint viewpoint = null;
       ViewPointContainer container = groupModel.getViewPointContainer();
       for (ViewPoint vp : container.getViewPoints()) {
