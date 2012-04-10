@@ -31,7 +31,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.featuremapper.models.feature.FeatureModel;
 
 /**
  * @author <a href="mailto:info@juliaschroeter.de">Julia Schroeter</a>
@@ -83,8 +82,6 @@ public final class ResourceUtil {
       IFile file = WorkspaceSynchronizer.getFile(modelResource);
       return file;
    }
-
-
 
    /**
     * Generic method to load a model from a file.
@@ -200,6 +197,7 @@ public final class ResourceUtil {
          ResourceUtil.refreshModelResource(modelResource);
       } catch (IOException e) {
          log.error("Could not save model to path " + fileName);
+         log.error(e.getMessage());
       }
    }
 
@@ -224,7 +222,6 @@ public final class ResourceUtil {
       return projectFolder;
    }
 
-   
    /**
     * get a project from the workspace. if it does not exist it, create it.
     * 

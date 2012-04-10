@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.feature.multi.perspective.model.cluster.CoreGroup;
 import org.feature.multi.perspective.model.cluster.Group;
 import org.feature.multi.perspective.model.cluster.GroupModel;
+import org.feature.multi.perspective.model.cluster.ViewPoint;
+import org.feature.multi.perspective.model.cluster.ViewPointContainer;
 
 /**
  * 
@@ -47,6 +49,24 @@ public final class GroupModelUtil {
       return result;
    }
 
+  /**
+   * Get a viewpoint from the groupmodel by name. 
+   * @param viewpointName
+   * @param groupModel
+   * @return
+   */
+   public ViewPoint getViewpointByName(String viewpointName, GroupModel groupModel) {
+      ViewPoint viewpoint = null;
+      ViewPointContainer container = groupModel.getViewPointContainer();
+      for (ViewPoint vp : container.getViewPoints()) {
+         if (viewpointName.equals(vp.getName())) {
+            viewpoint = vp;
+            break;
+         }
+      }
+      return viewpoint;
+   }
+   
    /**
     * get the Ecore GroupModel instance from a GroupModel resource.
     * @param resource

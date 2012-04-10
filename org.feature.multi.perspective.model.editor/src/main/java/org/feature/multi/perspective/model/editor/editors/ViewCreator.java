@@ -41,14 +41,22 @@ public class ViewCreator {
       init(featureMapping);
    }
 
-   private void init(FeatureMappingModel featureMapping) {
+   public ViewCreator(GroupModel groupModel, FeatureModel featureModel, FeatureMappingModel featureMapping){
+      init(groupModel, featureModel, featureMapping);
+   }
+   
+   private void init(GroupModel groupModel, FeatureModel featureModel, FeatureMappingModel featureMapping){
       setMappings(featureMapping.getMappings());
-      GroupModel groupModel = FeatureMappingUtil.getSolutionGroupModel(featureMapping);
       setCoreGroup(groupModel.getCoreGroup());
-      FeatureModel featureModel = FeatureMappingUtil.getFeatureModel(featureMapping);
-
       List<Feature> allFeatures = FeatureModelUtil.getAllFeatures(featureModel);
       initViews(featureModel, allFeatures);
+      
+   }
+   
+   private void init(FeatureMappingModel featureMapping) {
+      GroupModel groupModel = FeatureMappingUtil.getSolutionGroupModel(featureMapping);
+      FeatureModel featureModel = FeatureMappingUtil.getFeatureModel(featureMapping);
+      init(groupModel, featureModel, featureMapping);
    }
 
    private void initViews(FeatureModel featureModel, List<Feature> allFeatures) {
