@@ -889,8 +889,8 @@ public class ClusterMultiPageEditor extends MultiPageEditorPart implements IEdit
       groupViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
 
       groupViewer.setLabelProvider(new AdapterFactoryLabelProvider.FontProvider(adapterFactory, groupViewer));
-     // groupViewer.setInput(getGroupModel());
-      groupViewer.setInput(editingDomain.getResourceSet());
+      groupViewer.setInput(getGroupModel());
+      //groupViewer.setInput(editingDomain.getResourceSet());
       groupViewer.setSelection(new StructuredSelection(editingDomain.getResourceSet().getResources().get(0)), true);
 
       new AdapterFactoryTreeEditor(groupViewer.getTree(), adapterFactory);
