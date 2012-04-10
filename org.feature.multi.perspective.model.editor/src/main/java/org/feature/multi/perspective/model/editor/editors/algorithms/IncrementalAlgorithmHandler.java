@@ -42,7 +42,7 @@ public class IncrementalAlgorithmHandler extends AbstractHandler {
    }
 
    private void showLoadClusterMsg() {
-      MessageBox msgBox = new MessageBox(getShell(), SWT.OK | SWT.ICON_INFORMATION);
+      MessageBox msgBox = new MessageBox(WorkbenchUtil.getShell(), SWT.OK | SWT.ICON_INFORMATION);
       String msg = "Cannot validate viewpoints. No Featuremapping loaded yet.";
       msgBox.setMessage(msg);
       msgBox.open();
@@ -79,17 +79,13 @@ public class IncrementalAlgorithmHandler extends AbstractHandler {
          style = SWT.OK | SWT.ICON_WARNING;
       }
 
-      Shell shell = getShell();
+      Shell shell = WorkbenchUtil.getShell();
       MessageBox msgBox = new MessageBox(shell, style);
       msgBox.setText("Viewpoint Validation");
       msgBox.setMessage(msg);
       msgBox.open();
    }
 
-   private Shell getShell() {
-      Shell shell = getActiveMultiPageEditor().getSite().getShell();
-      return shell;
-   }
 
    private FeatureMappingModel getFeatureMapping() {
       FeatureMappingModel featureMappingModel = null;
@@ -100,6 +96,7 @@ public class IncrementalAlgorithmHandler extends AbstractHandler {
       }
       return featureMappingModel;
    }
+
 
    private ClusterMultiPageEditor getActiveMultiPageEditor() {
       ClusterMultiPageEditor mPageEditor = null;

@@ -3,6 +3,7 @@
  */
 package org.feature.model.utilities;
 
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
@@ -36,4 +37,15 @@ public class WorkbenchUtil {
       }
       return activeEditor;
    }
+
+   /**
+    * get the current shell from the active editor;
+    * 
+    * @return
+    */
+   public static Shell getShell() {
+      Shell shell = getActiveEditor().getSite().getShell();
+      return shell;
+   }
+
 }
