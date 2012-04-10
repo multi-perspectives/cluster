@@ -55,9 +55,14 @@ public class WorkbenchUtil {
       Shell shell = null;
       IWorkbenchPage activePage = getActivePage();
       if (activePage != null) {
-         IWorkbenchPart activePart = activePage.getActivePart();
-         if (activePart != null) {
-            shell = activePart.getSite().getShell();
+         IEditorPart activeEditor = getActiveEditor();
+         if (activeEditor != null) {
+            shell = activeEditor.getSite().getShell();
+         } else {
+            IWorkbenchPart activePart = activePage.getActivePart();
+            if (activePart != null) {
+               shell = activePart.getSite().getShell();
+            }
          }
       }
       return shell;
