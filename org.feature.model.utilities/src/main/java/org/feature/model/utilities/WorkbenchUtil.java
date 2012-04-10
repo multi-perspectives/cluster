@@ -7,6 +7,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
@@ -25,17 +26,24 @@ public class WorkbenchUtil {
     */
    public static IEditorPart getActiveEditor() {
       IEditorPart activeEditor = null;
+
+      IWorkbenchPage page = getActivePage();
+      if (page != null) {
+         activeEditor = page.getActiveEditor();
+      }
+      return activeEditor;
+   }
+
+   public static IWorkbenchPage getActivePage() {
+      IWorkbenchPage page = null;
       IWorkbench workbench = PlatformUI.getWorkbench();
       if (workbench != null) {
          IWorkbenchWindow activeWindow = workbench.getActiveWorkbenchWindow();
          if (activeWindow != null) {
-            IWorkbenchPage page = activeWindow.getActivePage();
-            if (page != null) {
-               activeEditor = page.getActiveEditor();
-            }
+            page = activeWindow.getActivePage();
          }
       }
-      return activeEditor;
+      return page;
    }
 
    /**
@@ -44,7 +52,14 @@ public class WorkbenchUtil {
     * @return
     */
    public static Shell getShell() {
-      Shell shell = getActiveEditor().getSite().getShell();
+      Shell shell = null;
+      IWorkbenchPage activePage = getActivePage();
+      if (activePage != null) {
+         IWorkbenchPart activePart = activePage.getActivePart();
+         if (activePart != null) {
+            shell = activePart.getSite().getShell();
+         }
+      }
       return shell;
    }
 
