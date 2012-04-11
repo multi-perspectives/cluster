@@ -56,6 +56,13 @@ public class IncrementalAlgorithm {
       initViewMap(views);
    }
    
+   
+   public IncrementalAlgorithm(GroupModel groupModel, List<View> views, FeatureModel featureModel){
+      this.featureModel = featureModel;
+      this.groupModel = groupModel;
+      initViewMap(views);
+   }
+   
    /**
     * 
     * @param views
