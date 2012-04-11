@@ -53,14 +53,14 @@ public final class FeatureModelUtil {
    private static Group createFeatureGroup(Feature parentFeature) {
       Group newGroup = FeatureFactory.eINSTANCE.createGroup();
       EcoreUtil.setID(newGroup, getRandomId());
-//      newGroup.setId(getRandomId());
+      // newGroup.setId(getRandomId());
       parentFeature.getGroups().add(newGroup);
       return newGroup;
    }
 
    public static Group createFeatureGroup(Feature parentFeature, int min, int max, String id) {
       Group group = createFeatureGroup(parentFeature);
-//      group.setId(id);
+      // group.setId(id);
       EcoreUtil.setID(group, id);
       group.setMinCardinality(min);
       group.setMaxCardinality(max);
@@ -72,7 +72,7 @@ public final class FeatureModelUtil {
       newFeature.setName(name);
       // createAttribute(newFeature, attribute_id, id, attribute_type_string);
       EcoreUtil.setID(newFeature, id);
-//      newFeature.setId(id);
+      // newFeature.setId(id);
       return newFeature;
    }
 
@@ -146,7 +146,7 @@ public final class FeatureModelUtil {
       Feature feature = FeatureFactory.eINSTANCE.createFeature();
       feature.setName(rootName);
       EcoreUtil.setID(feature, id);
-//      feature.setId(id);
+      // feature.setId(id);
       // createAttribute(feature, attribute_id, id, attribute_type_string);
       // root feature is mandatory
       FeatureModelUtil.setMandatory(feature);
@@ -333,7 +333,6 @@ public final class FeatureModelUtil {
       return languageConstraints;
    }
 
-   
    /**
     * initialize a featuremodel from an Ifile.
     * 
@@ -348,24 +347,54 @@ public final class FeatureModelUtil {
       }
       return featuremodel;
    }
-   
-   
-   public static void makeFeatureNamesUnique(List<Feature> allFeatures){
-      List<String> sortedFeatures = new ArrayList<String>(allFeatures.size()
-            );
-      for (Feature feature : allFeatures) {
-         String featureName = feature.getName();
-         sortedFeatures.add(featureName);
-      }
 
-      Collections.sort(sortedFeatures);
-      
-      
-      int featureSize = sortedFeatures.size();
-      int j=1;
-      for (int i = 0; i < featureSize; i++) {
-         String currFeature = sortedFeatures.get(i);
-         String nextFeature = sortedFeatures.get(j);
+   /**
+    * Makes feature names unique.
+    * 
+    * @param allFeatures
+    */
+   public static boolean makeFeatureNamesUnique(List<Feature> allFeatures) {
+      boolean isChanged = false;
+      List<Feature> featuresToCompare = new ArrayList<Feature>(allFeatures.size());
+      featuresToCompare.addAll(allFeatures);
+
+      for (Feature current : allFeatures) {
+         featuresToCompare.remove(current);
+         for (Feature next : featuresToCompare) {
+            String currentFeatureName = current.getName();
+            String nextFeatureName = next.getName();
+            if (currentFeatureName.equals(nextFeatureName)) {
+               // try to get feature Id:
+               Attribute idAttribute = getAttribute(current, attribute_id);
+               if (idAttribute != null) {
+                  String id = idAttribute.getValue();
+                  currentFeatureName += id;
+               } else {
+                  int hash = current.hashCode();
+                  currentFeatureName += hash;
+               }
+               log.info("Feature name changed. Was: '" + current.getName() + "' Is: '" + currentFeatureName + "'.");
+               current.setName(currentFeatureName);
+               isChanged = true;
+               break;
+            }
+         }
       }
+      return isChanged;
    }
+
+   /**
+    * Makes feature names unique.
+    * 
+    * @param allFeatures
+    */
+   public static boolean makeFeatureNamesUnique(FeatureModel featureModel) {
+      boolean isChanged = false;
+      if (featureModel != null) {
+         List<Feature> allFeatures = getAllFeatures(featureModel);
+         isChanged = makeFeatureNamesUnique(allFeatures);
+      }
+      return isChanged;
+   }
+
 }
