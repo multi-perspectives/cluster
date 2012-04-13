@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.feature.multi.perspective.expression.feature"
-      label="Feature Model Constraints (required)"
+      label="Feature Model Constraints"
       version="0.4.0.qualifier"
       provider-name="ST Group">
 
