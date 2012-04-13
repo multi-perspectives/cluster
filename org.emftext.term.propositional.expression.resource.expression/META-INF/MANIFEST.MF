@@ -10,7 +10,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.change,
  org.eclipse.emf.validation,
  org.emftext.access;resolution:=optional,
- org.emftext.commons.antlr3_4_0,
+ org.emftext.commons.antlr3_3_0,
  org.emftext.term.propositional,
  org.feature.model.utilities;bundle-version="0.4.0"
 Bundle-ActivationPolicy: lazy

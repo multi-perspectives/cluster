@@ -29,7 +29,7 @@ public class ExpressionEditor extends org.eclipse.ui.editors.text.TextEditor imp
 	
 	public ExpressionEditor() {
 		super();
-		setSourceViewerConfiguration(new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionSourceViewerConfiguration(this, this, this, colorManager));
+		setSourceViewerConfiguration(new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionEditorConfiguration(this, this, this, colorManager));
 		initializeEditingDomain();
 		org.eclipse.core.resources.ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener, org.eclipse.core.resources.IResourceChangeEvent.POST_CHANGE);
 		addSelectionChangedListener(this);
@@ -490,14 +490,7 @@ public class ExpressionEditor extends org.eclipse.ui.editors.text.TextEditor imp
 			Object object = structuredSelection.getFirstElement();
 			if (object instanceof org.eclipse.emf.ecore.EObject) {
 				org.eclipse.emf.ecore.EObject element = (org.eclipse.emf.ecore.EObject) object;
-				org.eclipse.emf.ecore.resource.Resource resource = element.eResource();
-				if (resource == null) {
-					return false;
-				}
-				if (!(resource instanceof org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource)) {
-					return false;
-				}
-				org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource textResource = (org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource) resource;
+				org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource textResource = (org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource) element.eResource();
 				org.emftext.term.propositional.expression.resource.expression.IExpressionLocationMap locationMap = textResource.getLocationMap();
 				int destination = locationMap.getCharStart(element);
 				if (destination < 0) {

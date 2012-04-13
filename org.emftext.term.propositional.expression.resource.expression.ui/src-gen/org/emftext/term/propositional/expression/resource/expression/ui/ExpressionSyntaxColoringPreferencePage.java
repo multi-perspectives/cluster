@@ -12,21 +12,30 @@ package org.emftext.term.propositional.expression.resource.expression.ui;
  */
 public class ExpressionSyntaxColoringPreferencePage extends org.eclipse.jface.preference.PreferencePage implements org.eclipse.ui.IWorkbenchPreferencePage {
 	
+	private final static org.emftext.term.propositional.expression.resource.expression.ui.ExpressionAntlrTokenHelper tokenHelper = new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionAntlrTokenHelper();
 	private final static java.util.Map<String, java.util.List<HighlightingColorListItem>> content = new java.util.LinkedHashMap<String, java.util.List<HighlightingColorListItem>>();
 	private final static java.util.Collection<IChangedPreference> changedPreferences = new java.util.ArrayList<IChangedPreference>();
 	
 	public ExpressionSyntaxColoringPreferencePage() {
 		super();
 		
-		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMetaInformation metaInformation = new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMetaInformation();
+		org.emftext.term.propositional.expression.resource.expression.IExpressionMetaInformation syntaxPlugin = new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMetaInformation();
 		
-		String languageId = metaInformation.getSyntaxName();
+		String languageId = syntaxPlugin.getSyntaxName();
 		
 		java.util.List<HighlightingColorListItem> terminals = new java.util.ArrayList<HighlightingColorListItem>();
-		String[] tokenNames = metaInformation.getSyntaxHighlightableTokenNames();
+		String[] tokenNames = syntaxPlugin.getTokenNames();
 		
 		for (int i = 0; i < tokenNames.length; i++) {
-			HighlightingColorListItem item = new HighlightingColorListItem(languageId, tokenNames[i]);
+			if (!tokenHelper.canBeUsedForSyntaxHighlighting(i)) {
+				continue;
+			}
+			
+			String tokenName = tokenHelper.getTokenName(tokenNames, i);
+			if (tokenName == null) {
+				continue;
+			}
+			HighlightingColorListItem item = new HighlightingColorListItem(languageId, tokenName);
 			terminals.add(item);
 		}
 		java.util.Collections.sort(terminals);

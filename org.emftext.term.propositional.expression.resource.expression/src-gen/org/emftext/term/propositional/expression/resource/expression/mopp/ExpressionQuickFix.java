@@ -45,7 +45,7 @@ public abstract class ExpressionQuickFix implements org.emftext.term.proposition
 			getResource().save(output, null);
 			return output.toString();
 		} catch (java.io.IOException e) {
-			new org.emftext.term.propositional.expression.resource.expression.util.ExpressionRuntimeUtil().logError("Exception while applying quick fix", e);
+			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionPlugin.logError("Exception while applying quick fix", e);
 		}
 		return null;
 	}

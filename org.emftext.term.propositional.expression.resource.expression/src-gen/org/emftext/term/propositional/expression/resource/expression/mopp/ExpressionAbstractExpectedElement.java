@@ -13,8 +13,7 @@ package org.emftext.term.propositional.expression.resource.expression.mopp;
 public abstract class ExpressionAbstractExpectedElement implements org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement {
 	
 	private org.eclipse.emf.ecore.EClass ruleMetaclass;
-	
-	private java.util.Set<org.emftext.term.propositional.expression.resource.expression.util.ExpressionPair<org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionContainedFeature[]>> followers = new java.util.LinkedHashSet<org.emftext.term.propositional.expression.resource.expression.util.ExpressionPair<org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionContainedFeature[]>>();
+	private java.util.Set<org.emftext.term.propositional.expression.resource.expression.util.ExpressionPair<org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>> followers = new java.util.LinkedHashSet<org.emftext.term.propositional.expression.resource.expression.util.ExpressionPair<org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>>();
 	
 	public ExpressionAbstractExpectedElement(org.eclipse.emf.ecore.EClass ruleMetaclass) {
 		super();
@@ -25,11 +24,11 @@ public abstract class ExpressionAbstractExpectedElement implements org.emftext.t
 		return ruleMetaclass;
 	}
 	
-	public void addFollower(org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement follower, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionContainedFeature[] path) {
-		followers.add(new org.emftext.term.propositional.expression.resource.expression.util.ExpressionPair<org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionContainedFeature[]>(follower, path));
+	public void addFollower(org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement follower, org.eclipse.emf.ecore.EStructuralFeature[] path) {
+		followers.add(new org.emftext.term.propositional.expression.resource.expression.util.ExpressionPair<org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>(follower, path));
 	}
 	
-	public java.util.Collection<org.emftext.term.propositional.expression.resource.expression.util.ExpressionPair<org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionContainedFeature[]>> getFollowers() {
+	public java.util.Collection<org.emftext.term.propositional.expression.resource.expression.util.ExpressionPair<org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>> getFollowers() {
 		return followers;
 	}
 	

@@ -12,30 +12,23 @@ package org.emftext.term.propositional.expression.resource.expression;
 public interface IExpressionExpectedElement {
 	
 	/**
-	 * Returns the names of all tokens that are expected at the given position.
+	 * Returns the names of all tokens that are expected at the given position
 	 */
 	public java.util.Set<String> getTokenNames();
 	
 	/**
-	 * Returns the metaclass of the rule that contains the expected element.
+	 * Returns the metaclass of the rule that contains the expected element
 	 */
 	public org.eclipse.emf.ecore.EClass getRuleMetaclass();
 	
 	/**
-	 * Returns the syntax element that is expected.
+	 * Adds an element that is a valid follower for this element
 	 */
-	public org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionSyntaxElement getSymtaxElement();
+	public void addFollower(org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement follower, org.eclipse.emf.ecore.EStructuralFeature[] path);
 	
 	/**
-	 * Adds an element that is a valid follower for this element.
+	 * Returns all valid followers for this element
 	 */
-	public void addFollower(org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement follower, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionContainedFeature[] path);
-	
-	/**
-	 * Returns all valid followers for this element. Each follower is represented by a
-	 * pair of an expected elements and the containment trace that leads from the
-	 * current element to the follower.
-	 */
-	public java.util.Collection<org.emftext.term.propositional.expression.resource.expression.util.ExpressionPair<org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionContainedFeature[]>> getFollowers();
+	public java.util.Collection<org.emftext.term.propositional.expression.resource.expression.util.ExpressionPair<org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>> getFollowers();
 	
 }

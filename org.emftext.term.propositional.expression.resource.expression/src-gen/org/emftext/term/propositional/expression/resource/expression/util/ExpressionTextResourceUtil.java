@@ -15,41 +15,21 @@ package org.emftext.term.propositional.expression.resource.expression.util;
  */
 public class ExpressionTextResourceUtil {
 	
-	/**
-	 * Use
-	 * org.emftext.term.propositional.expression.resource.expression.util.ExpressionRes
-	 * ourceUtil.getResource() instead.
-	 */
 	@Deprecated	
 	public static org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionResource getResource(org.eclipse.core.resources.IFile file) {
-		return new org.emftext.term.propositional.expression.resource.expression.util.ExpressionEclipseProxy().getResource(file);
+		return org.emftext.term.propositional.expression.resource.expression.util.ExpressionResourceUtil.getResource(file);
 	}
 	
-	/**
-	 * Use
-	 * org.emftext.term.propositional.expression.resource.expression.util.ExpressionRes
-	 * ourceUtil.getResource() instead.
-	 */
 	@Deprecated	
 	public static org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionResource getResource(java.io.File file, java.util.Map<?,?> options) {
 		return org.emftext.term.propositional.expression.resource.expression.util.ExpressionResourceUtil.getResource(file, options);
 	}
 	
-	/**
-	 * Use
-	 * org.emftext.term.propositional.expression.resource.expression.util.ExpressionRes
-	 * ourceUtil.getResource() instead.
-	 */
 	@Deprecated	
 	public static org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionResource getResource(org.eclipse.emf.common.util.URI uri) {
 		return org.emftext.term.propositional.expression.resource.expression.util.ExpressionResourceUtil.getResource(uri);
 	}
 	
-	/**
-	 * Use
-	 * org.emftext.term.propositional.expression.resource.expression.util.ExpressionRes
-	 * ourceUtil.getResource() instead.
-	 */
 	@Deprecated	
 	public static org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionResource getResource(org.eclipse.emf.common.util.URI uri, java.util.Map<?,?> options) {
 		return org.emftext.term.propositional.expression.resource.expression.util.ExpressionResourceUtil.getResource(uri, options);

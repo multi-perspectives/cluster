@@ -157,7 +157,7 @@ public class ExpressionDefaultTokenResolver implements org.emftext.term.proposit
 		}
 		
 		// Step 3: escape keywords if required
-		if (escapeKeywords && result != null) {
+		if (escapeKeywords) {
 			// Escape keywords if required
 			for (String keyword : org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionGrammarInformationProvider.INSTANCE.getKeywords()) {
 				if (result.endsWith(keyword)) {

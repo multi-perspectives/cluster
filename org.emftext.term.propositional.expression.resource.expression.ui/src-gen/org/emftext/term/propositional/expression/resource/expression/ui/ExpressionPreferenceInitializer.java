@@ -11,6 +11,8 @@ package org.emftext.term.propositional.expression.resource.expression.ui;
  */
 public class ExpressionPreferenceInitializer extends org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer {
 	
+	private final static org.emftext.term.propositional.expression.resource.expression.ui.ExpressionAntlrTokenHelper tokenHelper = new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionAntlrTokenHelper();
+	
 	public void initializeDefaultPreferences() {
 		
 		initializeDefaultSyntaxHighlighting();
@@ -46,14 +48,21 @@ public class ExpressionPreferenceInitializer extends org.eclipse.core.runtime.pr
 		store.setDefault(languageId + org.emftext.term.propositional.expression.resource.expression.ui.ExpressionPreferenceConstants.EDITOR_BRACKETS_SUFFIX, bracketSet.getBracketString());
 	}
 	
-	private void initializeDefaultSyntaxHighlighting(org.eclipse.jface.preference.IPreferenceStore store, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMetaInformation metaInformation) {
+	private void initializeDefaultSyntaxHighlighting(org.eclipse.jface.preference.IPreferenceStore store, org.emftext.term.propositional.expression.resource.expression.IExpressionMetaInformation metaInformation) {
 		String languageId = metaInformation.getSyntaxName();
-		String[] tokenNames = metaInformation.getSyntaxHighlightableTokenNames();
+		String[] tokenNames = metaInformation.getTokenNames();
 		if (tokenNames == null) {
 			return;
 		}
 		for (int i = 0; i < tokenNames.length; i++) {
-			String tokenName = tokenNames[i];
+			if (!tokenHelper.canBeUsedForSyntaxHighlighting(i)) {
+				continue;
+			}
+			
+			String tokenName = tokenHelper.getTokenName(tokenNames, i);
+			if (tokenName == null) {
+				continue;
+			}
 			org.emftext.term.propositional.expression.resource.expression.IExpressionTokenStyle style = metaInformation.getDefaultTokenStyle(tokenName);
 			if (style != null) {
 				String color = getColorString(style.getColorAsRGB());

@@ -100,27 +100,4 @@ public class ExpressionMetaInformation implements org.emftext.term.propositional
 		return "org.emftext.term.propositional.expression.resource.expression.ui.launchConfigurationType";
 	}
 	
-	public org.emftext.term.propositional.expression.resource.expression.IExpressionNameProvider createNameProvider() {
-		return new org.emftext.term.propositional.expression.resource.expression.analysis.ExpressionDefaultNameProvider();
-	}
-	
-	public String[] getSyntaxHighlightableTokenNames() {
-		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionAntlrTokenHelper tokenHelper = new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionAntlrTokenHelper();
-		java.util.List<String> highlightableTokens = new java.util.ArrayList<String>();
-		String[] parserTokenNames = getTokenNames();
-		for (int i = 0; i < parserTokenNames.length; i++) {
-			// If ANTLR is used we need to normalize the token names
-			if (!tokenHelper.canBeUsedForSyntaxHighlighting(i)) {
-				continue;
-			}
-			String tokenName = tokenHelper.getTokenName(parserTokenNames, i);
-			if (tokenName == null) {
-				continue;
-			}
-			highlightableTokens.add(tokenName);
-		}
-		highlightableTokens.add(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionTokenStyleInformationProvider.TASK_ITEM_TOKEN_NAME);
-		return highlightableTokens.toArray(new String[highlightableTokens.size()]);
-	}
-	
 }

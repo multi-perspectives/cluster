@@ -26,84 +26,6 @@ public class ExpressionPrinter2 implements org.emftext.term.propositional.expres
 			return tokenName;
 		}
 		
-		public String toString() {
-			return "'" + text + "' [" + tokenName + "]";
-		}
-		
-	}
-	
-	/**
-	 * The PrintCountingMap keeps tracks of the values that must be printed for each
-	 * feature of an EObject. It is also used to store the indices of all values that
-	 * have been printed. This knowledge is used to avoid printing values twice. We
-	 * must store the concrete indices of the printed values instead of basically
-	 * counting them, because values may be printed in an order that differs from the
-	 * order in which they are stored in the EObject's feature.
-	 */
-	protected class PrintCountingMap {
-		
-		private java.util.Map<String, java.util.List<Object>> featureToValuesMap = new java.util.LinkedHashMap<String, java.util.List<Object>>();
-		private java.util.Map<String, java.util.Set<Integer>> featureToPrintedIndicesMap = new java.util.LinkedHashMap<String, java.util.Set<Integer>>();
-		
-		public void setFeatureValues(String featureName, java.util.List<Object> values) {
-			featureToValuesMap.put(featureName, values);
-			// If the feature does not have values it won't be printed. An entry in
-			// 'featureToPrintedIndicesMap' is therefore not needed in this case.
-			if (values != null) {
-				featureToPrintedIndicesMap.put(featureName, new java.util.LinkedHashSet<Integer>());
-			}
-		}
-		
-		public java.util.Set<Integer> getIndicesToPrint(String featureName) {
-			return featureToPrintedIndicesMap.get(featureName);
-		}
-		
-		public void addIndexToPrint(String featureName, int index) {
-			featureToPrintedIndicesMap.get(featureName).add(index);
-		}
-		
-		public int getCountLeft(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionTerminal terminal) {
-			org.eclipse.emf.ecore.EStructuralFeature feature = terminal.getFeature();
-			String featureName = feature.getName();
-			java.util.List<Object> totalValuesToPrint = featureToValuesMap.get(featureName);
-			java.util.Set<Integer> printedIndices = featureToPrintedIndicesMap.get(featureName);
-			if (totalValuesToPrint == null) {
-				return 0;
-			}
-			if (feature instanceof org.eclipse.emf.ecore.EAttribute) {
-				// for attributes we do not need to check the type, since the CS languages does
-				// not allow type restrictions for attributes.
-				return totalValuesToPrint.size() - printedIndices.size();
-			} else if (feature instanceof org.eclipse.emf.ecore.EReference) {
-				org.eclipse.emf.ecore.EReference reference = (org.eclipse.emf.ecore.EReference) feature;
-				if (!reference.isContainment()) {
-					// for non-containment references we also do not need to check the type, since the
-					// CS languages does not allow type restrictions for these either.
-					return totalValuesToPrint.size() - printedIndices.size();
-				}
-			}
-			// now we're left with containment references for which we check the type of the
-			// objects to print
-			java.util.List<Class<?>> allowedTypes = getAllowedTypes(terminal);
-			java.util.Set<Integer> indicesWithCorrectType = new java.util.LinkedHashSet<Integer>();
-			int index = 0;
-			for (Object valueToPrint : totalValuesToPrint) {
-				for (Class<?> allowedType : allowedTypes) {
-					if (allowedType.isInstance(valueToPrint)) {
-						indicesWithCorrectType.add(index);
-					}
-				}
-				index++;
-			}
-			indicesWithCorrectType.removeAll(printedIndices);
-			return indicesWithCorrectType.size();
-		}
-		
-		public int getNextIndexToPrint(String featureName) {
-			int printedValues = featureToPrintedIndicesMap.get(featureName).size();
-			return printedValues;
-		}
-		
 	}
 	
 	public final static String NEW_LINE = java.lang.System.getProperties().getProperty("line.separator");
@@ -111,8 +33,6 @@ public class ExpressionPrinter2 implements org.emftext.term.propositional.expres
 	private final PrintToken SPACE_TOKEN = new PrintToken(" ", null);
 	private final PrintToken TAB_TOKEN = new PrintToken("\t", null);
 	private final PrintToken NEW_LINE_TOKEN = new PrintToken(NEW_LINE, null);
-	
-	private final org.emftext.term.propositional.expression.resource.expression.util.ExpressionEClassUtil eClassUtil = new org.emftext.term.propositional.expression.resource.expression.util.ExpressionEClassUtil();
 	
 	/**
 	 * Holds the resource that is associated with this printer. May be null if the
@@ -240,7 +160,7 @@ public class ExpressionPrinter2 implements org.emftext.term.propositional.expres
 	}
 	
 	public void decorateTree(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject) {
-		PrintCountingMap printCountingMap = initializePrintCountingMap(eObject);
+		java.util.Map<String, Integer> printCountingMap = initializePrintCountingMap(eObject);
 		java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionSyntaxElementDecorator> keywordsToPrint = new java.util.ArrayList<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionSyntaxElementDecorator>();
 		decorateTreeBasic(decorator, eObject, printCountingMap, keywordsToPrint);
 		for (org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionSyntaxElementDecorator keywordToPrint : keywordsToPrint) {
@@ -251,10 +171,10 @@ public class ExpressionPrinter2 implements org.emftext.term.propositional.expres
 	}
 	
 	/**
-	 * Tries to decorate the decorator with an attribute value, or reference held by
-	 * the given EObject. Returns true if an attribute value or reference was found.
+	 * Tries to decorate the decorator with an attribute value, or reference holded by
+	 * eObject. Returns true if an attribute value or reference was found.
 	 */
-	public boolean decorateTreeBasic(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, PrintCountingMap printCountingMap, java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionSyntaxElementDecorator> keywordsToPrint) {
+	public boolean decorateTreeBasic(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, java.util.Map<String, Integer> printCountingMap, java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionSyntaxElementDecorator> keywordsToPrint) {
 		boolean foundFeatureToPrint = false;
 		org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionSyntaxElement syntaxElement = decorator.getDecoratedElement();
 		org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionCardinality cardinality = syntaxElement.getCardinality();
@@ -270,22 +190,11 @@ public class ExpressionPrinter2 implements org.emftext.term.propositional.expres
 				if (feature == org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionGrammarInformationProvider.ANONYMOUS_FEATURE) {
 					return false;
 				}
-				String featureName = feature.getName();
-				int countLeft = printCountingMap.getCountLeft(terminal);
+				int countLeft = printCountingMap.get(feature.getName());
 				if (countLeft > terminal.getMandatoryOccurencesAfter()) {
-					// normally we print the element at the next index
-					int indexToPrint = printCountingMap.getNextIndexToPrint(featureName);
-					// But, if there are type restrictions for containments, we must choose an index
-					// of an element that fits (i.e., which has the correct type)
-					if (terminal instanceof org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionContainment) {
-						org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionContainment containment = (org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionContainment) terminal;
-						indexToPrint = findElementWithCorrectType(eObject, feature, printCountingMap.getIndicesToPrint(featureName), containment);
-					}
-					if (indexToPrint >= 0) {
-						decorator.addIndexToPrint(indexToPrint);
-						printCountingMap.addIndexToPrint(featureName, indexToPrint);
-						keepDecorating = true;
-					}
+					decorator.addIndexToPrint(countLeft);
+					printCountingMap.put(feature.getName(), countLeft - 1);
+					keepDecorating = true;
 				}
 			}
 			if (syntaxElement instanceof org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionChoice) {
@@ -334,41 +243,14 @@ public class ExpressionPrinter2 implements org.emftext.term.propositional.expres
 		return foundFeatureToPrint;
 	}
 	
-	private int findElementWithCorrectType(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EStructuralFeature feature, java.util.Set<Integer> indicesToPrint, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionContainment containment) {
-		// By default the type restrictions that are defined in the CS definition are
-		// considered when printing models. You can change this behavior by setting the
-		// 'ignoreTypeRestrictionsForPrinting' option to true.
-		boolean ignoreTypeRestrictions = false;
-		org.eclipse.emf.ecore.EClass[] allowedTypes = containment.getAllowedTypes();
-		Object value = eObject.eGet(feature);
-		if (value instanceof java.util.List<?>) {
-			java.util.List<?> valueList = (java.util.List<?>) value;
-			int listSize = valueList.size();
-			for (int index = 0; index < listSize; index++) {
-				if (indicesToPrint.contains(index)) {
-					continue;
-				}
-				Object valueAtIndex = valueList.get(index);
-				if (eClassUtil.isInstance(valueAtIndex, allowedTypes) || ignoreTypeRestrictions) {
-					return index;
-				}
-			}
-		} else {
-			if (eClassUtil.isInstance(value, allowedTypes) || ignoreTypeRestrictions) {
-				return 0;
-			}
-		}
-		return -1;
-	}
-	
 	/**
 	 * Checks whether decorating the given node will use at least one attribute value,
-	 * or reference held by eObject. Returns true if a printable attribute value or
+	 * or reference holded by eObject. Returns true if a printable attribute value or
 	 * reference was found. This method is used to decide which choice to pick, when
 	 * multiple choices are available. We pick the choice that prints at least one
 	 * attribute or reference.
 	 */
-	public boolean doesPrintFeature(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, PrintCountingMap printCountingMap) {
+	public boolean doesPrintFeature(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, java.util.Map<String, Integer> printCountingMap) {
 		org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionSyntaxElement syntaxElement = decorator.getDecoratedElement();
 		if (syntaxElement instanceof org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionTerminal) {
 			org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionTerminal terminal = (org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionTerminal) syntaxElement;
@@ -376,7 +258,7 @@ public class ExpressionPrinter2 implements org.emftext.term.propositional.expres
 			if (feature == org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionGrammarInformationProvider.ANONYMOUS_FEATURE) {
 				return false;
 			}
-			int countLeft = printCountingMap.getCountLeft(terminal);
+			int countLeft = printCountingMap.get(feature.getName());
 			if (countLeft > terminal.getMandatoryOccurencesAfter()) {
 				// found a feature to print
 				return true;
@@ -454,8 +336,8 @@ public class ExpressionPrinter2 implements org.emftext.term.propositional.expres
 	}
 	
 	public void printKeyword(org.eclipse.emf.ecore.EObject eObject, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionKeyword keyword, java.util.List<org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFormattingElement> foundFormattingElements, java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation> layoutInformations) {
-		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation keywordLayout = getLayoutInformation(layoutInformations, keyword, null, eObject);
-		printFormattingElements(foundFormattingElements, layoutInformations, keywordLayout);
+		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, keyword, null, eObject);
+		printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
 		String value = keyword.getValue();
 		tokenOutputStream.add(new PrintToken(value, "'" + org.emftext.term.propositional.expression.resource.expression.util.ExpressionStringUtil.escapeToANTLRKeyword(value) + "'"));
 	}
@@ -469,17 +351,15 @@ public class ExpressionPrinter2 implements org.emftext.term.propositional.expres
 		}
 	}
 	
-	public void printAttribute(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EAttribute attribute, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionPlaceholder placeholder, int index, java.util.List<org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFormattingElement> foundFormattingElements, java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation> layoutInformations) {
-		String result = null;
-		Object attributeValue = org.emftext.term.propositional.expression.resource.expression.util.ExpressionEObjectUtil.getFeatureValue(eObject, attribute, index);
-		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation attributeLayout = getLayoutInformation(layoutInformations, placeholder, attributeValue, eObject);
-		String visibleTokenText = getVisibleTokenText(attributeLayout);
+	public void printAttribute(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EAttribute attribute, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionPlaceholder placeholder, int count, java.util.List<org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFormattingElement> foundFormattingElements, java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation> layoutInformations) {
+		String result;
+		Object attributeValue = getValue(eObject, attribute, count);
+		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, placeholder, attributeValue, eObject);
+		String visibleTokenText = getVisibleTokenText(layoutInformation);
 		// if there is text for the attribute we use it
 		if (visibleTokenText != null) {
 			result = visibleTokenText;
-		}
-		
-		if (result == null) {
+		} else {
 			// if no text is available, the attribute is deresolved to obtain its textual
 			// representation
 			org.emftext.term.propositional.expression.resource.expression.IExpressionTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(placeholder.getTokenName());
@@ -487,27 +367,24 @@ public class ExpressionPrinter2 implements org.emftext.term.propositional.expres
 			String deResolvedValue = tokenResolver.deResolve(attributeValue, attribute, eObject);
 			result = deResolvedValue;
 		}
-		
 		if (result != null && !"".equals(result)) {
-			printFormattingElements(foundFormattingElements, layoutInformations, attributeLayout);
+			printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
 			// write result to the output stream
 			tokenOutputStream.add(new PrintToken(result, placeholder.getTokenName()));
 		}
 	}
 	
 	
-	public void printBooleanTerminal(org.eclipse.emf.ecore.EObject eObject, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionBooleanTerminal booleanTerminal, int index, java.util.List<org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFormattingElement> foundFormattingElements, java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation> layoutInformations) {
+	public void printBooleanTerminal(org.eclipse.emf.ecore.EObject eObject, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionBooleanTerminal booleanTerminal, int count, java.util.List<org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFormattingElement> foundFormattingElements, java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation> layoutInformations) {
 		org.eclipse.emf.ecore.EAttribute attribute = booleanTerminal.getAttribute();
-		String result = null;
-		Object attributeValue = org.emftext.term.propositional.expression.resource.expression.util.ExpressionEObjectUtil.getFeatureValue(eObject, attribute, index);
-		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation attributeLayout = getLayoutInformation(layoutInformations, booleanTerminal, attributeValue, eObject);
-		String visibleTokenText = getVisibleTokenText(attributeLayout);
+		String result;
+		Object attributeValue = getValue(eObject, attribute, count);
+		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, booleanTerminal, attributeValue, eObject);
+		String visibleTokenText = getVisibleTokenText(layoutInformation);
 		// if there is text for the attribute we use it
 		if (visibleTokenText != null) {
 			result = visibleTokenText;
-		}
-		
-		if (result == null) {
+		} else {
 			// if no text is available, the boolean attribute is converted to its textual
 			// representation using the literals of the boolean terminal
 			if (Boolean.TRUE.equals(attributeValue)) {
@@ -516,44 +393,40 @@ public class ExpressionPrinter2 implements org.emftext.term.propositional.expres
 				result = booleanTerminal.getFalseLiteral();
 			}
 		}
-		
 		if (result != null && !"".equals(result)) {
-			printFormattingElements(foundFormattingElements, layoutInformations, attributeLayout);
+			printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
 			// write result to the output stream
 			tokenOutputStream.add(new PrintToken(result, "'" + org.emftext.term.propositional.expression.resource.expression.util.ExpressionStringUtil.escapeToANTLRKeyword(result) + "'"));
 		}
 	}
 	
 	
-	public void printEnumerationTerminal(org.eclipse.emf.ecore.EObject eObject, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionEnumerationTerminal enumTerminal, int index, java.util.List<org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFormattingElement> foundFormattingElements, java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation> layoutInformations) {
+	public void printEnumerationTerminal(org.eclipse.emf.ecore.EObject eObject, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionEnumerationTerminal enumTerminal, int count, java.util.List<org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFormattingElement> foundFormattingElements, java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation> layoutInformations) {
 		org.eclipse.emf.ecore.EAttribute attribute = enumTerminal.getAttribute();
-		String result = null;
-		Object attributeValue = org.emftext.term.propositional.expression.resource.expression.util.ExpressionEObjectUtil.getFeatureValue(eObject, attribute, index);
-		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation attributeLayout = getLayoutInformation(layoutInformations, enumTerminal, attributeValue, eObject);
-		String visibleTokenText = getVisibleTokenText(attributeLayout);
+		String result;
+		Object attributeValue = getValue(eObject, attribute, count);
+		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, enumTerminal, attributeValue, eObject);
+		String visibleTokenText = getVisibleTokenText(layoutInformation);
 		// if there is text for the attribute we use it
 		if (visibleTokenText != null) {
 			result = visibleTokenText;
-		}
-		
-		if (result == null) {
+		} else {
 			// if no text is available, the enumeration attribute is converted to its textual
 			// representation using the literals of the enumeration terminal
 			assert attributeValue instanceof org.eclipse.emf.common.util.Enumerator;
 			result = enumTerminal.getText(((org.eclipse.emf.common.util.Enumerator) attributeValue).getName());
 		}
-		
 		if (result != null && !"".equals(result)) {
-			printFormattingElements(foundFormattingElements, layoutInformations, attributeLayout);
+			printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
 			// write result to the output stream
 			tokenOutputStream.add(new PrintToken(result, "'" + org.emftext.term.propositional.expression.resource.expression.util.ExpressionStringUtil.escapeToANTLRKeyword(result) + "'"));
 		}
 	}
 	
 	
-	public void printContainedObject(org.eclipse.emf.ecore.EObject eObject, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionContainment containment, int index, java.util.List<org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFormattingElement> foundFormattingElements, java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation> layoutInformations) {
+	public void printContainedObject(org.eclipse.emf.ecore.EObject eObject, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionContainment containment, int count, java.util.List<org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFormattingElement> foundFormattingElements, java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation> layoutInformations) {
 		org.eclipse.emf.ecore.EStructuralFeature reference = containment.getFeature();
-		Object o = org.emftext.term.propositional.expression.resource.expression.util.ExpressionEObjectUtil.getFeatureValue(eObject, reference, index);
+		Object o = getValue(eObject, reference, count);
 		// save current number of tabs to restore them after printing the contained object
 		int oldTabsBeforeCurrentObject = tabsBeforeCurrentObject;
 		int oldCurrentTabs = currentTabs;
@@ -624,21 +497,30 @@ public class ExpressionPrinter2 implements org.emftext.term.propositional.expres
 		startedPrintingContainedObject = true;
 	}
 	
+	private Object getValue(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EStructuralFeature feature, int count) {
+		// get value of feature
+		Object o = eObject.eGet(feature);
+		if (o instanceof java.util.List<?>) {
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			o = list.get(index);
+		}
+		return o;
+	}
+	
 	@SuppressWarnings("unchecked")	
-	public void printReference(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EReference reference, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionPlaceholder placeholder, int index, java.util.List<org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFormattingElement> foundFormattingElements, java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation> layoutInformations) {
+	public void printReference(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EReference reference, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionPlaceholder placeholder, int count, java.util.List<org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFormattingElement> foundFormattingElements, java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation> layoutInformations) {
 		String tokenName = placeholder.getTokenName();
-		Object referencedObject = org.emftext.term.propositional.expression.resource.expression.util.ExpressionEObjectUtil.getFeatureValue(eObject, reference, index, false);
+		Object referencedObject = getValue(eObject, reference, count);
 		// first add layout before the reference
-		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation referenceLayout = getLayoutInformation(layoutInformations, placeholder, referencedObject, eObject);
-		printFormattingElements(foundFormattingElements, layoutInformations, referenceLayout);
+		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, placeholder, referencedObject, eObject);
+		printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
 		// proxy objects must be printed differently
 		String deresolvedReference = null;
 		if (referencedObject instanceof org.eclipse.emf.ecore.EObject) {
 			org.eclipse.emf.ecore.EObject eObjectToDeResolve = (org.eclipse.emf.ecore.EObject) referencedObject;
 			if (eObjectToDeResolve.eIsProxy()) {
 				deresolvedReference = ((org.eclipse.emf.ecore.InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
-				// If the proxy was created by EMFText, we can try to recover the identifier from
-				// the proxy URI
 				if (deresolvedReference != null && deresolvedReference.startsWith(org.emftext.term.propositional.expression.resource.expression.IExpressionContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
 					deresolvedReference = deresolvedReference.substring(org.emftext.term.propositional.expression.resource.expression.IExpressionContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
 					deresolvedReference = deresolvedReference.substring(deresolvedReference.indexOf("_") + 1);
@@ -661,30 +543,25 @@ public class ExpressionPrinter2 implements org.emftext.term.propositional.expres
 		tokenOutputStream.add(new PrintToken(deresolvedToken, tokenName));
 	}
 	
-	@SuppressWarnings("unchecked")	
-	public PrintCountingMap initializePrintCountingMap(org.eclipse.emf.ecore.EObject eObject) {
-		// The PrintCountingMap contains a mapping from feature names to the number of
+	public java.util.Map<String, Integer> initializePrintCountingMap(org.eclipse.emf.ecore.EObject eObject) {
+		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		PrintCountingMap printCountingMap = new PrintCountingMap();
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>();
 		java.util.List<org.eclipse.emf.ecore.EStructuralFeature> features = eObject.eClass().getEAllStructuralFeatures();
 		for (org.eclipse.emf.ecore.EStructuralFeature feature : features) {
-			// We get the feature value without resolving it, because resolving is not
-			// required to count the number of elements that are referenced by the feature.
-			// Moreover, triggering reference resolving is not desired here, because we'd also
-			// like to print models that contain unresolved references.
-			Object featureValue = eObject.eGet(feature, false);
+			int count = 0;
+			Object featureValue = eObject.eGet(feature);
 			if (featureValue != null) {
 				if (featureValue instanceof java.util.List<?>) {
-					printCountingMap.setFeatureValues(feature.getName(), (java.util.List<Object>) featureValue);
+					count = ((java.util.List<?>) featureValue).size();
 				} else {
-					printCountingMap.setFeatureValues(feature.getName(), java.util.Collections.singletonList(featureValue));
+					count = 1;
 				}
-			} else {
-				printCountingMap.setFeatureValues(feature.getName(), null);
 			}
+			printCountingMap.put(feature.getName(), count);
 		}
 		return printCountingMap;
 	}
@@ -730,16 +607,7 @@ public class ExpressionPrinter2 implements org.emftext.term.propositional.expres
 			if (syntaxElement == layoutInformation.getSyntaxElement()) {
 				if (object == null) {
 					return layoutInformation;
-				}
-				// The layout information adapter must only try to resolve the object it refers
-				// to, if we compare with a non-proxy object. If we're printing a resource that
-				// contains proxy objects, resolving must not be triggered.
-				boolean isNoProxy = true;
-				if (object instanceof org.eclipse.emf.ecore.EObject) {
-					org.eclipse.emf.ecore.EObject eObject = (org.eclipse.emf.ecore.EObject) object;
-					isNoProxy = !eObject.eIsProxy();
-				}
-				if (isSame(object, layoutInformation.getObject(container, isNoProxy))) {
+				} else if (object == layoutInformation.getObject(container)) {
 					return layoutInformation;
 				}
 			}
@@ -887,29 +755,6 @@ public class ExpressionPrinter2 implements org.emftext.term.propositional.expres
 		}
 		// flush remaining valid text to writer
 		writer.write(validBlock);
-	}
-	
-	private boolean isSame(Object o1, Object o2) {
-		if (o1 instanceof Integer || o1 instanceof Long || o1 instanceof Byte || o1 instanceof Short || o1 instanceof Float || o2 instanceof Double) {
-			return o1.equals(o2);
-		}
-		return o1 == o2;
-	}
-	
-	protected java.util.List<Class<?>> getAllowedTypes(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionTerminal terminal) {
-		java.util.List<Class<?>> allowedTypes = new java.util.ArrayList<Class<?>>();
-		allowedTypes.add(terminal.getFeature().getEType().getInstanceClass());
-		if (terminal instanceof org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionContainment) {
-			org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionContainment printingContainment = (org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionContainment) terminal;
-			org.eclipse.emf.ecore.EClass[] typeRestrictions = printingContainment.getAllowedTypes();
-			if (typeRestrictions != null && typeRestrictions.length > 0) {
-				allowedTypes.clear();
-				for (org.eclipse.emf.ecore.EClass eClass : typeRestrictions) {
-					allowedTypes.add(eClass.getInstanceClass());
-				}
-			}
-		}
-		return allowedTypes;
 	}
 	
 }

@@ -43,7 +43,7 @@ public class ExpressionNewFileContentProvider {
 		try {
 			printer.print(root);
 		} catch (java.io.IOException e) {
-			new org.emftext.term.propositional.expression.resource.expression.util.ExpressionRuntimeUtil().logError("Exception while generating example content.", e);
+			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionPlugin.logError("Exception while generating example content.", e);
 		}
 		return buffer.toString();
 	}

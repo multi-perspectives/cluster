@@ -37,7 +37,7 @@ public abstract class ExpressionContextDependentURIFragment<ContainerType extend
 		return result != null;
 	}
 	
-	public org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceResolveResult<ReferenceType> resolve() {
+	public synchronized org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceResolveResult<ReferenceType> resolve() {
 		if (resolving) {
 			return null;
 		}
@@ -77,7 +77,7 @@ public abstract class ExpressionContextDependentURIFragment<ContainerType extend
 			} else if (list != null) {
 				addResultToList(mapping, proxy, list);
 			} else {
-				new org.emftext.term.propositional.expression.resource.expression.util.ExpressionRuntimeUtil().logError(container.eClass().getName() + "." + reference.getName() + " has multiplicity 1 but was resolved to multiple elements", null);
+				org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionPlugin.logError(container.eClass().getName() + "." + reference.getName() + " has multiplicity 1 but was resolved to multiple elements", null);
 			}
 		}
 	}

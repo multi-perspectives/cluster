@@ -9,7 +9,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Not" eSuperTypes="#//UnaryOperator"/>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureRef" eSuperTypes="#//Term">
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"
-        eType="ecore:EClass ../../org.featuremapper.models.feature/model/feature.ecore#//Feature"/>
+        eType="ecore:EClass platform:/plugin/org.featuremapper.models.feature/model/feature.ecore#//Feature"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Nested" eSuperTypes="#//UnaryOperator"/>
   <eClassifiers xsi:type="ecore:EClass" name="BinaryOperator" abstract="true" eSuperTypes="#//Term">

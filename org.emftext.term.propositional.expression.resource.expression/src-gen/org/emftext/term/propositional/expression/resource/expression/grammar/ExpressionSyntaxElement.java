@@ -26,21 +26,9 @@ public abstract class ExpressionSyntaxElement {
 		}
 	}
 	
-	/**
-	 * Sets the parent of this syntax element. This method must be invoked at most
-	 * once.
-	 */
 	public void setParent(ExpressionSyntaxElement parent) {
 		assert this.parent == null;
 		this.parent = parent;
-	}
-	
-	/**
-	 * Returns the parent of this syntax element. This parent is determined by the
-	 * containment hierarchy in the CS model.
-	 */
-	public ExpressionSyntaxElement getParent() {
-		return parent;
 	}
 	
 	public ExpressionSyntaxElement[] getChildren() {

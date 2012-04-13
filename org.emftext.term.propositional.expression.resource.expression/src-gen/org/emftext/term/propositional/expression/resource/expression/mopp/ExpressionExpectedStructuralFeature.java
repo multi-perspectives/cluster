@@ -23,13 +23,6 @@ public class ExpressionExpectedStructuralFeature extends org.emftext.term.propos
 		return placeholder.getFeature();
 	}
 	
-	/**
-	 * Returns the expected placeholder.
-	 */
-	public org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionSyntaxElement getSymtaxElement() {
-		return placeholder;
-	}
-	
 	public String getTokenName() {
 		return placeholder.getTokenName();
 	}

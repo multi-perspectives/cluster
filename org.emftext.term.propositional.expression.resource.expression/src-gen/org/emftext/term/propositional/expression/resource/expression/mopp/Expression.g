@@ -11,12 +11,12 @@ options {
 }
 
 @lexer::members {
-	public java.util.List<org.antlr.runtime3_4_0.RecognitionException> lexerExceptions  = new java.util.ArrayList<org.antlr.runtime3_4_0.RecognitionException>();
+	public java.util.List<org.antlr.runtime3_3_0.RecognitionException> lexerExceptions  = new java.util.ArrayList<org.antlr.runtime3_3_0.RecognitionException>();
 	public java.util.List<Integer> lexerExceptionsPosition = new java.util.ArrayList<Integer>();
 	
-	public void reportError(org.antlr.runtime3_4_0.RecognitionException e) {
+	public void reportError(org.antlr.runtime3_3_0.RecognitionException e) {
 		lexerExceptions.add(e);
-		lexerExceptionsPosition.add(((org.antlr.runtime3_4_0.ANTLRStringStream) input).index());
+		lexerExceptionsPosition.add(((org.antlr.runtime3_3_0.ANTLRStringStream) input).index());
 	}
 }
 @header{
@@ -52,7 +52,7 @@ options {
 	/**
 	 * A helper list to allow a lexer to pass errors to its parser
 	 */
-	protected java.util.List<org.antlr.runtime3_4_0.RecognitionException> lexerExceptions = java.util.Collections.synchronizedList(new java.util.ArrayList<org.antlr.runtime3_4_0.RecognitionException>());
+	protected java.util.List<org.antlr.runtime3_3_0.RecognitionException> lexerExceptions = java.util.Collections.synchronizedList(new java.util.ArrayList<org.antlr.runtime3_3_0.RecognitionException>());
 	
 	/**
 	 * Another helper list to allow a lexer to pass positions of errors to its parser
@@ -65,7 +65,7 @@ options {
 	 * pushed on the stack. Once the element was parser completely it is popped from
 	 * the stack.
 	 */
-	java.util.List<org.eclipse.emf.ecore.EObject> incompleteObjects = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
+	protected java.util.Stack<org.eclipse.emf.ecore.EObject> incompleteObjects = new java.util.Stack<org.eclipse.emf.ecore.EObject>();
 	
 	private int stopIncludingHiddenTokens;
 	private int stopExcludingHiddenTokens;
@@ -111,26 +111,16 @@ options {
 		});
 	}
 	
-	public void addExpectedElement(org.eclipse.emf.ecore.EClass eClass, int[] ids) {
+	public void addExpectedElement(org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement terminal, int followSetID, org.eclipse.emf.ecore.EStructuralFeature... containmentTrace) {
 		if (!this.rememberExpectedElements) {
 			return;
 		}
-		int terminalID = ids[0];
-		int followSetID = ids[1];
-		org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement terminal = org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINALS[terminalID];
-		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionContainedFeature[] containmentFeatures = new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionContainedFeature[ids.length - 2];
-		for (int i = 2; i < ids.length; i++) {
-			containmentFeatures[i - 2] = org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.LINKS[ids[i]];
-		}
-		org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionContainmentTrace containmentTrace = new org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionContainmentTrace(eClass, containmentFeatures);
-		org.eclipse.emf.ecore.EObject container = getLastIncompleteElement();
-		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal expectedElement = new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal(container, terminal, followSetID, containmentTrace);
+		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal expectedElement = new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal(terminal, followSetID, containmentTrace);
 		setPosition(expectedElement, input.index());
 		int startIncludingHiddenTokens = expectedElement.getStartIncludingHiddenTokens();
 		if (lastStartIncludingHidden >= 0 && lastStartIncludingHidden < startIncludingHiddenTokens && cursorOffset > startIncludingHiddenTokens) {
 			// clear list of expected elements
 			this.expectedElements.clear();
-			this.expectedElementsIndexOfLastCompleteElement = 0;
 		}
 		lastStartIncludingHidden = startIncludingHiddenTokens;
 		this.expectedElements.add(expectedElement);
@@ -140,9 +130,6 @@ options {
 	}
 	
 	protected void copyLocalizationInfos(final org.eclipse.emf.ecore.EObject source, final org.eclipse.emf.ecore.EObject target) {
-		if (disableLocationMap) {
-			return;
-		}
 		postParseCommands.add(new org.emftext.term.propositional.expression.resource.expression.IExpressionCommand<org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource>() {
 			public boolean execute(org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource resource) {
 				org.emftext.term.propositional.expression.resource.expression.IExpressionLocationMap locationMap = resource.getLocationMap();
@@ -159,10 +146,7 @@ options {
 		});
 	}
 	
-	protected void copyLocalizationInfos(final org.antlr.runtime3_4_0.CommonToken source, final org.eclipse.emf.ecore.EObject target) {
-		if (disableLocationMap) {
-			return;
-		}
+	protected void copyLocalizationInfos(final org.antlr.runtime3_3_0.CommonToken source, final org.eclipse.emf.ecore.EObject target) {
 		postParseCommands.add(new org.emftext.term.propositional.expression.resource.expression.IExpressionCommand<org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource>() {
 			public boolean execute(org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource resource) {
 				org.emftext.term.propositional.expression.resource.expression.IExpressionLocationMap locationMap = resource.getLocationMap();
@@ -187,9 +171,6 @@ options {
 	 * location map.
 	 */
 	protected void setLocalizationEnd(java.util.Collection<org.emftext.term.propositional.expression.resource.expression.IExpressionCommand<org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource>> postParseCommands , final org.eclipse.emf.ecore.EObject object, final int endChar, final int endLine) {
-		if (disableLocationMap) {
-			return;
-		}
 		postParseCommands.add(new org.emftext.term.propositional.expression.resource.expression.IExpressionCommand<org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource>() {
 			public boolean execute(org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource resource) {
 				org.emftext.term.propositional.expression.resource.expression.IExpressionLocationMap locationMap = resource.getLocationMap();
@@ -207,12 +188,12 @@ options {
 	public org.emftext.term.propositional.expression.resource.expression.IExpressionTextParser createInstance(java.io.InputStream actualInputStream, String encoding) {
 		try {
 			if (encoding == null) {
-				return new ExpressionParser(new org.antlr.runtime3_4_0.CommonTokenStream(new ExpressionLexer(new org.antlr.runtime3_4_0.ANTLRInputStream(actualInputStream))));
+				return new ExpressionParser(new org.antlr.runtime3_3_0.CommonTokenStream(new ExpressionLexer(new org.antlr.runtime3_3_0.ANTLRInputStream(actualInputStream))));
 			} else {
-				return new ExpressionParser(new org.antlr.runtime3_4_0.CommonTokenStream(new ExpressionLexer(new org.antlr.runtime3_4_0.ANTLRInputStream(actualInputStream, encoding))));
+				return new ExpressionParser(new org.antlr.runtime3_3_0.CommonTokenStream(new ExpressionLexer(new org.antlr.runtime3_3_0.ANTLRInputStream(actualInputStream, encoding))));
 			}
 		} catch (java.io.IOException e) {
-			new org.emftext.term.propositional.expression.resource.expression.util.ExpressionRuntimeUtil().logError("Error while creating parser.", e);
+			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionPlugin.logError("Error while creating parser.", e);
 			return null;
 		}
 	}
@@ -224,7 +205,7 @@ options {
 		super(null);
 	}
 	
-	protected org.eclipse.emf.ecore.EObject doParse() throws org.antlr.runtime3_4_0.RecognitionException {
+	protected org.eclipse.emf.ecore.EObject doParse() throws org.antlr.runtime3_3_0.RecognitionException {
 		this.lastPosition = 0;
 		// required because the lexer class can not be subclassed
 		((ExpressionLexer) getTokenStream().getTokenSource()).lexerExceptions = lexerExceptions;
@@ -245,7 +226,7 @@ options {
 		return mismatchedTokenRecoveryTries;
 	}
 	
-	public Object getMissingSymbol(org.antlr.runtime3_4_0.IntStream arg0, org.antlr.runtime3_4_0.RecognitionException arg1, int arg2, org.antlr.runtime3_4_0.BitSet arg3) {
+	public Object getMissingSymbol(org.antlr.runtime3_3_0.IntStream arg0, org.antlr.runtime3_3_0.RecognitionException arg1, int arg2, org.antlr.runtime3_3_0.BitSet arg3) {
 		mismatchedTokenRecoveryTries++;
 		return super.getMissingSymbol(arg0, arg1, arg2, arg3);
 	}
@@ -279,7 +260,7 @@ options {
 			if (lexerExceptions.isEmpty()) {
 				parseResult.setRoot(result);
 			}
-		} catch (org.antlr.runtime3_4_0.RecognitionException re) {
+		} catch (org.antlr.runtime3_3_0.RecognitionException re) {
 			reportError(re);
 		} catch (java.lang.IllegalArgumentException iae) {
 			if ("The 'no null' constraint is violated".equals(iae.getMessage())) {
@@ -289,7 +270,7 @@ options {
 				iae.printStackTrace();
 			}
 		}
-		for (org.antlr.runtime3_4_0.RecognitionException re : lexerExceptions) {
+		for (org.antlr.runtime3_3_0.RecognitionException re : lexerExceptions) {
 			reportLexicalError(re);
 		}
 		parseResult.getPostParseCommands().addAll(postParseCommands);
@@ -301,10 +282,10 @@ options {
 		this.parseToIndexTypeObject = type;
 		this.cursorOffset = cursorOffset;
 		this.lastStartIncludingHidden = -1;
-		final org.antlr.runtime3_4_0.CommonTokenStream tokenStream = (org.antlr.runtime3_4_0.CommonTokenStream) getTokenStream();
+		final org.antlr.runtime3_3_0.CommonTokenStream tokenStream = (org.antlr.runtime3_3_0.CommonTokenStream) getTokenStream();
 		org.emftext.term.propositional.expression.resource.expression.IExpressionParseResult result = parse();
 		for (org.eclipse.emf.ecore.EObject incompleteObject : incompleteObjects) {
-			org.antlr.runtime3_4_0.Lexer lexer = (org.antlr.runtime3_4_0.Lexer) tokenStream.getTokenSource();
+			org.antlr.runtime3_3_0.Lexer lexer = (org.antlr.runtime3_3_0.Lexer) tokenStream.getTokenSource();
 			int endChar = lexer.getCharIndex();
 			int endLine = lexer.getLine();
 			setLocalizationEnd(result.getPostParseCommands(), incompleteObject, endChar, endLine);
@@ -334,7 +315,7 @@ options {
 		int followSetID = 9;
 		int i;
 		for (i = tokenIndexOfLastCompleteElement; i < tokenStream.size(); i++) {
-			org.antlr.runtime3_4_0.CommonToken nextToken = (org.antlr.runtime3_4_0.CommonToken) tokenStream.get(i);
+			org.antlr.runtime3_3_0.CommonToken nextToken = (org.antlr.runtime3_3_0.CommonToken) tokenStream.get(i);
 			if (nextToken.getType() < 0) {
 				break;
 			}
@@ -353,12 +334,10 @@ options {
 				for (org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal nextFollow : currentFollowSet) {
 					if (nextFollow.getTerminal().getTokenNames().contains(getTokenNames()[nextToken.getType()])) {
 						// keep this one - it matches
-						java.util.Collection<org.emftext.term.propositional.expression.resource.expression.util.ExpressionPair<org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionContainedFeature[]>> newFollowers = nextFollow.getTerminal().getFollowers();
-						for (org.emftext.term.propositional.expression.resource.expression.util.ExpressionPair<org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionContainedFeature[]> newFollowerPair : newFollowers) {
+						java.util.Collection<org.emftext.term.propositional.expression.resource.expression.util.ExpressionPair<org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>> newFollowers = nextFollow.getTerminal().getFollowers();
+						for (org.emftext.term.propositional.expression.resource.expression.util.ExpressionPair<org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]> newFollowerPair : newFollowers) {
 							org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement newFollower = newFollowerPair.getLeft();
-							org.eclipse.emf.ecore.EObject container = getLastIncompleteElement();
-							org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionContainmentTrace containmentTrace = new org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionContainmentTrace(null, newFollowerPair.getRight());
-							org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal newFollowTerminal = new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal(container, newFollower, followSetID, containmentTrace);
+							org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal newFollowTerminal = new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal(newFollower, followSetID, newFollowerPair.getRight());
 							newFollowSet.add(newFollowTerminal);
 							expectedElements.add(newFollowTerminal);
 						}
@@ -384,9 +363,9 @@ options {
 			if (index >= input.size()) {
 				break;
 			}
-			org.antlr.runtime3_4_0.CommonToken tokenAtIndex = (org.antlr.runtime3_4_0.CommonToken) input.get(index);
+			org.antlr.runtime3_3_0.CommonToken tokenAtIndex = (org.antlr.runtime3_3_0.CommonToken) input.get(index);
 			stopIncludingHiddenTokens = tokenAtIndex.getStopIndex() + 1;
-			if (tokenAtIndex.getChannel() != 99 && !anonymousTokens.contains(tokenAtIndex)) {
+			if (tokenAtIndex.getChannel() != 99) {
 				stopExcludingHiddenTokens = tokenAtIndex.getStopIndex() + 1;
 			}
 		}
@@ -394,7 +373,7 @@ options {
 		expectedElement.setPosition(stopExcludingHiddenTokens, stopIncludingHiddenTokens);
 	}
 	
-	public Object recoverFromMismatchedToken(org.antlr.runtime3_4_0.IntStream input, int ttype, org.antlr.runtime3_4_0.BitSet follow) throws org.antlr.runtime3_4_0.RecognitionException {
+	public Object recoverFromMismatchedToken(org.antlr.runtime3_3_0.IntStream input, int ttype, org.antlr.runtime3_3_0.BitSet follow) throws org.antlr.runtime3_3_0.RecognitionException {
 		if (!rememberExpectedElements) {
 			return super.recoverFromMismatchedToken(input, ttype, follow);
 		} else {
@@ -405,35 +384,35 @@ options {
 	/**
 	 * Translates errors thrown by the parser into human readable messages.
 	 */
-	public void reportError(final org.antlr.runtime3_4_0.RecognitionException e)  {
+	public void reportError(final org.antlr.runtime3_3_0.RecognitionException e)  {
 		String message = e.getMessage();
-		if (e instanceof org.antlr.runtime3_4_0.MismatchedTokenException) {
-			org.antlr.runtime3_4_0.MismatchedTokenException mte = (org.antlr.runtime3_4_0.MismatchedTokenException) e;
+		if (e instanceof org.antlr.runtime3_3_0.MismatchedTokenException) {
+			org.antlr.runtime3_3_0.MismatchedTokenException mte = (org.antlr.runtime3_3_0.MismatchedTokenException) e;
 			String expectedTokenName = formatTokenName(mte.expecting);
 			String actualTokenName = formatTokenName(e.token.getType());
 			message = "Syntax error on token \"" + e.token.getText() + " (" + actualTokenName + ")\", \"" + expectedTokenName + "\" expected";
-		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedTreeNodeException) {
-			org.antlr.runtime3_4_0.MismatchedTreeNodeException mtne = (org.antlr.runtime3_4_0.MismatchedTreeNodeException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedTreeNodeException) {
+			org.antlr.runtime3_3_0.MismatchedTreeNodeException mtne = (org.antlr.runtime3_3_0.MismatchedTreeNodeException) e;
 			String expectedTokenName = formatTokenName(mtne.expecting);
 			message = "mismatched tree node: " + "xxx" + "; tokenName " + expectedTokenName;
-		} else if (e instanceof org.antlr.runtime3_4_0.NoViableAltException) {
+		} else if (e instanceof org.antlr.runtime3_3_0.NoViableAltException) {
 			message = "Syntax error on token \"" + e.token.getText() + "\", check following tokens";
-		} else if (e instanceof org.antlr.runtime3_4_0.EarlyExitException) {
+		} else if (e instanceof org.antlr.runtime3_3_0.EarlyExitException) {
 			message = "Syntax error on token \"" + e.token.getText() + "\", delete this token";
-		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedSetException) {
-			org.antlr.runtime3_4_0.MismatchedSetException mse = (org.antlr.runtime3_4_0.MismatchedSetException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedSetException) {
+			org.antlr.runtime3_3_0.MismatchedSetException mse = (org.antlr.runtime3_3_0.MismatchedSetException) e;
 			message = "mismatched token: " + e.token + "; expecting set " + mse.expecting;
-		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedNotSetException) {
-			org.antlr.runtime3_4_0.MismatchedNotSetException mse = (org.antlr.runtime3_4_0.MismatchedNotSetException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedNotSetException) {
+			org.antlr.runtime3_3_0.MismatchedNotSetException mse = (org.antlr.runtime3_3_0.MismatchedNotSetException) e;
 			message = "mismatched token: " +  e.token + "; expecting set " + mse.expecting;
-		} else if (e instanceof org.antlr.runtime3_4_0.FailedPredicateException) {
-			org.antlr.runtime3_4_0.FailedPredicateException fpe = (org.antlr.runtime3_4_0.FailedPredicateException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.FailedPredicateException) {
+			org.antlr.runtime3_3_0.FailedPredicateException fpe = (org.antlr.runtime3_3_0.FailedPredicateException) e;
 			message = "rule " + fpe.ruleName + " failed predicate: {" +  fpe.predicateText + "}?";
 		}
 		// the resource may be null if the parser is used for code completion
 		final String finalMessage = message;
-		if (e.token instanceof org.antlr.runtime3_4_0.CommonToken) {
-			final org.antlr.runtime3_4_0.CommonToken ct = (org.antlr.runtime3_4_0.CommonToken) e.token;
+		if (e.token instanceof org.antlr.runtime3_3_0.CommonToken) {
+			final org.antlr.runtime3_3_0.CommonToken ct = (org.antlr.runtime3_3_0.CommonToken) e.token;
 			addErrorToResource(finalMessage, ct.getCharPositionInLine(), ct.getLine(), ct.getStartIndex(), ct.getStopIndex());
 		} else {
 			addErrorToResource(finalMessage, e.token.getCharPositionInLine(), e.token.getLine(), 1, 5);
@@ -443,55 +422,40 @@ options {
 	/**
 	 * Translates errors thrown by the lexer into human readable messages.
 	 */
-	public void reportLexicalError(final org.antlr.runtime3_4_0.RecognitionException e)  {
+	public void reportLexicalError(final org.antlr.runtime3_3_0.RecognitionException e)  {
 		String message = "";
-		if (e instanceof org.antlr.runtime3_4_0.MismatchedTokenException) {
-			org.antlr.runtime3_4_0.MismatchedTokenException mte = (org.antlr.runtime3_4_0.MismatchedTokenException) e;
+		if (e instanceof org.antlr.runtime3_3_0.MismatchedTokenException) {
+			org.antlr.runtime3_3_0.MismatchedTokenException mte = (org.antlr.runtime3_3_0.MismatchedTokenException) e;
 			message = "Syntax error on token \"" + ((char) e.c) + "\", \"" + (char) mte.expecting + "\" expected";
-		} else if (e instanceof org.antlr.runtime3_4_0.NoViableAltException) {
+		} else if (e instanceof org.antlr.runtime3_3_0.NoViableAltException) {
 			message = "Syntax error on token \"" + ((char) e.c) + "\", delete this token";
-		} else if (e instanceof org.antlr.runtime3_4_0.EarlyExitException) {
-			org.antlr.runtime3_4_0.EarlyExitException eee = (org.antlr.runtime3_4_0.EarlyExitException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.EarlyExitException) {
+			org.antlr.runtime3_3_0.EarlyExitException eee = (org.antlr.runtime3_3_0.EarlyExitException) e;
 			message = "required (...)+ loop (decision=" + eee.decisionNumber + ") did not match anything; on line " + e.line + ":" + e.charPositionInLine + " char=" + ((char) e.c) + "'";
-		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedSetException) {
-			org.antlr.runtime3_4_0.MismatchedSetException mse = (org.antlr.runtime3_4_0.MismatchedSetException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedSetException) {
+			org.antlr.runtime3_3_0.MismatchedSetException mse = (org.antlr.runtime3_3_0.MismatchedSetException) e;
 			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set " + mse.expecting;
-		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedNotSetException) {
-			org.antlr.runtime3_4_0.MismatchedNotSetException mse = (org.antlr.runtime3_4_0.MismatchedNotSetException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedNotSetException) {
+			org.antlr.runtime3_3_0.MismatchedNotSetException mse = (org.antlr.runtime3_3_0.MismatchedNotSetException) e;
 			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set " + mse.expecting;
-		} else if (e instanceof org.antlr.runtime3_4_0.MismatchedRangeException) {
-			org.antlr.runtime3_4_0.MismatchedRangeException mre = (org.antlr.runtime3_4_0.MismatchedRangeException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedRangeException) {
+			org.antlr.runtime3_3_0.MismatchedRangeException mre = (org.antlr.runtime3_3_0.MismatchedRangeException) e;
 			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set '" + (char) mre.a + "'..'" + (char) mre.b + "'";
-		} else if (e instanceof org.antlr.runtime3_4_0.FailedPredicateException) {
-			org.antlr.runtime3_4_0.FailedPredicateException fpe = (org.antlr.runtime3_4_0.FailedPredicateException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.FailedPredicateException) {
+			org.antlr.runtime3_3_0.FailedPredicateException fpe = (org.antlr.runtime3_3_0.FailedPredicateException) e;
 			message = "rule " + fpe.ruleName + " failed predicate: {" + fpe.predicateText + "}?";
 		}
 		addErrorToResource(message, e.charPositionInLine, e.line, lexerExceptionsPosition.get(lexerExceptions.indexOf(e)), lexerExceptionsPosition.get(lexerExceptions.indexOf(e)));
 	}
 	
-	private void startIncompleteElement(Object object) {
-		if (object instanceof org.eclipse.emf.ecore.EObject) {
-			this.incompleteObjects.add((org.eclipse.emf.ecore.EObject) object);
-		}
-	}
-	
-	private void completedElement(Object object, boolean isContainment) {
+	protected void completedElement(Object object, boolean isContainment) {
 		if (isContainment && !this.incompleteObjects.isEmpty()) {
-			boolean exists = this.incompleteObjects.remove(object);
-			if (!exists) {
-			}
+			this.incompleteObjects.pop();
 		}
 		if (object instanceof org.eclipse.emf.ecore.EObject) {
 			this.tokenIndexOfLastCompleteElement = getTokenStream().index();
 			this.expectedElementsIndexOfLastCompleteElement = expectedElements.size() - 1;
 		}
-	}
-	
-	private org.eclipse.emf.ecore.EObject getLastIncompleteElement() {
-		if (incompleteObjects.isEmpty()) {
-			return null;
-		}
-		return incompleteObjects.get(incompleteObjects.size() - 1);
 	}
 	
 }
@@ -500,9 +464,9 @@ start returns [ org.eclipse.emf.ecore.EObject element = null]
 :
 	{
 		// follow set for start rule(s)
-		addExpectedElement(org.emftext.term.propositional.expression.TermPackage.eINSTANCE.getConstraint(), org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[0]);
-		addExpectedElement(org.emftext.term.propositional.expression.TermPackage.eINSTANCE.getConstraint(), org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[1]);
-		addExpectedElement(org.emftext.term.propositional.expression.TermPackage.eINSTANCE.getConstraint(), org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[2]);
+		addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_0, 0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_1);
+		addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_1, 0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_1);
+		addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_2, 0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_1);
 		expectedElementsIndexOfLastCompleteElement = 0;
 	}
 	(
@@ -525,7 +489,7 @@ parse_org_emftext_term_propositional_expression_Constraint returns [org.emftext.
 			}
 			if (element == null) {
 				element = org.emftext.term.propositional.expression.TermFactory.eINSTANCE.createConstraint();
-				startIncompleteElement(element);
+				incompleteObjects.push(element);
 			}
 			if (a0_0 != null) {
 				if (a0_0 != null) {
@@ -555,17 +519,17 @@ parseop_Term_level_1 returns [org.emftext.term.propositional.expression.Term ele
 		a0 = 'or' {
 			if (element == null) {
 				element = org.emftext.term.propositional.expression.TermFactory.eINSTANCE.createOr();
-				startIncompleteElement(element);
+				incompleteObjects.push(element);
 			}
 			collectHiddenTokens(element);
 			retrieveLayoutInformation(element, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionGrammarInformationProvider.EXPRESSION_1_0_0_1, null, true);
-			copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+			copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 		}
 		{
 			// expected elements (follow set)
-			addExpectedElement(org.emftext.term.propositional.expression.TermPackage.eINSTANCE.getOr(), org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[3]);
-			addExpectedElement(org.emftext.term.propositional.expression.TermPackage.eINSTANCE.getOr(), org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[4]);
-			addExpectedElement(org.emftext.term.propositional.expression.TermPackage.eINSTANCE.getOr(), org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[5]);
+			addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_0, 2, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_2);
+			addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_1, 2, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_2);
+			addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_2, 2, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_2);
 		}
 		
 		rightArg = parseop_Term_level_2		{
@@ -574,7 +538,7 @@ parseop_Term_level_1 returns [org.emftext.term.propositional.expression.Term ele
 			}
 			if (element == null) {
 				element = org.emftext.term.propositional.expression.TermFactory.eINSTANCE.createOr();
-				startIncompleteElement(element);
+				incompleteObjects.push(element);
 			}
 			if (leftArg != null) {
 				if (leftArg != null) {
@@ -593,7 +557,7 @@ parseop_Term_level_1 returns [org.emftext.term.propositional.expression.Term ele
 			}
 			if (element == null) {
 				element = org.emftext.term.propositional.expression.TermFactory.eINSTANCE.createOr();
-				startIncompleteElement(element);
+				incompleteObjects.push(element);
 			}
 			if (rightArg != null) {
 				if (rightArg != null) {
@@ -622,17 +586,17 @@ leftArg = parseop_Term_level_3((
 	a0 = 'and' {
 		if (element == null) {
 			element = org.emftext.term.propositional.expression.TermFactory.eINSTANCE.createAnd();
-			startIncompleteElement(element);
+			incompleteObjects.push(element);
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionGrammarInformationProvider.EXPRESSION_2_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(org.emftext.term.propositional.expression.TermPackage.eINSTANCE.getAnd(), org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[6]);
-		addExpectedElement(org.emftext.term.propositional.expression.TermPackage.eINSTANCE.getAnd(), org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[7]);
-		addExpectedElement(org.emftext.term.propositional.expression.TermPackage.eINSTANCE.getAnd(), org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[8]);
+		addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_0, 3, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_2);
+		addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_1, 3, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_2);
+		addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_2, 3, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_2);
 	}
 	
 	rightArg = parseop_Term_level_3	{
@@ -641,7 +605,7 @@ leftArg = parseop_Term_level_3((
 		}
 		if (element == null) {
 			element = org.emftext.term.propositional.expression.TermFactory.eINSTANCE.createAnd();
-			startIncompleteElement(element);
+			incompleteObjects.push(element);
 		}
 		if (leftArg != null) {
 			if (leftArg != null) {
@@ -660,7 +624,7 @@ leftArg = parseop_Term_level_3((
 		}
 		if (element == null) {
 			element = org.emftext.term.propositional.expression.TermFactory.eINSTANCE.createAnd();
-			startIncompleteElement(element);
+			incompleteObjects.push(element);
 		}
 		if (rightArg != null) {
 			if (rightArg != null) {
@@ -686,17 +650,17 @@ parseop_Term_level_3 returns [org.emftext.term.propositional.expression.Term ele
 a0 = 'not' {
 if (element == null) {
 	element = org.emftext.term.propositional.expression.TermFactory.eINSTANCE.createNot();
-	startIncompleteElement(element);
+	incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionGrammarInformationProvider.EXPRESSION_3_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.emftext.term.propositional.expression.TermPackage.eINSTANCE.getNot(), org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[9]);
-addExpectedElement(org.emftext.term.propositional.expression.TermPackage.eINSTANCE.getNot(), org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[10]);
-addExpectedElement(org.emftext.term.propositional.expression.TermPackage.eINSTANCE.getNot(), org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[11]);
+addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_0, 4, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_3);
+addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_1, 4, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_3);
+addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_2, 4, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_3);
 }
 
 arg = parseop_Term_level_4{
@@ -705,7 +669,7 @@ if (terminateParsing) {
 }
 if (element == null) {
 	element = org.emftext.term.propositional.expression.TermFactory.eINSTANCE.createNot();
-	startIncompleteElement(element);
+	incompleteObjects.push(element);
 }
 if (arg != null) {
 	if (arg != null) {
@@ -738,17 +702,17 @@ parse_org_emftext_term_propositional_expression_Nested returns [org.emftext.term
 a0 = '(' {
 if (element == null) {
 	element = org.emftext.term.propositional.expression.TermFactory.eINSTANCE.createNested();
-	startIncompleteElement(element);
+	incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionGrammarInformationProvider.EXPRESSION_4_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(org.emftext.term.propositional.expression.TermPackage.eINSTANCE.getNested(), org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[12]);
-addExpectedElement(org.emftext.term.propositional.expression.TermPackage.eINSTANCE.getNested(), org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[13]);
-addExpectedElement(org.emftext.term.propositional.expression.TermPackage.eINSTANCE.getNested(), org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[14]);
+addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_0, 5, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_3);
+addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_1, 5, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_3);
+addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_2, 5, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_0, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.FEATURE_3);
 }
 
 (
@@ -758,7 +722,7 @@ a1_0 = parse_org_emftext_term_propositional_expression_Term{
 	}
 	if (element == null) {
 		element = org.emftext.term.propositional.expression.TermFactory.eINSTANCE.createNested();
-		startIncompleteElement(element);
+		incompleteObjects.push(element);
 	}
 	if (a1_0 != null) {
 		if (a1_0 != null) {
@@ -774,23 +738,23 @@ a1_0 = parse_org_emftext_term_propositional_expression_Term{
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[15]);
+addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_5, 6);
 }
 
 a2 = ')' {
 if (element == null) {
 	element = org.emftext.term.propositional.expression.TermFactory.eINSTANCE.createNested();
-	startIncompleteElement(element);
+	incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionGrammarInformationProvider.EXPRESSION_4_0_0_2, null, true);
-copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[16]);
-addExpectedElement(null, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[17]);
-addExpectedElement(null, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[18]);
+addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_3, 7);
+addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_4, 7);
+addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_5, 7);
 }
 
 ;
@@ -807,7 +771,7 @@ a0 = TEXT
 	}
 	if (element == null) {
 		element = org.emftext.term.propositional.expression.TermFactory.eINSTANCE.createFeatureRef();
-		startIncompleteElement(element);
+		incompleteObjects.push(element);
 	}
 	if (a0 != null) {
 		org.emftext.term.propositional.expression.resource.expression.IExpressionTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
@@ -816,7 +780,7 @@ a0 = TEXT
 		tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.emftext.term.propositional.expression.TermPackage.FEATURE_REF__FEATURE), result);
 		Object resolvedObject = result.getResolvedToken();
 		if (resolvedObject == null) {
-			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a0).getStopIndex());
+			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 		}
 		String resolved = (String) resolvedObject;
 		org.featuremapper.models.feature.Feature proxy = org.featuremapper.models.feature.FeatureFactory.eINSTANCE.createFeature();
@@ -829,16 +793,16 @@ a0 = TEXT
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionGrammarInformationProvider.EXPRESSION_5_0_0_0, proxy, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
 	}
 }
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[19]);
-addExpectedElement(null, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[20]);
-addExpectedElement(null, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectationConstants.EXPECTATIONS[21]);
+addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_3, 8);
+addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_4, 8);
+addExpectedElement(org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionFollowSetProvider.TERMINAL_5, 8);
 }
 
 ;

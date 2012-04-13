@@ -36,16 +36,4 @@ public class ExpressionExpectedEnumerationTerminal extends org.emftext.term.prop
 	public org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionEnumerationTerminal getEnumerationTerminal() {
 		return this.enumerationTerminal;
 	}
-	
-	/**
-	 * Returns the expected enumeration terminal.
-	 */
-	public org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionSyntaxElement getSymtaxElement() {
-		return enumerationTerminal;
-	}
-	
-	public String toString() {
-		return "EnumTerminal \"" + getEnumerationTerminal() + "\"";
-	}
-	
 }

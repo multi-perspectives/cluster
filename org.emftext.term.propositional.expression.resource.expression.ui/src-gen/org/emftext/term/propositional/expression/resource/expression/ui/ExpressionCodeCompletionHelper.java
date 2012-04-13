@@ -16,8 +16,6 @@ public class ExpressionCodeCompletionHelper {
 	
 	private org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionAttributeValueProvider attributeValueProvider = new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionAttributeValueProvider();
 	
-	private org.emftext.term.propositional.expression.resource.expression.IExpressionMetaInformation metaInformation = new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMetaInformation();
-	
 	/**
 	 * Computes a set of proposals for the given document assuming the cursor is at
 	 * 'cursorOffset'. The proposals are derived using the meta information, i.e., the
@@ -53,21 +51,13 @@ public class ExpressionCodeCompletionHelper {
 		java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> allProposals = new java.util.LinkedHashSet<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal>();
 		java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> rightProposals = deriveProposals(expectedAfterCursor, content, resource, cursorOffset);
 		java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> leftProposals = deriveProposals(expectedBeforeCursor, content, resource, cursorOffset - 1);
-		removeKeywordsEndingBeforeIndex(leftProposals, cursorOffset);
 		// Second, the set of left proposals (i.e., the ones before the cursor) is checked
 		// for emptiness. If the set is empty, the right proposals (i.e., the ones after
 		// the cursor) are also considered. If the set is not empty, the right proposal
 		// are discarded, because it does not make sense to propose them until the element
 		// before the cursor was completed.
 		allProposals.addAll(leftProposals);
-		// Count the proposals before the cursor that match the prefix
-		int leftMatchingProposals = 0;
-		for (org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal leftProposal : leftProposals) {
-			if (leftProposal.getMatchesPrefix()) {
-				leftMatchingProposals++;
-			}
-		}
-		if (leftMatchingProposals == 0) {
+		if (leftProposals.isEmpty()) {
 			allProposals.addAll(rightProposals);
 		}
 		// Third, the proposals are sorted according to their relevance. Proposals that
@@ -75,13 +65,6 @@ public class ExpressionCodeCompletionHelper {
 		// sorted alphabetically.
 		final java.util.List<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> sortedProposals = new java.util.ArrayList<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal>(allProposals);
 		java.util.Collections.sort(sortedProposals);
-		org.eclipse.emf.ecore.EObject root = null;
-		if (!resource.getContents().isEmpty()) {
-			root = resource.getContents().get(0);
-		}
-		for (org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal proposal : sortedProposals) {
-			proposal.setRoot(root);
-		}
 		return sortedProposals.toArray(new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal[sortedProposals.size()]);
 	}
 	
@@ -95,55 +78,13 @@ public class ExpressionCodeCompletionHelper {
 		return expectedElements.toArray(new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal[expectedElements.size()]);
 	}
 	
-	/**
-	 * Removes all expected elements that refer to the same terminal and that start at
-	 * the same position.
-	 */
-	protected void removeDuplicateEntries(java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal> expectedElements) {
-		int size = expectedElements.size();
-		// We split the list of expected elements into buckets where each bucket contains
-		// the elements that start at the same position.
-		java.util.Map<Integer, java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal>> map = new java.util.LinkedHashMap<Integer, java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal>>();
-		for (int i = 0; i < size; i++) {
+	private void removeDuplicateEntries(java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal> expectedElements) {
+		for (int i = 0; i < expectedElements.size() - 1; i++) {
 			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal elementAtIndex = expectedElements.get(i);
-			int start1 = elementAtIndex.getStartExcludingHiddenTokens();
-			java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal> list = map.get(start1);
-			if (list == null) {
-				list = new java.util.ArrayList<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal>();
-				map.put(start1, list);
-			}
-			list.add(elementAtIndex);
-		}
-		
-		// Then, we remove all duplicate elements from each bucket individually.
-		for (int position : map.keySet()) {
-			java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal> list = map.get(position);
-			removeDuplicateEntriesFromBucket(list);
-		}
-		
-		// After removing all duplicates, we merge the buckets.
-		expectedElements.clear();
-		for (int position : map.keySet()) {
-			java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal> list = map.get(position);
-			expectedElements.addAll(list);
-		}
-	}
-	
-	/**
-	 * Removes all expected elements that refer to the same terminal. Attention: This
-	 * method assumes that the given list of expected terminals contains only elements
-	 * that start at the same position.
-	 */
-	protected void removeDuplicateEntriesFromBucket(java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal> expectedElements) {
-		int size = expectedElements.size();
-		for (int i = 0; i < size - 1; i++) {
-			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal elementAtIndex = expectedElements.get(i);
-			org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement terminal = elementAtIndex.getTerminal();
-			for (int j = i + 1; j < size;) {
+			for (int j = i + 1; j < expectedElements.size();) {
 				org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal elementAtNext = expectedElements.get(j);
-				if (terminal.equals(elementAtNext.getTerminal())) {
+				if (elementAtIndex.equals(elementAtNext) && elementAtIndex.getStartExcludingHiddenTokens() == elementAtNext.getStartExcludingHiddenTokens()) {
 					expectedElements.remove(j);
-					size--;
 				} else {
 					j++;
 				}
@@ -151,21 +92,11 @@ public class ExpressionCodeCompletionHelper {
 		}
 	}
 	
-	protected void removeInvalidEntriesAtEnd(java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal> expectedElements) {
+	private void removeInvalidEntriesAtEnd(java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal> expectedElements) {
 		for (int i = 0; i < expectedElements.size() - 1;) {
 			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal elementAtIndex = expectedElements.get(i);
 			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal elementAtNext = expectedElements.get(i + 1);
-			
-			// If the two expected elements have a different parent in the syntax definition,
-			// we must not discard the second element, because is probably stems from a parent
-			// rule.
-			org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionSyntaxElement symtaxElementOfThis = elementAtIndex.getTerminal().getSymtaxElement();
-			org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionSyntaxElement symtaxElementOfNext = elementAtNext.getTerminal().getSymtaxElement();
-			boolean differentParent = symtaxElementOfNext.getParent() != symtaxElementOfThis.getParent();
-			
-			boolean sameStartExcludingHiddenTokens = elementAtIndex.getStartExcludingHiddenTokens() == elementAtNext.getStartExcludingHiddenTokens();
-			boolean differentFollowSet = elementAtIndex.getFollowSetID() != elementAtNext.getFollowSetID();
-			if (sameStartExcludingHiddenTokens && differentFollowSet && !differentParent) {
+			if (elementAtIndex.getStartExcludingHiddenTokens() == elementAtNext.getStartExcludingHiddenTokens() && shouldRemove(elementAtIndex.getFollowSetID(), elementAtNext.getFollowSetID())) {
 				expectedElements.remove(i + 1);
 			} else {
 				i++;
@@ -173,26 +104,11 @@ public class ExpressionCodeCompletionHelper {
 		}
 	}
 	
-	/**
-	 * Removes all proposals for keywords that end before the given index.
-	 */
-	protected void removeKeywordsEndingBeforeIndex(java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> proposals, int index) {
-		java.util.List<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> toRemove = new java.util.ArrayList<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal>();
-		for (org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal proposal : proposals) {
-			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal expectedTerminal = proposal.getExpectedTerminal();
-			org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement terminal = expectedTerminal.getTerminal();
-			if (terminal instanceof org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedCsString) {
-				org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedCsString csString = (org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedCsString) terminal;
-				int startExcludingHiddenTokens = expectedTerminal.getStartExcludingHiddenTokens();
-				if (startExcludingHiddenTokens + csString.getValue().length() - 1 < index) {
-					toRemove.add(proposal);
-				}
-			}
-		}
-		proposals.removeAll(toRemove);
+	public boolean shouldRemove(int followSetID1, int followSetID2) {
+		return followSetID1 != followSetID2;
 	}
 	
-	protected String findPrefix(java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal> expectedElements, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal expectedAtCursor, String content, int cursorOffset) {
+	private String findPrefix(java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal> expectedElements, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal expectedAtCursor, String content, int cursorOffset) {
 		if (cursorOffset < 0) {
 			return "";
 		}
@@ -211,7 +127,7 @@ public class ExpressionCodeCompletionHelper {
 		return prefix;
 	}
 	
-	protected java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> deriveProposals(java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal> expectedElements, String content, org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource resource, int cursorOffset) {
+	private java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> deriveProposals(java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal> expectedElements, String content, org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource resource, int cursorOffset) {
 		java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> resultSet = new java.util.LinkedHashSet<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal>();
 		for (org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal expectedElement : expectedElements) {
 			resultSet.addAll(deriveProposals(expectedElement, content, resource, cursorOffset));
@@ -219,62 +135,93 @@ public class ExpressionCodeCompletionHelper {
 		return resultSet;
 	}
 	
-	protected java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> deriveProposals(final org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal expectedTerminal, String content, org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource resource, int cursorOffset) {
+	private java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> deriveProposals(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal expectedTerminal, String content, org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource resource, int cursorOffset) {
+		org.emftext.term.propositional.expression.resource.expression.IExpressionMetaInformation metaInformation = resource.getMetaInformation();
+		org.emftext.term.propositional.expression.resource.expression.IExpressionLocationMap locationMap = resource.getLocationMap();
 		org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement expectedElement = (org.emftext.term.propositional.expression.resource.expression.IExpressionExpectedElement) expectedTerminal.getTerminal();
 		if (expectedElement instanceof org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedCsString) {
 			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedCsString csString = (org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedCsString) expectedElement;
-			return handleKeyword(expectedTerminal, csString, expectedTerminal.getPrefix());
+			return handleKeyword(csString, expectedTerminal.getPrefix());
 		} else if (expectedElement instanceof org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedBooleanTerminal) {
 			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedBooleanTerminal expectedBooleanTerminal = (org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedBooleanTerminal) expectedElement;
-			return handleBooleanTerminal(expectedTerminal, expectedBooleanTerminal, expectedTerminal.getPrefix());
+			return handleBooleanTerminal(expectedBooleanTerminal, expectedTerminal.getPrefix());
 		} else if (expectedElement instanceof org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedEnumerationTerminal) {
 			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedEnumerationTerminal expectedEnumerationTerminal = (org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedEnumerationTerminal) expectedElement;
-			return handleEnumerationTerminal(expectedTerminal, expectedEnumerationTerminal, expectedTerminal.getPrefix());
+			return handleEnumerationTerminal(expectedEnumerationTerminal, expectedTerminal.getPrefix());
 		} else if (expectedElement instanceof org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedStructuralFeature) {
-			final org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedStructuralFeature expectedFeature = (org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedStructuralFeature) expectedElement;
-			final org.eclipse.emf.ecore.EStructuralFeature feature = expectedFeature.getFeature();
-			final org.eclipse.emf.ecore.EClassifier featureType = feature.getEType();
-			final org.eclipse.emf.ecore.EObject container = findCorrectContainer(expectedTerminal);
-			
-			// Here it gets really crazy. We need to modify the model in a way that reflects
-			// the state the model would be in, if the expected terminal were present. After
-			// computing the corresponding completion proposals, the original state of the
-			// model is restored. This procedure is required, because different models can be
-			// required for different completion situations. This can be particularly observed
-			// when the user has not yet typed a character that starts an element to be
-			// completed.
-			final java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> proposals = new java.util.ArrayList<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal>();
-			expectedTerminal.materialize(new Runnable() {
-				
-				public void run() {
-					if (feature instanceof org.eclipse.emf.ecore.EReference) {
-						org.eclipse.emf.ecore.EReference reference = (org.eclipse.emf.ecore.EReference) feature;
-						if (featureType instanceof org.eclipse.emf.ecore.EClass) {
-							if (reference.isContainment()) {
-								// the FOLLOW set should contain only non-containment references
-								assert false;
-							} else {
-								proposals.addAll(handleNCReference(expectedTerminal, container, reference, expectedTerminal.getPrefix(), expectedFeature.getTokenName()));
+			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedStructuralFeature expectedFeature = (org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedStructuralFeature) expectedElement;
+			org.eclipse.emf.ecore.EStructuralFeature feature = expectedFeature.getFeature();
+			org.eclipse.emf.ecore.EClassifier featureType = feature.getEType();
+			java.util.List<org.eclipse.emf.ecore.EObject> elementsAtCursor = locationMap.getElementsAt(cursorOffset);
+			org.eclipse.emf.ecore.EObject container = null;
+			// we need to skip the proxy elements at the cursor, because they are not the
+			// container for the reference we try to complete
+			for (int i = 0; i < elementsAtCursor.size(); i++) {
+				container = elementsAtCursor.get(i);
+				if (!container.eIsProxy()) {
+					break;
+				}
+			}
+			// if no container can be found, the cursor is probably at the end of the
+			// document. we need to create artificial containers.
+			if (container == null) {
+				boolean attachedArtificialContainer = false;
+				org.eclipse.emf.ecore.EClass containerClass = expectedTerminal.getTerminal().getRuleMetaclass();
+				org.eclipse.emf.ecore.EStructuralFeature[] containmentTrace = expectedTerminal.getContainmentTrace();
+				java.util.List<org.eclipse.emf.ecore.EObject> contentList = null;
+				for (org.eclipse.emf.ecore.EStructuralFeature eStructuralFeature : containmentTrace) {
+					if (attachedArtificialContainer) {
+						break;
+					}
+					org.eclipse.emf.ecore.EClass neededClass = eStructuralFeature.getEContainingClass();
+					// fill the content list during the first iteration of the loop
+					if (contentList == null) {
+						contentList = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
+						java.util.Iterator<org.eclipse.emf.ecore.EObject> allContents = resource.getAllContents();
+						while (allContents.hasNext()) {
+							org.eclipse.emf.ecore.EObject next = allContents.next();
+							contentList.add(next);
+						}
+					}
+					// find object to attach artificial container to
+					for (int i = contentList.size() - 1; i >= 0; i--) {
+						org.eclipse.emf.ecore.EObject object = contentList.get(i);
+						if (neededClass.isInstance(object)) {
+							org.eclipse.emf.ecore.EObject newContainer = containerClass.getEPackage().getEFactoryInstance().create(containerClass);
+							if (eStructuralFeature.getEType().isInstance(newContainer)) {
+								org.emftext.term.propositional.expression.resource.expression.util.ExpressionEObjectUtil.setFeature(object, eStructuralFeature, newContainer, false);
+								container = newContainer;
+								attachedArtificialContainer = true;
 							}
 						}
-					} else if (feature instanceof org.eclipse.emf.ecore.EAttribute) {
-						org.eclipse.emf.ecore.EAttribute attribute = (org.eclipse.emf.ecore.EAttribute) feature;
-						if (featureType instanceof org.eclipse.emf.ecore.EEnum) {
-							org.eclipse.emf.ecore.EEnum enumType = (org.eclipse.emf.ecore.EEnum) featureType;
-							proposals.addAll(handleEnumAttribute(expectedTerminal, expectedFeature, enumType, expectedTerminal.getPrefix(), container));
-						} else {
-							// handle EAttributes (derive default value depending on the type of the
-							// attribute, figure out token resolver, and call deResolve())
-							proposals.addAll(handleAttribute(expectedTerminal, expectedFeature, container, attribute, expectedTerminal.getPrefix()));
-						}
-					} else {
-						// there should be no other subclass of EStructuralFeature
-						assert false;
 					}
 				}
-			});
-			// Return the proposals that were computed in the closure call.
-			return proposals;
+			}
+			
+			if (feature instanceof org.eclipse.emf.ecore.EReference) {
+				org.eclipse.emf.ecore.EReference reference = (org.eclipse.emf.ecore.EReference) feature;
+				if (featureType instanceof org.eclipse.emf.ecore.EClass) {
+					if (reference.isContainment()) {
+						// the FOLLOW set should contain only non-containment references
+						assert false;
+					} else {
+						return handleNCReference(metaInformation, container, reference, expectedTerminal.getPrefix(), expectedFeature.getTokenName());
+					}
+				}
+			} else if (feature instanceof org.eclipse.emf.ecore.EAttribute) {
+				org.eclipse.emf.ecore.EAttribute attribute = (org.eclipse.emf.ecore.EAttribute) feature;
+				if (featureType instanceof org.eclipse.emf.ecore.EEnum) {
+					org.eclipse.emf.ecore.EEnum enumType = (org.eclipse.emf.ecore.EEnum) featureType;
+					return handleEnumAttribute(metaInformation, expectedFeature, enumType, expectedTerminal.getPrefix(), container);
+				} else {
+					// handle EAttributes (derive default value depending on the type of the
+					// attribute, figure out token resolver, and call deResolve())
+					return handleAttribute(metaInformation, expectedFeature, container, attribute, expectedTerminal.getPrefix());
+				}
+			} else {
+				// there should be no other subclass of EStructuralFeature
+				assert false;
+			}
 		} else {
 			// there should be no other class implementing IExpectedElement
 			assert false;
@@ -282,7 +229,7 @@ public class ExpressionCodeCompletionHelper {
 		return java.util.Collections.emptyList();
 	}
 	
-	protected java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> handleEnumAttribute(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal expectedTerminal, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedStructuralFeature expectedFeature, org.eclipse.emf.ecore.EEnum enumType, String prefix, org.eclipse.emf.ecore.EObject container) {
+	private java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> handleEnumAttribute(org.emftext.term.propositional.expression.resource.expression.IExpressionMetaInformation metaInformation, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedStructuralFeature expectedFeature, org.eclipse.emf.ecore.EEnum enumType, String prefix, org.eclipse.emf.ecore.EObject container) {
 		java.util.Collection<org.eclipse.emf.ecore.EEnumLiteral> enumLiterals = enumType.getELiterals();
 		java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> result = new java.util.LinkedHashSet<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal>();
 		for (org.eclipse.emf.ecore.EEnumLiteral literal : enumLiterals) {
@@ -292,12 +239,12 @@ public class ExpressionCodeCompletionHelper {
 			org.emftext.term.propositional.expression.resource.expression.IExpressionTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(expectedFeature.getTokenName());
 			String resolvedLiteral = tokenResolver.deResolve(unResolvedLiteral, expectedFeature.getFeature(), container);
 			boolean matchesPrefix = matches(resolvedLiteral, prefix);
-			result.add(new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal(expectedTerminal, resolvedLiteral, prefix, matchesPrefix, expectedFeature.getFeature(), container));
+			result.add(new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal(resolvedLiteral, prefix, matchesPrefix, expectedFeature.getFeature(), container));
 		}
 		return result;
 	}
 	
-	protected java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> handleNCReference(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal expectedTerminal, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, String prefix, String tokenName) {
+	private java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> handleNCReference(org.emftext.term.propositional.expression.resource.expression.IExpressionMetaInformation metaInformation, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, String prefix, String tokenName) {
 		// proposals for non-containment references are derived by calling the reference
 		// resolver switch in fuzzy mode.
 		org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceResolverSwitch resolverSwitch = metaInformation.getReferenceResolverSwitch();
@@ -319,7 +266,7 @@ public class ExpressionCodeCompletionHelper {
 						image = getImage((org.eclipse.emf.ecore.EObject) target);
 					}
 					boolean matchesPrefix = matches(identifier, prefix);
-					resultSet.add(new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal(expectedTerminal, identifier, prefix, matchesPrefix, reference, container, image));
+					resultSet.add(new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal(identifier, prefix, matchesPrefix, reference, container, image));
 				}
 			}
 			return resultSet;
@@ -327,7 +274,7 @@ public class ExpressionCodeCompletionHelper {
 		return java.util.Collections.emptyList();
 	}
 	
-	protected java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> handleAttribute(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal expectedTerminal, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedStructuralFeature expectedFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EAttribute attribute, String prefix) {
+	private java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> handleAttribute(org.emftext.term.propositional.expression.resource.expression.IExpressionMetaInformation metaInformation, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedStructuralFeature expectedFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EAttribute attribute, String prefix) {
 		java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> resultSet = new java.util.LinkedHashSet<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal>();
 		Object[] defaultValues = attributeValueProvider.getDefaultValues(attribute);
 		if (defaultValues != null) {
@@ -340,7 +287,7 @@ public class ExpressionCodeCompletionHelper {
 						if (tokenResolver != null) {
 							String defaultValueAsString = tokenResolver.deResolve(defaultValue, attribute, container);
 							boolean matchesPrefix = matches(defaultValueAsString, prefix);
-							resultSet.add(new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal(expectedTerminal, defaultValueAsString, prefix, matchesPrefix, expectedFeature.getFeature(), container));
+							resultSet.add(new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal(defaultValueAsString, prefix, matchesPrefix, expectedFeature.getFeature(), container));
 						}
 					}
 				}
@@ -349,46 +296,36 @@ public class ExpressionCodeCompletionHelper {
 		return resultSet;
 	}
 	
-	/**
-	 * Creates a set of completion proposals from the given keyword.
-	 */
-	protected java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> handleKeyword(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal expectedTerminal, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedCsString csString, String prefix) {
+	private java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> handleKeyword(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedCsString csString, String prefix) {
 		String proposal = csString.getValue();
 		boolean matchesPrefix = matches(proposal, prefix);
-		return java.util.Collections.singleton(new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal(expectedTerminal, proposal, prefix, matchesPrefix, null, null));
+		return java.util.Collections.singleton(new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal(proposal, prefix, matchesPrefix, null, null));
 	}
 	
-	/**
-	 * Creates a set of (two) completion proposals from the given boolean terminal.
-	 */
-	protected java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> handleBooleanTerminal(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal expectedTerminal, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedBooleanTerminal expectedBooleanTerminal, String prefix) {
+	private java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> handleBooleanTerminal(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedBooleanTerminal expectedBooleanTerminal, String prefix) {
 		java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> result = new java.util.LinkedHashSet<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal>(2);
 		org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionBooleanTerminal booleanTerminal = expectedBooleanTerminal.getBooleanTerminal();
-		result.addAll(handleLiteral(expectedTerminal, booleanTerminal.getAttribute(), prefix, booleanTerminal.getTrueLiteral()));
-		result.addAll(handleLiteral(expectedTerminal, booleanTerminal.getAttribute(), prefix, booleanTerminal.getFalseLiteral()));
+		result.addAll(handleLiteral(booleanTerminal.getAttribute(), prefix, booleanTerminal.getTrueLiteral()));
+		result.addAll(handleLiteral(booleanTerminal.getAttribute(), prefix, booleanTerminal.getFalseLiteral()));
 		return result;
 	}
 	
-	/**
-	 * Creates a set of completion proposals from the given enumeration terminal. For
-	 * each enumeration literal one proposal is created.
-	 */
-	protected java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> handleEnumerationTerminal(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal expectedTerminal, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedEnumerationTerminal expectedEnumerationTerminal, String prefix) {
+	private java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> handleEnumerationTerminal(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedEnumerationTerminal expectedEnumerationTerminal, String prefix) {
 		java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> result = new java.util.LinkedHashSet<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal>(2);
 		org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionEnumerationTerminal enumerationTerminal = expectedEnumerationTerminal.getEnumerationTerminal();
 		java.util.Map<String, String> literalMapping = enumerationTerminal.getLiteralMapping();
 		for (String literalName : literalMapping.keySet()) {
-			result.addAll(handleLiteral(expectedTerminal, enumerationTerminal.getAttribute(), prefix, literalMapping.get(literalName)));
+			result.addAll(handleLiteral(enumerationTerminal.getAttribute(), prefix, literalMapping.get(literalName)));
 		}
 		return result;
 	}
 	
-	protected java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> handleLiteral(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal expectedTerminal, org.eclipse.emf.ecore.EAttribute attribute, String prefix, String literal) {
+	private java.util.Collection<org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal> handleLiteral(org.eclipse.emf.ecore.EAttribute attribute, String prefix, String literal) {
 		if ("".equals(literal)) {
 			return java.util.Collections.emptySet();
 		}
 		boolean matchesPrefix = matches(literal, prefix);
-		return java.util.Collections.singleton(new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal(expectedTerminal, literal, prefix, matchesPrefix, null, null));
+		return java.util.Collections.singleton(new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionCompletionProposal(literal, prefix, matchesPrefix, null, null));
 	}
 	
 	/**
@@ -396,7 +333,7 @@ public class ExpressionCodeCompletionHelper {
 	 * the current document content, the cursor position, and the position where the
 	 * element is expected.
 	 */
-	protected void setPrefixes(java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal> expectedElements, String content, int cursorOffset) {
+	private void setPrefixes(java.util.List<org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal> expectedElements, String content, int cursorOffset) {
 		if (cursorOffset < 0) {
 			return;
 		}
@@ -419,13 +356,7 @@ public class ExpressionCodeCompletionHelper {
 		return expectedAtCursor.toArray(new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal[expectedAtCursor.size()]);
 	}
 	
-	/**
-	 * Calculates the end index of the expected element at allExpectedElements[index].
-	 * To determine the end, the subsequent expected elements from the array of all
-	 * expected elements are used. An element is considered to end one character
-	 * before the next elements starts.
-	 */
-	protected int getEnd(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal[] allExpectedElements, int indexInList) {
+	private int getEnd(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal[] allExpectedElements, int indexInList) {
 		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal elementAtIndex = allExpectedElements[indexInList];
 		int startIncludingHidden = elementAtIndex.getStartIncludingHiddenTokens();
 		int startExcludingHidden = elementAtIndex.getStartExcludingHiddenTokens();
@@ -440,19 +371,11 @@ public class ExpressionCodeCompletionHelper {
 		return Integer.MAX_VALUE;
 	}
 	
-	/**
-	 * Checks whether the given proposed string matches the prefix. The two strings
-	 * are compared ignoring the case. The prefix is also considered to match if is a
-	 * camel case representation of the proposal.
-	 */
-	protected boolean matches(String proposal, String prefix) {
-		if (proposal == null || prefix == null) {
-			return false;
-		}
+	private boolean matches(String proposal, String prefix) {
 		return (proposal.toLowerCase().startsWith(prefix.toLowerCase()) || org.emftext.term.propositional.expression.resource.expression.util.ExpressionStringUtil.matchCamelCase(prefix, proposal) != null) && !proposal.equals(prefix);
 	}
 	
-	protected org.eclipse.swt.graphics.Image getImage(org.eclipse.emf.ecore.EObject element) {
+	public org.eclipse.swt.graphics.Image getImage(org.eclipse.emf.ecore.EObject element) {
 		if (!org.eclipse.core.runtime.Platform.isRunning()) {
 			return null;
 		}
@@ -463,85 +386,4 @@ public class ExpressionCodeCompletionHelper {
 		org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider labelProvider = new org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider(adapterFactory);
 		return labelProvider.getImage(element);
 	}
-	
-	protected org.eclipse.emf.ecore.EObject findCorrectContainer(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionExpectedTerminal expectedTerminal) {
-		org.eclipse.emf.ecore.EObject container = expectedTerminal.getContainer();
-		org.eclipse.emf.ecore.EClass ruleMetaclass = expectedTerminal.getTerminal().getRuleMetaclass();
-		if (ruleMetaclass.isInstance(container)) {
-			// container is correct for expected terminal
-			return container;
-		}
-		// the container is wrong
-		org.eclipse.emf.ecore.EObject parent = null;
-		org.eclipse.emf.ecore.EObject previousParent = null;
-		org.eclipse.emf.ecore.EObject correctContainer = null;
-		org.eclipse.emf.ecore.EObject hookableParent = null;
-		org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionContainmentTrace containmentTrace = expectedTerminal.getContainmentTrace();
-		org.eclipse.emf.ecore.EClass startClass = containmentTrace.getStartClass();
-		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionContainedFeature currentLink = null;
-		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionContainedFeature previousLink = null;
-		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionContainedFeature[] containedFeatures = containmentTrace.getPath();
-		for (int i = 0; i < containedFeatures.length; i++) {
-			currentLink = containedFeatures[i];
-			if (i > 0) {
-				previousLink = containedFeatures[i - 1];
-			}
-			org.eclipse.emf.ecore.EClass containerClass = currentLink.getContainerClass();
-			hookableParent = findHookParent(container, startClass, currentLink, parent);
-			if (hookableParent != null) {
-				// we found the correct parent
-				break;
-			} else {
-				previousParent = parent;
-				parent = containerClass.getEPackage().getEFactoryInstance().create(containerClass);
-				if (previousParent == null) {
-					// replace container for expectedTerminal with correctContainer
-					correctContainer = parent;
-				} else {
-					org.emftext.term.propositional.expression.resource.expression.util.ExpressionEObjectUtil.setFeature(parent, previousLink.getFeature(), previousParent, false);
-				}
-			}
-		}
-		
-		if (correctContainer == null) {
-			correctContainer = container;
-		}
-		
-		if (currentLink == null) {
-			return correctContainer;
-		}
-		
-		hookableParent = findHookParent(container, startClass, currentLink, parent);
-		
-		final org.eclipse.emf.ecore.EObject finalHookableParent = hookableParent;
-		final org.eclipse.emf.ecore.EStructuralFeature finalFeature = currentLink.getFeature();
-		final org.eclipse.emf.ecore.EObject finalParent = parent;
-		if (parent != null) {
-			expectedTerminal.setAttachmentCode(new Runnable() {
-				
-				public void run() {
-					org.emftext.term.propositional.expression.resource.expression.util.ExpressionEObjectUtil.setFeature(finalHookableParent, finalFeature, finalParent, false);
-				}
-			});
-		}
-		return correctContainer;
-	}
-	
-	/**
-	 * Walks up the containment hierarchy to find an EObject that is able to hold
-	 * (contain) the given object.
-	 */
-	protected org.eclipse.emf.ecore.EObject findHookParent(org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EClass startClass, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionContainedFeature currentLink, org.eclipse.emf.ecore.EObject object) {
-		org.eclipse.emf.ecore.EClass containerClass = currentLink.getContainerClass();
-		while (container != null) {
-			if (containerClass.isInstance(object)) {
-				if (startClass.equals(container.eClass())) {
-					return container;
-				}
-			}
-			container = container.eContainer();
-		}
-		return null;
-	}
-	
 }

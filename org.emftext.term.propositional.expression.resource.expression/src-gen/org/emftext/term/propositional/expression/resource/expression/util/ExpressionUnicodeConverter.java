@@ -37,8 +37,7 @@ public class ExpressionUnicodeConverter extends org.emftext.term.propositional.e
 	 * Reads one character from the stream. Escaped unicode characters are converted
 	 * to UTF-8 byte sequences (i.e., up to four bytes).
 	 */
-	@Override	
-	public int read() throws java.io.IOException {
+	@Override	public int read() throws java.io.IOException {
 		if (!stackIsEmpty()) {
 			int result = pop();
 			return result;
@@ -117,7 +116,7 @@ public class ExpressionUnicodeConverter extends org.emftext.term.propositional.e
 					encodePush(next);
 				}
 			} else {
-				return read;
+				return encodePushAndReturn(read);
 			}
 		}
 		// do not encode negative numbers, because they signal EOF

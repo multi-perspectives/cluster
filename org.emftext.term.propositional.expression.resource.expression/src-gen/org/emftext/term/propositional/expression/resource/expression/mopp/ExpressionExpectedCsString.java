@@ -23,13 +23,6 @@ public class ExpressionExpectedCsString extends org.emftext.term.propositional.e
 		return keyword.getValue();
 	}
 	
-	/**
-	 * Returns the expected keyword.
-	 */
-	public org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionSyntaxElement getSymtaxElement() {
-		return keyword;
-	}
-	
 	public java.util.Set<String> getTokenNames() {
 		return java.util.Collections.singleton("'" + getValue() + "'");
 	}

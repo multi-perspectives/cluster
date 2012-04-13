@@ -207,11 +207,7 @@ public class ExpressionTextHover implements org.eclipse.jface.text.ITextHover, o
 	// The warning about overriding or implementing a deprecated API cannot be avoided
 	// because the SourceViewerConfiguration class depends on ITextHover.
 	public String getHoverInfo(org.eclipse.jface.text.ITextViewer textViewer, org.eclipse.jface.text.IRegion hoverRegion) {
-		Object hoverInfo = getHoverInfo2(textViewer, hoverRegion);
-		if (hoverInfo == null) {
-			return null;
-		}
-		return ((org.emftext.term.propositional.expression.resource.expression.ui.ExpressionDocBrowserInformationControlInput) hoverInfo).getHtml();
+		return ((org.emftext.term.propositional.expression.resource.expression.ui.ExpressionDocBrowserInformationControlInput) getHoverInfo2(textViewer, hoverRegion)).getHtml();
 	}
 	
 	public org.eclipse.jface.text.IRegion getHoverRegion(org.eclipse.jface.text.ITextViewer textViewer, int offset) {
@@ -242,9 +238,6 @@ public class ExpressionTextHover implements org.eclipse.jface.text.ITextHover, o
 	
 	private org.emftext.term.propositional.expression.resource.expression.ui.ExpressionDocBrowserInformationControlInput internalGetHoverInfo(org.eclipse.jface.text.ITextViewer textViewer, org.eclipse.jface.text.IRegion hoverRegion) {
 		org.emftext.term.propositional.expression.resource.expression.IExpressionTextResource textResource = resourceProvider.getResource();
-		if (textResource == null) {
-			return null;
-		}
 		org.emftext.term.propositional.expression.resource.expression.IExpressionLocationMap locationMap = textResource.getLocationMap();
 		java.util.List<org.eclipse.emf.ecore.EObject> elementsAtOffset = locationMap.getElementsAt(hoverRegion.getOffset());
 		if (elementsAtOffset == null || elementsAtOffset.size() == 0) {

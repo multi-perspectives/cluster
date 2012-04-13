@@ -36,6 +36,59 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 		
 	}
 	
+	private static class ReferenceCache implements org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceCache, org.eclipse.emf.common.notify.Adapter {
+		
+		private java.util.Map<org.eclipse.emf.ecore.EClass, java.util.Set<org.eclipse.emf.ecore.EObject>> cache = new java.util.LinkedHashMap<org.eclipse.emf.ecore.EClass, java.util.Set<org.eclipse.emf.ecore.EObject>>();
+		private boolean isInitialized;
+		private org.eclipse.emf.common.notify.Notifier target;
+		
+		public org.eclipse.emf.common.notify.Notifier getTarget() {
+			return target;
+		}
+		
+		public boolean isAdapterForType(Object arg0) {
+			return false;
+		}
+		
+		public void notifyChanged(org.eclipse.emf.common.notify.Notification arg0) {
+		}
+		
+		public void setTarget(org.eclipse.emf.common.notify.Notifier arg0) {
+			target = arg0;
+		}
+		
+		public java.util.Set<org.eclipse.emf.ecore.EObject> getObjects(org.eclipse.emf.ecore.EClass type) {
+			return cache.get(type);
+		}
+		
+		public void initialize(org.eclipse.emf.ecore.EObject root) {
+			if (isInitialized) {
+				return;
+			}
+			put(root);
+			java.util.Iterator<org.eclipse.emf.ecore.EObject> it = root.eAllContents();
+			while (it.hasNext()) {
+				put(it.next());
+			}
+			isInitialized = true;
+		}
+		
+		private void put(org.eclipse.emf.ecore.EObject object) {
+			org.eclipse.emf.ecore.EClass eClass = object.eClass();
+			if (!cache.containsKey(eClass)) {
+				cache.put(eClass, new java.util.LinkedHashSet<org.eclipse.emf.ecore.EObject>());
+			}
+			cache.get(eClass).add(object);
+		}
+		
+		public void clear() {
+			cache.clear();
+			isInitialized = false;
+		}
+		
+	}
+	
+	public final static String NAME_FEATURE = "name";
 	/**
 	 * The maximal distance between two identifiers according to the Levenshtein
 	 * distance to qualify for a quick fix.
@@ -45,7 +98,7 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 	private boolean enableScoping = true;
 	
 	/**
-	 * This is a cache for the external objects that are referenced by the current
+	 * This is a cache for the extenal objects that are referenced by the current
 	 * resource. We must cache this set because determining this set required to
 	 * resolve proxy objects, which causes reference resolving to slow down
 	 * exponentially.
@@ -56,13 +109,9 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 	 * We store the number of proxy objects that were present when
 	 * <code>referencedExternalObjects</code> was resolved, to recompute this set when
 	 * a proxy was resolved. This is required, because a resolved proxy may point to a
-	 * new external object.
+	 * new extenal object.
 	 */
 	private int oldProxyCount = -1;
-	
-	private static org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMetaInformation metaInformation = new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMetaInformation();
-	
-	private org.emftext.term.propositional.expression.resource.expression.IExpressionNameProvider nameProvider = metaInformation.createNameProvider();
 	
 	/**
 	 * This standard implementation searches for objects in the resource, which have
@@ -74,7 +123,7 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 		try {
 			org.eclipse.emf.ecore.EObject root = container;
 			if (!enableScoping) {
-				root = org.eclipse.emf.ecore.util.EcoreUtil.getRootContainer(container);
+				root = org.emftext.term.propositional.expression.resource.expression.util.ExpressionEObjectUtil.findRootContainer(container);
 			}
 			while (root != null) {
 				boolean continueSearch = tryToResolveIdentifierInObjectTree(identifier, container, root, reference, position, resolveFuzzy, result, !enableScoping);
@@ -93,9 +142,6 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 					}
 				}
 			}
-			if (continueSearch) {
-				continueSearch = tryToResolveIdentifierInGenModelRegistry(identifier, container, reference, position, resolveFuzzy, result);
-			}
 		} catch (java.lang.RuntimeException rte) {
 			// catch exception here to prevent EMF proxy resolution from swallowing it
 			rte.printStackTrace();
@@ -106,8 +152,8 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 	 * Returns all EObjects that are referenced by EObjects in the resource that
 	 * contains <code>object</code>, but that are located in different resources.
 	 */
-	protected java.util.Set<org.eclipse.emf.ecore.EObject> findReferencedExternalObjects(org.eclipse.emf.ecore.EObject object) {
-		org.eclipse.emf.ecore.EObject root = org.eclipse.emf.ecore.util.EcoreUtil.getRootContainer(object);
+	private java.util.Set<org.eclipse.emf.ecore.EObject> findReferencedExternalObjects(org.eclipse.emf.ecore.EObject object) {
+		org.eclipse.emf.ecore.EObject root = org.emftext.term.propositional.expression.resource.expression.util.ExpressionEObjectUtil.findRootContainer(object);
 		java.util.Map<org.eclipse.emf.ecore.EObject, java.util.Collection<org.eclipse.emf.ecore.EStructuralFeature.Setting>> proxies = org.eclipse.emf.ecore.util.EcoreUtil.ProxyCrossReferencer.find(root);
 		int proxyCount = 0;
 		for (java.util.Collection<org.eclipse.emf.ecore.EStructuralFeature.Setting> settings : proxies.values()) {
@@ -133,7 +179,7 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 	 * Returns all EObjects that are not contained in the same resource as the given
 	 * EObject.
 	 */
-	protected java.util.Set<org.eclipse.emf.ecore.EObject> getExternalObjects(java.util.Collection<org.eclipse.emf.ecore.EObject> objects, org.eclipse.emf.ecore.EObject object) {
+	private java.util.Set<org.eclipse.emf.ecore.EObject> getExternalObjects(java.util.Collection<org.eclipse.emf.ecore.EObject> objects, org.eclipse.emf.ecore.EObject object) {
 		java.util.Set<org.eclipse.emf.ecore.EObject> externalObjects = new java.util.LinkedHashSet<org.eclipse.emf.ecore.EObject>();
 		for (org.eclipse.emf.ecore.EObject next : objects) {
 			if (next.eResource() != object.eResource()) {
@@ -180,7 +226,7 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 		return true;
 	}
 	
-	protected boolean tryToResolveIdentifierAsURI(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceResolveResult<ReferenceType> result) {
+	private boolean tryToResolveIdentifierAsURI(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceResolveResult<ReferenceType> result) {
 		org.eclipse.emf.ecore.EClass type = reference.getEReferenceType();
 		org.eclipse.emf.ecore.resource.Resource resource = container.eResource();
 		if (resource != null) {
@@ -196,40 +242,12 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 		return true;
 	}
 	
-	protected boolean tryToResolveIdentifierInGenModelRegistry(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceResolveResult<ReferenceType> result) {
-		org.eclipse.emf.ecore.EClass type = reference.getEReferenceType();
-		
-		final java.util.Map<String, org.eclipse.emf.common.util.URI> packageNsURIToGenModelLocationMap = org.eclipse.emf.ecore.plugin.EcorePlugin.getEPackageNsURIToGenModelLocationMap();
-		for (String nextNS : packageNsURIToGenModelLocationMap.keySet()) {
-			org.eclipse.emf.common.util.URI genModelURI = packageNsURIToGenModelLocationMap.get(nextNS);
-			try {
-				final org.eclipse.emf.ecore.resource.ResourceSet rs = container.eResource().getResourceSet();
-				org.eclipse.emf.ecore.resource.Resource genModelResource = rs.getResource(genModelURI, true);
-				if (genModelResource == null) {
-					continue;
-				}
-				final java.util.List<org.eclipse.emf.ecore.EObject> contents = genModelResource.getContents();
-				if (contents == null || contents.size() == 0) {
-					continue;
-				}
-				org.eclipse.emf.ecore.EObject genModel = contents.get(0);
-				boolean continueSearch = checkElement(container, genModel, reference, position, type, identifier, resolveFuzzy, false, result);
-				if (!continueSearch) {
-					return false;
-				}
-			} catch (Exception e) {
-				// ignore exceptions that are raised by faulty genmodel registrations
-			}
-		}
-		return true;
-	}
-	
-	protected boolean checkElement(org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EReference reference, int position, org.eclipse.emf.ecore.EClass type, String identifier, boolean resolveFuzzy, boolean checkStringWise, org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceResolveResult<ReferenceType> result) {
+	private boolean checkElement(org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EReference reference, int position, org.eclipse.emf.ecore.EClass type, String identifier, boolean resolveFuzzy, boolean checkStringWise, org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceResolveResult<ReferenceType> result) {
 		if (element.eIsProxy()) {
 			return true;
 		}
 		
-		boolean hasCorrectType = hasCorrectEType(element, type);
+		boolean hasCorrectType = hasCorrectType(element, type.getInstanceClass());
 		if (!hasCorrectType) {
 			return true;
 		}
@@ -274,7 +292,7 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 	 * compilation. Thus, an instanceof check cannot be performed at runtime.
 	 */
 	@SuppressWarnings("unchecked")	
-	protected ReferenceType cast(org.eclipse.emf.ecore.EObject element) {
+	private ReferenceType cast(org.eclipse.emf.ecore.EObject element) {
 		return (ReferenceType) element;
 	}
 	
@@ -284,16 +302,10 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 	}
 	
 	protected String deResolve(ReferenceType element, ContainerType container, org.eclipse.emf.ecore.EReference reference) {
-		org.eclipse.emf.ecore.resource.Resource elementResource = element.eResource();
-		// For elements in external resources we return the resource URI instead of the
-		// name of the element.
-		if (elementResource != null && !elementResource.equals(container.eResource())) {
-			return elementResource.getURI().toString();
-		}
 		return getName(element);
 	}
 	
-	protected StringMatch matches(org.eclipse.emf.ecore.EObject element, String identifier, boolean matchFuzzy) {
+	private StringMatch matches(org.eclipse.emf.ecore.EObject element, String identifier, boolean matchFuzzy) {
 		for (Object name : getNames(element)) {
 			StringMatch match = matches(identifier, name, matchFuzzy);
 			if (match.getExactMatch() != null) {
@@ -304,15 +316,49 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 	}
 	
 	/**
-	 * This method is only kept for compatibility reasons. The current version
-	 * delegates all calls to a name provider, but previous custom implementation of
-	 * this class may have overridden this method.
+	 * Returns a list of potential identifiers that may be used to reference the given
+	 * element. This method can be overridden to customize the identification of
+	 * elements.
 	 */
-	public java.util.List<String> getNames(org.eclipse.emf.ecore.EObject element) {
-		return nameProvider.getNames(element);
+	protected java.util.List<Object> getNames(org.eclipse.emf.ecore.EObject element) {
+		java.util.List<Object> names = new java.util.ArrayList<Object>();
+		
+		// first check for attributes that have set the ID flag to true
+		java.util.List<org.eclipse.emf.ecore.EAttribute> attributes = element.eClass().getEAllAttributes();
+		for (org.eclipse.emf.ecore.EAttribute attribute : attributes) {
+			if (attribute.isID()) {
+				Object attributeValue = element.eGet(attribute);
+				names.add(attributeValue);
+			}
+		}
+		
+		// then check for an attribute that is called 'name'
+		org.eclipse.emf.ecore.EStructuralFeature nameAttr = element.eClass().getEStructuralFeature(NAME_FEATURE);
+		if (nameAttr instanceof org.eclipse.emf.ecore.EAttribute) {
+			Object attributeValue = element.eGet(nameAttr);
+			names.add(attributeValue);
+		} else {
+			// try any other string attribute found
+			for (org.eclipse.emf.ecore.EAttribute attribute : attributes) {
+				if ("java.lang.String".equals(attribute.getEType().getInstanceClassName())) {
+					Object attributeValue = element.eGet(attribute);
+					names.add(attributeValue);
+				}
+			}
+			
+			// try operations without arguments that return strings and which have a name that
+			// ends with 'name'
+			for (org.eclipse.emf.ecore.EOperation operation : element.eClass().getEAllOperations()) {
+				if (operation.getName().toLowerCase().endsWith(NAME_FEATURE) && operation.getEParameters().size() == 0) {
+					String result = (String) org.emftext.term.propositional.expression.resource.expression.util.ExpressionEObjectUtil.invokeOperation(element, operation);
+					names.add(result);
+				}
+			}
+		}
+		return names;
 	}
 	
-	protected StringMatch matches(String identifier, Object attributeValue, boolean matchFuzzy) {
+	private StringMatch matches(String identifier, Object attributeValue, boolean matchFuzzy) {
 		if (attributeValue != null && attributeValue instanceof String) {
 			String name = (String) attributeValue;
 			if (name.equals(identifier) || matchFuzzy) {
@@ -327,14 +373,12 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 		return new StringMatch();
 	}
 	
-	protected String getName(ReferenceType element) {
+	private String getName(ReferenceType element) {
 		String deresolvedReference = null;
 		if (element instanceof org.eclipse.emf.ecore.EObject) {
 			org.eclipse.emf.ecore.EObject eObjectToDeResolve = (org.eclipse.emf.ecore.EObject) element;
 			if (eObjectToDeResolve.eIsProxy()) {
 				deresolvedReference = ((org.eclipse.emf.ecore.InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
-				// If the proxy was created by EMFText, we can try to recover the identifier from
-				// the proxy URI
 				if (deresolvedReference != null && deresolvedReference.startsWith(org.emftext.term.propositional.expression.resource.expression.IExpressionContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
 					deresolvedReference = deresolvedReference.substring(org.emftext.term.propositional.expression.resource.expression.IExpressionContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
 					deresolvedReference = deresolvedReference.substring(deresolvedReference.indexOf("_") + 1);
@@ -346,27 +390,20 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 		}
 		// if the referenced element was not a proxy, we try the same magic that was used
 		// while resolving elements to obtain names for elements
-		java.util.List<String> names = getNames(element);
-		for (String name : names) {
-			if (name != null) {
-				return name;
+		java.util.List<Object> names = getNames(element);
+		for (Object name : names) {
+			if (name != null && name instanceof String) {
+				return (String) name;
 			}
 		}
 		return null;
 	}
 	
-	protected boolean hasCorrectEType(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EClass expectedTypeEClass) {
-		if (expectedTypeEClass.getInstanceClass() == null) {
-			return expectedTypeEClass.isInstance(element);
-		}
-		return hasCorrectType(element, expectedTypeEClass.getInstanceClass());
-	}
-	
-	protected boolean hasCorrectType(org.eclipse.emf.ecore.EObject element, Class<?> expectedTypeClass) {
+	private boolean hasCorrectType(org.eclipse.emf.ecore.EObject element, Class<?> expectedTypeClass) {
 		return expectedTypeClass.isInstance(element);
 	}
 	
-	protected org.eclipse.emf.ecore.EObject loadResource(org.eclipse.emf.ecore.resource.ResourceSet resourceSet, org.eclipse.emf.common.util.URI uri) {
+	private org.eclipse.emf.ecore.EObject loadResource(org.eclipse.emf.ecore.resource.ResourceSet resourceSet, org.eclipse.emf.common.util.URI uri) {
 		try {
 			org.eclipse.emf.ecore.resource.Resource resource = resourceSet.getResource(uri, true);
 			org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> contents = resource.getContents();
@@ -380,7 +417,7 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 		return null;
 	}
 	
-	protected org.eclipse.emf.common.util.URI getURI(String identifier, org.eclipse.emf.common.util.URI baseURI) {
+	private org.eclipse.emf.common.util.URI getURI(String identifier, org.eclipse.emf.common.util.URI baseURI) {
 		if (identifier == null) {
 			return null;
 		}
@@ -397,18 +434,18 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 	}
 	
 	protected org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceCache getCache(org.eclipse.emf.ecore.EObject object) {
-		org.eclipse.emf.ecore.EObject root = org.eclipse.emf.ecore.util.EcoreUtil.getRootContainer(object);
-		org.eclipse.emf.common.notify.Adapter adapter = org.emftext.term.propositional.expression.resource.expression.util.ExpressionEObjectUtil.getEAdapter(root, org.emftext.term.propositional.expression.resource.expression.analysis.ExpressionReferenceCache.class);
-		org.emftext.term.propositional.expression.resource.expression.analysis.ExpressionReferenceCache cache = org.emftext.term.propositional.expression.resource.expression.util.ExpressionCastUtil.cast(adapter);
-		if (cache != null) {
-			return cache;
-		} else {
-			// cache does not exist. create a new one.
-			cache = new org.emftext.term.propositional.expression.resource.expression.analysis.ExpressionReferenceCache(nameProvider);
-			cache.initialize(root);
-			root.eAdapters().add(cache);
-			return cache;
+		org.eclipse.emf.ecore.EObject root = org.emftext.term.propositional.expression.resource.expression.util.ExpressionEObjectUtil.findRootContainer(object);
+		java.util.List<org.eclipse.emf.common.notify.Adapter> eAdapters = root.eAdapters();
+		for (org.eclipse.emf.common.notify.Adapter adapter : eAdapters) {
+			if (adapter instanceof ReferenceCache) {
+				ReferenceCache cache = (ReferenceCache) adapter;
+				return cache;
+			}
 		}
+		ReferenceCache cache = new ReferenceCache();
+		cache.initialize(root);
+		root.eAdapters().add(cache);
+		return cache;
 	}
 	
 	public void setEnableScoping(boolean enableScoping) {
@@ -419,7 +456,7 @@ public class ExpressionDefaultResolverDelegate<ContainerType extends org.eclipse
 		return enableScoping;
 	}
 	
-	protected boolean isSimilar(String identifier, Object attributeValue) {
+	private boolean isSimilar(String identifier, Object attributeValue) {
 		if (attributeValue != null && attributeValue instanceof String) {
 			String name = (String) attributeValue;
 			if (org.emftext.term.propositional.expression.resource.expression.util.ExpressionStringUtil.computeLevenshteinDistance(identifier, name) <= MAX_DISTANCE) {

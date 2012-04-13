@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.conper.feature_0.4.0.qualifier.jar" id="org.conper.feature" version="0.4.0.qualifier">
+      <category name="org.feature.multi.perspective.category"/>
+   </feature>
+   <category-def name="org.feature.multi.perspective.category" label="Multi-Perspectives on Feature Models"/>
+</site>

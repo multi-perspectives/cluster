@@ -33,7 +33,7 @@ public class ExpressionNewProjectWizard extends org.eclipse.jface.wizard.Wizard 
 	/**
 	 * The description of the project creation page
 	 */
-	private String pageDescription = "Enter a name and select a location where the new project shall be created.";
+	private String pageDescription = "";
 	
 	/**
 	 *  The name of the project in the project creation page
@@ -299,12 +299,6 @@ public class ExpressionNewProjectWizard extends org.eclipse.jface.wizard.Wizard 
 	 * dNewProjectCreationPage(String)
 	 */
 	public void init(org.eclipse.ui.IWorkbench workbench, org.eclipse.jface.viewers.IStructuredSelection selection) {
-		// Set default image for all wizard pages
-		org.eclipse.core.runtime.IPath path = new org.eclipse.core.runtime.Path("icons/new_project_wizban.gif");
-		org.osgi.framework.Bundle bundle = org.emftext.term.propositional.expression.resource.expression.ui.ExpressionUIPlugin.getDefault().getBundle();
-		java.net.URL url = org.eclipse.core.runtime.FileLocator.find(bundle, path, null);
-		org.eclipse.jface.resource.ImageDescriptor descriptor = org.eclipse.jface.resource.ImageDescriptor.createFromURL(url);
-		setDefaultPageImageDescriptor(descriptor);
 		
 		wizardNewProjectCreationPage = new org.eclipse.ui.dialogs.WizardNewProjectCreationPage(pageName);
 		wizardNewProjectCreationPage.setTitle(pageTitle);

@@ -144,8 +144,6 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	 */
 	private boolean terminateReload = false;
 	
-	protected org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMetaInformation metaInformation = new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMetaInformation();
-	
 	public ExpressionResource() {
 		super();
 		resetLocationMap();
@@ -158,20 +156,12 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	
 	protected void doLoad(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
 		this.loadOptions = options;
-		resetLocationMap();
 		this.terminateReload = false;
 		String encoding = null;
-		if (new org.emftext.term.propositional.expression.resource.expression.util.ExpressionRuntimeUtil().isEclipsePlatformAvailable()) {
-			encoding = new org.emftext.term.propositional.expression.resource.expression.util.ExpressionEclipseProxy().getPlatformResourceEncoding(uri);
-		}
 		java.io.InputStream actualInputStream = inputStream;
 		Object inputStreamPreProcessorProvider = null;
 		if (options != null) {
 			inputStreamPreProcessorProvider = options.get(org.emftext.term.propositional.expression.resource.expression.IExpressionOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER);
-			Object encodingOption = options.get("OPTION_ENCODING");
-			if (encodingOption != null) {
-				encoding = encodingOption.toString();
-			}
 		}
 		if (inputStreamPreProcessorProvider != null) {
 			if (inputStreamPreProcessorProvider instanceof org.emftext.term.propositional.expression.resource.expression.IExpressionInputStreamProcessorProvider) {
@@ -187,8 +177,6 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceResolverSwitch referenceResolverSwitch = getReferenceResolverSwitch();
 		referenceResolverSwitch.setOptions(options);
 		org.emftext.term.propositional.expression.resource.expression.IExpressionParseResult result = parser.parse();
-		// dispose parser, we don't need it anymore
-		parser = null;
 		clearState();
 		getContentsInternal().clear();
 		org.eclipse.emf.ecore.EObject root = null;
@@ -213,30 +201,21 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		}
 	}
 	
-	/**
-	 * Reloads the contents of this resource from the given stream.
-	 */
 	public void reload(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
 		try {
 			isLoaded = false;
 			java.util.Map<Object, Object> loadOptions = addDefaultLoadOptions(options);
 			doLoad(inputStream, loadOptions);
-			resolveAfterParsing();
+			org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(this.getResourceSet());
 		} catch (org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionTerminateParsingException tpe) {
 			// do nothing - the resource is left unchanged if this exception is thrown
 		}
 		isLoaded = true;
 	}
 	
-	/**
-	 * Cancels reloading this resource. The running parser and post processors are
-	 * terminated.
-	 */
 	public void cancelReload() {
 		org.emftext.term.propositional.expression.resource.expression.IExpressionTextParser parserCopy = parser;
-		if (parserCopy != null) {
-			parserCopy.terminate();
-		}
+		parserCopy.terminate();
 		this.terminateReload = true;
 		org.emftext.term.propositional.expression.resource.expression.IExpressionResourcePostProcessor runningPostProcessorCopy = runningPostProcessor;
 		if (runningPostProcessorCopy != null) {
@@ -268,15 +247,8 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		return new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMetaInformation();
 	}
 	
-	/**
-	 * Clears the location map by replacing it with a new instance.
-	 */
 	protected void resetLocationMap() {
-		if (isLocationMapEnabled()) {
-			locationMap = new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLocationMap();
-		} else {
-			locationMap = new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionDevNullLocationMap();
-		}
+		locationMap = new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionLocationMap();
 	}
 	
 	public void addURIFragment(String internalURIFragment, org.emftext.term.propositional.expression.resource.expression.IExpressionContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment) {
@@ -301,8 +273,8 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 				result = uriFragment.resolve();
 			} catch (Exception e) {
 				String message = "An expection occured while resolving the proxy for: "+ id + ". (" + e.toString() + ")";
-				addProblem(new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionProblem(message, org.emftext.term.propositional.expression.resource.expression.ExpressionEProblemType.UNRESOLVED_REFERENCE, org.emftext.term.propositional.expression.resource.expression.ExpressionEProblemSeverity.ERROR), uriFragment.getProxy());
-				new org.emftext.term.propositional.expression.resource.expression.util.ExpressionRuntimeUtil().logError(message, e);
+				addProblem(new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionProblem(message, org.emftext.term.propositional.expression.resource.expression.ExpressionEProblemType.UNRESOLVED_REFERENCE, org.emftext.term.propositional.expression.resource.expression.ExpressionEProblemSeverity.ERROR),uriFragment.getProxy());
+				org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionPlugin.logError(message, e);
 			}
 			if (result == null) {
 				// the resolving did call itself
@@ -340,7 +312,7 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		}
 	}
 	
-	protected org.eclipse.emf.ecore.EObject getResultElement(org.emftext.term.propositional.expression.resource.expression.IExpressionContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment, org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceMapping<? extends org.eclipse.emf.ecore.EObject> mapping, org.eclipse.emf.ecore.EObject proxy, final String errorMessage) {
+	private org.eclipse.emf.ecore.EObject getResultElement(org.emftext.term.propositional.expression.resource.expression.IExpressionContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment, org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceMapping<? extends org.eclipse.emf.ecore.EObject> mapping, org.eclipse.emf.ecore.EObject proxy, final String errorMessage) {
 		if (mapping instanceof org.emftext.term.propositional.expression.resource.expression.IExpressionURIMapping<?>) {
 			org.eclipse.emf.common.util.URI uri = ((org.emftext.term.propositional.expression.resource.expression.IExpressionURIMapping<? extends org.eclipse.emf.ecore.EObject>)mapping).getTargetIdentifier();
 			if (uri != null) {
@@ -382,21 +354,19 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		}
 	}
 	
-	protected void removeDiagnostics(org.eclipse.emf.ecore.EObject cause, java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> diagnostics) {
+	private void removeDiagnostics(org.eclipse.emf.ecore.EObject cause, java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> diagnostics) {
 		// remove all errors/warnings from this resource
 		for (org.eclipse.emf.ecore.resource.Resource.Diagnostic errorCand : new org.eclipse.emf.common.util.BasicEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>(diagnostics)) {
 			if (errorCand instanceof org.emftext.term.propositional.expression.resource.expression.IExpressionTextDiagnostic) {
 				if (((org.emftext.term.propositional.expression.resource.expression.IExpressionTextDiagnostic) errorCand).wasCausedBy(cause)) {
 					diagnostics.remove(errorCand);
-					if (new org.emftext.term.propositional.expression.resource.expression.util.ExpressionRuntimeUtil().isEclipsePlatformAvailable()) {
-						org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMarkerHelper.unmark(this, cause);
-					}
+					org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMarkerHelper.unmark(this, cause);
 				}
 			}
 		}
 	}
 	
-	protected void attachResolveError(org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceResolveResult<?> result, org.eclipse.emf.ecore.EObject proxy) {
+	private void attachResolveError(org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceResolveResult<?> result, org.eclipse.emf.ecore.EObject proxy) {
 		// attach errors to this resource
 		assert result != null;
 		final String errorMessage = result.getErrorMessage();
@@ -407,7 +377,7 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		}
 	}
 	
-	protected void attachResolveWarnings(org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceResolveResult<? extends org.eclipse.emf.ecore.EObject> result, org.eclipse.emf.ecore.EObject proxy) {
+	private void attachResolveWarnings(org.emftext.term.propositional.expression.resource.expression.IExpressionReferenceResolveResult<? extends org.eclipse.emf.ecore.EObject> result, org.eclipse.emf.ecore.EObject proxy) {
 		assert result != null;
 		assert result.wasResolved();
 		if (result.wasResolved()) {
@@ -431,13 +401,8 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		loadOptions = null;
 	}
 	
-	/**
-	 * Runs all post processors to process this resource.
-	 */
 	protected void runPostProcessors(java.util.Map<?, ?> loadOptions) {
-		if (new org.emftext.term.propositional.expression.resource.expression.util.ExpressionRuntimeUtil().isEclipsePlatformAvailable()) {
-			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMarkerHelper.unmark(this, org.emftext.term.propositional.expression.resource.expression.ExpressionEProblemType.ANALYSIS_PROBLEM);
-		}
+		org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMarkerHelper.unmark(this, org.emftext.term.propositional.expression.resource.expression.ExpressionEProblemType.ANALYSIS_PROBLEM);
 		if (terminateReload) {
 			return;
 		}
@@ -468,15 +433,12 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		}
 	}
 	
-	/**
-	 * Runs the given post processor to process this resource.
-	 */
 	protected void runPostProcessor(org.emftext.term.propositional.expression.resource.expression.IExpressionResourcePostProcessor postProcessor) {
 		try {
 			this.runningPostProcessor = postProcessor;
 			postProcessor.process(this);
 		} catch (Exception e) {
-			new org.emftext.term.propositional.expression.resource.expression.util.ExpressionRuntimeUtil().logError("Exception while running a post-processor.", e);
+			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionPlugin.logError("Exception while running a post-processor.", e);
 		}
 		this.runningPostProcessor = null;
 	}
@@ -484,11 +446,7 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	public void load(java.util.Map<?, ?> options) throws java.io.IOException {
 		java.util.Map<Object, Object> loadOptions = addDefaultLoadOptions(options);
 		super.load(loadOptions);
-		resolveAfterParsing();
-	}
-	
-	protected void resolveAfterParsing() {
-		org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(this);
+		org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(this.getResourceSet());
 	}
 	
 	public void setURI(org.eclipse.emf.common.util.URI uri) {
@@ -498,10 +456,6 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		super.setURI(uri);
 	}
 	
-	/**
-	 * Returns the location map that contains information about the position of the
-	 * contents of this resource in the original textual representation.
-	 */
 	public org.emftext.term.propositional.expression.resource.expression.IExpressionLocationMap getLocationMap() {
 		return locationMap;
 	}
@@ -509,22 +463,9 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	public void addProblem(org.emftext.term.propositional.expression.resource.expression.IExpressionProblem problem, org.eclipse.emf.ecore.EObject element) {
 		ElementBasedTextDiagnostic diagnostic = new ElementBasedTextDiagnostic(locationMap, getURI(), problem, element);
 		getDiagnostics(problem.getSeverity()).add(diagnostic);
-		if (new org.emftext.term.propositional.expression.resource.expression.util.ExpressionRuntimeUtil().isEclipsePlatformAvailable() && isMarkerCreationEnabled()) {
+		if (isMarkerCreationEnabled()) {
 			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMarkerHelper.mark(this, diagnostic);
 		}
-		addQuickFixesToQuickFixMap(problem);
-	}
-	
-	public void addProblem(org.emftext.term.propositional.expression.resource.expression.IExpressionProblem problem, int column, int line, int charStart, int charEnd) {
-		PositionBasedTextDiagnostic diagnostic = new PositionBasedTextDiagnostic(getURI(), problem, column, line, charStart, charEnd);
-		getDiagnostics(problem.getSeverity()).add(diagnostic);
-		if (new org.emftext.term.propositional.expression.resource.expression.util.ExpressionRuntimeUtil().isEclipsePlatformAvailable() && isMarkerCreationEnabled()) {
-			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMarkerHelper.mark(this, diagnostic);
-		}
-		addQuickFixesToQuickFixMap(problem);
-	}
-	
-	protected void addQuickFixesToQuickFixMap(org.emftext.term.propositional.expression.resource.expression.IExpressionProblem problem) {
 		java.util.Collection<org.emftext.term.propositional.expression.resource.expression.IExpressionQuickFix> quickFixes = problem.getQuickFixes();
 		if (quickFixes != null) {
 			for (org.emftext.term.propositional.expression.resource.expression.IExpressionQuickFix quickFix : quickFixes) {
@@ -532,6 +473,14 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 					quickFixMap.put(quickFix.getContextAsString(), quickFix);
 				}
 			}
+		}
+	}
+	
+	public void addProblem(org.emftext.term.propositional.expression.resource.expression.IExpressionProblem problem, int column, int line, int charStart, int charEnd) {
+		PositionBasedTextDiagnostic diagnostic = new PositionBasedTextDiagnostic(getURI(), problem, column, line, charStart, charEnd);
+		getDiagnostics(problem.getSeverity()).add(diagnostic);
+		if (isMarkerCreationEnabled()) {
+			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMarkerHelper.mark(this, diagnostic);
 		}
 	}
 	
@@ -553,7 +502,7 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		addProblem(new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionProblem(message, type, org.emftext.term.propositional.expression.resource.expression.ExpressionEProblemSeverity.WARNING), cause);
 	}
 	
-	protected java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getDiagnostics(org.emftext.term.propositional.expression.resource.expression.ExpressionEProblemSeverity severity) {
+	private java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getDiagnostics(org.emftext.term.propositional.expression.resource.expression.ExpressionEProblemSeverity severity) {
 		if (severity == org.emftext.term.propositional.expression.resource.expression.ExpressionEProblemSeverity.ERROR) {
 			return getErrors();
 		} else {
@@ -563,14 +512,59 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	
 	protected java.util.Map<Object, Object> addDefaultLoadOptions(java.util.Map<?, ?> loadOptions) {
 		java.util.Map<Object, Object> loadOptionsCopy = org.emftext.term.propositional.expression.resource.expression.util.ExpressionMapUtil.copySafelyToObjectToObjectMap(loadOptions);
-		// first add static option provider
-		loadOptionsCopy.putAll(new org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionOptionProvider().getOptions());
-		
-		// second, add dynamic option providers that are registered via extension
-		if (new org.emftext.term.propositional.expression.resource.expression.util.ExpressionRuntimeUtil().isEclipsePlatformAvailable()) {
-			new org.emftext.term.propositional.expression.resource.expression.util.ExpressionEclipseProxy().getDefaultLoadOptionProviderExtensions(loadOptionsCopy);
+		if (org.eclipse.core.runtime.Platform.isRunning()) {
+			// find default load option providers
+			org.eclipse.core.runtime.IExtensionRegistry extensionRegistry = org.eclipse.core.runtime.Platform.getExtensionRegistry();
+			org.eclipse.core.runtime.IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionPlugin.EP_DEFAULT_LOAD_OPTIONS_ID);
+			for (org.eclipse.core.runtime.IConfigurationElement element : configurationElements) {
+				try {
+					org.emftext.term.propositional.expression.resource.expression.IExpressionOptionProvider provider = (org.emftext.term.propositional.expression.resource.expression.IExpressionOptionProvider) element.createExecutableExtension("class");
+					final java.util.Map<?, ?> options = provider.getOptions();
+					final java.util.Collection<?> keys = options.keySet();
+					for (Object key : keys) {
+						addLoadOption(loadOptionsCopy, key, options.get(key));
+					}
+				} catch (org.eclipse.core.runtime.CoreException ce) {
+					org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionPlugin.logError("Exception while getting default options.", ce);
+				}
+			}
 		}
 		return loadOptionsCopy;
+	}
+	
+	/**
+	 * Adds a new key,value pair to the list of options. If there is already an option
+	 * with the same key, the two values are collected in a list.
+	 */
+	private void addLoadOption(java.util.Map<Object, Object> options,Object key, Object value) {
+		// check if there is already an option set
+		if (options.containsKey(key)) {
+			Object currentValue = options.get(key);
+			if (currentValue instanceof java.util.List<?>) {
+				// if the current value is a list, we add the new value to this list
+				java.util.List<?> currentValueAsList = (java.util.List<?>) currentValue;
+				java.util.List<Object> currentValueAsObjectList = org.emftext.term.propositional.expression.resource.expression.util.ExpressionListUtil.copySafelyToObjectList(currentValueAsList);
+				if (value instanceof java.util.Collection<?>) {
+					currentValueAsObjectList.addAll((java.util.Collection<?>) value);
+				} else {
+					currentValueAsObjectList.add(value);
+				}
+				options.put(key, currentValueAsObjectList);
+			} else {
+				// if the current value is not a list, we create a fresh list and add both the old
+				// (current) and the new value to this list
+				java.util.List<Object> newValueList = new java.util.ArrayList<Object>();
+				newValueList.add(currentValue);
+				if (value instanceof java.util.Collection<?>) {
+					newValueList.addAll((java.util.Collection<?>) value);
+				} else {
+					newValueList.add(value);
+				}
+				options.put(key, newValueList);
+			}
+		} else {
+			options.put(key, value);
+		}
 	}
 	
 	/**
@@ -583,7 +577,7 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		internalURIFragmentMap.clear();
 		getErrors().clear();
 		getWarnings().clear();
-		if (new org.emftext.term.propositional.expression.resource.expression.util.ExpressionRuntimeUtil().isEclipsePlatformAvailable() && isMarkerCreationEnabled()) {
+		if (isMarkerCreationEnabled()) {
 			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMarkerHelper.unmark(this, org.emftext.term.propositional.expression.resource.expression.ExpressionEProblemType.UNKNOWN);
 			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMarkerHelper.unmark(this, org.emftext.term.propositional.expression.resource.expression.ExpressionEProblemType.SYNTAX_ERROR);
 			org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMarkerHelper.unmark(this, org.emftext.term.propositional.expression.resource.expression.ExpressionEProblemType.UNRESOLVED_REFERENCE);
@@ -603,33 +597,72 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	}
 	
 	/**
-	 * Returns the raw contents of this resource. In contrast to getContents(), this
-	 * methods does not return a copy of the content list, but the original list.
+	 * Returns the raw contents of this resource.
 	 */
 	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> getContentsInternal() {
 		return super.getContents();
 	}
 	
-	/**
-	 * Returns all warnings that are associated with this resource.
-	 */
 	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getWarnings() {
 		return new org.emftext.term.propositional.expression.resource.expression.util.ExpressionCopiedEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>(super.getWarnings());
 	}
 	
-	/**
-	 * Returns all errors that are associated with this resource.
-	 */
 	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getErrors() {
 		return new org.emftext.term.propositional.expression.resource.expression.util.ExpressionCopiedEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>(super.getErrors());
 	}
 	
-	protected void runValidators(org.eclipse.emf.ecore.EObject root) {
-		// checking constraints provided by EMF validator classes was disabled by option
-		// 'disableEValidators'.
+	@SuppressWarnings("restriction")	
+	private void runValidators(org.eclipse.emf.ecore.EObject root) {
+		// checking constraints provided by EMF validator classes was disabled
 		
-		if (new org.emftext.term.propositional.expression.resource.expression.util.ExpressionRuntimeUtil().isEclipsePlatformAvailable()) {
-			new org.emftext.term.propositional.expression.resource.expression.util.ExpressionEclipseProxy().checkEMFValidationConstraints(this, root);
+		// check EMF validation constraints
+		// EMF validation does not work if OSGi is not running
+		// The EMF validation framework code throws a NPE if the validation plug-in is not
+		// loaded. This is a bug, which is fixed in the Helios release. Nonetheless, we
+		// need to catch the exception here.
+		if (org.eclipse.core.runtime.Platform.isRunning()) {
+			// The EMF validation framework code throws a NPE if the validation plug-in is not
+			// loaded. This is a workaround for bug 322079.
+			if (org.eclipse.emf.validation.internal.EMFModelValidationPlugin.getPlugin() != null) {
+				try {
+					org.eclipse.emf.validation.service.ModelValidationService service = org.eclipse.emf.validation.service.ModelValidationService.getInstance();
+					org.eclipse.emf.validation.service.IBatchValidator validator = service.<org.eclipse.emf.ecore.EObject, org.eclipse.emf.validation.service.IBatchValidator>newValidator(org.eclipse.emf.validation.model.EvaluationMode.BATCH);
+					validator.setIncludeLiveConstraints(true);
+					org.eclipse.core.runtime.IStatus status = validator.validate(root);
+					addStatus(status, root);
+				} catch (Throwable t) {
+					org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionPlugin.logError("Exception while checking contraints provided by EMF validator classes.", t);
+				}
+			}
+		}
+	}
+	
+	private void addStatus(org.eclipse.core.runtime.IStatus status, org.eclipse.emf.ecore.EObject root) {
+		java.util.List<org.eclipse.emf.ecore.EObject> causes = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
+		causes.add(root);
+		if (status instanceof org.eclipse.emf.validation.model.ConstraintStatus) {
+			org.eclipse.emf.validation.model.ConstraintStatus constraintStatus = (org.eclipse.emf.validation.model.ConstraintStatus) status;
+			java.util.Set<org.eclipse.emf.ecore.EObject> resultLocus = constraintStatus.getResultLocus();
+			causes.clear();
+			causes.addAll(resultLocus);
+		}
+		boolean hasChildren = status.getChildren() != null && status.getChildren().length > 0;
+		// Ignore composite status objects that have children. The actual status
+		// information is then contained in the child objects.
+		if (!status.isMultiStatus() || !hasChildren) {
+			if (status.getSeverity() == org.eclipse.core.runtime.IStatus.ERROR) {
+				for (org.eclipse.emf.ecore.EObject cause : causes) {
+					addError(status.getMessage(), org.emftext.term.propositional.expression.resource.expression.ExpressionEProblemType.ANALYSIS_PROBLEM, cause);
+				}
+			}
+			if (status.getSeverity() == org.eclipse.core.runtime.IStatus.WARNING) {
+				for (org.eclipse.emf.ecore.EObject cause : causes) {
+					addWarning(status.getMessage(), org.emftext.term.propositional.expression.resource.expression.ExpressionEProblemType.ANALYSIS_PROBLEM, cause);
+				}
+			}
+		}
+		for (org.eclipse.core.runtime.IStatus child : status.getChildren()) {
+			addStatus(child, root);
 		}
 	}
 	
@@ -643,12 +676,4 @@ public class ExpressionResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		}
 		return !loadOptions.containsKey(org.emftext.term.propositional.expression.resource.expression.IExpressionOptions.DISABLE_CREATING_MARKERS_FOR_PROBLEMS);
 	}
-	
-	protected boolean isLocationMapEnabled() {
-		if (loadOptions == null) {
-			return true;
-		}
-		return !loadOptions.containsKey(org.emftext.term.propositional.expression.resource.expression.IExpressionOptions.DISABLE_LOCATION_MAP);
-	}
-	
 }

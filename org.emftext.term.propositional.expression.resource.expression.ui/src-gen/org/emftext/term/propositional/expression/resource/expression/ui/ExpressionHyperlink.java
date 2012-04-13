@@ -83,9 +83,6 @@ public class ExpressionHyperlink implements org.eclipse.jface.text.hyperlink.IHy
 	
 	private org.eclipse.core.resources.IFile getIFileFromResource() {
 		org.eclipse.emf.ecore.resource.Resource linkTargetResource = linkTarget.eResource();
-		if (linkTargetResource == null) {
-			return null;
-		}
 		org.eclipse.emf.common.util.URI resourceURI = linkTargetResource.getURI();
 		if (linkTargetResource.getResourceSet() != null && linkTargetResource.getResourceSet().getURIConverter() != null) {
 			resourceURI = linkTargetResource.getResourceSet().getURIConverter().normalize(resourceURI);

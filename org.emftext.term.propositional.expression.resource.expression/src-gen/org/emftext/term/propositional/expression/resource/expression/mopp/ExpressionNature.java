@@ -15,7 +15,7 @@ public class ExpressionNature implements org.eclipse.core.resources.IProjectNatu
 	/**
 	 * the IDs of all builders, IDs of additional builders can be added here
 	 */
-	public final static String[] BUILDER_IDS = {org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionBuilderAdapter.BUILDER_ID, org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionTaskItemBuilder.BUILDER_ID};
+	public final static String[] BUILDER_IDS = {org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionBuilderAdapter.BUILDER_ID};
 	
 	public static void activate(org.eclipse.core.resources.IProject project) {
 		try {

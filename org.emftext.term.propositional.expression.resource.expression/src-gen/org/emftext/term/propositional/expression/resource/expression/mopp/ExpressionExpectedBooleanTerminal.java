@@ -23,13 +23,6 @@ public class ExpressionExpectedBooleanTerminal extends org.emftext.term.proposit
 		return booleanTerminal;
 	}
 	
-	/**
-	 * Returns the expected boolean terminal.
-	 */
-	public org.emftext.term.propositional.expression.resource.expression.grammar.ExpressionSyntaxElement getSymtaxElement() {
-		return booleanTerminal;
-	}
-	
 	private org.eclipse.emf.ecore.EStructuralFeature getFeature() {
 		return booleanTerminal.getFeature();
 	}

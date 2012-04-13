@@ -13,23 +13,13 @@ public class ExpressionOutlinePage extends org.eclipse.ui.part.Page implements o
 	
 	public final static String CONTEXT_MENU_ID = "org.emftext.term.propositional.expression.resource.expression.ui.outlinecontext";
 	
-	/**
-	 * The auto expand level determines the depth to which the outline tree is
-	 * expanded by default.
-	 */
-	public static int AUTO_EXPAND_LEVEL = 2;
-	
-	/**
-	 * The provider for the resource that is displayed in the outline page. Normally
-	 * this is the current editor.
-	 */
-	private org.emftext.term.propositional.expression.resource.expression.IExpressionResourceProvider resourceProvider;
-	private org.emftext.term.propositional.expression.resource.expression.ui.ExpressionOutlinePageTreeViewer treeViewer;
+	private org.emftext.term.propositional.expression.resource.expression.ui.ExpressionEditor editor;
+	private org.eclipse.jface.viewers.TreeViewer treeViewer;
 	private org.eclipse.core.runtime.ListenerList selectionChangedListeners = new org.eclipse.core.runtime.ListenerList();
 	
-	public ExpressionOutlinePage(org.emftext.term.propositional.expression.resource.expression.IExpressionResourceProvider resourceProvider) {
+	public ExpressionOutlinePage(org.emftext.term.propositional.expression.resource.expression.ui.ExpressionEditor textEditor) {
 		super();
-		this.resourceProvider = resourceProvider;
+		this.editor = textEditor;
 	}
 	
 	public void createControl(org.eclipse.swt.widgets.Composite parent) {
@@ -45,18 +35,17 @@ public class ExpressionOutlinePage extends org.eclipse.ui.part.Page implements o
 		adapterFactory.addAdapterFactory(new org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory());
 		org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider contentProvider = new org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider(adapterFactory);
-		treeViewer.setAutoExpandLevel(AUTO_EXPAND_LEVEL);
+		treeViewer.setAutoExpandLevel(3);
 		treeViewer.setContentProvider(contentProvider);
 		treeViewer.setLabelProvider(new org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider(adapterFactory));
-		org.eclipse.emf.ecore.resource.Resource resource = resourceProvider.getResource();
-		treeViewer.setInput(resource);
-		if (resource != null) {
+		org.eclipse.emf.ecore.resource.ResourceSet resourceSet = editor.getResourceSet();
+		org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.resource.Resource> resources = resourceSet.getResources();
+		treeViewer.setInput(resources.get(0));
+		if (!resources.isEmpty()) {
 			// Select the root object in the view.
-			treeViewer.setSelection(new org.eclipse.jface.viewers.StructuredSelection(resource), true);
+			treeViewer.setSelection(new org.eclipse.jface.viewers.StructuredSelection(resources.get(0)), true);
 		}
-		treeViewer.setComparator(new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionOutlinePageTreeViewerComparator());
 		createContextMenu();
-		createActions();
 	}
 	
 	private void createContextMenu() {
@@ -77,16 +66,6 @@ public class ExpressionOutlinePage extends org.eclipse.ui.part.Page implements o
 	
 	private void fillContextMenu(org.eclipse.jface.action.IMenuManager manager) {
 		manager.add(new org.eclipse.jface.action.GroupMarker(org.eclipse.ui.IWorkbenchActionConstants.MB_ADDITIONS));
-	}
-	
-	private void createActions() {
-		org.eclipse.ui.part.IPageSite site = getSite();
-		org.eclipse.ui.IActionBars actionBars = site.getActionBars();
-		org.eclipse.jface.action.IToolBarManager toolBarManager = actionBars.getToolBarManager();
-		java.util.List<org.eclipse.jface.action.IAction> actions = new org.emftext.term.propositional.expression.resource.expression.ui.ExpressionOutlinePageActionProvider().getActions(treeViewer);
-		for (org.eclipse.jface.action.IAction action : actions) {
-			toolBarManager.add(action);
-		}
 	}
 	
 	public void addSelectionChangedListener(org.eclipse.jface.viewers.ISelectionChangedListener listener) {
