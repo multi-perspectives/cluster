@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cluster:GroupModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:cluster="http://org.feature.cluster.model/schema/1.0">
+<cluster:GroupModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:cluster="http://org.feature.multi.perspective.model/schema/1.0">
   <coreGroup>
     <groups name="Basic" viewPointReference="//@viewPointContainer/@viewPoints.0 //@viewPointContainer/@viewPoints.1 //@viewPointContainer/@viewPoints.2">
       <groups name="Customized" viewPointReference="//@viewPointContainer/@viewPoints.3"/>
