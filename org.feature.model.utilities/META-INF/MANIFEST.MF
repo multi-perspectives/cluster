@@ -2,14 +2,14 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Utilities
 Bundle-SymbolicName: org.feature.model.utilities
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.4.0.qualifier
 Bundle-Activator: org.feature.model.utilities.UtilityPlugin
 Bundle-Vendor: Julia Schroeter
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources;bundle-version="3.7.100";visibility:=reexport,
  org.eclipse.emf.workspace;bundle-version="1.5.1";visibility:=reexport,
- org.feature.multi.perspective.model;bundle-version="1.0.0"
+ org.feature.multi.perspective.model;bundle-version="0.4.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/commons-collections-3.2.1.jar,

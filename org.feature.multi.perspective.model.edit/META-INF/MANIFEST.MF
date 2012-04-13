@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.feature.multi.perspective.model.edit;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.4.0.qualifier
 Bundle-ClassPath: .,
  lib/log4j-1.2.15.jar
 Bundle-Activator: org.feature.multi.perspective.model.cluster.provider.ClusterEditPlugin$Implementation
@@ -16,5 +16,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.edit;visibility:=reexport,
  org.eclipse.ui.console;bundle-version="3.5.100",
  org.eclipse.ui;bundle-version="3.7.0",
- org.feature.multi.perspective.model;bundle-version="1.0.0";visibility:=reexport
+ org.feature.multi.perspective.model;bundle-version="0.4.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy

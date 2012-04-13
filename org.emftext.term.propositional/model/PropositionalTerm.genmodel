@@ -6,7 +6,7 @@
     modelPluginID="org.emftext.term.propositional" modelName="PropositionalTerm" modelPluginClass="org.emftext.term.propositional.expression.PropositionalTermPlugin"
     testsDirectory="/org.emftext.term.propositiona.test/src-gen" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.emftext.term.propositional.edit"
-    editorPluginID="org.emftext.term.propositional.editor" usedGenPackages="../../org.js.model.feature.extended/model/feature.genmodel#//feature">
+    editorPluginID="org.emftext.term.propositional.editor" usedGenPackages="platform:/plugin/org.featuremapper.models.feature/model/feature.genmodel#//feature">
   <foreignModel>PropositionalTerm.ecore</foreignModel>
   <genPackages prefix="Term" basePackage="org.emftext.term.propositional" disposableProviderFactory="true"
       ecorePackage="PropositionalTerm.ecore#/">
