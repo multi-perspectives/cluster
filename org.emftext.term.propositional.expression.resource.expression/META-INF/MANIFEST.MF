@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFText Parser Plugin: expression
 Bundle-SymbolicName: org.emftext.term.propositional.expression.resource.expression;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 0.4.0.qualifier
 Bundle-Vendor: Software Technology Group - TU Dresden Germany
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf,
@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.emftext.access;resolution:=optional,
  org.emftext.commons.antlr3_4_0,
  org.emftext.term.propositional,
- org.feature.model.utilities;bundle-version="1.0.0"
+ org.feature.model.utilities;bundle-version="0.4.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.emftext.term.propositional.expression.resource.expression,

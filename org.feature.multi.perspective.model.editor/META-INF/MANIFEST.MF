@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.feature.multi.perspective.model.editor;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.4.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.feature.multi.perspective.model.cluster.presentation.ClusterEditorPlugin$Implementation
 Bundle-Vendor: %providerName
@@ -29,10 +29,10 @@ Require-Bundle: org.eclipse.core.runtime,
  org.featuremapper.models.feature.editor;bundle-version="0.8.0",
  org.eclipse.emf.validation;bundle-version="1.4.0",
  org.featuremapper.common;bundle-version="0.8.0",
- org.feature.model.utilities;bundle-version="1.0.0",
- org.feature.model.csp;bundle-version="1.0.0",
- org.emftext.term.propositional.expression.resource.expression;bundle-version="1.0.0",
- org.emftext.term.propositional;bundle-version="1.0.0",
- org.feature.multi.perspective.model.edit;bundle-version="1.0.0";visibility:=reexport
+ org.feature.model.utilities;bundle-version="0.4.0",
+ org.feature.model.csp;bundle-version="0.4.0",
+ org.emftext.term.propositional.expression.resource.expression;bundle-version="0.4.0",
+ org.emftext.term.propositional;bundle-version="0.4.0",
+ org.feature.multi.perspective.model.edit;bundle-version="0.4.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Import-Package: org.featuremapper.ui.views.filter
