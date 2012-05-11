@@ -30,10 +30,13 @@ public final class GroupModelUtil {
     * @param grupModel
     * @return list containing all groups
     */
-   public static List<Group> getAllGroups(GroupModel groupModel) {
+   public static List<Group> getAllGroups(GroupModel groupModel, boolean containCoreGroup) {
       List<Group> result = new ArrayList<Group>();
       CoreGroup core = groupModel.getCoreGroup();
       if (core != null) {
+         if (containCoreGroup){
+            result.add(core);
+         }
          result.addAll(getGroups(core));
       }
       return result;
