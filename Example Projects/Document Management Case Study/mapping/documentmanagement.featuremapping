@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="ASCII"?>
 <featuremapping:FeatureMappingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:featuremapping="http://www.tudresden.de/featuremapping" composerID="org.featuremapper.interpreter.emf.interpreter">
   <mappings xsi:type="featuremapping:ElementMapping">
-    <element href="../viewmodel/documentmanagement.cluster#//@coreGroup/@groups.0/@groups.0"/>
+    <element href="../viewmodel/documentmanagement.viewmodel#//@coreGroup/@groups.0/@groups.0"/>
     <term xsi:type="featuremapping:FeatureRef">
       <feature href="../feature/documentmanagement.feature#UnicodeTextType"/>
     </term>
   </mappings>
   <mappings xsi:type="featuremapping:ElementMapping">
-    <element href="../viewmodel/documentmanagement.cluster#//@coreGroup/@groups.1/@groups.1"/>
+    <element href="../viewmodel/documentmanagement.viewmodel#//@coreGroup/@groups.1/@groups.1"/>
     <term xsi:type="featuremapping:And">
       <terms xsi:type="featuremapping:FeatureRef">
         <feature href="../feature/documentmanagement.feature#ImageType"/>
@@ -24,7 +24,7 @@
     </term>
   </mappings>
   <mappings xsi:type="featuremapping:ElementMapping">
-    <element href="../viewmodel/documentmanagement.cluster#//@coreGroup/@groups.1"/>
+    <element href="../viewmodel/documentmanagement.viewmodel#//@coreGroup/@groups.1"/>
     <term xsi:type="featuremapping:And">
       <terms xsi:type="featuremapping:FeatureRef">
         <feature href="../feature/documentmanagement.feature#TitleSearch"/>
@@ -47,7 +47,7 @@
     </term>
   </mappings>
   <mappings xsi:type="featuremapping:ElementMapping">
-    <element href="../viewmodel/documentmanagement.cluster#//@coreGroup/@groups.0"/>
+    <element href="../viewmodel/documentmanagement.viewmodel#//@coreGroup/@groups.0"/>
     <term xsi:type="featuremapping:And">
       <terms xsi:type="featuremapping:FeatureRef">
         <feature href="../feature/documentmanagement.feature#PDFType"/>
@@ -64,7 +64,7 @@
     </term>
   </mappings>
   <mappings xsi:type="featuremapping:ElementMapping">
-    <element href="../viewmodel/documentmanagement.cluster#//@coreGroup/@groups.1/@groups.0"/>
+    <element href="../viewmodel/documentmanagement.viewmodel#//@coreGroup/@groups.1/@groups.0"/>
     <term xsi:type="featuremapping:And">
       <terms xsi:type="featuremapping:FeatureRef">
         <feature href="../feature/documentmanagement.feature#AuthorIndex"/>
@@ -78,6 +78,6 @@
     <value href="../feature/documentmanagement.feature#/"/>
   </featureModel>
   <solutionModels>
-    <value href="../viewmodel/documentmanagement.cluster#/"/>
+    <value href="../viewmodel/documentmanagement.viewmodel#/"/>
   </solutionModels>
 </featuremapping:FeatureMappingModel>
