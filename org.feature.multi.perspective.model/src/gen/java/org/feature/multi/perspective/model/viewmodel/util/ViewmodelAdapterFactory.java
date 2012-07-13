@@ -76,8 +76,8 @@ public class ViewmodelAdapterFactory extends AdapterFactoryImpl {
             return createCoreGroupAdapter();
          }
          @Override
-         public Adapter caseGroup(Group object) {
-            return createGroupAdapter();
+         public Adapter caseAbstractGroup(AbstractGroup object) {
+            return createAbstractGroupAdapter();
          }
          @Override
          public Adapter caseViewPoint(ViewPoint object) {
@@ -94,6 +94,10 @@ public class ViewmodelAdapterFactory extends AdapterFactoryImpl {
          @Override
          public Adapter caseViewPointContainer(ViewPointContainer object) {
             return createViewPointContainerAdapter();
+         }
+         @Override
+         public Adapter caseGroup(Group object) {
+            return createGroupAdapter();
          }
          @Override
          public Adapter defaultCase(EObject object) {
@@ -126,6 +130,20 @@ public class ViewmodelAdapterFactory extends AdapterFactoryImpl {
     * @generated
     */
    public Adapter createCoreGroupAdapter() {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.feature.multi.perspective.model.viewmodel.AbstractGroup <em>Abstract Group</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * @return the new adapter.
+    * @see org.feature.multi.perspective.model.viewmodel.AbstractGroup
+    * @generated
+    */
+   public Adapter createAbstractGroupAdapter() {
       return null;
    }
 

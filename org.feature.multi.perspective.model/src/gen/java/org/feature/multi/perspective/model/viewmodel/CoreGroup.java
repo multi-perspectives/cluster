@@ -17,5 +17,5 @@ package org.feature.multi.perspective.model.viewmodel;
  * @model
  * @generated
  */
-public interface CoreGroup extends Group {
+public interface CoreGroup extends AbstractGroup {
 } // CoreGroup

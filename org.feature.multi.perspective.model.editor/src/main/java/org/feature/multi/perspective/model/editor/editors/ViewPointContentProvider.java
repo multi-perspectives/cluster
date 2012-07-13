@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
+import org.feature.multi.perspective.model.viewmodel.AbstractGroup;
 import org.feature.multi.perspective.model.viewmodel.ViewmodelPackage;
 import org.feature.multi.perspective.model.viewmodel.CoreGroup;
 import org.feature.multi.perspective.model.viewmodel.Group;
@@ -140,8 +141,8 @@ public class ViewPointContentProvider implements ITreeContentProvider {
             coreGroups[0] = defaultGroupImpl;
             return coreGroups;
          } else {
-            EList<Group> groups = viewPoint.getContainedInGroup();
-            Group[] noRedundantGroups = catchSubGroup(groups);
+            EList<AbstractGroup> groups = viewPoint.getContainedInGroup();
+            AbstractGroup[] noRedundantGroups = catchSubGroup(groups);
             return noRedundantGroups;
          }
       } else if (parentElement instanceof GroupImpl) {
@@ -175,13 +176,13 @@ public class ViewPointContentProvider implements ITreeContentProvider {
     * @param groups groups to be checked
     * @return subset of groups
     */
-   private Group[] catchSubGroup(EList<Group> groups) {
-      Set<Group> listOfGroupsToRemove = new HashSet<Group>();
-      for (Group group : groups) {
+   private AbstractGroup[] catchSubGroup(EList<AbstractGroup> groups) {
+      Set<AbstractGroup> listOfGroupsToRemove = new HashSet<AbstractGroup>();
+      for (AbstractGroup group : groups) {
          EObject eContainer = group.eContainer();
          while (eContainer instanceof Group) {
-            Group subGroup = (Group) eContainer;
-            for (Group group2 : groups) {
+            AbstractGroup subGroup = (Group) eContainer;
+            for (AbstractGroup group2 : groups) {
                if (group2.getName().equals(subGroup.getName())) {
                   listOfGroupsToRemove.add(subGroup);
                }
@@ -189,9 +190,9 @@ public class ViewPointContentProvider implements ITreeContentProvider {
             eContainer = subGroup.eContainer();
          }
       }
-      Group[] newGroups = new Group[groups.size() - listOfGroupsToRemove.size()];
+      AbstractGroup[] newGroups = new Group[groups.size() - listOfGroupsToRemove.size()];
       int j = 0;
-      for (Group group : groups) {
+      for (AbstractGroup group : groups) {
          if (!listOfGroupsToRemove.contains(group)) {
             newGroups[j] = group;
             j++;

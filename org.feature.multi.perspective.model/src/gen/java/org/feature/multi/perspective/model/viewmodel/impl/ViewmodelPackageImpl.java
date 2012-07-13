@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EValidator;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.feature.multi.perspective.model.viewmodel.AbstractGroup;
 import org.feature.multi.perspective.model.viewmodel.CoreGroup;
 import org.feature.multi.perspective.model.viewmodel.Element;
 import org.feature.multi.perspective.model.viewmodel.Group;
@@ -40,6 +41,13 @@ public class ViewmodelPackageImpl extends EPackageImpl implements ViewmodelPacka
     * @generated
     */
    private EClass coreGroupEClass = null;
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   private EClass abstractGroupEClass = null;
 
    /**
     * <!-- begin-user-doc -->
@@ -160,6 +168,33 @@ public class ViewmodelPackageImpl extends EPackageImpl implements ViewmodelPacka
     * <!-- end-user-doc -->
     * @generated
     */
+   public EClass getAbstractGroup() {
+      return abstractGroupEClass;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   public EReference getAbstractGroup_ViewPointReference() {
+      return (EReference)abstractGroupEClass.getEStructuralFeatures().get(0);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   public EReference getAbstractGroup_Groups() {
+      return (EReference)abstractGroupEClass.getEStructuralFeatures().get(1);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
    public EClass getGroup() {
       return groupEClass;
    }
@@ -169,26 +204,8 @@ public class ViewmodelPackageImpl extends EPackageImpl implements ViewmodelPacka
     * <!-- end-user-doc -->
     * @generated
     */
-   public EReference getGroup_ViewPointReference() {
-      return (EReference)groupEClass.getEStructuralFeatures().get(0);
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * @generated
-    */
    public EReference getGroup_ParentGroup() {
-      return (EReference)groupEClass.getEStructuralFeatures().get(1);
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * @generated
-    */
-   public EReference getGroup_Groups() {
-      return (EReference)groupEClass.getEStructuralFeatures().get(2);
+      return (EReference)groupEClass.getEStructuralFeatures().get(0);
    }
 
    /**
@@ -302,10 +319,9 @@ public class ViewmodelPackageImpl extends EPackageImpl implements ViewmodelPacka
       // Create classes and their features
       coreGroupEClass = createEClass(CORE_GROUP);
 
-      groupEClass = createEClass(GROUP);
-      createEReference(groupEClass, GROUP__VIEW_POINT_REFERENCE);
-      createEReference(groupEClass, GROUP__PARENT_GROUP);
-      createEReference(groupEClass, GROUP__GROUPS);
+      abstractGroupEClass = createEClass(ABSTRACT_GROUP);
+      createEReference(abstractGroupEClass, ABSTRACT_GROUP__VIEW_POINT_REFERENCE);
+      createEReference(abstractGroupEClass, ABSTRACT_GROUP__GROUPS);
 
       viewPointEClass = createEClass(VIEW_POINT);
       createEReference(viewPointEClass, VIEW_POINT__CONTAINED_IN_GROUP);
@@ -319,6 +335,9 @@ public class ViewmodelPackageImpl extends EPackageImpl implements ViewmodelPacka
 
       viewPointContainerEClass = createEClass(VIEW_POINT_CONTAINER);
       createEReference(viewPointContainerEClass, VIEW_POINT_CONTAINER__VIEW_POINTS);
+
+      groupEClass = createEClass(GROUP);
+      createEReference(groupEClass, GROUP__PARENT_GROUP);
    }
 
    /**
@@ -349,19 +368,19 @@ public class ViewmodelPackageImpl extends EPackageImpl implements ViewmodelPacka
       // Set bounds for type parameters
 
       // Add supertypes to classes
-      coreGroupEClass.getESuperTypes().add(this.getGroup());
-      groupEClass.getESuperTypes().add(this.getElement());
+      coreGroupEClass.getESuperTypes().add(this.getAbstractGroup());
+      abstractGroupEClass.getESuperTypes().add(this.getElement());
       viewPointEClass.getESuperTypes().add(this.getElement());
+      groupEClass.getESuperTypes().add(this.getAbstractGroup());
 
       // Initialize classes and features; add operations and parameters
       initEClass(coreGroupEClass, CoreGroup.class, "CoreGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-      initEClass(groupEClass, Group.class, "Group", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-      initEReference(getGroup_ViewPointReference(), this.getViewPoint(), null, "viewPointReference", null, 0, -1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEReference(getGroup_ParentGroup(), this.getGroup(), this.getGroup_Groups(), "parentGroup", null, 0, 1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEReference(getGroup_Groups(), this.getGroup(), this.getGroup_ParentGroup(), "groups", null, 0, -1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEClass(abstractGroupEClass, AbstractGroup.class, "AbstractGroup", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+      initEReference(getAbstractGroup_ViewPointReference(), this.getViewPoint(), this.getViewPoint_ContainedInGroup(), "viewPointReference", null, 0, -1, AbstractGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEReference(getAbstractGroup_Groups(), this.getGroup(), this.getGroup_ParentGroup(), "groups", null, 0, -1, AbstractGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-      EOperation op = addEOperation(groupEClass, ecorePackage.getEBoolean(), "checkForRedundantViewPoints", 1, 1, IS_UNIQUE, IS_ORDERED);
+      EOperation op = addEOperation(abstractGroupEClass, ecorePackage.getEBoolean(), "checkForRedundantViewPoints", 1, 1, IS_UNIQUE, IS_ORDERED);
       addEParameter(op, ecorePackage.getEDiagnosticChain(), "eDiagnosticChain", 1, 1, IS_UNIQUE, IS_ORDERED);
       EGenericType g1 = createEGenericType(ecorePackage.getEMap());
       EGenericType g2 = createEGenericType();
@@ -371,7 +390,7 @@ public class ViewmodelPackageImpl extends EPackageImpl implements ViewmodelPacka
       addEParameter(op, g1, "eMap", 1, 1, IS_UNIQUE, IS_ORDERED);
 
       initEClass(viewPointEClass, ViewPoint.class, "ViewPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-      initEReference(getViewPoint_ContainedInGroup(), this.getGroup(), null, "containedInGroup", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEReference(getViewPoint_ContainedInGroup(), this.getAbstractGroup(), this.getAbstractGroup_ViewPointReference(), "containedInGroup", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
       initEClass(elementEClass, Element.class, "Element", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
       initEAttribute(getElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -382,6 +401,9 @@ public class ViewmodelPackageImpl extends EPackageImpl implements ViewmodelPacka
 
       initEClass(viewPointContainerEClass, ViewPointContainer.class, "ViewPointContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
       initEReference(getViewPointContainer_ViewPoints(), this.getViewPoint(), null, "viewPoints", null, 0, -1, ViewPointContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+      initEClass(groupEClass, Group.class, "Group", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+      initEReference(getGroup_ParentGroup(), this.getAbstractGroup(), this.getAbstractGroup_Groups(), "parentGroup", null, 0, 1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
       // Create resource
       createResource(eNS_URI);

@@ -27,7 +27,8 @@ import org.eclipse.emf.common.util.EList;
 public interface ViewPoint extends Element {
    /**
     * Returns the value of the '<em><b>Contained In Group</b></em>' reference list.
-    * The list contents are of type {@link org.feature.multi.perspective.model.viewmodel.Group}.
+    * The list contents are of type {@link org.feature.multi.perspective.model.viewmodel.AbstractGroup}.
+    * It is bidirectional and its opposite is '{@link org.feature.multi.perspective.model.viewmodel.AbstractGroup#getViewPointReference <em>View Point Reference</em>}'.
     * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Contained In Group</em>' reference list isn't clear,
@@ -36,9 +37,10 @@ public interface ViewPoint extends Element {
     * <!-- end-user-doc -->
     * @return the value of the '<em>Contained In Group</em>' reference list.
     * @see org.feature.multi.perspective.model.viewmodel.ViewmodelPackage#getViewPoint_ContainedInGroup()
-    * @model changeable="false"
+    * @see org.feature.multi.perspective.model.viewmodel.AbstractGroup#getViewPointReference
+    * @model opposite="viewPointReference" changeable="false"
     * @generated
     */
-   EList<Group> getContainedInGroup();
+   EList<AbstractGroup> getContainedInGroup();
 
 } // ViewPoint

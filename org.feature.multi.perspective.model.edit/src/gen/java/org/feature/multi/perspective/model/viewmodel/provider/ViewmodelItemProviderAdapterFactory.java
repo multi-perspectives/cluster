@@ -292,10 +292,10 @@ public class ViewmodelItemProviderAdapterFactory extends ViewmodelAdapterFactory
     */
    public void dispose() {
       if (coreGroupItemProvider != null) coreGroupItemProvider.dispose();
-      if (groupItemProvider != null) groupItemProvider.dispose();
       if (viewPointItemProvider != null) viewPointItemProvider.dispose();
       if (groupModelItemProvider != null) groupModelItemProvider.dispose();
       if (viewPointContainerItemProvider != null) viewPointContainerItemProvider.dispose();
+      if (groupItemProvider != null) groupItemProvider.dispose();
    }
 
 }

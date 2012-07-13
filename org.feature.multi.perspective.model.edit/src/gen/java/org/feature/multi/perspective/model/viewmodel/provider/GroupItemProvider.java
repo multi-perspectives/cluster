@@ -36,7 +36,7 @@ import org.feature.multi.perspective.model.viewmodel.ViewmodelPackage;
  * @generated
  */
 public class GroupItemProvider
-   extends ElementItemProvider
+   extends AbstractGroupItemProvider
    implements
       IEditingDomainItemProvider,
       IStructuredItemContentProvider,
@@ -65,61 +65,8 @@ public class GroupItemProvider
       if (itemPropertyDescriptors == null) {
          super.getPropertyDescriptors(object);
 
-         addViewPointReferencePropertyDescriptor(object);
       }
       return itemPropertyDescriptors;
-   }
-
-   /**
-    * This adds a property descriptor for the View Point Reference feature.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * @generated
-    */
-   protected void addViewPointReferencePropertyDescriptor(Object object) {
-      itemPropertyDescriptors.add
-         (createItemPropertyDescriptor
-            (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-             getResourceLocator(),
-             getString("_UI_Group_viewPointReference_feature"),
-             getString("_UI_PropertyDescriptor_description", "_UI_Group_viewPointReference_feature", "_UI_Group_type"),
-             ViewmodelPackage.Literals.GROUP__VIEW_POINT_REFERENCE,
-             true,
-             false,
-             true,
-             null,
-             null,
-             null));
-   }
-
-   /**
-    * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-    * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-    * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * @generated
-    */
-   @Override
-   public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-      if (childrenFeatures == null) {
-         super.getChildrenFeatures(object);
-         childrenFeatures.add(ViewmodelPackage.Literals.GROUP__GROUPS);
-      }
-      return childrenFeatures;
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * @generated
-    */
-   @Override
-   protected EStructuralFeature getChildFeature(Object object, Object child) {
-      // Check the type of the specified child object and return the proper feature to use for
-      // adding (see {@link AddCommand}) it as a child.
-
-      return super.getChildFeature(object, child);
    }
 
    /**
@@ -157,12 +104,6 @@ public class GroupItemProvider
    @Override
    public void notifyChanged(Notification notification) {
       updateChildren(notification);
-
-      switch (notification.getFeatureID(Group.class)) {
-         case ViewmodelPackage.GROUP__GROUPS:
-            fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-            return;
-      }
       super.notifyChanged(notification);
    }
 
@@ -176,16 +117,6 @@ public class GroupItemProvider
    @Override
    protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
       super.collectNewChildDescriptors(newChildDescriptors, object);
-
-      newChildDescriptors.add
-         (createChildParameter
-            (ViewmodelPackage.Literals.GROUP__GROUPS,
-             ViewmodelFactory.eINSTANCE.createGroup()));
-
-      newChildDescriptors.add
-         (createChildParameter
-            (ViewmodelPackage.Literals.GROUP__GROUPS,
-             ViewmodelFactory.eINSTANCE.createCoreGroup()));
    }
 
 }

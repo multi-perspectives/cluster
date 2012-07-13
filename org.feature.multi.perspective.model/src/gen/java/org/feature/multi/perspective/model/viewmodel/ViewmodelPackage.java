@@ -88,14 +88,14 @@ public interface ViewmodelPackage extends EPackage {
    int ELEMENT_FEATURE_COUNT = 1;
 
    /**
-    * The meta object id for the '{@link org.feature.multi.perspective.model.viewmodel.impl.GroupImpl <em>Group</em>}' class.
+    * The meta object id for the '{@link org.feature.multi.perspective.model.viewmodel.impl.AbstractGroupImpl <em>Abstract Group</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @see org.feature.multi.perspective.model.viewmodel.impl.GroupImpl
-    * @see org.feature.multi.perspective.model.viewmodel.impl.ViewmodelPackageImpl#getGroup()
+    * @see org.feature.multi.perspective.model.viewmodel.impl.AbstractGroupImpl
+    * @see org.feature.multi.perspective.model.viewmodel.impl.ViewmodelPackageImpl#getAbstractGroup()
     * @generated
     */
-   int GROUP = 1;
+   int ABSTRACT_GROUP = 1;
 
    /**
     * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -104,7 +104,7 @@ public interface ViewmodelPackage extends EPackage {
     * @generated
     * @ordered
     */
-   int GROUP__NAME = ELEMENT__NAME;
+   int ABSTRACT_GROUP__NAME = ELEMENT__NAME;
 
    /**
     * The feature id for the '<em><b>View Point Reference</b></em>' reference list.
@@ -113,16 +113,7 @@ public interface ViewmodelPackage extends EPackage {
     * @generated
     * @ordered
     */
-   int GROUP__VIEW_POINT_REFERENCE = ELEMENT_FEATURE_COUNT + 0;
-
-   /**
-    * The feature id for the '<em><b>Parent Group</b></em>' container reference.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * @generated
-    * @ordered
-    */
-   int GROUP__PARENT_GROUP = ELEMENT_FEATURE_COUNT + 1;
+   int ABSTRACT_GROUP__VIEW_POINT_REFERENCE = ELEMENT_FEATURE_COUNT + 0;
 
    /**
     * The feature id for the '<em><b>Groups</b></em>' containment reference list.
@@ -131,16 +122,26 @@ public interface ViewmodelPackage extends EPackage {
     * @generated
     * @ordered
     */
-   int GROUP__GROUPS = ELEMENT_FEATURE_COUNT + 2;
+   int ABSTRACT_GROUP__GROUPS = ELEMENT_FEATURE_COUNT + 1;
 
    /**
-    * The number of structural features of the '<em>Group</em>' class.
+    * The number of structural features of the '<em>Abstract Group</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * @generated
     * @ordered
     */
-   int GROUP_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 3;
+   int ABSTRACT_GROUP_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
+
+   /**
+    * The meta object id for the '{@link org.feature.multi.perspective.model.viewmodel.impl.GroupImpl <em>Group</em>}' class.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @see org.feature.multi.perspective.model.viewmodel.impl.GroupImpl
+    * @see org.feature.multi.perspective.model.viewmodel.impl.ViewmodelPackageImpl#getGroup()
+    * @generated
+    */
+   int GROUP = 6;
 
    /**
     * The meta object id for the '{@link org.feature.multi.perspective.model.viewmodel.impl.CoreGroupImpl <em>Core Group</em>}' class.
@@ -159,7 +160,7 @@ public interface ViewmodelPackage extends EPackage {
     * @generated
     * @ordered
     */
-   int CORE_GROUP__NAME = GROUP__NAME;
+   int CORE_GROUP__NAME = ABSTRACT_GROUP__NAME;
 
    /**
     * The feature id for the '<em><b>View Point Reference</b></em>' reference list.
@@ -168,16 +169,7 @@ public interface ViewmodelPackage extends EPackage {
     * @generated
     * @ordered
     */
-   int CORE_GROUP__VIEW_POINT_REFERENCE = GROUP__VIEW_POINT_REFERENCE;
-
-   /**
-    * The feature id for the '<em><b>Parent Group</b></em>' container reference.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * @generated
-    * @ordered
-    */
-   int CORE_GROUP__PARENT_GROUP = GROUP__PARENT_GROUP;
+   int CORE_GROUP__VIEW_POINT_REFERENCE = ABSTRACT_GROUP__VIEW_POINT_REFERENCE;
 
    /**
     * The feature id for the '<em><b>Groups</b></em>' containment reference list.
@@ -186,7 +178,7 @@ public interface ViewmodelPackage extends EPackage {
     * @generated
     * @ordered
     */
-   int CORE_GROUP__GROUPS = GROUP__GROUPS;
+   int CORE_GROUP__GROUPS = ABSTRACT_GROUP__GROUPS;
 
    /**
     * The number of structural features of the '<em>Core Group</em>' class.
@@ -195,7 +187,7 @@ public interface ViewmodelPackage extends EPackage {
     * @generated
     * @ordered
     */
-   int CORE_GROUP_FEATURE_COUNT = GROUP_FEATURE_COUNT + 0;
+   int CORE_GROUP_FEATURE_COUNT = ABSTRACT_GROUP_FEATURE_COUNT + 0;
 
    /**
     * The meta object id for the '{@link org.feature.multi.perspective.model.viewmodel.impl.ViewPointImpl <em>View Point</em>}' class.
@@ -299,6 +291,51 @@ public interface ViewmodelPackage extends EPackage {
     */
    int VIEW_POINT_CONTAINER_FEATURE_COUNT = 1;
 
+   /**
+    * The feature id for the '<em><b>Name</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    * @ordered
+    */
+   int GROUP__NAME = ABSTRACT_GROUP__NAME;
+
+   /**
+    * The feature id for the '<em><b>View Point Reference</b></em>' reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    * @ordered
+    */
+   int GROUP__VIEW_POINT_REFERENCE = ABSTRACT_GROUP__VIEW_POINT_REFERENCE;
+
+   /**
+    * The feature id for the '<em><b>Groups</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    * @ordered
+    */
+   int GROUP__GROUPS = ABSTRACT_GROUP__GROUPS;
+
+   /**
+    * The feature id for the '<em><b>Parent Group</b></em>' container reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    * @ordered
+    */
+   int GROUP__PARENT_GROUP = ABSTRACT_GROUP_FEATURE_COUNT + 0;
+
+   /**
+    * The number of structural features of the '<em>Group</em>' class.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    * @ordered
+    */
+   int GROUP_FEATURE_COUNT = ABSTRACT_GROUP_FEATURE_COUNT + 1;
+
 
    /**
     * Returns the meta object for class '{@link org.feature.multi.perspective.model.viewmodel.CoreGroup <em>Core Group</em>}'.
@@ -311,6 +348,38 @@ public interface ViewmodelPackage extends EPackage {
    EClass getCoreGroup();
 
    /**
+    * Returns the meta object for class '{@link org.feature.multi.perspective.model.viewmodel.AbstractGroup <em>Abstract Group</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @return the meta object for class '<em>Abstract Group</em>'.
+    * @see org.feature.multi.perspective.model.viewmodel.AbstractGroup
+    * @generated
+    */
+   EClass getAbstractGroup();
+
+   /**
+    * Returns the meta object for the reference list '{@link org.feature.multi.perspective.model.viewmodel.AbstractGroup#getViewPointReference <em>View Point Reference</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @return the meta object for the reference list '<em>View Point Reference</em>'.
+    * @see org.feature.multi.perspective.model.viewmodel.AbstractGroup#getViewPointReference()
+    * @see #getAbstractGroup()
+    * @generated
+    */
+   EReference getAbstractGroup_ViewPointReference();
+
+   /**
+    * Returns the meta object for the containment reference list '{@link org.feature.multi.perspective.model.viewmodel.AbstractGroup#getGroups <em>Groups</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @return the meta object for the containment reference list '<em>Groups</em>'.
+    * @see org.feature.multi.perspective.model.viewmodel.AbstractGroup#getGroups()
+    * @see #getAbstractGroup()
+    * @generated
+    */
+   EReference getAbstractGroup_Groups();
+
+   /**
     * Returns the meta object for class '{@link org.feature.multi.perspective.model.viewmodel.Group <em>Group</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -319,17 +388,6 @@ public interface ViewmodelPackage extends EPackage {
     * @generated
     */
    EClass getGroup();
-
-   /**
-    * Returns the meta object for the reference list '{@link org.feature.multi.perspective.model.viewmodel.Group#getViewPointReference <em>View Point Reference</em>}'.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * @return the meta object for the reference list '<em>View Point Reference</em>'.
-    * @see org.feature.multi.perspective.model.viewmodel.Group#getViewPointReference()
-    * @see #getGroup()
-    * @generated
-    */
-   EReference getGroup_ViewPointReference();
 
    /**
     * Returns the meta object for the container reference '{@link org.feature.multi.perspective.model.viewmodel.Group#getParentGroup <em>Parent Group</em>}'.
@@ -341,17 +399,6 @@ public interface ViewmodelPackage extends EPackage {
     * @generated
     */
    EReference getGroup_ParentGroup();
-
-   /**
-    * Returns the meta object for the containment reference list '{@link org.feature.multi.perspective.model.viewmodel.Group#getGroups <em>Groups</em>}'.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * @return the meta object for the containment reference list '<em>Groups</em>'.
-    * @see org.feature.multi.perspective.model.viewmodel.Group#getGroups()
-    * @see #getGroup()
-    * @generated
-    */
-   EReference getGroup_Groups();
 
    /**
     * Returns the meta object for class '{@link org.feature.multi.perspective.model.viewmodel.ViewPoint <em>View Point</em>}'.
@@ -481,6 +528,32 @@ public interface ViewmodelPackage extends EPackage {
       EClass CORE_GROUP = eINSTANCE.getCoreGroup();
 
       /**
+       * The meta object literal for the '{@link org.feature.multi.perspective.model.viewmodel.impl.AbstractGroupImpl <em>Abstract Group</em>}' class.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * @see org.feature.multi.perspective.model.viewmodel.impl.AbstractGroupImpl
+       * @see org.feature.multi.perspective.model.viewmodel.impl.ViewmodelPackageImpl#getAbstractGroup()
+       * @generated
+       */
+      EClass ABSTRACT_GROUP = eINSTANCE.getAbstractGroup();
+
+      /**
+       * The meta object literal for the '<em><b>View Point Reference</b></em>' reference list feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * @generated
+       */
+      EReference ABSTRACT_GROUP__VIEW_POINT_REFERENCE = eINSTANCE.getAbstractGroup_ViewPointReference();
+
+      /**
+       * The meta object literal for the '<em><b>Groups</b></em>' containment reference list feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * @generated
+       */
+      EReference ABSTRACT_GROUP__GROUPS = eINSTANCE.getAbstractGroup_Groups();
+
+      /**
        * The meta object literal for the '{@link org.feature.multi.perspective.model.viewmodel.impl.GroupImpl <em>Group</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
@@ -491,28 +564,12 @@ public interface ViewmodelPackage extends EPackage {
       EClass GROUP = eINSTANCE.getGroup();
 
       /**
-       * The meta object literal for the '<em><b>View Point Reference</b></em>' reference list feature.
-       * <!-- begin-user-doc -->
-       * <!-- end-user-doc -->
-       * @generated
-       */
-      EReference GROUP__VIEW_POINT_REFERENCE = eINSTANCE.getGroup_ViewPointReference();
-
-      /**
        * The meta object literal for the '<em><b>Parent Group</b></em>' container reference feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
        * @generated
        */
       EReference GROUP__PARENT_GROUP = eINSTANCE.getGroup_ParentGroup();
-
-      /**
-       * The meta object literal for the '<em><b>Groups</b></em>' containment reference list feature.
-       * <!-- begin-user-doc -->
-       * <!-- end-user-doc -->
-       * @generated
-       */
-      EReference GROUP__GROUPS = eINSTANCE.getGroup_Groups();
 
       /**
        * The meta object literal for the '{@link org.feature.multi.perspective.model.viewmodel.impl.ViewPointImpl <em>View Point</em>}' class.

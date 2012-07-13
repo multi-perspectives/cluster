@@ -7,6 +7,7 @@ package org.feature.multi.perspective.model.editor.editors.algorithms;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.feature.multi.perspective.model.viewmodel.AbstractGroup;
 import org.feature.multi.perspective.model.viewmodel.Group;
 import org.featuremapper.models.feature.Feature;
 
@@ -16,7 +17,7 @@ import org.featuremapper.models.feature.Feature;
  */
 public class UsedGroup {
 	private UsedGroup parentGroup;
-	private Group group;
+	private AbstractGroup group;
 	private Set<Feature> features = new HashSet<Feature>();
 	private boolean consistent = false;
 	private boolean done = false;
@@ -27,7 +28,7 @@ public class UsedGroup {
 	 * @param features
 	 */
 	public UsedGroup(UsedGroup parentGroup,
-			Group group, Set<Feature> features) {
+	                 AbstractGroup group, Set<Feature> features) {
 		super();
 		this.parentGroup = parentGroup;
 		this.group = group;
@@ -51,13 +52,13 @@ public class UsedGroup {
 	/**
 	 * @return the group
 	 */
-	public Group getGroup() {
+	public AbstractGroup getGroup() {
 		return group;
 	}
 	/**
 	 * @param group the group to set
 	 */
-	public void setGroup(Group group) {
+	public void setGroup(AbstractGroup group) {
 		this.group = group;
 	}
 	/**

@@ -61,10 +61,10 @@ public class ViewmodelFactoryImpl extends EFactoryImpl implements ViewmodelFacto
    public EObject create(EClass eClass) {
       switch (eClass.getClassifierID()) {
          case ViewmodelPackage.CORE_GROUP: return createCoreGroup();
-         case ViewmodelPackage.GROUP: return createGroup();
          case ViewmodelPackage.VIEW_POINT: return createViewPoint();
          case ViewmodelPackage.GROUP_MODEL: return createGroupModel();
          case ViewmodelPackage.VIEW_POINT_CONTAINER: return createViewPointContainer();
+         case ViewmodelPackage.GROUP: return createGroup();
          default:
             throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
       }

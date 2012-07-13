@@ -73,15 +73,15 @@ public class ViewmodelSwitch<T> extends Switch<T> {
          case ViewmodelPackage.CORE_GROUP: {
             CoreGroup coreGroup = (CoreGroup)theEObject;
             T result = caseCoreGroup(coreGroup);
-            if (result == null) result = caseGroup(coreGroup);
+            if (result == null) result = caseAbstractGroup(coreGroup);
             if (result == null) result = caseElement(coreGroup);
             if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case ViewmodelPackage.GROUP: {
-            Group group = (Group)theEObject;
-            T result = caseGroup(group);
-            if (result == null) result = caseElement(group);
+         case ViewmodelPackage.ABSTRACT_GROUP: {
+            AbstractGroup abstractGroup = (AbstractGroup)theEObject;
+            T result = caseAbstractGroup(abstractGroup);
+            if (result == null) result = caseElement(abstractGroup);
             if (result == null) result = defaultCase(theEObject);
             return result;
          }
@@ -110,6 +110,14 @@ public class ViewmodelSwitch<T> extends Switch<T> {
             if (result == null) result = defaultCase(theEObject);
             return result;
          }
+         case ViewmodelPackage.GROUP: {
+            Group group = (Group)theEObject;
+            T result = caseGroup(group);
+            if (result == null) result = caseAbstractGroup(group);
+            if (result == null) result = caseElement(group);
+            if (result == null) result = defaultCase(theEObject);
+            return result;
+         }
          default: return defaultCase(theEObject);
       }
    }
@@ -126,6 +134,21 @@ public class ViewmodelSwitch<T> extends Switch<T> {
     * @generated
     */
    public T caseCoreGroup(CoreGroup object) {
+      return null;
+   }
+
+   /**
+    * Returns the result of interpreting the object as an instance of '<em>Abstract Group</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
+    * @param object the target of the switch.
+    * @return the result of interpreting the object as an instance of '<em>Abstract Group</em>'.
+    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+    * @generated
+    */
+   public T caseAbstractGroup(AbstractGroup object) {
       return null;
    }
 

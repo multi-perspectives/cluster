@@ -20,7 +20,7 @@ import org.feature.multi.perspective.model.viewmodel.ViewmodelPackage;
  *
  * @generated
  */
-public class CoreGroupImpl extends GroupImpl implements CoreGroup {
+public class CoreGroupImpl extends AbstractGroupImpl implements CoreGroup {
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->

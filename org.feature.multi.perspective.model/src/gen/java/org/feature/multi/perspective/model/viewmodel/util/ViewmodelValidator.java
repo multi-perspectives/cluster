@@ -44,12 +44,12 @@ public class ViewmodelValidator extends EObjectValidator {
    public static final String DIAGNOSTIC_SOURCE = "org.feature.multi.perspective.model.viewmodel";
 
    /**
-    * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Check For Redundant View Points' of 'Group'.
+    * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Check For Redundant View Points' of 'Abstract Group'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * @generated
     */
-   public static final int GROUP__CHECK_FOR_REDUNDANT_VIEW_POINTS = 1;
+   public static final int ABSTRACT_GROUP__CHECK_FOR_REDUNDANT_VIEW_POINTS = 1;
 
    /**
     * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -99,8 +99,8 @@ public class ViewmodelValidator extends EObjectValidator {
       switch (classifierID) {
          case ViewmodelPackage.CORE_GROUP:
             return validateCoreGroup((CoreGroup)value, diagnostics, context);
-         case ViewmodelPackage.GROUP:
-            return validateGroup((Group)value, diagnostics, context);
+         case ViewmodelPackage.ABSTRACT_GROUP:
+            return validateAbstractGroup((AbstractGroup)value, diagnostics, context);
          case ViewmodelPackage.VIEW_POINT:
             return validateViewPoint((ViewPoint)value, diagnostics, context);
          case ViewmodelPackage.ELEMENT:
@@ -109,6 +109,8 @@ public class ViewmodelValidator extends EObjectValidator {
             return validateGroupModel((GroupModel)value, diagnostics, context);
          case ViewmodelPackage.VIEW_POINT_CONTAINER:
             return validateViewPointContainer((ViewPointContainer)value, diagnostics, context);
+         case ViewmodelPackage.GROUP:
+            return validateGroup((Group)value, diagnostics, context);
          default:
             return true;
       }
@@ -129,8 +131,37 @@ public class ViewmodelValidator extends EObjectValidator {
       if (result || diagnostics != null) result &= validate_UniqueID(coreGroup, diagnostics, context);
       if (result || diagnostics != null) result &= validate_EveryKeyUnique(coreGroup, diagnostics, context);
       if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(coreGroup, diagnostics, context);
-      if (result || diagnostics != null) result &= validateGroup_checkForRedundantViewPoints(coreGroup, diagnostics, context);
+      if (result || diagnostics != null) result &= validateAbstractGroup_checkForRedundantViewPoints(coreGroup, diagnostics, context);
       return result;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   public boolean validateAbstractGroup(AbstractGroup abstractGroup, DiagnosticChain diagnostics, Map<Object, Object> context) {
+      if (!validate_NoCircularContainment(abstractGroup, diagnostics, context)) return false;
+      boolean result = validate_EveryMultiplicityConforms(abstractGroup, diagnostics, context);
+      if (result || diagnostics != null) result &= validate_EveryDataValueConforms(abstractGroup, diagnostics, context);
+      if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(abstractGroup, diagnostics, context);
+      if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(abstractGroup, diagnostics, context);
+      if (result || diagnostics != null) result &= validate_EveryProxyResolves(abstractGroup, diagnostics, context);
+      if (result || diagnostics != null) result &= validate_UniqueID(abstractGroup, diagnostics, context);
+      if (result || diagnostics != null) result &= validate_EveryKeyUnique(abstractGroup, diagnostics, context);
+      if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(abstractGroup, diagnostics, context);
+      if (result || diagnostics != null) result &= validateAbstractGroup_checkForRedundantViewPoints(abstractGroup, diagnostics, context);
+      return result;
+   }
+
+   /**
+    * Validates the checkForRedundantViewPoints constraint of '<em>Abstract Group</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   public boolean validateAbstractGroup_checkForRedundantViewPoints(AbstractGroup abstractGroup, DiagnosticChain diagnostics, Map<Object, Object> context) {
+      return abstractGroup.checkForRedundantViewPoints(diagnostics, context);
    }
 
    /**
@@ -148,18 +179,8 @@ public class ViewmodelValidator extends EObjectValidator {
       if (result || diagnostics != null) result &= validate_UniqueID(group, diagnostics, context);
       if (result || diagnostics != null) result &= validate_EveryKeyUnique(group, diagnostics, context);
       if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(group, diagnostics, context);
-      if (result || diagnostics != null) result &= validateGroup_checkForRedundantViewPoints(group, diagnostics, context);
+      if (result || diagnostics != null) result &= validateAbstractGroup_checkForRedundantViewPoints(group, diagnostics, context);
       return result;
-   }
-
-   /**
-    * Validates the checkForRedundantViewPoints constraint of '<em>Group</em>'.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * @generated
-    */
-   public boolean validateGroup_checkForRedundantViewPoints(Group group, DiagnosticChain diagnostics, Map<Object, Object> context) {
-      return group.checkForRedundantViewPoints(diagnostics, context);
    }
 
    /**

@@ -9,6 +9,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.feature.multi.perspective.model.viewmodel.AbstractGroup;
 import org.feature.multi.perspective.model.viewmodel.CoreGroup;
 import org.feature.multi.perspective.model.viewmodel.Group;
 import org.feature.multi.perspective.model.viewmodel.GroupModel;
@@ -30,8 +31,8 @@ public final class GroupModelUtil {
     * @param grupModel
     * @return list containing all groups
     */
-   public static List<Group> getAllGroups(GroupModel groupModel, boolean containCoreGroup) {
-      List<Group> result = new ArrayList<Group>();
+   public static List<AbstractGroup> getAllGroups(GroupModel groupModel, boolean containCoreGroup) {
+      List<AbstractGroup> result = new ArrayList<AbstractGroup>();
       CoreGroup core = groupModel.getCoreGroup();
       if (core != null) {
          if (containCoreGroup){
@@ -42,11 +43,11 @@ public final class GroupModelUtil {
       return result;
    }
 
-   private static List<Group> getGroups(Group parent) {
-      List<Group> result = new ArrayList<Group>();
+   private static List<AbstractGroup> getGroups(AbstractGroup parent) {
+      List<AbstractGroup> result = new ArrayList<AbstractGroup>();
       EList<Group> groups = parent.getGroups();
       result.addAll(groups);
-      for (Group group : groups) {
+      for (AbstractGroup group : groups) {
          result.addAll(getGroups(group));
       }
       return result;

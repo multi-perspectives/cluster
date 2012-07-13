@@ -30,7 +30,7 @@ import org.feature.multi.perspective.model.viewmodel.CoreGroup;
  * @generated
  */
 public class CoreGroupItemProvider
-   extends GroupItemProvider
+   extends AbstractGroupItemProvider
    implements
       IEditingDomainItemProvider,
       IStructuredItemContentProvider,

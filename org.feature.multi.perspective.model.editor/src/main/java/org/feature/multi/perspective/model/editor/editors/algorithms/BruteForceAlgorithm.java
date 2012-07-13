@@ -15,6 +15,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.feature.multi.perspective.model.viewmodel.AbstractGroup;
 import org.feature.multi.perspective.model.viewmodel.CoreGroup;
 import org.feature.multi.perspective.model.viewmodel.Group;
 import org.feature.multi.perspective.model.viewmodel.GroupModel;
@@ -97,9 +98,9 @@ public class BruteForceAlgorithm {
     * @param coreGroup the coreGroup
     */
    public View checkViewpoint(ViewPoint viewPoint, CoreGroup coreGroup, HashMap<EObject, View> viewMemory) {
-      EList<Group> containedInGroup = viewPoint.getContainedInGroup();
+      EList<AbstractGroup> containedInGroup = viewPoint.getContainedInGroup();
       Set<Set<View>> setOfPaths = new HashSet<Set<View>>();
-      for (Group group : containedInGroup) {
+      for (AbstractGroup group : containedInGroup) {
          List<EObject> groups = getGroupPath(group, coreGroup);
          // log.debug("check path for: " + group.getName());
          viewMemory.clear(); // performance test without memory
@@ -132,8 +133,8 @@ public class BruteForceAlgorithm {
          String logMsg = "BruteForceAlg ";
          logMsg += viewPoint.getName();
          logMsg += " contained in ";
-         EList<Group> conInGroup = viewPoint.getContainedInGroup();
-         for (Group group : conInGroup) {
+         EList<AbstractGroup> conInGroup = viewPoint.getContainedInGroup();
+         for (AbstractGroup group : conInGroup) {
             logMsg += group.getName() + ", ";
          }
          log.debug(logMsg);
@@ -191,11 +192,11 @@ public class BruteForceAlgorithm {
     * @param coreGroup the core group
     * @return the path from the coreGroup to the group
     */
-   private List<EObject> getGroupPath(Group group, CoreGroup coreGroup) {
+   private List<EObject> getGroupPath(AbstractGroup group, CoreGroup coreGroup) {
       List<EObject> groups = new LinkedList<EObject>();
       groups.add(coreGroup);
-      for (Group childGroup : coreGroup.getGroups()) {
-         List<Group> calcGroupPath = calcGroupPath(group, childGroup);
+      for (AbstractGroup childGroup : coreGroup.getGroups()) {
+         List<AbstractGroup> calcGroupPath = calcGroupPath(group, childGroup);
          if (!calcGroupPath.isEmpty()) {
             groups.addAll(calcGroupPath);
             break;
@@ -211,21 +212,21 @@ public class BruteForceAlgorithm {
     * @param source the current group
     * @return the path or an empty list
     */
-   private List<Group> calcGroupPath(Group target, Group source) {
+   private List<AbstractGroup> calcGroupPath(AbstractGroup target, AbstractGroup source) {
       if (target.equals(source)) {
-         List<Group> groups = new LinkedList<Group>();
+         List<AbstractGroup> groups = new LinkedList<AbstractGroup>();
          groups.add(target);
          return groups;
       } else {// check children
-         for (Group group : source.getGroups()) {
-            List<Group> calcGroupPath = calcGroupPath(target, group);
+         for (AbstractGroup group : source.getGroups()) {
+            List<AbstractGroup> calcGroupPath = calcGroupPath(target, group);
             if (!calcGroupPath.isEmpty()) {
                calcGroupPath.add(0, source);// the index used to be sorted!
                return calcGroupPath;
             }
          }
       }
-      return new LinkedList<Group>();
+      return new LinkedList<AbstractGroup>();
    }
 
    /**

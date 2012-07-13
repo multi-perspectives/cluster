@@ -14,14 +14,15 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.feature.model.utilities.FeatureMappingUtil;
-import org.feature.multi.perspective.model.viewmodel.Group;
-import org.feature.multi.perspective.model.viewmodel.GroupModel;
-import org.feature.multi.perspective.model.viewmodel.ViewPoint;
-import org.feature.multi.perspective.model.viewmodel.ViewPointContainer;
 import org.feature.multi.perspective.model.editor.editors.View;
 import org.feature.multi.perspective.model.editor.editors.ViewCreator;
 import org.feature.multi.perspective.model.editor.util.Flag;
 import org.feature.multi.perspective.model.editor.util.Util;
+import org.feature.multi.perspective.model.viewmodel.AbstractGroup;
+import org.feature.multi.perspective.model.viewmodel.Group;
+import org.feature.multi.perspective.model.viewmodel.GroupModel;
+import org.feature.multi.perspective.model.viewmodel.ViewPoint;
+import org.feature.multi.perspective.model.viewmodel.ViewPointContainer;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.featuremapping.FeatureMappingModel;
@@ -37,15 +38,15 @@ public class IncrementalAlgorithm {
    private GroupModel groupModel;
    private UsedGroup usedGroupCoreGroup;
    private FeatureModel featureModel;
-   
+
    private boolean checkRun = false;
    private List<ViewPoint> inConsistentViewpoints = new ArrayList<ViewPoint>();
 
    // private int i = 0; //used for tests
 
-   
    /**
     * Constructor that initializes views for the given featuremapping.
+    * 
     * @param mapping
     */
    public IncrementalAlgorithm(FeatureMappingModel mapping) {
@@ -55,14 +56,13 @@ public class IncrementalAlgorithm {
       List<View> views = viewCreater.getViews();
       initViewMap(views);
    }
-   
-   
-   public IncrementalAlgorithm(GroupModel groupModel, List<View> views, FeatureModel featureModel){
+
+   public IncrementalAlgorithm(GroupModel groupModel, List<View> views, FeatureModel featureModel) {
       this.featureModel = featureModel;
       this.groupModel = groupModel;
       initViewMap(views);
    }
-   
+
    /**
     * 
     * @param views
@@ -74,24 +74,25 @@ public class IncrementalAlgorithm {
       initViewMap(views);
    }
 
-   private void initViewMap(List<View> views){
+   private void initViewMap(List<View> views) {
       this.viewMap = new HashMap<EObject, View>();
       for (View view : views) {
          viewMap.put(view.getGroup(), view);
       }
    }
-   
+
    /**
     * Single check of a {@link ViewPoint}.
+    * 
     * @param viewPoint the {@link ViewPoint} for the check.
     * @return true if all direct connected groups are consistent.
     */
    public boolean checkViewPoint(ViewPoint viewPoint) {
       List<ViewPoint> vps = new ArrayList<ViewPoint>();
       vps.add(viewPoint);
-      Map<Group, UsedGroup> groupFeatureModel = buildGroupFeatureModel(vps);
+      Map<AbstractGroup, UsedGroup> groupFeatureModel = buildGroupFeatureModel(vps);
       boolean isCon = true;
-      for (Group group : viewPoint.getContainedInGroup()) {
+      for (AbstractGroup group : viewPoint.getContainedInGroup()) {
          UsedGroup usedGroup = groupFeatureModel.get(group);
          boolean consistent = usedGroup.isConsistent();
          if (isCon && !consistent) {
@@ -106,14 +107,14 @@ public class IncrementalAlgorithm {
     * 
     * @return null if no viewpoints where found
     */
-   private Map<Group, UsedGroup> buildGroupFeatureModel(List<ViewPoint> viewPoints) {
+   private Map<AbstractGroup, UsedGroup> buildGroupFeatureModel(List<ViewPoint> viewPoints) {
       // log.info("Number of ViewPoints: " + viewPoints.size());
-      Set<Group> groups = new HashSet<Group>();
+      Set<AbstractGroup> groups = new HashSet<AbstractGroup>();
       // get groups from viewpoints
       for (ViewPoint viewPoint : viewPoints) {
          groups.addAll(viewPoint.getContainedInGroup());
       }
-      Map<Group, UsedGroup> usedGroups = createMSGM(groups);
+      Map<AbstractGroup, UsedGroup> usedGroups = createMSGM(groups);
       for (Group g : usedGroupCoreGroup.getGroup().getGroups()) {
          if (usedGroups.containsKey(g)) {
             UsedGroup mostSpecificGroup = usedGroups.get(g);
@@ -142,22 +143,21 @@ public class IncrementalAlgorithm {
       ViewPointContainer container = groupModel.getViewPointContainer();
       if (container != null) {
          EList<ViewPoint> viewPoints = container.getViewPoints();
-         Map<Group, UsedGroup> groupFeatureModel = buildGroupFeatureModel(viewPoints);
+         Map<AbstractGroup, UsedGroup> groupFeatureModel = buildGroupFeatureModel(viewPoints);
          for (ViewPoint viewPoint : viewPoints) {
-            
+
             String logMsg = "Heuristic ";
             logMsg += viewPoint.getName();
             logMsg += " contained in ";
-            EList<Group> containedInGroup = viewPoint.getContainedInGroup();
-            for (Group group : containedInGroup) {
+            EList<AbstractGroup> containedInGroup = viewPoint.getContainedInGroup();
+            for (AbstractGroup group : containedInGroup) {
                logMsg += group.getName() + ", ";
             }
             log.debug(logMsg);
-            
-            
+
             boolean isCon = true;
             Set<Feature> combinedFeaturesForViewPoint = new HashSet<Feature>();
-            for (Group group : viewPoint.getContainedInGroup()) {
+            for (AbstractGroup group : viewPoint.getContainedInGroup()) {
                UsedGroup usedGroup = groupFeatureModel.get(group);
                combinedFeaturesForViewPoint.addAll(usedGroup.getFeatures());
                boolean consistent = usedGroup.isConsistent();
@@ -166,18 +166,18 @@ public class IncrementalAlgorithm {
                }
             }
             if (!isCon) {
-//               log.debug("recheck");
+               // log.debug("recheck");
                Flag flag = new Flag();
                FeatureModel view = Util.createFeatureModel(featureModel, combinedFeaturesForViewPoint, flag);
                if (!flag.isChanged() && !flag.isFlagged()) {
                   isCon = Util.isConsistent(view);
-//                  log.debug(isCon);
+                  // log.debug(isCon);
                }
             }
-           
+
             ViewPointWrapper wrapper = new ViewPointWrapper(viewPoint, isCon);
             viewPointConsistency.add(wrapper);
-            if (!isCon){
+            if (!isCon) {
                inConsistentViewpoints.add(viewPoint);
             }
          }
@@ -188,24 +188,24 @@ public class IncrementalAlgorithm {
       return viewPointConsistency;
    }
 
-   
    /**
     * return all inconsistent viewpoints.
+    * 
     * @return
     */
-   public List<ViewPoint> getInConsistentViewpoints(){
-      if (!checkRun){
+   public List<ViewPoint> getInConsistentViewpoints() {
+      if (!checkRun) {
          checkViewpoints();
       }
       return inConsistentViewpoints;
    }
-   
+
    /**
     * 
     * @param group
     * @param usedGroups
     */
-   private void checkGroupModel(Group group, Map<Group, UsedGroup> usedGroups) {
+   private void checkGroupModel(AbstractGroup group, Map<AbstractGroup, UsedGroup> usedGroups) {
       for (Group g : group.getGroups()) {
          if (usedGroups.containsKey(g)) {
             UsedGroup ug = usedGroups.get(g);
@@ -230,8 +230,8 @@ public class IncrementalAlgorithm {
     * @param groups most specific groups
     * @return
     */
-   private Map<Group, UsedGroup> createMSGM(Set<Group> groups) {
-      Map<Group, UsedGroup> usedGroups = new HashMap<Group, UsedGroup>();
+   private Map<AbstractGroup, UsedGroup> createMSGM(Set<AbstractGroup> groups) {
+      Map<AbstractGroup, UsedGroup> usedGroups = new HashMap<AbstractGroup, UsedGroup>();
       usedGroupCoreGroup = new UsedGroup(null, groupModel.getCoreGroup(), viewMap.get(groupModel.getCoreGroup()).getFeatures());
       usedGroupCoreGroup.setDone();
       Flag f = new Flag();
@@ -243,22 +243,25 @@ public class IncrementalAlgorithm {
       }
       // ugCG.setConsistent(Util.isConsistent(ugCG.getFeatures()));
       usedGroups.put(groupModel.getCoreGroup(), usedGroupCoreGroup);
-      for (Group group : groups) {
+      for (AbstractGroup group : groups) {
          if (!usedGroups.containsKey(group)) {
             Set<Feature> features = new HashSet<Feature>();
             features.addAll(viewMap.get(group).getFeatures());
 
             UsedGroup ugParent = null;
-            if (group.getParentGroup() != null) {
-               if (group.getParentGroup().equals(groupModel.getCoreGroup())) {
-                  ugParent = usedGroupCoreGroup;
-               } else {
-                  ugParent = createMSG((Group) group.getParentGroup(), usedGroups);
+            if (group instanceof Group) {
+               Group g = (Group) group;
+               if (g.getParentGroup() != null) {
+                  if (g.getParentGroup().equals(groupModel.getCoreGroup())) {
+                     ugParent = usedGroupCoreGroup;
+                  } else {
+                     ugParent = createMSG((AbstractGroup) g.getParentGroup(), usedGroups);
+                  }
+                  features.addAll(ugParent.getFeatures());
                }
-               features.addAll(ugParent.getFeatures());
+               UsedGroup ug = new UsedGroup(ugParent, group, features);
+               usedGroups.put(group, ug);
             }
-            UsedGroup ug = new UsedGroup(ugParent, group, features);
-            usedGroups.put(group, ug);
          }
       }
       return usedGroups;
@@ -272,22 +275,27 @@ public class IncrementalAlgorithm {
     * @param ugs a list of most specific group.
     * @return the most specific group.
     */
-   private UsedGroup createMSG(Group group, Map<Group, UsedGroup> ugs) {
+   private UsedGroup createMSG(AbstractGroup group, Map<AbstractGroup, UsedGroup> ugs) {
       if (ugs.containsKey(group)) {
          return ugs.get(group);
       }
       UsedGroup ugParent;
-      if (group.getParentGroup().equals(groupModel.getCoreGroup())) {
-         ugParent = usedGroupCoreGroup;
-      } else {
-         ugParent = createMSG((Group) group.getParentGroup(), ugs);
-      }
+      if (group instanceof Group) {
+         Group g = (Group) group;
+         if (g.getParentGroup().equals(groupModel.getCoreGroup())) {
+            ugParent = usedGroupCoreGroup;
+         } else {
+            ugParent = createMSG((Group) g.getParentGroup(), ugs);
+         }
 
-      Set<Feature> features = new HashSet<Feature>();
-      features.addAll(ugParent.getFeatures());
-      features.addAll(viewMap.get(group).getFeatures());
-      UsedGroup ug = new UsedGroup(ugParent, group, features);
-      ugs.put(group, ug);
-      return ug;
+         Set<Feature> features = new HashSet<Feature>();
+         features.addAll(ugParent.getFeatures());
+         features.addAll(viewMap.get(group).getFeatures());
+
+         UsedGroup ug = new UsedGroup(ugParent, group, features);
+         ugs.put(group, ug);
+         return ug;
+      }
+      return null;
    }
 }

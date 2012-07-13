@@ -12,13 +12,12 @@
   <genPackages prefix="Viewmodel" basePackage="org.feature.multi.perspective.model"
       disposableProviderFactory="true" ecorePackage="viewmodel.ecore#/">
     <genClasses ecoreClass="viewmodel.ecore#//CoreGroup"/>
-    <genClasses ecoreClass="viewmodel.ecore#//Group">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference viewmodel.ecore#//Group/viewPointReference"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference viewmodel.ecore#//Group/parentGroup"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference viewmodel.ecore#//Group/groups"/>
-      <genOperations ecoreOperation="viewmodel.ecore#//Group/checkForRedundantViewPoints">
-        <genParameters ecoreParameter="viewmodel.ecore#//Group/checkForRedundantViewPoints/eDiagnosticChain"/>
-        <genParameters ecoreParameter="viewmodel.ecore#//Group/checkForRedundantViewPoints/eMap"/>
+    <genClasses image="false" ecoreClass="viewmodel.ecore#//AbstractGroup">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference viewmodel.ecore#//AbstractGroup/viewPointReference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference viewmodel.ecore#//AbstractGroup/groups"/>
+      <genOperations ecoreOperation="viewmodel.ecore#//AbstractGroup/checkForRedundantViewPoints">
+        <genParameters ecoreParameter="viewmodel.ecore#//AbstractGroup/checkForRedundantViewPoints/eDiagnosticChain"/>
+        <genParameters ecoreParameter="viewmodel.ecore#//AbstractGroup/checkForRedundantViewPoints/eMap"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="viewmodel.ecore#//ViewPoint">
@@ -33,6 +32,9 @@
     </genClasses>
     <genClasses ecoreClass="viewmodel.ecore#//ViewPointContainer">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference viewmodel.ecore#//ViewPointContainer/viewPoints"/>
+    </genClasses>
+    <genClasses ecoreClass="viewmodel.ecore#//Group">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference viewmodel.ecore#//Group/parentGroup"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
