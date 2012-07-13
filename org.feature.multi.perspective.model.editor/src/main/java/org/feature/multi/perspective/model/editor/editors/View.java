@@ -3,8 +3,8 @@ package org.feature.multi.perspective.model.editor.editors;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
-import org.feature.multi.perspective.model.cluster.Group;
-import org.feature.multi.perspective.model.cluster.GroupModel;
+import org.feature.multi.perspective.model.viewmodel.Group;
+import org.feature.multi.perspective.model.viewmodel.GroupModel;
 import org.feature.multi.perspective.model.editor.util.Flag;
 import org.feature.multi.perspective.model.editor.util.Util;
 import org.featuremapper.models.feature.Feature;

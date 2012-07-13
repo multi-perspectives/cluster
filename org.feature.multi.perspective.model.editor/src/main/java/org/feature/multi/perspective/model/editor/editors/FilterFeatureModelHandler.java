@@ -14,7 +14,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
-import org.feature.multi.perspective.model.cluster.ViewPoint;
+import org.feature.multi.perspective.model.viewmodel.ViewPoint;
 
 /**
  * 
@@ -33,14 +33,14 @@ public class FilterFeatureModelHandler extends AbstractHandler {
     */
    @Override
    public Object execute(ExecutionEvent event) throws ExecutionException {
-                  ClusterMultiPageEditor multiPageEditor = getActiveEditor();
+         ViewmodelMultiPageEditor multiPageEditor = getActiveEditor();
                   if (multiPageEditor != null){
                   multiPageEditor.createFilteredFeatureModel(viewPoint);
                   } return null;
    }
 
-   private ClusterMultiPageEditor getActiveEditor(){
-      ClusterMultiPageEditor multiPageEditor = null;
+   private ViewmodelMultiPageEditor getActiveEditor(){
+      ViewmodelMultiPageEditor multiPageEditor = null;
       IWorkbench workbench = PlatformUI.getWorkbench();
       if (workbench != null) {
          IWorkbenchWindow activeWindow = workbench.getActiveWorkbenchWindow();
@@ -48,8 +48,8 @@ public class FilterFeatureModelHandler extends AbstractHandler {
             IWorkbenchPage page = activeWindow.getActivePage();
             if (page != null) {
                IEditorPart activeEditor = page.getActiveEditor();
-               if (activeEditor instanceof ClusterMultiPageEditor) {
-                   multiPageEditor = (ClusterMultiPageEditor) activeEditor;
+               if (activeEditor instanceof ViewmodelMultiPageEditor) {
+                   multiPageEditor = (ViewmodelMultiPageEditor) activeEditor;
                }}}}
       return multiPageEditor;
    }
@@ -73,7 +73,7 @@ public class FilterFeatureModelHandler extends AbstractHandler {
    @Override
    public void setEnabled(Object evaluationContext) {
       super.setEnabled(evaluationContext);
-      ClusterMultiPageEditor multiPageEditor = getActiveEditor();
+      ViewmodelMultiPageEditor multiPageEditor = getActiveEditor();
       if (multiPageEditor != null){
       if (evaluationContext instanceof EvaluationContext) {
          EvaluationContext eval = (EvaluationContext) evaluationContext;

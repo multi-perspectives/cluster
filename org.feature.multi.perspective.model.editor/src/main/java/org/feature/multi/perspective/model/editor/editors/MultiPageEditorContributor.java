@@ -83,7 +83,7 @@ public class MultiPageEditorContributor extends MultiPageEditorActionBarContribu
 	private void createActions() {
 		sampleAction = new Action() {
 			public void run() {
-				MessageDialog.openInformation(null, "Cluster Editor", "Sample Action Executed");
+				MessageDialog.openInformation(null, "Multi-Perspective Editor", "Sample Action Executed");
 			}
 		};
 		sampleAction.setText("Sample Action");

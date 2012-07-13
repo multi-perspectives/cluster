@@ -3,7 +3,7 @@
  */
 package org.feature.multi.perspective.model.editor.zest.model;
 
-import org.feature.multi.perspective.model.cluster.CoreGroup;
+import org.feature.multi.perspective.model.viewmodel.CoreGroup;
 
 
 /**

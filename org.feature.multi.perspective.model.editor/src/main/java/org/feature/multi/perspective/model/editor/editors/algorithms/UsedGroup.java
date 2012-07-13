@@ -7,7 +7,7 @@ package org.feature.multi.perspective.model.editor.editors.algorithms;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.feature.multi.perspective.model.cluster.Group;
+import org.feature.multi.perspective.model.viewmodel.Group;
 import org.featuremapper.models.feature.Feature;
 
 /**

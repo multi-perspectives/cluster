@@ -35,7 +35,7 @@ import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.feature.Group;
 
 /**
- * Utility class for the cluster editor.
+ * Utility class for the multi-perspective editor.
  * 
  * @author Tim Winkelmann
  * 

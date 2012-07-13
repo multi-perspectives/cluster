@@ -3,7 +3,7 @@
  */
 package org.feature.multi.perspective.model.editor.editors.algorithms;
 
-import org.feature.multi.perspective.model.cluster.ViewPoint;
+import org.feature.multi.perspective.model.viewmodel.ViewPoint;
 
 /**
  * @author <a href=mailto:info@juliaschroeter.de>Julia Schroeter</a>

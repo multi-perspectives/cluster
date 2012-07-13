@@ -38,7 +38,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 
 /**
- * This is the action bar contributor for the Cluster model editor.
+ * This is the action bar contributor for the Multi-Perspective editor.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -161,8 +161,8 @@ public class MultiPageActionBarContributor
 	 */
 	@Override
 	public void contributeToToolBar(IToolBarManager toolBarManager) {
-		toolBarManager.add(new Separator("cluster-settings"));
-		toolBarManager.add(new Separator("cluster-additions"));
+		toolBarManager.add(new Separator("viewmodel-settings"));
+		toolBarManager.add(new Separator("viewmodel-additions"));
 	}
 
 	/**
@@ -174,35 +174,6 @@ public class MultiPageActionBarContributor
 	 */
 	@Override
 	public void contributeToMenu(IMenuManager menuManager) {
-//		super.contributeToMenu(menuManager);
-//
-//		IMenuManager submenuManager = new MenuManager(MultiPageEditorPlugin.INSTANCE.getString("_UI_ClusterEditor_menu"), "org.feature.multi.perspective.model.clusterMenuID");
-//		menuManager.insertAfter("additions", submenuManager);
-//		submenuManager.add(new Separator("settings"));
-//		submenuManager.add(new Separator("actions"));
-//		submenuManager.add(new Separator("additions"));
-//		submenuManager.add(new Separator("additions-end"));
-//
-//		// Prepare for CreateChild item addition or removal.
-//		//
-//		createChildMenuManager = new MenuManager(MultiPageEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item"));
-//		submenuManager.insertBefore("additions", createChildMenuManager);
-//
-//		// Prepare for CreateSibling item addition or removal.
-//		//
-//		createSiblingMenuManager = new MenuManager(MultiPageEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
-//		submenuManager.insertBefore("additions", createSiblingMenuManager);
-//
-//		// Force an update because Eclipse hides empty menus now.
-//		//
-//		submenuManager.addMenuListener
-//			(new IMenuListener() {
-//				 public void menuAboutToShow(IMenuManager menuManager) {
-//					 menuManager.updateAll(true);
-//				 }
-//			 });
-//
-//		addGlobalActions(submenuManager);
 	}
 
 	/**

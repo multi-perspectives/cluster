@@ -9,11 +9,11 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.feature.multi.perspective.model.cluster.CoreGroup;
-import org.feature.multi.perspective.model.cluster.Group;
-import org.feature.multi.perspective.model.cluster.GroupModel;
-import org.feature.multi.perspective.model.cluster.ViewPoint;
-import org.feature.multi.perspective.model.cluster.ViewPointContainer;
+import org.feature.multi.perspective.model.viewmodel.CoreGroup;
+import org.feature.multi.perspective.model.viewmodel.Group;
+import org.feature.multi.perspective.model.viewmodel.GroupModel;
+import org.feature.multi.perspective.model.viewmodel.ViewPoint;
+import org.feature.multi.perspective.model.viewmodel.ViewPointContainer;
 
 /**
  * 

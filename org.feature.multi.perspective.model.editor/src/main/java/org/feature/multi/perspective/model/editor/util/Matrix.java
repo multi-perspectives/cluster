@@ -9,8 +9,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.feature.multi.perspective.model.cluster.CoreGroup;
-import org.feature.multi.perspective.model.cluster.Group;
+import org.feature.multi.perspective.model.viewmodel.CoreGroup;
+import org.feature.multi.perspective.model.viewmodel.Group;
 
 /**
  * This class creates a matrix about the relations between groups.

@@ -5,15 +5,15 @@ package org.feature.multi.perspective.model.editor.editors.listeners;
 
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.feature.multi.perspective.model.editor.editors.ClusterMultiPageEditor;
+import org.feature.multi.perspective.model.editor.editors.ViewmodelMultiPageEditor;
 
 /**
  * @author winkelti
  *
  */
 public class ReloadMappingButtonListener implements SelectionListener {
-	ClusterMultiPageEditor multiPageEditor;
-	public ReloadMappingButtonListener(ClusterMultiPageEditor multiPageEditor) {
+   ViewmodelMultiPageEditor multiPageEditor;
+	public ReloadMappingButtonListener(ViewmodelMultiPageEditor multiPageEditor) {
 		this.multiPageEditor = multiPageEditor;
 	}
 

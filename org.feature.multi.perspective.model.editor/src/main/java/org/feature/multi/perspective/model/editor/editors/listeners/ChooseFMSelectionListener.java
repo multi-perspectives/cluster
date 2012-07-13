@@ -14,9 +14,9 @@ import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
-import org.feature.multi.perspective.model.cluster.GroupModel;
-import org.feature.multi.perspective.model.editor.editors.ClusterMappingFilter;
-import org.feature.multi.perspective.model.editor.editors.ClusterMultiPageEditor;
+import org.feature.multi.perspective.model.viewmodel.GroupModel;
+import org.feature.multi.perspective.model.editor.editors.ViewmodelMappingFilter;
+import org.feature.multi.perspective.model.editor.editors.ViewmodelMultiPageEditor;
 import org.featuremapper.common.utils.FeatureMappingUtil;
 
 /**
@@ -29,9 +29,9 @@ public class ChooseFMSelectionListener implements SelectionListener {
 
    Logger log = Logger.getLogger(ChooseFMSelectionListener.class);
    private Composite parentComposite;
-   private ClusterMultiPageEditor mpe;
+   private ViewmodelMultiPageEditor mpe;
 
-   public ChooseFMSelectionListener(Composite composite, ClusterMultiPageEditor multiPageEditor) {
+   public ChooseFMSelectionListener(Composite composite, ViewmodelMultiPageEditor multiPageEditor) {
       this.parentComposite = composite;
       this.mpe = multiPageEditor;
    }
@@ -55,7 +55,7 @@ public class ChooseFMSelectionListener implements SelectionListener {
       ArrayList<String> extensions = FeatureMappingUtil.getMappingModelExtensions();
       GroupModel groupModel = mpe.getGroupModel();
 
-      ClusterMappingFilter filter = new ClusterMappingFilter(extensions, groupModel);
+      ViewmodelMappingFilter filter = new ViewmodelMappingFilter(extensions, groupModel);
       filters.add(filter);
 
       IFile[] selectedFiles =

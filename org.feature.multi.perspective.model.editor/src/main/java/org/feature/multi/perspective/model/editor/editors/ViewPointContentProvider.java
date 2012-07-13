@@ -17,11 +17,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.feature.multi.perspective.model.cluster.ClusterPackage;
-import org.feature.multi.perspective.model.cluster.CoreGroup;
-import org.feature.multi.perspective.model.cluster.Group;
-import org.feature.multi.perspective.model.cluster.ViewPoint;
-import org.feature.multi.perspective.model.cluster.impl.GroupImpl;
+import org.feature.multi.perspective.model.viewmodel.ViewmodelPackage;
+import org.feature.multi.perspective.model.viewmodel.CoreGroup;
+import org.feature.multi.perspective.model.viewmodel.Group;
+import org.feature.multi.perspective.model.viewmodel.ViewPoint;
+import org.feature.multi.perspective.model.viewmodel.impl.GroupImpl;
 
 /**
  * @author Tim Winkelmann
@@ -50,7 +50,7 @@ public class ViewPointContentProvider implements ITreeContentProvider {
    private Set<EObject> observedViewPoints = new HashSet<EObject>();
 
    protected void viewPointChanged(Notification msg) {
-      if (ClusterPackage.Literals.VIEW_POINT__CONTAINED_IN_GROUP.equals(msg.getFeature())) {
+      if (ViewmodelPackage.Literals.VIEW_POINT__CONTAINED_IN_GROUP.equals(msg.getFeature())) {
          if (Notification.ADD == msg.getEventType()) {
             log.debug("ViewPoint changed.");
             addToViewer(msg.getNotifier(), msg.getNewValue());

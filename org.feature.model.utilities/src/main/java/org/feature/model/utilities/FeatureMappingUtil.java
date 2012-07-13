@@ -9,7 +9,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.feature.multi.perspective.model.cluster.GroupModel;
+import org.feature.multi.perspective.model.viewmodel.GroupModel;
 import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.featuremapping.FeatureMappingModel;
 import org.featuremapper.models.featuremapping.FeatureModelRef;

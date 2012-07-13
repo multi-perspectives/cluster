@@ -15,8 +15,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.feature.model.utilities.FeatureMappingUtil;
 import org.feature.model.utilities.WorkbenchUtil;
-import org.feature.multi.perspective.model.cluster.ViewPoint;
-import org.feature.multi.perspective.model.editor.editors.ClusterMultiPageEditor;
+import org.feature.multi.perspective.model.viewmodel.ViewPoint;
+import org.feature.multi.perspective.model.editor.editors.ViewmodelMultiPageEditor;
 import org.featuremapper.models.featuremapping.FeatureMappingModel;
 
 /**
@@ -36,12 +36,12 @@ public class IncrementalAlgorithmHandler extends AbstractHandler {
          List<ViewPoint> viewpoints = algorithm.getInConsistentViewpoints();
          showMessage(viewpoints);
       } else {
-         showLoadClusterMsg();
+         showLoadViewmodelMsg();
       }
       return null; // No return value needed.
    }
 
-   private void showLoadClusterMsg() {
+   private void showLoadViewmodelMsg() {
       Shell shell = WorkbenchUtil.getShell();
       if (shell != null) {
          MessageBox msgBox = new MessageBox(shell, SWT.OK | SWT.ICON_INFORMATION);
@@ -93,7 +93,7 @@ public class IncrementalAlgorithmHandler extends AbstractHandler {
 
    private FeatureMappingModel getFeatureMapping() {
       FeatureMappingModel featureMappingModel = null;
-      ClusterMultiPageEditor multiPageEditor = getActiveMultiPageEditor();
+      ViewmodelMultiPageEditor multiPageEditor = getActiveMultiPageEditor();
       if (multiPageEditor != null) {
          Resource mapping = multiPageEditor.getMappingResource();
          featureMappingModel = FeatureMappingUtil.getFeatureMapping(mapping);
@@ -101,11 +101,11 @@ public class IncrementalAlgorithmHandler extends AbstractHandler {
       return featureMappingModel;
    }
 
-   private ClusterMultiPageEditor getActiveMultiPageEditor() {
-      ClusterMultiPageEditor mPageEditor = null;
+   private ViewmodelMultiPageEditor getActiveMultiPageEditor() {
+      ViewmodelMultiPageEditor mPageEditor = null;
       IEditorPart activeEditor = WorkbenchUtil.getActiveEditor();
-      if (activeEditor instanceof ClusterMultiPageEditor) {
-         mPageEditor = (ClusterMultiPageEditor) activeEditor;
+      if (activeEditor instanceof ViewmodelMultiPageEditor) {
+         mPageEditor = (ViewmodelMultiPageEditor) activeEditor;
 
       }
       return mPageEditor;

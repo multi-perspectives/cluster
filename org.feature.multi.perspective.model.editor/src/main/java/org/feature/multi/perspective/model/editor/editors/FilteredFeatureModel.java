@@ -17,8 +17,8 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.feature.model.utilities.FeatureMappingUtil;
 import org.feature.model.utilities.FeatureModelUtil;
-import org.feature.multi.perspective.model.cluster.GroupModel;
-import org.feature.multi.perspective.model.cluster.ViewPoint;
+import org.feature.multi.perspective.model.viewmodel.GroupModel;
+import org.feature.multi.perspective.model.viewmodel.ViewPoint;
 import org.feature.multi.perspective.model.editor.editors.algorithms.BruteForceAlgorithm;
 import org.feature.multi.perspective.model.editor.editors.algorithms.IncrementalAlgorithm;
 import org.feature.multi.perspective.model.editor.util.Util;
@@ -36,14 +36,14 @@ import org.featuremapper.models.featuremapping.FeatureModelRef;
 public class FilteredFeatureModel {
 
    private static Logger log = Logger.getLogger(FilteredFeatureModel.class);
-   private ClusterMultiPageEditor multiPageEditor;
+   private ViewmodelMultiPageEditor multiPageEditor;
 
    /**
     * 
     * @param mappingResource
     * @param viewPoint
     */
-   public FilteredFeatureModel(Resource mappingResource, ViewPoint viewPoint, ClusterMultiPageEditor multiPageEditor) {
+   public FilteredFeatureModel(Resource mappingResource, ViewPoint viewPoint, ViewmodelMultiPageEditor multiPageEditor) {
       this.multiPageEditor = multiPageEditor;
       FeatureMappingModel featureMappingModel = FeatureMappingUtil.getFeatureMapping(mappingResource);
       FeatureModel featureModel = FeatureMappingUtil.getFeatureModel(featureMappingModel);

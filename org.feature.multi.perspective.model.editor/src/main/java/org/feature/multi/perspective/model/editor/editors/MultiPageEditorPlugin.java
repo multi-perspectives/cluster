@@ -13,7 +13,7 @@ import org.eclipse.emf.common.ui.EclipseUIPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 /**
- * This is the central singleton for the Cluster editor plugin.
+ * This is the central singleton for the Multi-perspective editor plugin.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated

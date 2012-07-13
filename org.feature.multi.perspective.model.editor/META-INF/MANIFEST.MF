@@ -4,11 +4,11 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.feature.multi.perspective.model.editor;singleton:=true
 Bundle-Version: 0.4.0.qualifier
 Bundle-ClassPath: .
-Bundle-Activator: org.feature.multi.perspective.model.cluster.presentation.ClusterEditorPlugin$Implementation
+Bundle-Activator: org.feature.multi.perspective.model.viewmodel.presentation.ViewmodelEditorPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.feature.multi.perspective.model.cluster.presentation,
+Export-Package: org.feature.multi.perspective.model.viewmodel.presentation,
  org.feature.multi.perspective.model.editor.editors,
  org.feature.multi.perspective.model.editor.editors.algorithms,
  org.feature.multi.perspective.model.editor.util

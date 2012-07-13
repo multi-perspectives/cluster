@@ -15,8 +15,8 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.zest.core.viewers.GraphViewer;
 import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.GraphNode;
-import org.feature.multi.perspective.model.cluster.Group;
-import org.feature.multi.perspective.model.editor.editors.ClusterMultiPageEditor;
+import org.feature.multi.perspective.model.viewmodel.Group;
+import org.feature.multi.perspective.model.editor.editors.ViewmodelMultiPageEditor;
 import org.feature.multi.perspective.model.editor.util.Util;
 import org.feature.multi.perspective.model.editor.zest.model.CoreGroupNode;
 import org.feature.multi.perspective.model.editor.zest.model.FeatureNode;
@@ -29,10 +29,10 @@ import org.feature.multi.perspective.model.editor.zest.model.ViewPointNode;
  *
  */
 public class ViewPointNodeMouseListener implements IDoubleClickListener {
-	private ClusterMultiPageEditor multiPageEditor;
+	private ViewmodelMultiPageEditor multiPageEditor;
 	private List<Node> nodesForHighlighting;
 	
-	public ViewPointNodeMouseListener(ClusterMultiPageEditor multiPageEditor) {
+	public ViewPointNodeMouseListener(ViewmodelMultiPageEditor multiPageEditor) {
 		this.multiPageEditor = multiPageEditor;
 	}
 

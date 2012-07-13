@@ -9,9 +9,9 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Combo;
-import org.feature.multi.perspective.model.cluster.CoreGroup;
-import org.feature.multi.perspective.model.cluster.ViewPoint;
-import org.feature.multi.perspective.model.editor.editors.ClusterMultiPageEditor;
+import org.feature.multi.perspective.model.viewmodel.CoreGroup;
+import org.feature.multi.perspective.model.viewmodel.ViewPoint;
+import org.feature.multi.perspective.model.editor.editors.ViewmodelMultiPageEditor;
 import org.feature.multi.perspective.model.editor.util.Matrix;
 
 /**
@@ -21,9 +21,9 @@ import org.feature.multi.perspective.model.editor.util.Matrix;
  */
 public class ViewPointComboSelectionListener implements SelectionListener {
 
-	private ClusterMultiPageEditor multiPageEditor;
+	private ViewmodelMultiPageEditor multiPageEditor;
 	
-	public ViewPointComboSelectionListener(ClusterMultiPageEditor multiPageEditor) {
+	public ViewPointComboSelectionListener(ViewmodelMultiPageEditor multiPageEditor) {
 		this.multiPageEditor = multiPageEditor;
 	}
 

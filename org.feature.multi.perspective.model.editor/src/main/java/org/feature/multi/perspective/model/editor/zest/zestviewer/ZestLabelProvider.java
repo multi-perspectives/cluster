@@ -9,7 +9,7 @@ import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.zest.core.viewers.EntityConnectionData;
-import org.feature.multi.perspective.model.cluster.provider.ClusterEditPlugin;
+import org.feature.multi.perspective.model.viewmodel.provider.ViewmodelEditPlugin;
 import org.feature.multi.perspective.model.editor.zest.model.Connection;
 import org.feature.multi.perspective.model.editor.zest.model.CoreGroupNode;
 import org.feature.multi.perspective.model.editor.zest.model.FeatureNode;
@@ -82,6 +82,6 @@ public class ZestLabelProvider  extends LabelProvider {
 	}
 	
 	public ResourceLocator getResourceLocator() {
-		return ClusterEditPlugin.INSTANCE;
+		return ViewmodelEditPlugin.INSTANCE;
 	}
 }
