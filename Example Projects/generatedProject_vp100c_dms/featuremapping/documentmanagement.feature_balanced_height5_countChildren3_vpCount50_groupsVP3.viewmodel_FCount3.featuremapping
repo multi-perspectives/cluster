@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="ASCII"?>
+<featuremapping:FeatureMappingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:featuremapping="http://www.tudresden.de/featuremapping">
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#DocumentManagement"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#DocumentType"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#TextType"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#OCR"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#Indexing"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#GeneralIndex"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#FileNameIndex"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#Search"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#GeneralSearch"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#FileNameSearch"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#ImageType"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#DocumentType"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#ContentSearch"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#AuthorIndex"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#GeneralSearch"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#AuthorSearch"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#GeneralIndex"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#GeneralIndex"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#ContentIndex"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#PDFType"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#ImageOCR"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#FileNameIndex"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#ImageType"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#AuthorIndex"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#ContentIndex"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#AuthorIndex"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#AuthorIndex"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#TitleSearch"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#UnicodeTextType"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#FileNameSearch"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#TextType"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#PDFType"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#PDFOCR"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#UnicodeTextType"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#GeneralSearch"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#ImageOCR"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#MetaDataSearch"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#AuthorIndex"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#PDFType"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#ContentSearch"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#Search"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#FileNameSearch"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#ImageType"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#PDFOCR"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#GeneralSearch"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#AuthorIndex"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#Indexing"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#AuthorIndex"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#FileNameSearch"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#TitelIndex"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#OCR"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#AuthorSearch"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#FileNameSearch"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#AuthorSearch"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#MetaDataSearch"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#DocumentType"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#FileNameIndex"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#GeneralIndex"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#TitelIndex"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#GeneralSearch"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#OCR"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#ContentIndex"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/documentmanagement.feature#TitleSearch"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#Search"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/documentmanagement.feature#MetaDataIndex"/>
+    </term>
+  </mappings>
+  <featureModel>
+    <value href="../feature/documentmanagement.feature#/"/>
+  </featureModel>
+  <solutionModels>
+    <value href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#/"/>
+  </solutionModels>
+</featuremapping:FeatureMappingModel>

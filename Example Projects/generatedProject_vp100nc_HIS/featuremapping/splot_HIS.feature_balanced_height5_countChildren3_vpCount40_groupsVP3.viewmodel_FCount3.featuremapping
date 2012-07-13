@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="ASCII"?>
+<featuremapping:FeatureMappingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:featuremapping="http://www.tudresden.de/featuremapping">
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#his"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#services"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#security"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#intrusion"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#detection_id_4"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#motion"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#monitoring_detecting_id_6"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#continuous_value_id_9"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#action_id_10"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#door_operation"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#alarm"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#fire"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#detection_id_16"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#smoke"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#monitoring_detecting_id_18"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#continuous_value_id_21"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#action_id_22"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#water"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#administration"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#hmi"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#advanced"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#detection_devices"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#motion_sensor"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#skoke_sensor"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#action_devices"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#sprinkler"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#monitor_control"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#direct"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#scheduled"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#periodic"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#one_time"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#responding_strategy"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#priority"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#event_based"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#quality_attributes"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#usability"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#scalability"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#reliability"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#redundancy_control"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#standby"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#safety"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#security"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#event_based"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#udp"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#advanced"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#detection"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#udp"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#direct"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#connection"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#motion"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#communication"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#usability"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#communication"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#advanced"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#discrete_value"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#standard"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#advanced"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#sump_pump"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#periodic"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#responding_strategy"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#hmi"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#communication"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#voice"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#monitor_control"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#detection"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#reliability"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#gas"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#one_time"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#monitoring_detecting_id_6"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#continuous_value_id_21"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#action_id_10"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#scalability"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#detection_devices"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#security"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#administration"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#reliability"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#event_based"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#action_id_10"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#periodic"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#advanced"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#action_devices"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#sprinkler"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#telephone"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#voice"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#services"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#advanced"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#continuous_value"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#direct"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#gas"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#motion_sensor"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#advanced"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#gas"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#pumping"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#scalability"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#skoke_sensor"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#detection_id_16"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#periodic"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#sprinkler"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#gas"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#water_main"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#connection"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#alarm"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#water"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#hmi"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#monitoring_detecting_id_6"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_HIS.feature#priority"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#services"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#discrete_value_id_8"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#message"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#data"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#discrete_value_id_20"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#flood"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#moisture"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#monitoring_detecting"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#action"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#internet"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#tcp"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#moisture_sensor"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#sequential"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_HIS.feature#active"/>
+    </term>
+  </mappings>
+  <featureModel>
+    <value href="../feature/splot_HIS.feature#/"/>
+  </featureModel>
+  <solutionModels>
+    <value href="../viewmodel/balanced_height5_countChildren3_vpCount40_groupsVP3.viewmodel#/"/>
+  </solutionModels>
+</featuremapping:FeatureMappingModel>

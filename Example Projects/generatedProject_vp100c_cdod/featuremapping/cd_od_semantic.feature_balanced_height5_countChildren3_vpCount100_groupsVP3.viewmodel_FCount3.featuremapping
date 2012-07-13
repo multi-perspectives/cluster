@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="ASCII"?>
+<featuremapping:FeatureMappingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:featuremapping="http://www.tudresden.de/featuremapping">
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#CDODConsistency"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#ODSemantics"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#EmptyOMOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#EmptyOMInvalidOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#CompletenessOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#ObjectsOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllObjectsShownOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#LinksOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllLinksShownOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AttributesOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllowAttributesOmittedOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#TypesOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllTypesShownOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#ObjectTypingOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#NonStrictOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#CDSemantics"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#EmptyOMCD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#EmptyOMInvalidCD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#CompletenessCD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AttributesCD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllowAttributesOmittedCD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#ClassesCD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllClassesShownCD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#EmptyOMInvalidOD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#EmptyOMInvalidOD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllClassesShownCD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#CDSemantics"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#NonStrictOD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#CompletenessCD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#AllAttributesShownOD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#ODSemantics"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllowLinksOmittedOD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#EmptyOMOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AttributesOD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#ODSemantics"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#StrictOD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#CompletenessCD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllLinksShownOD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#EmptyOMOD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllLinksShownOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllowObjectsOmittedOD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#AllowAttributesOmittedOD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#AllowTypesOmittedOD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#AllowLinksOmittedOD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#EmptyOMCD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllowObjectsOmittedOD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#StrictOD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#AllClassesShownCD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#EmptyOMInvalidCD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllowClassesOmittedCD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllowClassesOmittedCD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#EmptyOMCD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllLinksShownOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#ObjectsOD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#CDSemantics"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#EmptyOMValidInstanceOD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllClassesShownCD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllObjectsShownOD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#AttributesOD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AttributesOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllAttributesShownCD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#CompletenessCD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#EmptyOMInvalidOD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#NonStrictOD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#ObjectTypingOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#EmptyOMOD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#TypesOD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#EmptyOMInvalidCD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AttributesOD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllLinksShownOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllLinksShownOD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#StrictOD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#AllObjectsShownOD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#AllowTypesOmittedOD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#LinksOD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#CDSemantics"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#TypesOD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#ClassesCD"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/cd_od_semantic.feature#CompletenessCD"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#AllowAttributesOmittedCD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#StrictOD"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/cd_od_semantic.feature#EmptyOMValidInstanceCD"/>
+    </term>
+  </mappings>
+  <featureModel>
+    <value href="../feature/cd_od_semantic.feature#/"/>
+  </featureModel>
+  <solutionModels>
+    <value href="../viewmodel/balanced_height5_countChildren3_vpCount100_groupsVP3.viewmodel#/"/>
+  </solutionModels>
+</featuremapping:FeatureMappingModel>

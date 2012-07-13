@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="ASCII"?>
+<featuremapping:FeatureMappingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:featuremapping="http://www.tudresden.de/featuremapping">
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#GPL"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#Gtp"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#undirected"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#Algorithms"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#stronglyc"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/graph_productline.feature#connected"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#Gtp"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#BFS"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/graph_productline.feature#Algorithms"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#unweighted"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#directed"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#DFS"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#undirected"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#stronglyc"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#connected"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#weighted"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#Gtp"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#undirected"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#DFS"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#connected"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#DFS"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#Search"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#Search"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/graph_productline.feature#DFS"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#mstprim"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#shortest"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/graph_productline.feature#Weight"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/graph_productline.feature#Gtp"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/graph_productline.feature#weighted"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/graph_productline.feature#stronglyc"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#BFS"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#undirected"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#cycle"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#directed"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#undirected"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#cycle"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#directed"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#mstkruskal"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/graph_productline.feature#cycle"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/graph_productline.feature#directed"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/graph_productline.feature#Search"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#unweighted"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#DFS"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/graph_productline.feature#stronglyc"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#unweighted"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#Algorithms"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#directed"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#unweighted"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#weighted"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#mstkruskal"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#mstkruskal"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#DFS"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/graph_productline.feature#BFS"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#BFS"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#mstprim"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#mstkruskal"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#BFS"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#Algorithms"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#DFS"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/graph_productline.feature#unweighted"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#Algorithms"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#Gtp"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#connected"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#stronglyc"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#DFS"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#Search"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/graph_productline.feature#mstkruskal"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#unweighted"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/graph_productline.feature#directed"/>
+      </terms>
+    </term>
+  </mappings>
+  <featureModel>
+    <value href="../feature/graph_productline.feature#/"/>
+  </featureModel>
+  <solutionModels>
+    <value href="../viewmodel/balanced_height5_countChildren3_vpCount50_groupsVP3.viewmodel#/"/>
+  </solutionModels>
+</featuremapping:FeatureMappingModel>

@@ -1,0 +1,993 @@
+<?xml version="1.0" encoding="ASCII"?>
+<featuremapping:FeatureMappingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:featuremapping="http://www.tudresden.de/featuremapping">
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Xerox"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Capabilites"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Standard_Capabilities"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#High-volume_network_printing_and_3rd-party_finishing"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Printed_Sides"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Duplex"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#MICR"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#No"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Product_Color"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Print_Line_Management"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Performance"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Rated_Speed"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Resolution"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Color_r_2_12_96_160"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Recommended_average_monthly_volume"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Duty_cycle"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Scan_Speed"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Free_Flow_Scanner"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Line_Screens"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Technology"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#PDLs"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Network_Interfaces"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Memory"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Harddisk"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#CPU"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#User_Interface"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Print_Engine_r_3_164"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Process_or_Imaging"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Color"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Paper_Handling"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Paper_sources"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Stitching_and_Binding_option_r_4_32_166_170"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Standard_paper_capacity"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Stitching_and_Binding_option"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Maximum_paper_capacity_with_options"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Media_Dimensions_-_Minimum"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Media_Dimensions_-_Maximum"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Media_Weight_-_Minimum"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#uncoated_r_4_37_110_112"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Media_Weight_-_Maximum"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#uncoated_r_4_39_113_115"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Media_Types"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#speciality"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Input"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#High_Capacity_Feeder"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Roll_Feed_Solution"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Other_Input_Devices"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#High_Capacity_Insertion_Module"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Tray"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Tray_5"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Electronic_Input"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Automatic_Doucment_Feeder"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Output"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Stacker_r_6_117_144"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Finishing"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#ByPass_Transport"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Print_Controllers"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Digital_front-ends"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Environmental"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Electrical_Requirements"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Dimensions"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Xerox_Tape_Binder"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Security"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#IP-v6_support"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Price"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Category"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Business_Development"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Products"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Color_Products"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Pinot"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#IP-v6_support"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Print_Line_Management"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Print_r_1_17_18_19"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#uncoated"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Business_Development"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Finishing"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Paper_sources"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Media_Types"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#HLC"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Tray_5"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Chamonix"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Image_overwrite"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Media_Dimensions_-_Maximum"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Malta"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Post-print_Four-tray_Paper_Insertion_Module"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#uncoated_r_4_39_113_115"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Products"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Roll_Feed_Solution"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Mono_Products"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Paper_sources"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#High_Capacity_Sheet_Feed_Module_r_4_32_166_168"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Capabilites"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#B_and_W_Transaction_Digital_Printing_Press"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Rated_Speed"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Price"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Finishing"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Tray_5"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Standard_Capabilities"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Media_Weight_-_Minimum"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Digital_Wide_Format_Printers_and_Copiers"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Xerox_Tape_Binder"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Scanning"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Automatic_Doucment_Feeder"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Sheet_Enhancement_Module"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#HighLight_Color_Digital_Printing_Press"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Mono_Products"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Resolution"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Optional_Capabilties"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#DFEs_and_controllers"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Chamonix"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Other_Finishing_Options"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Tray_1"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Encrypted_Scan_to_email"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Binder"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Electronic_Input"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Finishing_r_1_23_24_25"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Color_Printers"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Color_Digital_Printing_Press"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Media_Dimensions_-_Maximum"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#BB"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#IP_filtering"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Black"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Color_Printers"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Media_Dimensions_-_Minimum"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:And">
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Security"/>
+      </terms>
+      <terms xsi:type="featuremapping:FeatureRef">
+        <feature href="../feature/splot_printer.feature#Production_Printers_and_Copiers"/>
+      </terms>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Scan_r_1_17_18_20"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Copy"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Fax"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Production_Printing"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Finishing_r_1_17_18_100"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Reprinting"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Production_MICR_Printing"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Yes"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Print"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#RIP"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Scan"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Scan_to_file"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Black_r_2_12_96_159"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Integrated_Scanner"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Sheet_Feed_Module_r_4_32_166_167"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#High_Capacity_Stacking_Option_r_4_32_166_169"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Sheet_Feed_Module"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#High_Capacity_Sheet_Feed_Module"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#High_Capacity_Stacking_Option"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#coated_r_4_37_110_111"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#coated_r_4_39_113_114"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#coated"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Standard_Four-tray_Sheet"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Oversized_High-Capacity_Sheet_Feed_Module"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Post-print_Oversized_Two-tray_Paper_Insertion_Module"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Insertion_Module"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Tray_2"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Tray_3"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Tray_4"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Offset_Output_Tray"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Top_Tray"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Finisher"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Basic_Finisher_Module_r_7_51_52_132_133"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Basic_Finisher_Module_Plus_r_7_51_52_132_134"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Basic_Finisher_Module-DC"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Multifunction_Finisher_Professional"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Multifunction_Finisher_Pro_plus_r_7_51_52_132_147"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Booklet_Making"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Stapler"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Cutting"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Tape_Bound"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Hole_Punch"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Stacker"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Slitter_or_Merger"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Print_Engine"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Sheet_feed_and_Insertion_Module"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Basic_Finisher_Module"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Basic_Finisher_Module_Plus"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Finishing_Transport_Module"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Feeder_Module_With_Integrated_Scanner"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Professional"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Multifunction_Finisher_Pro_plus"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Basic_Finisher_Module_DC"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Xerox_DS3500_Stacker"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Secure_print"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Authentication"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Digital_Printing_Presses"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#B_and_W_Publishing_Digital_Printing_Press"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#B_and_W_Printers"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#B_and_W_Publishing"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#B_and_W_Transaction"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#HighLight_Color"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.2/@groups.2"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Continuous_Feed_Printers"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Wide_Format_Solutions"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Color_Wide_Format_Printers"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Wide_Format_Finishers"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Software_Solutions"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Workflow_software"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Freeflow_Software_and_scanners"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.1/@groups.0/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Production_printing_software"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#QM"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Teak"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Nuvera"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.1/@groups.1"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Mykonos"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#//@coreGroup/@groups.0/@groups.0/@groups.2/@groups.0/@groups.0"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../feature/splot_printer.feature#Chandon"/>
+    </term>
+  </mappings>
+  <featureModel>
+    <value href="../feature/splot_printer.feature#/"/>
+  </featureModel>
+  <solutionModels>
+    <value href="../viewmodel/balanced_height5_countChildren3_vpCount90_groupsVP3.viewmodel#/"/>
+  </solutionModels>
+</featuremapping:FeatureMappingModel>

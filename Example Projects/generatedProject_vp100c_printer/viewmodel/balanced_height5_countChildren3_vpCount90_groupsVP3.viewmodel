@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="ASCII"?>
+<viewmodel:GroupModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewmodel="http://org.feature.multi.perspective.model/schema/1.0">
+  <coreGroup name="Core" viewPointReference="//@viewPointContainer/@viewPoints.89">
+    <groups name="G_1" viewPointReference="//@viewPointContainer/@viewPoints.2 //@viewPointContainer/@viewPoints.14 //@viewPointContainer/@viewPoints.15 //@viewPointContainer/@viewPoints.22 //@viewPointContainer/@viewPoints.24 //@viewPointContainer/@viewPoints.27 //@viewPointContainer/@viewPoints.28 //@viewPointContainer/@viewPoints.30 //@viewPointContainer/@viewPoints.35 //@viewPointContainer/@viewPoints.38 //@viewPointContainer/@viewPoints.40 //@viewPointContainer/@viewPoints.59 //@viewPointContainer/@viewPoints.64 //@viewPointContainer/@viewPoints.71 //@viewPointContainer/@viewPoints.72 //@viewPointContainer/@viewPoints.84 //@viewPointContainer/@viewPoints.85 //@viewPointContainer/@viewPoints.86 //@viewPointContainer/@viewPoints.88">
+      <groups name="G_11" viewPointReference="//@viewPointContainer/@viewPoints.6 //@viewPointContainer/@viewPoints.7 //@viewPointContainer/@viewPoints.8 //@viewPointContainer/@viewPoints.14 //@viewPointContainer/@viewPoints.19 //@viewPointContainer/@viewPoints.23 //@viewPointContainer/@viewPoints.36 //@viewPointContainer/@viewPoints.37 //@viewPointContainer/@viewPoints.40 //@viewPointContainer/@viewPoints.48 //@viewPointContainer/@viewPoints.49 //@viewPointContainer/@viewPoints.51 //@viewPointContainer/@viewPoints.54 //@viewPointContainer/@viewPoints.59 //@viewPointContainer/@viewPoints.63 //@viewPointContainer/@viewPoints.68 //@viewPointContainer/@viewPoints.69 //@viewPointContainer/@viewPoints.70 //@viewPointContainer/@viewPoints.71 //@viewPointContainer/@viewPoints.74 //@viewPointContainer/@viewPoints.76 //@viewPointContainer/@viewPoints.77 //@viewPointContainer/@viewPoints.84 //@viewPointContainer/@viewPoints.85 //@viewPointContainer/@viewPoints.87">
+        <groups name="G_111" viewPointReference="//@viewPointContainer/@viewPoints.0 //@viewPointContainer/@viewPoints.1 //@viewPointContainer/@viewPoints.4 //@viewPointContainer/@viewPoints.5 //@viewPointContainer/@viewPoints.6 //@viewPointContainer/@viewPoints.10 //@viewPointContainer/@viewPoints.12 //@viewPointContainer/@viewPoints.16 //@viewPointContainer/@viewPoints.17 //@viewPointContainer/@viewPoints.18 //@viewPointContainer/@viewPoints.21 //@viewPointContainer/@viewPoints.22 //@viewPointContainer/@viewPoints.24 //@viewPointContainer/@viewPoints.28 //@viewPointContainer/@viewPoints.29 //@viewPointContainer/@viewPoints.34 //@viewPointContainer/@viewPoints.38 //@viewPointContainer/@viewPoints.41 //@viewPointContainer/@viewPoints.47 //@viewPointContainer/@viewPoints.51 //@viewPointContainer/@viewPoints.57 //@viewPointContainer/@viewPoints.61 //@viewPointContainer/@viewPoints.65 //@viewPointContainer/@viewPoints.76 //@viewPointContainer/@viewPoints.79 //@viewPointContainer/@viewPoints.80">
+          <groups name="G_1111" viewPointReference="//@viewPointContainer/@viewPoints.0 //@viewPointContainer/@viewPoints.3 //@viewPointContainer/@viewPoints.7 //@viewPointContainer/@viewPoints.9 //@viewPointContainer/@viewPoints.13 //@viewPointContainer/@viewPoints.15 //@viewPointContainer/@viewPoints.16 //@viewPointContainer/@viewPoints.23 //@viewPointContainer/@viewPoints.27 //@viewPointContainer/@viewPoints.30 //@viewPointContainer/@viewPoints.34 //@viewPointContainer/@viewPoints.48 //@viewPointContainer/@viewPoints.52 //@viewPointContainer/@viewPoints.55 //@viewPointContainer/@viewPoints.57 //@viewPointContainer/@viewPoints.67 //@viewPointContainer/@viewPoints.68 //@viewPointContainer/@viewPoints.78">
+            <groups name="G_11111" viewPointReference="//@viewPointContainer/@viewPoints.4 //@viewPointContainer/@viewPoints.11 //@viewPointContainer/@viewPoints.12 //@viewPointContainer/@viewPoints.24 //@viewPointContainer/@viewPoints.26 //@viewPointContainer/@viewPoints.29 //@viewPointContainer/@viewPoints.31 //@viewPointContainer/@viewPoints.33 //@viewPointContainer/@viewPoints.35 //@viewPointContainer/@viewPoints.39 //@viewPointContainer/@viewPoints.43 //@viewPointContainer/@viewPoints.50 //@viewPointContainer/@viewPoints.52 //@viewPointContainer/@viewPoints.57 //@viewPointContainer/@viewPoints.58 //@viewPointContainer/@viewPoints.66 //@viewPointContainer/@viewPoints.69 //@viewPointContainer/@viewPoints.73 //@viewPointContainer/@viewPoints.76 //@viewPointContainer/@viewPoints.77 //@viewPointContainer/@viewPoints.82"/>
+            <groups name="G_11112" viewPointReference="//@viewPointContainer/@viewPoints.12 //@viewPointContainer/@viewPoints.14 //@viewPointContainer/@viewPoints.15 //@viewPointContainer/@viewPoints.16 //@viewPointContainer/@viewPoints.17 //@viewPointContainer/@viewPoints.25 //@viewPointContainer/@viewPoints.26 //@viewPointContainer/@viewPoints.32 //@viewPointContainer/@viewPoints.39 //@viewPointContainer/@viewPoints.44 //@viewPointContainer/@viewPoints.46 //@viewPointContainer/@viewPoints.47 //@viewPointContainer/@viewPoints.49 //@viewPointContainer/@viewPoints.56 //@viewPointContainer/@viewPoints.60 //@viewPointContainer/@viewPoints.61 //@viewPointContainer/@viewPoints.62 //@viewPointContainer/@viewPoints.64 //@viewPointContainer/@viewPoints.66 //@viewPointContainer/@viewPoints.68 //@viewPointContainer/@viewPoints.72 //@viewPointContainer/@viewPoints.74 //@viewPointContainer/@viewPoints.75 //@viewPointContainer/@viewPoints.82 //@viewPointContainer/@viewPoints.86 //@viewPointContainer/@viewPoints.87"/>
+            <groups name="G_11113" viewPointReference="//@viewPointContainer/@viewPoints.1 //@viewPointContainer/@viewPoints.5 //@viewPointContainer/@viewPoints.10 //@viewPointContainer/@viewPoints.11 //@viewPointContainer/@viewPoints.20 //@viewPointContainer/@viewPoints.25 //@viewPointContainer/@viewPoints.39 //@viewPointContainer/@viewPoints.42 //@viewPointContainer/@viewPoints.43 //@viewPointContainer/@viewPoints.52 //@viewPointContainer/@viewPoints.53 //@viewPointContainer/@viewPoints.55 //@viewPointContainer/@viewPoints.58 //@viewPointContainer/@viewPoints.62 //@viewPointContainer/@viewPoints.63 //@viewPointContainer/@viewPoints.65 //@viewPointContainer/@viewPoints.67 //@viewPointContainer/@viewPoints.78 //@viewPointContainer/@viewPoints.81 //@viewPointContainer/@viewPoints.83"/>
+          </groups>
+        </groups>
+        <groups name="G_112">
+          <groups name="G_1121">
+            <groups name="G_11211"/>
+            <groups name="G_11212"/>
+          </groups>
+          <groups name="G_1122">
+            <groups name="G_11221"/>
+            <groups name="G_11222"/>
+          </groups>
+          <groups name="G_1123">
+            <groups name="G_11231"/>
+            <groups name="G_11232"/>
+            <groups name="G_11233"/>
+          </groups>
+        </groups>
+        <groups name="G_113">
+          <groups name="G_1131">
+            <groups name="G_11311"/>
+            <groups name="G_11312"/>
+          </groups>
+        </groups>
+      </groups>
+      <groups name="G_12" viewPointReference="//@viewPointContainer/@viewPoints.0 //@viewPointContainer/@viewPoints.8 //@viewPointContainer/@viewPoints.9 //@viewPointContainer/@viewPoints.19 //@viewPointContainer/@viewPoints.20 //@viewPointContainer/@viewPoints.21 //@viewPointContainer/@viewPoints.33 //@viewPointContainer/@viewPoints.42 //@viewPointContainer/@viewPoints.44 //@viewPointContainer/@viewPoints.46 //@viewPointContainer/@viewPoints.62 //@viewPointContainer/@viewPoints.70 //@viewPointContainer/@viewPoints.71 //@viewPointContainer/@viewPoints.73 //@viewPointContainer/@viewPoints.75 //@viewPointContainer/@viewPoints.79 //@viewPointContainer/@viewPoints.81 //@viewPointContainer/@viewPoints.86">
+        <groups name="G_121" viewPointReference="//@viewPointContainer/@viewPoints.13 //@viewPointContainer/@viewPoints.17 //@viewPointContainer/@viewPoints.19 //@viewPointContainer/@viewPoints.20 //@viewPointContainer/@viewPoints.23 //@viewPointContainer/@viewPoints.25 //@viewPointContainer/@viewPoints.27 //@viewPointContainer/@viewPoints.31 //@viewPointContainer/@viewPoints.43 //@viewPointContainer/@viewPoints.45 //@viewPointContainer/@viewPoints.56 //@viewPointContainer/@viewPoints.60 //@viewPointContainer/@viewPoints.61 //@viewPointContainer/@viewPoints.65 //@viewPointContainer/@viewPoints.66 //@viewPointContainer/@viewPoints.70 //@viewPointContainer/@viewPoints.77 //@viewPointContainer/@viewPoints.84 //@viewPointContainer/@viewPoints.85 //@viewPointContainer/@viewPoints.88">
+          <groups name="G_1211">
+            <groups name="G_12111"/>
+            <groups name="G_12112"/>
+            <groups name="G_12113"/>
+          </groups>
+        </groups>
+      </groups>
+      <groups name="G_13" viewPointReference="//@viewPointContainer/@viewPoints.3 //@viewPointContainer/@viewPoints.18 //@viewPointContainer/@viewPoints.21 //@viewPointContainer/@viewPoints.44 //@viewPointContainer/@viewPoints.45 //@viewPointContainer/@viewPoints.46 //@viewPointContainer/@viewPoints.50 //@viewPointContainer/@viewPoints.53 //@viewPointContainer/@viewPoints.58 //@viewPointContainer/@viewPoints.67 //@viewPointContainer/@viewPoints.82 //@viewPointContainer/@viewPoints.83 //@viewPointContainer/@viewPoints.87">
+        <groups name="G_131" viewPointReference="//@viewPointContainer/@viewPoints.2 //@viewPointContainer/@viewPoints.6 //@viewPointContainer/@viewPoints.11 //@viewPointContainer/@viewPoints.32 //@viewPointContainer/@viewPoints.36 //@viewPointContainer/@viewPoints.40 //@viewPointContainer/@viewPoints.41 //@viewPointContainer/@viewPoints.42 //@viewPointContainer/@viewPoints.48 //@viewPointContainer/@viewPoints.60 //@viewPointContainer/@viewPoints.74 //@viewPointContainer/@viewPoints.75 //@viewPointContainer/@viewPoints.80">
+          <groups name="G_1311">
+            <groups name="G_13111"/>
+            <groups name="G_13112"/>
+            <groups name="G_13113"/>
+          </groups>
+          <groups name="G_1312" viewPointReference="//@viewPointContainer/@viewPoints.2 //@viewPointContainer/@viewPoints.3 //@viewPointContainer/@viewPoints.10 //@viewPointContainer/@viewPoints.13 //@viewPointContainer/@viewPoints.22 //@viewPointContainer/@viewPoints.30 //@viewPointContainer/@viewPoints.32 //@viewPointContainer/@viewPoints.36 //@viewPointContainer/@viewPoints.37 //@viewPointContainer/@viewPoints.38 //@viewPointContainer/@viewPoints.41 //@viewPointContainer/@viewPoints.50 //@viewPointContainer/@viewPoints.51 //@viewPointContainer/@viewPoints.53 //@viewPointContainer/@viewPoints.55 //@viewPointContainer/@viewPoints.64 //@viewPointContainer/@viewPoints.80 //@viewPointContainer/@viewPoints.88">
+            <groups name="G_13121"/>
+            <groups name="G_13122"/>
+          </groups>
+          <groups name="G_1313">
+            <groups name="G_13131"/>
+          </groups>
+        </groups>
+      </groups>
+    </groups>
+  </coreGroup>
+  <viewPointContainer>
+    <viewPoints name="V_0" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_1" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2"/>
+    <viewPoints name="V_2" containedInGroup="//@coreGroup/@groups.0/@groups.2/@groups.0 //@coreGroup/@groups.0 //@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <viewPoints name="V_3" containedInGroup="//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_4" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_5" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_6" containedInGroup="//@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.2/@groups.0"/>
+    <viewPoints name="V_7" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0"/>
+    <viewPoints name="V_8" containedInGroup="//@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.1"/>
+    <viewPoints name="V_9" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.1"/>
+    <viewPoints name="V_10" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <viewPoints name="V_11" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.2/@groups.0"/>
+    <viewPoints name="V_12" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_13" containedInGroup="//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.1/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_14" containedInGroup="//@coreGroup/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0"/>
+    <viewPoints name="V_15" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0"/>
+    <viewPoints name="V_16" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_17" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <viewPoints name="V_18" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.2"/>
+    <viewPoints name="V_19" containedInGroup="//@coreGroup/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <viewPoints name="V_20" containedInGroup="//@coreGroup/@groups.0/@groups.1/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.1"/>
+    <viewPoints name="V_21" containedInGroup="//@coreGroup/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_22" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1 //@coreGroup/@groups.0"/>
+    <viewPoints name="V_23" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.1/@groups.0 //@coreGroup/@groups.0/@groups.0"/>
+    <viewPoints name="V_24" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0"/>
+    <viewPoints name="V_25" containedInGroup="//@coreGroup/@groups.0/@groups.1/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1"/>
+    <viewPoints name="V_26" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_27" containedInGroup="//@coreGroup/@groups.0/@groups.1/@groups.0 //@coreGroup/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_28" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0"/>
+    <viewPoints name="V_29" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_30" containedInGroup="//@coreGroup/@groups.0 //@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_31" containedInGroup="//@coreGroup/@groups.0/@groups.1/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_32" containedInGroup="//@coreGroup/@groups.0/@groups.2/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <viewPoints name="V_33" containedInGroup="//@coreGroup/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_34" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_35" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0"/>
+    <viewPoints name="V_36" containedInGroup="//@coreGroup/@groups.0/@groups.2/@groups.0 //@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <viewPoints name="V_37" containedInGroup="//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0"/>
+    <viewPoints name="V_38" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1 //@coreGroup/@groups.0"/>
+    <viewPoints name="V_39" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1"/>
+    <viewPoints name="V_40" containedInGroup="//@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.0 //@coreGroup/@groups.0/@groups.2/@groups.0"/>
+    <viewPoints name="V_41" containedInGroup="//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.2/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_42" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.2/@groups.0"/>
+    <viewPoints name="V_43" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <viewPoints name="V_44" containedInGroup="//@coreGroup/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.1"/>
+    <viewPoints name="V_45" containedInGroup="//@coreGroup/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <viewPoints name="V_46" containedInGroup="//@coreGroup/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.1"/>
+    <viewPoints name="V_47" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1"/>
+    <viewPoints name="V_48" containedInGroup="//@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.2/@groups.0"/>
+    <viewPoints name="V_49" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0"/>
+    <viewPoints name="V_50" containedInGroup="//@coreGroup/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_51" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <viewPoints name="V_52" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2"/>
+    <viewPoints name="V_53" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.2"/>
+    <viewPoints name="V_54" containedInGroup="//@coreGroup/@groups.0/@groups.0"/>
+    <viewPoints name="V_55" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2"/>
+    <viewPoints name="V_56" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <viewPoints name="V_57" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_58" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_59" containedInGroup="//@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.0"/>
+    <viewPoints name="V_60" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.2/@groups.0 //@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <viewPoints name="V_61" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <viewPoints name="V_62" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.1"/>
+    <viewPoints name="V_63" containedInGroup="//@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2"/>
+    <viewPoints name="V_64" containedInGroup="//@coreGroup/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1"/>
+    <viewPoints name="V_65" containedInGroup="//@coreGroup/@groups.0/@groups.1/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_66" containedInGroup="//@coreGroup/@groups.0/@groups.1/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_67" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.2"/>
+    <viewPoints name="V_68" containedInGroup="//@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1"/>
+    <viewPoints name="V_69" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0"/>
+    <viewPoints name="V_70" containedInGroup="//@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <viewPoints name="V_71" containedInGroup="//@coreGroup/@groups.0/@groups.1 //@coreGroup/@groups.0 //@coreGroup/@groups.0/@groups.0"/>
+    <viewPoints name="V_72" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0"/>
+    <viewPoints name="V_73" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.1"/>
+    <viewPoints name="V_74" containedInGroup="//@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.2/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1"/>
+    <viewPoints name="V_75" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.2/@groups.0"/>
+    <viewPoints name="V_76" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0"/>
+    <viewPoints name="V_77" containedInGroup="//@coreGroup/@groups.0/@groups.1/@groups.0 //@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_78" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2"/>
+    <viewPoints name="V_79" containedInGroup="//@coreGroup/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0/@groups.0"/>
+    <viewPoints name="V_80" containedInGroup="//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.2/@groups.0"/>
+    <viewPoints name="V_81" containedInGroup="//@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.1"/>
+    <viewPoints name="V_82" containedInGroup="//@coreGroup/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1"/>
+    <viewPoints name="V_83" containedInGroup="//@coreGroup/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.2"/>
+    <viewPoints name="V_84" containedInGroup="//@coreGroup/@groups.0 //@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.1/@groups.0"/>
+    <viewPoints name="V_85" containedInGroup="//@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.0/@groups.1/@groups.0 //@coreGroup/@groups.0"/>
+    <viewPoints name="V_86" containedInGroup="//@coreGroup/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0"/>
+    <viewPoints name="V_87" containedInGroup="//@coreGroup/@groups.0/@groups.2 //@coreGroup/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.0"/>
+    <viewPoints name="V_88" containedInGroup="//@coreGroup/@groups.0/@groups.2/@groups.0/@groups.1 //@coreGroup/@groups.0/@groups.1/@groups.0 //@coreGroup/@groups.0"/>
+    <viewPoints name="V_Core" containedInGroup="//@coreGroup"/>
+  </viewPointContainer>
+</viewmodel:GroupModel>
