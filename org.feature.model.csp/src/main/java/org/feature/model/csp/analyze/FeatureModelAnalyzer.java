@@ -71,7 +71,7 @@ public class FeatureModelAnalyzer {
     */
    public List<Constraint> getAllCSPConstraints() {
       if (allCSPConstraints == null) {
-         allCSPConstraints = FeatureModelUtil.getConstraints(model, FeatureModelUtil.cps_constraintLanguage);
+         allCSPConstraints = FeatureModelUtil.getConstraints(model, FeatureModelUtil.csp_constraintLanguage);
       }
       return allCSPConstraints;
    }

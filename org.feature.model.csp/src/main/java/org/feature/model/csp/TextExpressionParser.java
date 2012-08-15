@@ -53,7 +53,7 @@ public class TextExpressionParser {
       if (resource != null) {
          resourceSet = resource.getResourceSet();
       }
-      List<Constraint> cspConstraints = FeatureModelUtil.getConstraints(featuremodel, FeatureModelUtil.cps_constraintLanguage);
+      List<Constraint> cspConstraints = FeatureModelUtil.getConstraints(featuremodel, FeatureModelUtil.csp_constraintLanguage);
       for (Constraint constraint : cspConstraints) {
          String expression = constraint.getExpression();
          Term term = parseExpression(expression, uri, resourceSet);

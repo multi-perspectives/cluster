@@ -2,7 +2,6 @@ package org.feature.model.utilities;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -34,7 +33,7 @@ public final class FeatureModelUtil {
    public static String whitespace = " ";
    public static String attribute_type_string = "String";
    public static String attribute_id = "id";
-   public static String cps_constraintLanguage = "CSP";
+   public static String csp_constraintLanguage = "CSP";
 
    public static String featuremodel_file_extension = "feature";
 
@@ -162,7 +161,7 @@ public final class FeatureModelUtil {
     */
    public static Constraint createConstraint(String expression) {
       Constraint constraint = FeatureFactory.eINSTANCE.createConstraint();
-      constraint.setLanguage(cps_constraintLanguage);
+      constraint.setLanguage(csp_constraintLanguage);
       constraint.setExpression(expression);
       return constraint;
    }
