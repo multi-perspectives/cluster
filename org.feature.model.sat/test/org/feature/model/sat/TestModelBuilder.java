@@ -91,11 +91,87 @@ public class TestModelBuilder {
 			Assert.fail();
 			e.printStackTrace();
 		} catch (UnknownStatementException e) {
-			// TODO Auto-generated catch block
+			Assert.fail();
 			e.printStackTrace();
 		}
 	}
 
+	@Test
+	public void testGetModelFailContAlternative() {
+
+		fm = (FeatureModel) loadModel(FeaturePackage.eINSTANCE,
+				"testdata/SimplePhoneNoCTC.feature", null);
+
+		Feature testfeature1 = null, testfeature2 = null;
+
+		for (Feature f : fm.getAllFeatures()) {
+			if (f.getName().equals("M_8")) {
+				testfeature1 = f;
+			} else if (f.getName().equals("M_3")) {
+				testfeature2 = f;
+			}
+		}
+
+		if (testfeature1 == null || testfeature2 == null)
+			Assert.fail();
+
+		GateTranslator solver = new GateTranslator(SolverFactory.newDefault());
+		SATModelBuilder builder = new SATModelBuilder(solver);
+		builder.buildSATModel(fm);
+
+		try {
+			VecInt req = new VecInt();
+			req.push(builder.getMapping(testfeature1));
+			req.push(builder.getMapping(testfeature2));
+
+			Assert.assertEquals(false, builder.getModel().isSatisfiable(req));
+		} catch (TimeoutException e) {
+			Assert.fail();
+			e.printStackTrace();
+		} catch (UnknownStatementException e) {
+			Assert.fail();
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testGetModelFailMandatoryParent() {
+
+		fm = (FeatureModel) loadModel(FeaturePackage.eINSTANCE,
+				"testdata/SimplePhoneNoCTC.feature", null);
+
+		Feature testfeature1 = null, testfeature2 = null;
+
+		for (Feature f : fm.getAllFeatures()) {
+			if (f.getName().equals("GSM")) {
+				testfeature1 = f;
+			} else if (f.getName().equals("Communication")) {
+				testfeature2 = f;
+			}
+		}
+
+		if (testfeature1 == null || testfeature2 == null)
+			Assert.fail();
+
+		GateTranslator solver = new GateTranslator(SolverFactory.newDefault());
+		SATModelBuilder builder = new SATModelBuilder(solver);
+		builder.buildSATModel(fm);
+
+		try {
+			VecInt req = new VecInt();
+			req.push(builder.getMapping(testfeature1));
+			req.push(-builder.getMapping(testfeature2));
+
+			Assert.assertEquals(false, builder.getModel().isSatisfiable(req));
+		} catch (TimeoutException e) {
+			Assert.fail();
+			e.printStackTrace();
+		} catch (UnknownStatementException e) {
+			Assert.fail();
+			e.printStackTrace();
+		}
+	}
+	
 	@Test
 	public void testGetModelFailContReq() {
 
@@ -129,7 +205,7 @@ public class TestModelBuilder {
 			Assert.fail();
 			e.printStackTrace();
 		} catch (UnknownStatementException e) {
-			// TODO Auto-generated catch block
+			Assert.fail();
 			e.printStackTrace();
 		}
 	}
@@ -165,7 +241,7 @@ public class TestModelBuilder {
 			Assert.fail();
 			e.printStackTrace();
 		} catch (UnknownStatementException e) {
-			// TODO Auto-generated catch block
+			Assert.fail();
 			e.printStackTrace();
 		}
 	}
@@ -187,7 +263,99 @@ public class TestModelBuilder {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void testGetModelSuccessModelConstraint() {
 
+		fm = (FeatureModel) loadModel(FeaturePackage.eINSTANCE,
+				"testdata/SimplePhone.feature", null);
+
+		GateTranslator solver = new GateTranslator(SolverFactory.newDefault());
+		SATModelBuilder builder = new SATModelBuilder(solver);
+		builder.buildSATModel(fm);
+
+		try {
+			Assert.assertEquals(true, builder.getModel().isSatisfiable());
+		} catch (TimeoutException e) {
+			Assert.fail();
+			e.printStackTrace();
+		}
+	}
+	
+	public void testGetModelFailModelConstraintExclude() {
+
+		fm = (FeatureModel) loadModel(FeaturePackage.eINSTANCE,
+				"testdata/SimplePhone.feature", null);
+
+		Feature testfeature1 = null, testfeature2 = null;
+
+		for (Feature f : fm.getAllFeatures()) {
+			if (f.getName().equals("M_8")) {
+				testfeature1 = f;
+			} else if (f.getName().equals("MMS")) {
+				testfeature2 = f;
+			}
+		}
+
+		if (testfeature1 == null || testfeature2 == null)
+			Assert.fail();
+
+		GateTranslator solver = new GateTranslator(SolverFactory.newDefault());
+		SATModelBuilder builder = new SATModelBuilder(solver);
+		builder.buildSATModel(fm);
+
+		try {
+			VecInt req = new VecInt();
+			req.push(builder.getMapping(testfeature1));
+			req.push(builder.getMapping(testfeature2));
+
+			Assert.assertEquals(false, builder.getModel().isSatisfiable(req));
+		} catch (TimeoutException e) {
+			Assert.fail();
+			e.printStackTrace();
+		} catch (UnknownStatementException e) {
+			Assert.fail();
+			e.printStackTrace();
+		}
+	}
+
+	public void testGetModelFailModelConstraintRequire() {
+
+		fm = (FeatureModel) loadModel(FeaturePackage.eINSTANCE,
+				"testdata/SimplePhone.feature", null);
+
+		Feature testfeature1 = null, testfeature2 = null;
+
+		for (Feature f : fm.getAllFeatures()) {
+			if (f.getName().equals("Camera")) {
+				testfeature1 = f;
+			} else if (f.getName().equals("MMS")) {
+				testfeature2 = f;
+			}
+		}
+
+		if (testfeature1 == null || testfeature2 == null)
+			Assert.fail();
+
+		GateTranslator solver = new GateTranslator(SolverFactory.newDefault());
+		SATModelBuilder builder = new SATModelBuilder(solver);
+		builder.buildSATModel(fm);
+
+		try {
+			VecInt req = new VecInt();
+			req.push(builder.getMapping(testfeature1));
+			req.push(-builder.getMapping(testfeature2));
+
+			Assert.assertEquals(false, builder.getModel().isSatisfiable(req));
+		} catch (TimeoutException e) {
+			Assert.fail();
+			e.printStackTrace();
+		} catch (UnknownStatementException e) {
+			Assert.fail();
+			e.printStackTrace();
+		}
+	}
+	
 	private EObject loadModel(EPackage ePackage, String path,
 			ResourceSet resourceSet) {
 		initEMF(ePackage);

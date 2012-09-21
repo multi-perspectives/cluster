@@ -12,11 +12,18 @@
       </childFeatures>
     </groups>
     <groups maxCardinality="1">
-      <childFeatures maxCardinality="100" name="Communication">
-        <groups maxCardinality="100">
-          <childFeatures maxCardinality="1" name="WLAN"/>
+      <childFeatures maxCardinality="1" name="Communication">
+        <groups maxCardinality="1">
           <childFeatures maxCardinality="1" name="Bluetooth"/>
+        </groups>
+        <groups maxCardinality="1">
+          <childFeatures maxCardinality="1" name="WLAN"/>
+        </groups>
+        <groups maxCardinality="1">
           <childFeatures maxCardinality="1" name="UMTS"/>
+        </groups>
+        <groups minCardinality="1" maxCardinality="1">
+          <childFeatures minCardinality="1" maxCardinality="1" name="GSM"/>
         </groups>
       </childFeatures>
     </groups>

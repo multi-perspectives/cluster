@@ -72,8 +72,9 @@ public class SATModelBuilder {
 		Feature rootFeature = featuremodel.getRoot();
 
 		addMapping(rootFeature);
-		buildRootFeature(rootFeature);
+		
 		try {
+			buildRootFeature(rootFeature);
 			transformFeature(rootFeature);
 		} catch (BuilderException | ContradictionException e1) {
 			logger.error("Cannot build constraint model for SAT4J");
@@ -126,17 +127,18 @@ public class SATModelBuilder {
 			// true
 
 			try {
-				v.push(checkTerm(term));
+				v.push(checkTerm(term));				
 			} catch (UnknownStatementException e) {
-				logger.error("Not all features in the constraint could be resolved - Cross Tree Constraint dicarded");
+				logger.error("Not all features in the constraint could be resolved - cross tree constraint dicarded");
 			}
 		}
+		
 		try {
-			v.push(getMapping(model.getRoot()));
+			solver.and(getMapping(model.getRoot()), v);
 		} catch (UnknownStatementException e) {
-			logger.error("Cross Tree Constraints could not be added to the feature model");
+			logger.error("Root feature could not be found in feature model - all cross tree constraints dicarded");
 		}
-		solver.addClause(v);
+		
 	}
 
 	private int checkTerm(Term term) throws ContradictionException, UnknownStatementException {
@@ -151,29 +153,36 @@ public class SATModelBuilder {
 			int rightConstraint = checkTerm(rightTerm);
 
 			if (term instanceof Or) {
-				int[] values = { leftConstraint, rightConstraint };
+				varCounter++;
+				int[] values = { -varCounter, leftConstraint, rightConstraint };
 				// create a new variable that expresses the or relation
-				solver.or(varCounter++, new VecInt(values));
+				logger.debug("Adding cross tree constraint or for features: '" + leftConstraint  + " || " + rightConstraint + "'");
+				solver.or(varCounter, new VecInt(values));
 				result = varCounter;
 			} else if (term instanceof And) {
-				int[] values = { leftConstraint, rightConstraint };
+				varCounter++;
+				int[] values = {varCounter,  leftConstraint, rightConstraint };
 				// create a new variable that expresses the and relation
-				solver.and(varCounter++, new VecInt(values));
+				logger.debug("Adding cross tree constraint and for features: '" + leftConstraint  + " && " + rightConstraint + "'");
+				solver.and(varCounter, new VecInt(values));
 				result = varCounter;
 			}
 		} else if (term instanceof UnaryOperator) {
 			UnaryOperator unaryTerm = (UnaryOperator) term;
 			Term singleTerm = unaryTerm.getOperand();
 			int singleConstraint = checkTerm(singleTerm);
-			// give back the internal feature variable, either negated or not
+			// return the internal feature variable, either negated or not
 			if (term instanceof Not) {
+				logger.debug("Adding cross tree constraint not for feature: '" + singleConstraint + "'");
 				result = -(singleConstraint);
 			} else if (term instanceof Nested) {
+				logger.debug("Adding cross tree constraint bound for feature: '" + singleConstraint + "'");
 				result = singleConstraint;
 			}
 		} else if (term instanceof FeatureRef) {
 			FeatureRef featureRefTerm = (FeatureRef) term;
 			Feature feature = featureRefTerm.getFeature();
+			logger.debug("Adding feature to cross tree constaint: '" + feature.getName() + "'");
 			if (feature.eIsProxy()) {
 				URI proxyURI = ((org.eclipse.emf.ecore.InternalEObject) feature)
 						.eProxyURI();
@@ -225,19 +234,7 @@ public class SATModelBuilder {
 			throw new BuilderException(
 					"Unkown combination of feature cardinalities");
 
-		// for (Feature f : group.getChildFeatures()) {
-		// buildParent(f, group.getParentFeature());
-		// }
 	}
-
-	// private void buildParent(Feature childFeature, Feature parentIdentifier)
-	// throws BuilderException {
-	// int[] clause = { -getMapping(childFeature),
-	// getMapping(parentIdentifier) };
-	// logger.debug("add parent clause  '{" + childFeature + "}' -> '{"
-	// + parentIdentifier + "}'");
-	// buildClause(clause);
-	// }
 
 	private void buildAlternativeChildren(Feature featureIdentifier,
 			List<Feature> alternativeIdentifiers) throws BuilderException,
@@ -247,8 +244,7 @@ public class SATModelBuilder {
 		for (int i = 0; i < alternativeIdentifiers.size(); i++) {
 			clause[i] = getMapping(alternativeIdentifiers.get(i));
 		}
-		// clause[alternativeIdentifiers.size()] =
-		// -getMapping(featureIdentifier);
+
 		logger.debug("add alternative clause '{" + featureIdentifier
 				+ "}' -> '{" + alternativeIdentifiers + "}'");
 
@@ -269,7 +265,7 @@ public class SATModelBuilder {
 			clause[i] = getMapping(optionalIdentifiers.get(i));
 		}
 
-		// Add Imply constraint to parent feature
+		// Add Imply -> constraint to parent feature
 		solver.halfOr(getMapping(featureIdentifier), new VecInt(clause));
 	}
 
@@ -280,11 +276,9 @@ public class SATModelBuilder {
 		VecInt mandatory = new VecInt();
 
 		for (Feature f : mandatoryIdentifiers) {
-			// int[] clause = { feature, getMapping(mandatory) };
 			mandatory.push(getMapping(f));
 			logger.debug("add mandatory clause '{" + featureIdentifier
 					+ "}' <-> '{" + f + "}'");
-			// buildClause(clause);
 		}
 
 		// add mandatory features for parent feature
@@ -332,11 +326,11 @@ public class SATModelBuilder {
 //	}
 
 	private void buildRootFeature(Feature rootIdentifier)
-			throws BuilderException {
+			throws BuilderException, ContradictionException {
 		try {
 			int[] clause = { getMapping(rootIdentifier) };
 			logger.debug("add root clause '{" + rootIdentifier + "}'");
-			buildClause(clause);
+			solver.addClause(new VecInt(clause));
 		} catch (UnknownStatementException e) {
 			logger.error("Root feature can not be found");
 		}
@@ -351,6 +345,7 @@ public class SATModelBuilder {
 	 * @throws BuilderException
 	 *             converted ContradictionException
 	 */
+	@Deprecated
 	private void buildClause(int[] clause) throws BuilderException {
 		try {
 			// Add or-clause column; add several columns for and-clause
@@ -407,7 +402,8 @@ public class SATModelBuilder {
 		if (featureToId.containsKey(newFeature))
 			return;
 		else {
-			featureToId.put(newFeature, varCounter++);
+			varCounter++;
+			featureToId.put(newFeature, varCounter);
 			idToFeature.put(varCounter, newFeature);
 		}
 	}
