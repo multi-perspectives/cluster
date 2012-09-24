@@ -41,8 +41,8 @@ public class TestModelBuilder {
 				"testdata/SimplePhoneNoCTC.feature", null);
 
 		GateTranslator solver = new GateTranslator(SolverFactory.newDefault());
-		SATModelBuilder builder = new SATModelBuilder(solver);
-		builder.buildSATModel(fm);
+		ISolverModelBuilder builder = new SATModelBuilder(solver);
+		builder.buildSolverModel(fm);
 		try {
 			Assert.assertTrue(builder.getModel().isSatisfiable());
 		} catch (TimeoutException e) {
@@ -77,7 +77,7 @@ public class TestModelBuilder {
 
 		GateTranslator solver = new GateTranslator(SolverFactory.newDefault());
 		SATModelBuilder builder = new SATModelBuilder(solver);
-		builder.buildSATModel(fm);
+		builder.buildSolverModel(fm);
 
 		try {
 			VecInt req = new VecInt();
@@ -117,7 +117,7 @@ public class TestModelBuilder {
 
 		GateTranslator solver = new GateTranslator(SolverFactory.newDefault());
 		SATModelBuilder builder = new SATModelBuilder(solver);
-		builder.buildSATModel(fm);
+		builder.buildSolverModel(fm);
 
 		try {
 			VecInt req = new VecInt();
@@ -155,7 +155,7 @@ public class TestModelBuilder {
 
 		GateTranslator solver = new GateTranslator(SolverFactory.newDefault());
 		SATModelBuilder builder = new SATModelBuilder(solver);
-		builder.buildSATModel(fm);
+		builder.buildSolverModel(fm);
 
 		try {
 			VecInt req = new VecInt();
@@ -193,7 +193,7 @@ public class TestModelBuilder {
 
 		GateTranslator solver = new GateTranslator(SolverFactory.newDefault());
 		SATModelBuilder builder = new SATModelBuilder(solver);
-		builder.buildSATModel(fm);
+		builder.buildSolverModel(fm);
 
 		try {
 			VecInt req = new VecInt();
@@ -230,7 +230,7 @@ public class TestModelBuilder {
 
 		GateTranslator solver = new GateTranslator(SolverFactory.newDefault());
 		SATModelBuilder builder = new SATModelBuilder(solver);
-		builder.buildSATModel(fm);
+		builder.buildSolverModel(fm);
 
 		try {
 			VecInt req = new VecInt();
@@ -254,7 +254,7 @@ public class TestModelBuilder {
 
 		GateTranslator solver = new GateTranslator(SolverFactory.newDefault());
 		SATModelBuilder builder = new SATModelBuilder(solver);
-		builder.buildSATModel(fm);
+		builder.buildSolverModel(fm);
 
 		try {
 			Assert.assertEquals(false, builder.getModel().isSatisfiable());
@@ -272,7 +272,7 @@ public class TestModelBuilder {
 
 		GateTranslator solver = new GateTranslator(SolverFactory.newDefault());
 		SATModelBuilder builder = new SATModelBuilder(solver);
-		builder.buildSATModel(fm);
+		builder.buildSolverModel(fm);
 
 		try {
 			Assert.assertEquals(true, builder.getModel().isSatisfiable());
@@ -302,7 +302,7 @@ public class TestModelBuilder {
 
 		GateTranslator solver = new GateTranslator(SolverFactory.newDefault());
 		SATModelBuilder builder = new SATModelBuilder(solver);
-		builder.buildSATModel(fm);
+		builder.buildSolverModel(fm);
 
 		try {
 			VecInt req = new VecInt();
@@ -339,7 +339,7 @@ public class TestModelBuilder {
 
 		GateTranslator solver = new GateTranslator(SolverFactory.newDefault());
 		SATModelBuilder builder = new SATModelBuilder(solver);
-		builder.buildSATModel(fm);
+		builder.buildSolverModel(fm);
 
 		try {
 			VecInt req = new VecInt();

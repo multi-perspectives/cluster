@@ -17,7 +17,6 @@ import org.emftext.term.propositional.expression.Term;
 import org.emftext.term.propositional.expression.UnaryOperator;
 import org.feature.model.sat.exception.BuilderException;
 import org.feature.model.sat.exception.UnknownStatementException;
-import org.feature.model.sat.model.slicing.BoundedType;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.feature.Group;
@@ -26,7 +25,7 @@ import org.sat4j.specs.ContradictionException;
 import org.sat4j.specs.ISolver;
 import org.sat4j.tools.GateTranslator;
 
-public class SATModelBuilder {
+public class SATModelBuilder implements ISolverModelBuilder{
 
 	private int varCounter;
 
@@ -55,20 +54,18 @@ public class SATModelBuilder {
 		this.solver = new GateTranslator(solver);
 	}
 
-	public void setGateTranslator(GateTranslator gt) {
+	@Override
+	public void setSolverModel(GateTranslator gt) {
 		solver = gt;
 	}
 
+	@Override
 	public GateTranslator getModel() {
 		return solver;
 	}
 
-	/**
-	 * Transform a cardinality-based feature model into a constraint model.
-	 * 
-	 * @param featuremodel
-	 */
-	public GateTranslator buildSATModel(FeatureModel featuremodel) {
+	@Override
+	public GateTranslator buildSolverModel(FeatureModel featuremodel) {
 		Feature rootFeature = featuremodel.getRoot();
 
 		addMapping(rootFeature);
@@ -89,6 +86,38 @@ public class SATModelBuilder {
 		}
 
 		return solver;
+	}
+	
+	@Override
+	public void addMapping(Feature newFeature) {
+		if (featureToId.containsKey(newFeature))
+			return;
+		else {
+			varCounter++;
+			featureToId.put(newFeature, varCounter);
+			idToFeature.put(varCounter, newFeature);
+		}
+	}
+
+	@Override
+	public Integer getMapping(Feature featureIdentifier)
+			throws UnknownStatementException {
+		if (featureToId.get(featureIdentifier) == null)
+			throw new UnknownStatementException(
+					"Feature can not be found in the feature model");
+		return featureToId.get(featureIdentifier);
+	}
+
+	@Override
+	public Feature getMapping(int feature) {
+		return idToFeature.get(feature);
+	}
+
+	@Override
+	public void removeMapping(Feature featureId)
+			throws UnknownStatementException {
+		idToFeature.remove(getMapping(featureId));
+		featureToId.remove(featureId);
 	}
 
 	private void transformFeature(Feature feature) throws BuilderException,
@@ -116,7 +145,6 @@ public class SATModelBuilder {
 		
 	}
 
-	// TODO: Does not work correctly! Fix it!
 	private void transformRemainingCTConstraints(FeatureModel model)
 			throws ContradictionException {
 
@@ -248,7 +276,7 @@ public class SATModelBuilder {
 		logger.debug("add alternative clause '{" + featureIdentifier
 				+ "}' -> '{" + alternativeIdentifiers + "}'");
 
-		buildXOrClause(clause);
+		buildXOrClause(clause, getMapping(featureIdentifier));
 
 		// Add Imply constraint to parent feature
 		solver.halfOr(getMapping(featureIdentifier), new VecInt(clause));
@@ -299,31 +327,11 @@ public class SATModelBuilder {
 		// clause[orIdentifiers.size()] = -getMapping(featureIdentifier);
 		logger.debug("add or clause '{" + featureIdentifier + "}' -> '{"
 				+ orIdentifiers + "}'");
-		buildOrClause(clause);
+		buildOrClause(clause, getMapping(featureIdentifier));
 
 		// Add Imply constraint to parent feature
 		solver.halfOr(getMapping(featureIdentifier), new VecInt(clause));
 	}
-
-	// TODO: Integrate accordingly when three valued logic is integrated
-//	private void buildVariabilityType(Feature featureIdentifier,
-//			BoundedType type) throws BuilderException {
-//		switch (type) {
-//		case ALIVE:
-//			int[] clause1 = { getMapping(featureIdentifier) };
-//			logger.debug("add static clause '{" + featureIdentifier + "}'");
-//			buildClause(clause1);
-//			break;
-//		case DEAD:
-//			int[] clause2 = { -getMapping(featureIdentifier) };
-//			logger.debug("add dead clause 'not {" + featureIdentifier + "}'");
-//			buildClause(clause2);
-//			break;
-//		default:
-//			logger.debug("feature type ignored");
-//			break;
-//		}
-//	}
 
 	private void buildRootFeature(Feature rootIdentifier)
 			throws BuilderException, ContradictionException {
@@ -338,35 +346,17 @@ public class SATModelBuilder {
 	}
 
 	/**
-	 * build clause
-	 * 
-	 * @param clause
-	 *            as array of integers
-	 * @throws BuilderException
-	 *             converted ContradictionException
-	 */
-	@Deprecated
-	private void buildClause(int[] clause) throws BuilderException {
-		try {
-			// Add or-clause column; add several columns for and-clause
-			solver.addClause(new VecInt(clause));
-		} catch (ContradictionException e) {
-			String message = e.getMessage();
-			logger.warn(message, e);
-			throw new BuilderException(message, e);
-		}
-	}
-
-	/**
 	 * translate or to sat
 	 * 
 	 * @param ors
 	 *            ors
 	 * @throws BuilderException
 	 */
-	private void buildOrClause(int[] ors) throws BuilderException {
+	private void buildOrClause(int[] ors, int parentId) throws BuilderException {
 		try {
-			solver.addAtLeast(new VecInt(ors), 1);
+			VecInt orgroup = new VecInt(ors);
+			orgroup.push(-parentId);
+			solver.addAtLeast(orgroup, 1);
 		} catch (ContradictionException e) {
 			String message = e.getMessage();
 			logger.warn(message, e);
@@ -381,10 +371,12 @@ public class SATModelBuilder {
 	 *            alternatives
 	 * @throws BuilderException
 	 */
-	private void buildXOrClause(int[] alternatives) throws BuilderException {
+	private void buildXOrClause(int[] alternatives, int parentId) throws BuilderException {
 		try {
-			solver.addAtLeast(new VecInt(alternatives), 1);
-			solver.addAtMost(new VecInt(alternatives), 1);
+			VecInt altgroup = new VecInt(alternatives);
+			altgroup.push(-parentId);
+			solver.addAtLeast(altgroup, 1);
+			solver.addAtMost(altgroup, 1);
 		} catch (ContradictionException e) {
 			String message = e.getMessage();
 			logger.warn(message, e);
@@ -397,76 +389,4 @@ public class SATModelBuilder {
 			addMapping(f);
 		}
 	}
-
-	public void addMapping(Feature newFeature) {
-		if (featureToId.containsKey(newFeature))
-			return;
-		else {
-			varCounter++;
-			featureToId.put(newFeature, varCounter);
-			idToFeature.put(varCounter, newFeature);
-		}
-	}
-
-	public Integer getMapping(Feature featureIdentifier)
-			throws UnknownStatementException {
-		if (featureToId.get(featureIdentifier) == null)
-			throw new UnknownStatementException(
-					"Feature can not be found in the feature model");
-		return featureToId.get(featureIdentifier);
-	}
-
-	public Feature getMapping(int feature) {
-		return idToFeature.get(feature);
-	}
-
-	public void removeMapping(Feature featureId)
-			throws UnknownStatementException {
-		idToFeature.remove(getMapping(featureId));
-		featureToId.remove(featureId);
-	}
-
-	@Deprecated
-	private void registerFeatures(Map<Feature, String> featureIdentifiers)
-			throws BuilderException {
-		featureToId = new HashMap<Feature, Integer>(featureIdentifiers.size());
-		int i = 1;
-		for (Feature identifier : featureIdentifiers.keySet()) {
-			featureToId.put(identifier, new Integer(i));
-			idToFeature.put(new Integer(i), identifier);
-			logger.debug("add new feature '{"
-					+ featureIdentifiers.get(identifier)
-					+ "}' with integer value '{" + i + "}'");
-			i++;
-		}
-		// solver.newVar(featureIdentifiers.size());
-		varCounter = featureIdentifiers.size();
-	}
-
-	@Deprecated
-	private void buildExcludeDependencies(Feature featureIdentifier,
-			List<Feature> excludeIdentifiers) throws BuilderException,
-			UnknownStatementException {
-		for (Feature exclude : excludeIdentifiers) {
-			int[] clause = { -getMapping(featureIdentifier),
-					-getMapping(exclude) };
-			logger.debug("add exclude clause '{" + featureIdentifier
-					+ "}' <-> '{" + exclude + "}'");
-			buildClause(clause);
-		}
-	}
-
-	@Deprecated
-	private void buildRequireDependencies(Feature featureIdentifier,
-			List<Feature> requireIdentifiers) throws BuilderException,
-			UnknownStatementException {
-		for (Feature require : requireIdentifiers) {
-			int[] clause = { -getMapping(featureIdentifier),
-					getMapping(require) };
-			logger.debug("add require clause '{" + featureIdentifier
-					+ "}' -> '{" + require + "}'");
-			buildClause(clause);
-		}
-	}
-
 }
