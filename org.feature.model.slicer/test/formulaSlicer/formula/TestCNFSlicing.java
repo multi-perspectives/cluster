@@ -74,6 +74,32 @@ public class TestCNFSlicing {
 		Assert.assertEquals(false, trimmedCNF.contains("Bluetooth"));
 	}
 	
+	@Test
+	public void testCTCModelSlice() {
+		
+		FeatureModel fm = (FeatureModel) loadModel(FeaturePackage.eINSTANCE,
+				"testdata/SimplePhoneSAT.feature", null);
+		
+		Set<Feature> deadFeatures = new HashSet<Feature>();
+		Set<Feature> aliveFeatures = new HashSet<Feature>();
+			
+		for(Feature f : fm.getAllFeatures()) {
+			if(f.getName().equals("MMS"))
+				aliveFeatures.add(f);
+		}
+		
+		GateTranslator solver = new GateTranslator(SolverFactory.newDefault());
+		ISolverModelBuilder satBuilder = new SATModelBuilder(solver);
+		satBuilder.buildSolverModel(fm);
+		IFeatureSolver featureSolver = new SimpleSAT4JSolver(satBuilder, fm);
+		
+		SAT4JCNFFormulaFactory cnfBuilder = new SAT4JCNFFormulaFactory();
+		String trimmedCNF = cnfBuilder.createFormulaNameMinimized(featureSolver, aliveFeatures, deadFeatures);
+				
+		Assert.assertEquals(false, trimmedCNF.contains("MMS"));
+		Assert.assertEquals(false, trimmedCNF.contains("Camera"));
+	}
+	
 	private EObject loadModel(EPackage ePackage, String path,
 			ResourceSet resourceSet) {
 		initEMF(ePackage);
