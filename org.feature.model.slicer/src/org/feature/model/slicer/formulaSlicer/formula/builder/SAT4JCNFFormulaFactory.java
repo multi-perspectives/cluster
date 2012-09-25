@@ -187,7 +187,7 @@ public class SAT4JCNFFormulaFactory implements IFormulaFactory {
 		for (Feature dead : handler.getBoundDeadFeatures())
 			deadStrings.add(dead.getName());
 
-		trimmer.trimCnf(cnf, aliveStrings, deadStrings);
+		trimmer.trimCnf(cnf, solverModel.getFeatureModel().getRoot().getName(), aliveStrings, deadStrings);
 
 		return trimmer.getCnfString();
 	}
@@ -208,12 +208,13 @@ public class SAT4JCNFFormulaFactory implements IFormulaFactory {
 
 			for (Feature dead : boundedDead)
 				deadStrings.add(builder.getMapping(dead) + "");
+			
+			trimmer.trimCnf(cnf, builder.getMapping(model.getRoot()).toString(), aliveStrings, deadStrings);
 
 		} catch (UnknownStatementException e) {
 			logger.error("Could not resolve all features for CNF creation");
 		}
 
-		trimmer.trimCnf(cnf, aliveStrings, deadStrings);
 
 		return trimmer.getCnfString();
 	}

@@ -23,6 +23,7 @@ import org.featuremapper.models.feature.Group;
 import org.sat4j.core.VecInt;
 import org.sat4j.specs.ContradictionException;
 import org.sat4j.specs.ISolver;
+import org.sat4j.specs.IVecInt;
 import org.sat4j.tools.GateTranslator;
 
 public class SATModelBuilder implements ISolverModelBuilder{
@@ -40,6 +41,8 @@ public class SATModelBuilder implements ISolverModelBuilder{
 	 * association of integer to feature identifier
 	 */
 	private Map<Integer, Feature> idToFeature = new HashMap<Integer, Feature>();
+	
+	private Feature rootFeature;
 
 	/**
 	 * used sat solver
@@ -66,7 +69,7 @@ public class SATModelBuilder implements ISolverModelBuilder{
 
 	@Override
 	public GateTranslator buildSolverModel(FeatureModel featuremodel) {
-		Feature rootFeature = featuremodel.getRoot();
+		rootFeature = featuremodel.getRoot();
 
 		addMapping(rootFeature);
 		
@@ -267,19 +270,28 @@ public class SATModelBuilder implements ISolverModelBuilder{
 	private void buildAlternativeChildren(Feature featureIdentifier,
 			List<Feature> alternativeIdentifiers) throws BuilderException,
 			ContradictionException, UnknownStatementException {
-		int[] clause = new int[alternativeIdentifiers.size()];
-
+		VecInt clause = new VecInt();
+		
+		int parentId = getMapping(featureIdentifier);
+		int rootId = getMapping(rootFeature);
+		
 		for (int i = 0; i < alternativeIdentifiers.size(); i++) {
-			clause[i] = getMapping(alternativeIdentifiers.get(i));
+			int featureId = getMapping(alternativeIdentifiers.get(i));
+			clause.push(featureId);
+			
+			//TODO: Find better solution!
+			int[] redundantClause = {rootId, -featureId};
+			solver.addClause(new VecInt(redundantClause));
 		}
 
 		logger.debug("add alternative clause '{" + featureIdentifier
 				+ "}' -> '{" + alternativeIdentifiers + "}'");
 
-		buildXOrClause(clause, getMapping(featureIdentifier));
-
 		// Add Imply constraint to parent feature
-		solver.halfOr(getMapping(featureIdentifier), new VecInt(clause));
+		solver.halfOr(parentId, clause);
+		
+		clause.push(-parentId);
+		buildXOrClause(clause);
 	}
 
 	private void buildOptionalChildren(Feature featureIdentifier,
@@ -287,14 +299,22 @@ public class SATModelBuilder implements ISolverModelBuilder{
 			ContradictionException, UnknownStatementException {
 		logger.debug("build optional, nothing to do");
 
-		int[] clause = new int[optionalIdentifiers.size()];
+		VecInt clause = new VecInt();
+		
+		int parentId = getMapping(featureIdentifier);
+		int rootId = getMapping(rootFeature);
 
 		for (int i = 0; i < optionalIdentifiers.size(); i++) {
-			clause[i] = getMapping(optionalIdentifiers.get(i));
+			int featureId = getMapping(optionalIdentifiers.get(i));
+			clause.push(featureId);
+			
+			//TODO: Find better solution!
+			int[] redundantClause = {rootId, -featureId};
+			solver.addClause(new VecInt(redundantClause));
 		}
 
 		// Add Imply -> constraint to parent feature
-		solver.halfOr(getMapping(featureIdentifier), new VecInt(clause));
+		solver.halfOr(parentId, clause);
 	}
 
 	private void buildMandatoryChildren(Feature featureIdentifier,
@@ -302,6 +322,8 @@ public class SATModelBuilder implements ISolverModelBuilder{
 			ContradictionException, UnknownStatementException {
 
 		VecInt mandatory = new VecInt();
+		
+		int parentId = getMapping(featureIdentifier);
 
 		for (Feature f : mandatoryIdentifiers) {
 			mandatory.push(getMapping(f));
@@ -310,7 +332,7 @@ public class SATModelBuilder implements ISolverModelBuilder{
 		}
 
 		// add mandatory features for parent feature
-		solver.and(getMapping(featureIdentifier), mandatory);
+		solver.and(parentId, mandatory);
 
 		// Add Imply constraint to parent feature
 		// --> not necessary since constraint logical equality is specified
@@ -319,18 +341,28 @@ public class SATModelBuilder implements ISolverModelBuilder{
 	private void buildOrChildren(Feature featureIdentifier,
 			List<Feature> orIdentifiers) throws BuilderException,
 			ContradictionException, UnknownStatementException {
-		int[] clause = new int[orIdentifiers.size()];
+		VecInt clause = new VecInt();
 
+		int parentId = getMapping(featureIdentifier);
+		int rootId = getMapping(rootFeature);
+		
 		for (int i = 0; i < orIdentifiers.size(); i++) {
-			clause[i] = getMapping(orIdentifiers.get(i));
+			int featureId = getMapping(orIdentifiers.get(i));
+			clause.push(featureId);
+			
+			//TODO: Find better solution!
+			int[] redundantClause = {rootId, -featureId};
+			solver.addClause(new VecInt(redundantClause));
 		}
 		// clause[orIdentifiers.size()] = -getMapping(featureIdentifier);
 		logger.debug("add or clause '{" + featureIdentifier + "}' -> '{"
 				+ orIdentifiers + "}'");
-		buildOrClause(clause, getMapping(featureIdentifier));
-
+		
 		// Add Imply constraint to parent feature
-		solver.halfOr(getMapping(featureIdentifier), new VecInt(clause));
+		solver.halfOr(parentId, clause);
+		
+		clause.push(parentId);
+		buildOrClause(clause);
 	}
 
 	private void buildRootFeature(Feature rootIdentifier)
@@ -352,11 +384,9 @@ public class SATModelBuilder implements ISolverModelBuilder{
 	 *            ors
 	 * @throws BuilderException
 	 */
-	private void buildOrClause(int[] ors, int parentId) throws BuilderException {
+	private void buildOrClause(IVecInt ors) throws BuilderException {
 		try {
-			VecInt orgroup = new VecInt(ors);
-			orgroup.push(-parentId);
-			solver.addAtLeast(orgroup, 1);
+			solver.addAtLeast(ors, 1);
 		} catch (ContradictionException e) {
 			String message = e.getMessage();
 			logger.warn(message, e);
@@ -371,12 +401,10 @@ public class SATModelBuilder implements ISolverModelBuilder{
 	 *            alternatives
 	 * @throws BuilderException
 	 */
-	private void buildXOrClause(int[] alternatives, int parentId) throws BuilderException {
-		try {
-			VecInt altgroup = new VecInt(alternatives);
-			altgroup.push(-parentId);
-			solver.addAtLeast(altgroup, 1);
-			solver.addAtMost(altgroup, 1);
+	private void buildXOrClause(IVecInt alternatives) throws BuilderException {
+		try {			
+			solver.addAtLeast(alternatives, 1);
+			solver.addAtMost(alternatives, 1);
 		} catch (ContradictionException e) {
 			String message = e.getMessage();
 			logger.warn(message, e);

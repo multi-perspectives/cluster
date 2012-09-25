@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.feature.model.slicer.formulaSlicer.formula.builder.SAT4JCNFFormulaFactory;
 import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.feature.FeaturePackage;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,8 +35,8 @@ public class TestCNFBuild {
 		
 		SAT4JCNFFormulaFactory builder = new SAT4JCNFFormulaFactory();
 		String cnf = builder.createFormulaName(fm);
-		System.out.println(cnf);
-		
+		Assert.assertEquals(true, cnf.contains("Message"));
+		Assert.assertEquals(true, cnf.contains("SMS"));		
 	}
 
 	private EObject loadModel(EPackage ePackage, String path,

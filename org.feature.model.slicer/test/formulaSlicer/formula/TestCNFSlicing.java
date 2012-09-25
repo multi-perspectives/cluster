@@ -61,17 +61,17 @@ public class TestCNFSlicing {
 		
 		SAT4JCNFFormulaFactory cnfBuilder = new SAT4JCNFFormulaFactory();
 		String trimmedCNF = cnfBuilder.createFormulaNameMinimized(featureSolver, aliveFeatures, deadFeatures);
-		
-		//TODO: Wrong test!!! Implementaion works as specified; minimization approach is simply wrong; cannot handle or-relations correctly
-		Assert.assertEquals("", trimmedCNF);
-		
-//		Assert.assertEquals(true, trimmedCNF.contains("M_8"));
-//		Assert.assertEquals(true, trimmedCNF.contains("Camera"));
-//		Assert.assertEquals(true, trimmedCNF.contains("Extras"));
-//		Assert.assertEquals(false, trimmedCNF.contains("WLAN"));
-//		Assert.assertEquals(false, trimmedCNF.contains("GSM"));
-//		Assert.assertEquals(false, trimmedCNF.contains("Bluetooth"));
-//		Assert.assertEquals(false, trimmedCNF.contains("MP3"));
+				
+		Assert.assertEquals(true, trimmedCNF.contains("MMS"));
+		Assert.assertEquals(true, trimmedCNF.contains("MP3"));
+
+		Assert.assertEquals(false, trimmedCNF.contains("Camera"));
+		Assert.assertEquals(false, trimmedCNF.contains("M_8"));
+		Assert.assertEquals(false, trimmedCNF.contains("Camera"));
+		Assert.assertEquals(false, trimmedCNF.contains("Extras"));
+		Assert.assertEquals(false, trimmedCNF.contains("WLAN"));
+		Assert.assertEquals(false, trimmedCNF.contains("GSM"));
+		Assert.assertEquals(false, trimmedCNF.contains("Bluetooth"));
 	}
 	
 	private EObject loadModel(EPackage ePackage, String path,

@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.ui,
  org.sat4j.core;bundle-version="2.3.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: org.apache.log4j;version="1.2.15",
+Import-Package: org.apache.log4j,
  org.eclipse.emf.common.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.resource,
