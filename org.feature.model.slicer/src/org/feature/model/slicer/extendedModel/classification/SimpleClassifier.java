@@ -62,7 +62,7 @@ public class SimpleClassifier implements IClassifier {
 
 	/**
 	 * classify a feature with the bounded features of the model which carried
-	 * by the given solver
+	 * by the given solver. worst case 2x solving
 	 * 
 	 * @param solver
 	 *            for the classification
@@ -76,6 +76,7 @@ public class SimpleClassifier implements IClassifier {
 				cHandler.getBoundAliveFeatures());
 
 		toEvaluate.add(feature);
+		//Test feature is setting it to alive leads to a contradiction. If yes, it is a dead feature 
 		if (!solver.isSolvable(toEvaluate, cHandler.getBoundDeadFeatures())) {
 			logger.debug("feature '{" + feature.getName() + "}' is bound dead");
 			cHandler.classifyBoundDead(feature, false);
@@ -83,6 +84,8 @@ public class SimpleClassifier implements IClassifier {
 			toEvaluate = new HashSet<Feature>(cHandler.getBoundDeadFeatures());
 
 			toEvaluate.add(feature);
+			//Test the feature it setting it to dead leads to a contradiction. If yes, it is a alive feature
+			//Otherbise (neither dead nor alive) it is unbound
 			if (solver.isSolvable(cHandler.getBoundAliveFeatures(), toEvaluate)) {
 				logger.debug("feature '" + feature.getName() + "' is unbound");
 				cHandler.classifyUnbound(feature, false);

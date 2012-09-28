@@ -10,7 +10,7 @@ import org.featuremapper.models.feature.FeatureModel;
  * interface for a formula factory which handle a model or a model with bounded
  * features
  * 
- * @author Ingo Reimund
+ * @author Saller
  * 
  */
 public interface IFormulaFactory {
@@ -20,7 +20,7 @@ public interface IFormulaFactory {
 	 * 
 	 * @param model
 	 *            to convert, which can contains bounded features
-	 * @return formula
+	 * @return cnf with feature names
 	 */
 	public String createFormulaName(FeatureModel model);
 	
@@ -29,7 +29,7 @@ public interface IFormulaFactory {
 	 * 
 	 * @param model
 	 *            to convert, which can contains bounded features
-	 * @return formula
+	 * @return cnf with feature ids
 	 */
 	public String createFormulaId(FeatureModel model);
 
@@ -42,7 +42,7 @@ public interface IFormulaFactory {
 	 *            additional bounded alive features
 	 * @param boundedDead
 	 *            additional bounded dead features
-	 * @return
+	 * @return cnf with feature names
 	 */
 	public String createFormulaName(FeatureModel model, Set<Feature> boundedAlive, Set<Feature> boundedDead);
 	
@@ -55,7 +55,7 @@ public interface IFormulaFactory {
 	 *            additional bounded alive features
 	 * @param boundedDead
 	 *            additional bounded dead features
-	 * @return
+	 * @return cnf with feature ids
 	 */
 	public String createFormulaId(FeatureModel model, Set<Feature> boundedAlive, Set<Feature> boundedDead);
 	
@@ -68,7 +68,7 @@ public interface IFormulaFactory {
 	 *            additional bounded alive features
 	 * @param boundedDead
 	 *            additional bounded dead features
-	 * @return
+	 * @return minimized cnf with the name of features
 	 */
 	public String createFormulaNameMinimized(IFeatureSolver solverModel, Set<Feature> boundedAlive, Set<Feature> boundedDead);
 	
@@ -81,7 +81,7 @@ public interface IFormulaFactory {
 	 *            additional bounded alive features
 	 * @param boundedDead
 	 *            additional bounded dead features
-	 * @return
+	 * @return minimized cnf with the feature ids
 	 */
 	public String createFormulaIdMinimized(FeatureModel model, Set<Feature> boundedAlive, Set<Feature> boundedDead);
 }

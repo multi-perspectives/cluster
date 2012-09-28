@@ -1,13 +1,20 @@
 package org.feature.model.slicer.extendedModel.classification;
 
 /**
- * Additional type of features
+ * A feature may have four states
+ * 
+ * (initial) not classified
+ * ->
+ * unbound
+ * -> 
+ * alive or dead (contradict each other)
+ * (final state)
  * 
  * @author Ingo Reimund
  * @create 15.03.2012
  */
 public enum BoundedType {
-	ALIVE, UNBOUND, DEAD, ROOT;
+	ALIVE, UNBOUND, DEAD, ROOT, NOTCLASSIFIED;
 	
 	/**
 	 * convert an given String to upper case and search for equivalent value

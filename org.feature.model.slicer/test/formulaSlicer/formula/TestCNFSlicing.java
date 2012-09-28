@@ -21,7 +21,6 @@ import org.feature.model.sat.builder.SATModelBuilder;
 import org.feature.model.sat.solver.IFeatureSolver;
 import org.feature.model.sat.solver.SimpleSAT4JSolver;
 import org.feature.model.slicer.formulaSlicer.formula.builder.SAT4JCNFFormulaFactory;
-import org.feature.model.slicer.formulaSlicer.formula.trimmer.TrimSAT4JCNF;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.feature.FeaturePackage;

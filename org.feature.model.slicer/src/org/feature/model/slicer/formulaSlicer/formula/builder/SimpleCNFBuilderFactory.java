@@ -15,10 +15,6 @@ import org.feature.model.sat.solver.IFeatureSolver;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.feature.Group;
-import org.sat4j.Messages;
-import org.sat4j.core.VecInt;
-import org.sat4j.specs.ContradictionException;
-import org.sat4j.tools.GateTranslator;
 
 /**
  * This Builder create a SAT string for output
@@ -26,6 +22,7 @@ import org.sat4j.tools.GateTranslator;
  * @author Ingo Reimund
  * @create 12.03.2012
  */
+@Deprecated
 public class SimpleCNFBuilderFactory implements IFormulaFactory {
 
 	/**

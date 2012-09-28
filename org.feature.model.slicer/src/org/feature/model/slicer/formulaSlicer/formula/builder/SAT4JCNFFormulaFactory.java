@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.feature.model.sat.builder.ISolverModelBuilder;
 import org.feature.model.sat.builder.SATModelBuilder;
 import org.feature.model.sat.exception.UnknownStatementException;
 import org.feature.model.sat.solver.IFeatureSolver;
