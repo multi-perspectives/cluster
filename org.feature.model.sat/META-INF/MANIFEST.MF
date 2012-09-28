@@ -22,5 +22,6 @@ Import-Package: org.apache.log4j,
  org.feature.model.utilities,
  org.featuremapper.models.feature
 Export-Package: org.feature.model.sat,
+ org.feature.model.sat.builder,
  org.feature.model.sat.exception,
  org.feature.model.sat.solver

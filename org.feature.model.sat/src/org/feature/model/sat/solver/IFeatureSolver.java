@@ -2,8 +2,8 @@ package org.feature.model.sat.solver;
 
 import java.util.Set;
 
-import org.feature.model.sat.ISolverModelBuilder;
-import org.feature.model.sat.SATModelBuilder;
+import org.feature.model.sat.builder.ISolverModelBuilder;
+import org.feature.model.sat.builder.SATModelBuilder;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 

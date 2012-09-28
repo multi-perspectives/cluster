@@ -2,7 +2,6 @@ package org.feature.model.slicer.formulaSlicer.formula.builder;
 
 import java.util.Set;
 
-import org.feature.model.sat.ISolverModelBuilder;
 import org.feature.model.sat.solver.IFeatureSolver;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;

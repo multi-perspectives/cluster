@@ -1,4 +1,4 @@
-package org.feature.model.sat;
+package org.feature.model.sat.builder;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,6 +17,7 @@ import org.emftext.term.propositional.expression.Not;
 import org.emftext.term.propositional.expression.Or;
 import org.emftext.term.propositional.expression.Term;
 import org.emftext.term.propositional.expression.UnaryOperator;
+import org.feature.model.sat.TextExpressionParser;
 import org.feature.model.sat.exception.BuilderException;
 import org.feature.model.sat.exception.UnknownStatementException;
 import org.featuremapper.models.feature.Constraint;
@@ -29,8 +30,17 @@ import org.sat4j.specs.ISolver;
 import org.sat4j.specs.IVecInt;
 import org.sat4j.tools.GateTranslator;
 
+/**
+ * Class is responsible for transforming a EMF feature model into a SAT4J Model representation.
+ * 
+ * @author saller
+ *
+ */
 public class SATModelBuilder implements ISolverModelBuilder {
 
+	/**
+	 * counter of features within the feature model. is also used to derive uniqe id for the transformation
+	 */
 	private int varCounter;
 
 	private static Logger logger = Logger.getLogger(SATModelBuilder.class);
@@ -45,6 +55,9 @@ public class SATModelBuilder implements ISolverModelBuilder {
 	 */
 	private Map<Integer, Feature> idToFeature = new HashMap<Integer, Feature>();
 
+	/**
+	 * Root feature of the according feature model
+	 */
 	private Feature rootFeature;
 
 	/**
@@ -52,6 +65,12 @@ public class SATModelBuilder implements ISolverModelBuilder {
 	 */
 	private GateTranslator solver;
 
+	/**
+	 * 
+	 * Initialize necessary attributes
+	 * 
+	 * @param solver SAT solver
+	 */
 	public SATModelBuilder(ISolver solver) {
 		varCounter = 1;
 		featureToId = new HashMap<Feature, Integer>();
@@ -72,12 +91,15 @@ public class SATModelBuilder implements ISolverModelBuilder {
 
 	@Override
 	public GateTranslator buildSolverModel(FeatureModel featuremodel) {
+		
 		rootFeature = featuremodel.getRoot();
 
+		//add initial mapping for root feature
 		addMapping(rootFeature);
 
 		try {
 			buildRootFeature(rootFeature);
+			//start transformation feature model into SAT model
 			transformFeature(rootFeature);
 		} catch (BuilderException | ContradictionException e1) {
 			logger.error("Cannot build constraint model for SAT4J");
@@ -85,6 +107,7 @@ public class SATModelBuilder implements ISolverModelBuilder {
 		}
 
 		try {
+			//parse and transform cross tree constraints within the feature model
 			transformRemainingCTConstraints(featuremodel);
 		} catch (ContradictionException e) {
 			logger.error("Cannot build constraint model for SAT4J");
@@ -143,6 +166,7 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			createGroupConstraint(group);
 			EList<Feature> childFeatures = group.getChildFeatures();
 			for (Feature feature : childFeatures) {
+//				start another transformation process for a child feature
 				transformFeature(feature);
 			}
 		} catch (UnknownStatementException e) {
@@ -166,6 +190,7 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			}
 		}
 
+		//If no CSP terms are given, look for SAT terms; otherwise add CSP cross tree constraints
 		if (terms.size() > 0)
 			try {
 				solver.and(getMapping(model.getRoot()), v);
@@ -190,7 +215,7 @@ public class SATModelBuilder implements ISolverModelBuilder {
 
 			if (term instanceof Or) {
 				varCounter++;
-				int[] values = { -varCounter, leftConstraint, rightConstraint };
+				int[] values = {leftConstraint, rightConstraint};
 				// create a new variable that expresses the or relation
 				logger.debug("Adding cross tree constraint or for features: '"
 						+ leftConstraint + " || " + rightConstraint + "'");
@@ -198,7 +223,7 @@ public class SATModelBuilder implements ISolverModelBuilder {
 				result = varCounter;
 			} else if (term instanceof And) {
 				varCounter++;
-				int[] values = { varCounter, leftConstraint, rightConstraint };
+				int[] values = {leftConstraint, rightConstraint };
 				// create a new variable that expresses the and relation
 				logger.debug("Adding cross tree constraint and for features: '"
 						+ leftConstraint + " && " + rightConstraint + "'");
@@ -238,6 +263,7 @@ public class SATModelBuilder implements ISolverModelBuilder {
 	}
 
 	private void checkSATConstrints(FeatureModel model) {
+		//parse SAT constraint require(source, target) or exclude(source, target)
 		for (Constraint c : model.getConstraints()) {
 			if (c.getLanguage().toLowerCase().equals("sat")) {
 				String expr = c.getExpression();
@@ -466,13 +492,6 @@ public class SATModelBuilder implements ISolverModelBuilder {
 
 	}
 
-	/**
-	 * translate or to sat
-	 * 
-	 * @param ors
-	 *            ors
-	 * @throws BuilderException
-	 */
 	private void buildOrClause(IVecInt ors) throws BuilderException {
 		try {
 			solver.addAtLeast(ors, 1);
@@ -483,13 +502,6 @@ public class SATModelBuilder implements ISolverModelBuilder {
 		}
 	}
 
-	/**
-	 * translate alternatives to sat
-	 * 
-	 * @param alternatives
-	 *            alternatives
-	 * @throws BuilderException
-	 */
 	private void buildXOrClause(IVecInt alternatives) throws BuilderException {
 		try {
 			solver.addAtLeast(alternatives, 1);

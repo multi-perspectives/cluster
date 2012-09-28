@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.feature.model.sat.ISolverModelBuilder;
-import org.feature.model.sat.SATModelBuilder;
+import org.feature.model.sat.builder.ISolverModelBuilder;
+import org.feature.model.sat.builder.SATModelBuilder;
 import org.feature.model.sat.exception.UnknownStatementException;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
@@ -27,21 +27,34 @@ public class SimpleSAT4JSolver implements IFeatureSolver {
 	 */
 	private static Logger logger = Logger.getLogger(SimpleSAT4JSolver.class);
 
-	private ISolverModelBuilder problem;
+	/**
+	 * SAT model builder
+	 */
+	private ISolverModelBuilder builder;
 
+	/**
+	 * Feature model on which the operations are executed
+	 */
 	private FeatureModel featureModel;
 
+	/**
+	 * 
+	 * @param model
+	 *            SAT model representation of the feature model
+	 * @param fm
+	 *            feature model on which the solving operations are executed
+	 */
 	public SimpleSAT4JSolver(ISolverModelBuilder model, FeatureModel fm) {
-		this.problem = model;
+		this.builder = model;
 		this.featureModel = fm;
 	}
 
 	@Override
 	public void setBaseModel(SATModelBuilder model, FeatureModel fm) {
-		this.problem = model;
+		this.builder = model;
 		this.featureModel = fm;
 	}
-	
+
 	@Override
 	public boolean isSolvable(Set<Feature> boundedAlive,
 			Set<Feature> boundedDead) {
@@ -49,14 +62,14 @@ public class SimpleSAT4JSolver implements IFeatureSolver {
 
 		try {
 			for (Feature aliveFeature : boundedAlive) {
-				selected.push(problem.getMapping(aliveFeature));
+				selected.push(builder.getMapping(aliveFeature));
 			}
 
 			for (Feature deadFeature : boundedDead) {
-				selected.push(-problem.getMapping(deadFeature));
+				selected.push(-builder.getMapping(deadFeature));
 			}
 
-			int[] model = problem.getModel().findModel(selected);
+			int[] model = builder.getModel().findModel(selected);
 			if (model == null) {
 				logger.info("no products found");
 				return false;
@@ -72,29 +85,6 @@ public class SimpleSAT4JSolver implements IFeatureSolver {
 		}
 	}
 
-	// @Override
-	// public boolean trim(Set<Feature> boundedAlive, Set<Feature> boundedDead)
-	// {
-	// super.trim(boundedAlive, boundedDead);
-	// for (String alive : boundedAlive) {
-	// try {
-	// problem.getSolver().gateTrue(problem.getMapping(alive));
-	// } catch (ContradictionException e) {
-	// logger.error(e.getMessage(), e);
-	// }
-	// }
-	// for (String dead : boundedDead) {
-	// try {
-	// problem.getSolver().gateFalse(problem.getMapping(dead));
-	// } catch (ContradictionException e) {
-	// logger.error(e.getMessage(), e);
-	// }
-	// }
-	// return true;
-	// }
-
-
-
 	@Override
 	public Set<Feature> getConfiguration(Set<Feature> boundedAlive,
 			Set<Feature> boundedDead) {
@@ -102,14 +92,14 @@ public class SimpleSAT4JSolver implements IFeatureSolver {
 
 		try {
 			for (Feature alive : boundedAlive) {
-				selected.push(problem.getMapping(alive));
+				selected.push(builder.getMapping(alive));
 			}
 
 			for (Feature dead : boundedDead) {
-				selected.push(-problem.getMapping(dead));
+				selected.push(-builder.getMapping(dead));
 			}
 
-			int[] model = problem.getModel().findModel(selected);
+			int[] model = builder.getModel().findModel(selected);
 			if (model == null) {
 				logger.info("no products found");
 				return null;
@@ -123,11 +113,18 @@ public class SimpleSAT4JSolver implements IFeatureSolver {
 		}
 	}
 
+	/**
+	 * Convert a list of feature ids (representing a configuration) to the
+	 * according set of EMF feature objects
+	 * 
+	 * @param model list of feature ids
+	 * @return set of the according EMF feature objects
+	 */
 	private Set<Feature> convert(int[] model) {
 		Set<Feature> product = new HashSet<>();
 
 		for (int i : model)
-			product.add(problem.getMapping(i));
+			product.add(builder.getMapping(i));
 		return product;
 	}
 
@@ -146,7 +143,7 @@ public class SimpleSAT4JSolver implements IFeatureSolver {
 
 		try {
 
-			int[] model = problem.getModel().findModel();
+			int[] model = builder.getModel().findModel();
 			if (model == null) {
 				logger.info("no products found");
 				return null;
@@ -177,7 +174,7 @@ public class SimpleSAT4JSolver implements IFeatureSolver {
 
 	@Override
 	public ISolverModelBuilder getBaseModel() {
-		return problem;
+		return builder;
 	}
 
 	@Override

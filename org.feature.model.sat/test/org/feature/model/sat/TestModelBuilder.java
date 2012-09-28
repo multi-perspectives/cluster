@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.feature.model.sat.builder.ISolverModelBuilder;
+import org.feature.model.sat.builder.SATModelBuilder;
 import org.feature.model.sat.exception.UnknownStatementException;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
@@ -35,6 +37,9 @@ public class TestModelBuilder {
 	}
 
 	@Test
+	/**
+	 * Simple test if a given feature model is solvable. Feature Model on its own is solvable.
+	 */
 	public void testGetModelSuccess() {
 
 		fm = (FeatureModel) loadModel(FeaturePackage.eINSTANCE,
@@ -52,6 +57,9 @@ public class TestModelBuilder {
 	}
 
 	@Test
+	/**
+	 * Test if feature model with valid constraints is solvable.
+	 */
 	public void testGetModelSuccessReq() {
 
 		fm = (FeatureModel) loadModel(FeaturePackage.eINSTANCE,
@@ -97,6 +105,9 @@ public class TestModelBuilder {
 	}
 
 	@Test
+	/**
+	 * Test for contradicting constraints in an alternative group
+	 */
 	public void testGetModelFailContAlternative() {
 
 		fm = (FeatureModel) loadModel(FeaturePackage.eINSTANCE,
@@ -133,8 +144,11 @@ public class TestModelBuilder {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
+	/**
+	 * Test for contradicting constraints child->parent
+	 */
 	public void testGetModelFailMandatoryParent() {
 
 		fm = (FeatureModel) loadModel(FeaturePackage.eINSTANCE,
@@ -171,8 +185,11 @@ public class TestModelBuilder {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
+	/**
+	 * Test for contradicting constraints in a requirement relation
+	 */
 	public void testGetModelFailContReq() {
 
 		fm = (FeatureModel) loadModel(FeaturePackage.eINSTANCE,
@@ -247,6 +264,9 @@ public class TestModelBuilder {
 	}
 
 	@Test
+	/**
+	 * Test feature model with invalid specified cross tree constraints
+	 */
 	public void testGetModelFailModelConstraint() {
 
 		fm = (FeatureModel) loadModel(FeaturePackage.eINSTANCE,
@@ -263,8 +283,11 @@ public class TestModelBuilder {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
+	/**
+	 * test feature model specified with valid cross tree constraints
+	 */
 	public void testGetModelSuccessModelConstraint() {
 
 		fm = (FeatureModel) loadModel(FeaturePackage.eINSTANCE,
@@ -281,7 +304,11 @@ public class TestModelBuilder {
 			e.printStackTrace();
 		}
 	}
-	
+
+	@Test
+	/**
+	 * Test for a selection of features via an exclude selection
+	 */
 	public void testGetModelFailModelConstraintExclude() {
 
 		fm = (FeatureModel) loadModel(FeaturePackage.eINSTANCE,
@@ -319,6 +346,10 @@ public class TestModelBuilder {
 		}
 	}
 
+	@Test
+	/**
+	 * Test for a selection of features via an require selection
+	 */
 	public void testGetModelFailModelConstraintRequire() {
 
 		fm = (FeatureModel) loadModel(FeaturePackage.eINSTANCE,
@@ -343,8 +374,8 @@ public class TestModelBuilder {
 
 		try {
 			VecInt req = new VecInt();
-			req.push(builder.getMapping(testfeature1));
-			req.push(-builder.getMapping(testfeature2));
+			req.push(-builder.getMapping(testfeature1));
+			req.push(builder.getMapping(testfeature2));
 
 			Assert.assertEquals(false, builder.getModel().isSatisfiable(req));
 		} catch (TimeoutException e) {
@@ -355,7 +386,11 @@ public class TestModelBuilder {
 			e.printStackTrace();
 		}
 	}
-	
+
+	@Test
+	/**
+	 * Test for a SAT constraint specification
+	 */
 	public void testGetModelFailModelConstraintSATRequire() {
 
 		fm = (FeatureModel) loadModel(FeaturePackage.eINSTANCE,
@@ -380,8 +415,8 @@ public class TestModelBuilder {
 
 		try {
 			VecInt req = new VecInt();
-			req.push(builder.getMapping(testfeature1));
-			req.push(-builder.getMapping(testfeature2));
+			req.push(-builder.getMapping(testfeature1));
+			req.push(builder.getMapping(testfeature2));
 
 			Assert.assertEquals(false, builder.getModel().isSatisfiable(req));
 		} catch (TimeoutException e) {
@@ -391,11 +426,11 @@ public class TestModelBuilder {
 			Assert.fail();
 			e.printStackTrace();
 		}
-		
+
 		try {
 			VecInt req = new VecInt();
-			req.push(-builder.getMapping(testfeature1));
-			req.push(builder.getMapping(testfeature2));
+			req.push(builder.getMapping(testfeature1));
+			req.push(-builder.getMapping(testfeature2));
 
 			Assert.assertEquals(true, builder.getModel().isSatisfiable(req));
 		} catch (TimeoutException e) {
@@ -406,7 +441,7 @@ public class TestModelBuilder {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private EObject loadModel(EPackage ePackage, String path,
 			ResourceSet resourceSet) {
 		initEMF(ePackage);
