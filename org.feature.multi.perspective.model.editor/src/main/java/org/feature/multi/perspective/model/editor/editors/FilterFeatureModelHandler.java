@@ -9,6 +9,8 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.expressions.EvaluationContext;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
@@ -75,20 +77,16 @@ public class FilterFeatureModelHandler extends AbstractHandler {
       super.setEnabled(evaluationContext);
       ViewmodelMultiPageEditor multiPageEditor = getActiveEditor();
       if (multiPageEditor != null){
-      if (evaluationContext instanceof EvaluationContext) {
-         EvaluationContext eval = (EvaluationContext) evaluationContext;
-         Object defaultVariable = eval.getDefaultVariable();
-         if (defaultVariable instanceof Collection) {
-            Collection list = (Collection) defaultVariable;
-            for (Object object : list) {
-               if (object instanceof ViewPoint && multiPageEditor.getMappingResource() != null) {
-                  this.viewPoint = (ViewPoint) object;
+        ISelection selection = multiPageEditor.getSelection();
+        if (selection instanceof IStructuredSelection) {
+         IStructuredSelection structSelection = (IStructuredSelection) selection;
+         Object firstElement = structSelection.getFirstElement();
+               if (firstElement instanceof ViewPoint && multiPageEditor.getMappingResource() != null) {
+                  this.viewPoint = (ViewPoint) firstElement;
                   enabled = true;
                   return;
                }
-            }
-         }}
+         }
       }
-      enabled = false;
    }
 }
