@@ -5,7 +5,13 @@
 	<projects>
 	</projects>
 	<buildSpec>
+		<buildCommand>
+			<name>org.feature.multi.perspective.mapping.viewmapping.resource.mtext.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>org.feature.multi.perspective.mapping.viewmapping.resource.mtext.nature</nature>
 	</natures>
 </projectDescription>
