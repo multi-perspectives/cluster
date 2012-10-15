@@ -15,7 +15,7 @@ view group "Silver" contains
 	
 view group "Gold" contains
 	"ImageType" 
-	"OCR" "PDFOCR" "ImageOCR"
+	 "OCR" "PDFOCR" "ImageOCR"
 	
 view group "Customized"	contains
 	"UnicodeTextType"		 
