@@ -163,7 +163,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 
 /**
- * This is an example of a Multi-Perspective editor.
+ * This is an example of a Viewmodel model editor.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated

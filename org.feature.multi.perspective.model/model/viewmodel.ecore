@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="viewmodel"
-    nsURI="http://org.feature.multi.perspective.model/schema/1.0" nsPrefix="viewmodel">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="viewmodel" nsURI="http://org.feature.multi.perspective.model/schema/1.0"
+    nsPrefix="viewmodel">
   <eClassifiers xsi:type="ecore:EClass" name="CoreGroup" eSuperTypes="#//AbstractGroup"/>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractGroup" abstract="true" eSuperTypes="#//Element">
     <eOperations name="checkForRedundantViewPoints" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -24,7 +23,8 @@
         eType="#//AbstractGroup" changeable="false" eOpposite="#//AbstractGroup/viewPointReference"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GroupModel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="coreGroup" lowerBound="1"

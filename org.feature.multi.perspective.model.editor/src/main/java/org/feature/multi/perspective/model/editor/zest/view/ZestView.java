@@ -25,6 +25,7 @@ import org.eclipse.zest.core.widgets.GraphNode;
 import org.eclipse.zest.layouts.LayoutAlgorithm;
 import org.eclipse.zest.layouts.LayoutStyles;
 import org.eclipse.zest.layouts.algorithms.GridLayoutAlgorithm;
+import org.feature.multi.perspective.mapping.viewmapping.MappingModel;
 import org.feature.multi.perspective.model.viewmodel.GroupModel;
 import org.feature.multi.perspective.model.editor.editors.ViewmodelMultiPageEditor;
 import org.feature.multi.perspective.model.editor.editors.listeners.ViewPointNodeMouseListener;
@@ -33,8 +34,6 @@ import org.feature.multi.perspective.model.editor.zest.model.Node;
 import org.feature.multi.perspective.model.editor.zest.model.NodeModelContentProvider;
 import org.feature.multi.perspective.model.editor.zest.zestviewer.ZestLabelProvider;
 import org.feature.multi.perspective.model.editor.zest.zestviewer.ZestNodeContentProvider;
-import org.featuremapper.models.featuremapping.FeatureMappingModel;
-import org.featuremapper.models.featuremapping.SolutionModelRef;
 
 /**
  * @author winkelti
@@ -105,10 +104,10 @@ public class ZestView  extends ViewerPane implements IZoomableWorkbenchPart {
 	 */
 	public void init(Resource res){
 		EList<EObject> contents = res.getContents();
-		FeatureMappingModel featureMappingModel = null;
+		MappingModel featureMappingModel = null;
 		for (EObject eObject : contents) {
-			if (eObject instanceof FeatureMappingModel) {
-				featureMappingModel = (FeatureMappingModel) eObject;
+			if (eObject instanceof MappingModel) {
+			   featureMappingModel = (MappingModel) eObject;
 				break;
 			}
 		}
@@ -116,14 +115,7 @@ public class ZestView  extends ViewerPane implements IZoomableWorkbenchPart {
 			log.error("Could not find a mapping.");
 			return;
 		}
-		EList<SolutionModelRef> solutionModels = featureMappingModel.getSolutionModels();
-		GroupModel groupModel = null;
-		for (SolutionModelRef solutionModelRef : solutionModels) {
-			EObject value = solutionModelRef.getValue();
-			if (value instanceof GroupModel) {
-				groupModel = (GroupModel) value;
-			}
-		}
+		GroupModel groupModel = featureMappingModel.getViewModel();
 		if (groupModel == null) {
 			log.error("Could not find a Groupmodel in the mapping.");
 			return;

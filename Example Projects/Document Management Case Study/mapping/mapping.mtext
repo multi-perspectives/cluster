@@ -1,0 +1,21 @@
+viewmapping 
+	featuremodel <../feature/documentmanagement.feature>
+	viewmodel <../viewmodel/documentmanagement.viewmodel>
+	
+view group "Basic" contains 
+	"ImageType" "PDFType"
+
+view group "Premium" contains 
+	"PDFType" 
+	"MetaDataIndex" "TitelIndex" "ContentIndex" 
+	"MetaDataSearch" "TitleSearch" "ContentSearch"
+	
+view group "Silver" contains
+	"AuthorIndex" "AuthorSearch"
+	
+view group "Gold" contains
+	"ImageType" 
+	"OCR" "PDFOCR" "ImageOCR"
+	
+view group "Customized"	contains
+	"UnicodeTextType"		 

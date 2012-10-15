@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.feature.model.utilities.FeatureMappingUtil;
+import org.feature.multi.perspective.mapping.viewmapping.MappingModel;
 import org.feature.multi.perspective.model.editor.editors.View;
 import org.feature.multi.perspective.model.editor.editors.ViewCreator;
 import org.feature.multi.perspective.model.editor.util.Flag;
@@ -25,7 +26,6 @@ import org.feature.multi.perspective.model.viewmodel.ViewPoint;
 import org.feature.multi.perspective.model.viewmodel.ViewPointContainer;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
-import org.featuremapper.models.featuremapping.FeatureMappingModel;
 
 /**
  * @author Tim Winkelmann
@@ -49,7 +49,7 @@ public class IncrementalAlgorithm {
     * 
     * @param mapping
     */
-   public IncrementalAlgorithm(FeatureMappingModel mapping) {
+   public IncrementalAlgorithm(MappingModel mapping) {
       this.featureModel = FeatureMappingUtil.getFeatureModel(mapping);
       this.groupModel = FeatureMappingUtil.getSolutionGroupModel(mapping);
       ViewCreator viewCreater = new ViewCreator(mapping);
@@ -68,7 +68,7 @@ public class IncrementalAlgorithm {
     * @param views
     * @param groupModel
     */
-   public IncrementalAlgorithm(List<View> views, FeatureMappingModel mapping) {
+   public IncrementalAlgorithm(List<View> views, MappingModel mapping) {
       this.featureModel = FeatureMappingUtil.getFeatureModel(mapping);
       this.groupModel = FeatureMappingUtil.getSolutionGroupModel(mapping);
       initViewMap(views);

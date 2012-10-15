@@ -17,15 +17,14 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.feature.model.utilities.FeatureMappingUtil;
 import org.feature.model.utilities.FeatureModelUtil;
-import org.feature.multi.perspective.model.viewmodel.GroupModel;
-import org.feature.multi.perspective.model.viewmodel.ViewPoint;
+import org.feature.multi.perspective.mapping.viewmapping.MappingModel;
 import org.feature.multi.perspective.model.editor.editors.algorithms.BruteForceAlgorithm;
 import org.feature.multi.perspective.model.editor.editors.algorithms.IncrementalAlgorithm;
 import org.feature.multi.perspective.model.editor.util.Util;
+import org.feature.multi.perspective.model.viewmodel.GroupModel;
+import org.feature.multi.perspective.model.viewmodel.ViewPoint;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
-import org.featuremapper.models.featuremapping.FeatureMappingModel;
-import org.featuremapper.models.featuremapping.FeatureModelRef;
 
 /**
  * create the filtered feature model and validates it. also validates all view points.
@@ -45,7 +44,7 @@ public class FilteredFeatureModel {
     */
    public FilteredFeatureModel(Resource mappingResource, ViewPoint viewPoint, ViewmodelMultiPageEditor multiPageEditor) {
       this.multiPageEditor = multiPageEditor;
-      FeatureMappingModel featureMappingModel = FeatureMappingUtil.getFeatureMapping(mappingResource);
+      MappingModel featureMappingModel = FeatureMappingUtil.getFeatureMapping(mappingResource);
       FeatureModel featureModel = FeatureMappingUtil.getFeatureModel(featureMappingModel);
       List<Feature> allFeatures = FeatureModelUtil.getAllFeatures(featureModel);
 
@@ -61,7 +60,7 @@ public class FilteredFeatureModel {
       log.debug("time: " + (System.currentTimeMillis() - timeMillis));
       timeMillis = System.currentTimeMillis();
 
-      BruteForceAlgorithm bruteForce = new BruteForceAlgorithm(groupModel, views, featureMappingModel.getFeatureModel().getValue());
+      BruteForceAlgorithm bruteForce = new BruteForceAlgorithm(groupModel, views, featureMappingModel.getFeatureModel());
       View view = bruteForce.checkViewpoint(viewPoint);
 
       boolean consistent = view.isConsistent();
@@ -113,20 +112,20 @@ public class FilteredFeatureModel {
     * @param viewPoint the viewpoint
     * @param view the features to the viewpoint
     */
-   private void createFeatureModel(FeatureMappingModel featureMappingModel, ViewPoint viewPoint, View view) {
+   private void createFeatureModel(MappingModel featureMappingModel, ViewPoint viewPoint, View view) {
       log.info("#Features for a ViewPoint:  " + view.getFeatures().size());
       Map<String, Feature> featureMap = new HashMap<String, Feature>();
       Set<Feature> features = view.getFeatures();
       for (Feature feature : features) {
          featureMap.put(feature.getName(), feature);
       }
-      FeatureModelRef org = featureMappingModel.getFeatureModel();
+      FeatureModel org = featureMappingModel.getFeatureModel();
       Filter filter = new Filter(org, featureMap);
 
       log.debug(filter.fm);
       String saveFileName =
-         Util.save(featureMappingModel.getFeatureModel().getValue().getName() + "_" + viewPoint.getName() + ".feature", multiPageEditor
-            .getSite().getShell());
+         Util.save(featureMappingModel.getFeatureModel().getName() + "_" + viewPoint.getName() + ".feature", multiPageEditor.getSite()
+            .getShell());
       if (saveFileName != null && !saveFileName.isEmpty()) {
          ResourceSet rst = new ResourceSetImpl();
          Resource resource = rst.createResource(URI.createFileURI(saveFileName));

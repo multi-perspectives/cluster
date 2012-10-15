@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ASCII"?>
+<viewmapping:MappingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewmapping="http://www.tudresden.de/viewmapping">
+  <mappings>
+    <features href="../feature/documentmanagement.feature#ImageType"/>
+    <features href="../feature/documentmanagement.feature#PDFType"/>
+    <viewgroup href="../viewmodel/documentmanagement.viewmodel#//@coreGroup/@groups.0"/>
+  </mappings>
+  <mappings>
+    <features href="../feature/documentmanagement.feature#PDFType"/>
+    <features href="../feature/documentmanagement.feature#MetaDataIndex"/>
+    <features href="../feature/documentmanagement.feature#TitelIndex"/>
+    <features href="../feature/documentmanagement.feature#ContentIndex"/>
+    <features href="../feature/documentmanagement.feature#MetaDataSearch"/>
+    <features href="../feature/documentmanagement.feature#TitleSearch"/>
+    <features href="../feature/documentmanagement.feature#ContentSearch"/>
+    <viewgroup href="../viewmodel/documentmanagement.viewmodel#//@coreGroup/@groups.1"/>
+  </mappings>
+  <mappings>
+    <features href="../feature/documentmanagement.feature#AuthorIndex"/>
+    <features href="../feature/documentmanagement.feature#AuthorSearch"/>
+    <viewgroup href="../viewmodel/documentmanagement.viewmodel#//@coreGroup/@groups.1/@groups.0"/>
+  </mappings>
+  <mappings>
+    <features href="../feature/documentmanagement.feature#ImageType"/>
+    <features href="../feature/documentmanagement.feature#OCR"/>
+    <features href="../feature/documentmanagement.feature#PDFOCR"/>
+    <features href="../feature/documentmanagement.feature#ImageOCR"/>
+    <viewgroup href="../viewmodel/documentmanagement.viewmodel#//@coreGroup/@groups.1/@groups.1"/>
+  </mappings>
+  <mappings>
+    <features href="../feature/documentmanagement.feature#UnicodeTextType"/>
+    <viewgroup href="../viewmodel/documentmanagement.viewmodel#//@coreGroup/@groups.0/@groups.0"/>
+  </mappings>
+  <featureModel href="../feature/documentmanagement.feature#/"/>
+  <viewModel href="../viewmodel/documentmanagement.viewmodel#/"/>
+</viewmapping:MappingModel>

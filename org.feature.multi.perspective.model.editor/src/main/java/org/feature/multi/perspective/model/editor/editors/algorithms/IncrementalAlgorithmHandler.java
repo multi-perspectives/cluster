@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.feature.model.utilities.FeatureMappingUtil;
 import org.feature.model.utilities.WorkbenchUtil;
+import org.feature.multi.perspective.mapping.viewmapping.MappingModel;
 import org.feature.multi.perspective.model.viewmodel.ViewPoint;
 import org.feature.multi.perspective.model.editor.editors.ViewmodelMultiPageEditor;
 import org.featuremapper.models.featuremapping.FeatureMappingModel;
@@ -30,7 +31,7 @@ public class IncrementalAlgorithmHandler extends AbstractHandler {
    @Override
    public Object execute(ExecutionEvent event) throws ExecutionException {
 
-      FeatureMappingModel featureMappingModel = getFeatureMapping();
+      MappingModel featureMappingModel = getFeatureMapping();
       if (featureMappingModel != null) {
          IncrementalAlgorithm algorithm = new IncrementalAlgorithm(featureMappingModel);
          List<ViewPoint> viewpoints = algorithm.getInConsistentViewpoints();
@@ -91,8 +92,8 @@ public class IncrementalAlgorithmHandler extends AbstractHandler {
       }
    }
 
-   private FeatureMappingModel getFeatureMapping() {
-      FeatureMappingModel featureMappingModel = null;
+   private MappingModel getFeatureMapping() {
+      MappingModel featureMappingModel = null;
       ViewmodelMultiPageEditor multiPageEditor = getActiveMultiPageEditor();
       if (multiPageEditor != null) {
          Resource mapping = multiPageEditor.getMappingResource();

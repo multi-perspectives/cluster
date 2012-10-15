@@ -17,7 +17,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.feature.multi.perspective.model.viewmodel.GroupModel;
 import org.feature.multi.perspective.model.editor.editors.ViewmodelMappingFilter;
 import org.feature.multi.perspective.model.editor.editors.ViewmodelMultiPageEditor;
-import org.featuremapper.common.utils.FeatureMappingUtil;
 
 /**
  * Listener for the selection of the FeatureMapping.
@@ -52,7 +51,9 @@ public class ChooseFMSelectionListener implements SelectionListener {
     */
    private void browseMapping() {
       List<ViewerFilter> filters = new ArrayList<ViewerFilter>();
-      ArrayList<String> extensions = FeatureMappingUtil.getMappingModelExtensions();
+      List<String> extensions = new ArrayList<String>();
+      extensions.add("mtext");
+      extensions.add("viewmapping");
       GroupModel groupModel = mpe.getGroupModel();
 
       ViewmodelMappingFilter filter = new ViewmodelMappingFilter(extensions, groupModel);

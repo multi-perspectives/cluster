@@ -36,7 +36,7 @@ public interface Element extends EObject {
     * @return the value of the '<em>Name</em>' attribute.
     * @see #setName(String)
     * @see org.feature.multi.perspective.model.viewmodel.ViewmodelPackage#getElement_Name()
-    * @model
+    * @model id="true"
     * @generated
     */
    String getName();

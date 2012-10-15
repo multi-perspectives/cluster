@@ -10,19 +10,17 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.feature.model.utilities.FeatureMappingUtil;
 import org.feature.model.utilities.FeatureModelUtil;
+import org.feature.multi.perspective.mapping.viewmapping.Mapping;
+import org.feature.multi.perspective.mapping.viewmapping.MappingModel;
+import org.feature.multi.perspective.model.viewmodel.AbstractGroup;
 import org.feature.multi.perspective.model.viewmodel.CoreGroup;
 import org.feature.multi.perspective.model.viewmodel.Group;
 import org.feature.multi.perspective.model.viewmodel.GroupModel;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
-import org.featuremapper.models.featuremapping.And;
-import org.featuremapper.models.featuremapping.ElementMapping;
-import org.featuremapper.models.featuremapping.FeatureMappingModel;
-import org.featuremapper.models.featuremapping.FeatureRef;
-import org.featuremapper.models.featuremapping.Mapping;
-import org.featuremapper.models.featuremapping.Term;
 
 /**
  * This class creates the views for every {@link Group} and the {@link CoreGroup} from the {@link GroupModel}.
@@ -37,15 +35,15 @@ public class ViewCreator {
    private List<View> views;
    private List<Feature> mappedFeatures = new LinkedList<Feature>();
 
-   public ViewCreator(FeatureMappingModel featureMapping) {
+   public ViewCreator(MappingModel featureMapping) {
       init(featureMapping);
    }
 
-   public ViewCreator(GroupModel groupModel, FeatureModel featureModel, FeatureMappingModel featureMapping){
+   public ViewCreator(GroupModel groupModel, FeatureModel featureModel, MappingModel featureMapping){
       init(groupModel, featureModel, featureMapping);
    }
    
-   private void init(GroupModel groupModel, FeatureModel featureModel, FeatureMappingModel featureMapping){
+   private void init(GroupModel groupModel, FeatureModel featureModel, MappingModel featureMapping){
       setMappings(featureMapping.getMappings());
       setCoreGroup(groupModel.getCoreGroup());
       List<Feature> allFeatures = FeatureModelUtil.getAllFeatures(featureModel);
@@ -53,7 +51,7 @@ public class ViewCreator {
       
    }
    
-   private void init(FeatureMappingModel featureMapping) {
+   private void init(MappingModel featureMapping) {
       GroupModel groupModel = FeatureMappingUtil.getSolutionGroupModel(featureMapping);
       FeatureModel featureModel = FeatureMappingUtil.getFeatureModel(featureMapping);
       init(groupModel, featureModel, featureMapping);
@@ -99,32 +97,14 @@ public class ViewCreator {
    private Set<Feature> getFeatures(EObject group) {
       Set<Feature> features = new HashSet<Feature>();
       for (Mapping mapping : getMappings()) {
-         if (mapping instanceof ElementMapping) {
-            ElementMapping elementMapping = (ElementMapping) mapping;
-            EObject element = elementMapping.getElement();
-            if (element.equals(group)) {
-               Term term = elementMapping.getTerm();
-               if (term instanceof FeatureRef) {
-                  FeatureRef featureRef = (FeatureRef) term;
-                  features.add(featureRef.getFeature());
-                  mappedFeatures.add(featureRef.getFeature());
-               } else {
-                  if (term instanceof And) {
-                     And and = (And) term;
-                     EList<Term> terms = and.getTerms();
-                     for (Term andTerm : terms) {
-                        if (andTerm instanceof FeatureRef) {
-                           FeatureRef featureRef = (FeatureRef) andTerm;
-                           features.add(featureRef.getFeature());
-                           mappedFeatures.add(featureRef.getFeature());
-                        }
-                     }
-                  }
-               }
-            }
+         AbstractGroup viewgroup = mapping.getViewgroup();
+         if (EcoreUtil.equals(viewgroup, group)){
+            EList<Feature> mapFeatures = mapping.getFeatures();
+            features.addAll(mapFeatures);
+            mappedFeatures.addAll(mapFeatures);
          }
       }
-      return features;
+         return features;
    }
 
    /**

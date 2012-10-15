@@ -44,7 +44,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 
 /**
- * This is the action bar contributor for the Multi-Perspective editor.
+ * This is the action bar contributor for the Viewmodel model editor.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated

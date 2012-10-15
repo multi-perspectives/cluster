@@ -23,13 +23,12 @@
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.junit"/>
       <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.core.expressions" version="3.4.0" match="compatible"/>
       <import plugin="org.eclipse.ui.console" version="3.5.100" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui" version="3.7.0" match="greaterOrEqual"/>
       <import plugin="org.feature.multi.perspective.model" version="0.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.jface.text"/>
       <import plugin="org.eclipse.ui.editors"/>
       <import plugin="org.featuremapper.models.featuremapping" version="0.8.0" match="greaterOrEqual"/>
@@ -37,6 +36,7 @@
       <import plugin="org.eclipse.zest.core" version="1.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.zest.layouts" version="1.1.0" match="greaterOrEqual"/>
       <import plugin="org.featuremapper.models.feature.edit" version="0.8.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.expressions" version="3.4.0" match="compatible"/>
       <import plugin="org.featuremapper.models.feature.editor" version="0.8.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.validation" version="1.4.0" match="greaterOrEqual"/>
       <import plugin="org.featuremapper.common" version="0.8.0" match="greaterOrEqual"/>
@@ -46,6 +46,17 @@
       <import plugin="org.emftext.term.propositional" version="0.4.0" match="greaterOrEqual"/>
       <import plugin="org.feature.multi.perspective.model.edit" version="0.4.0" match="greaterOrEqual"/>
       <import plugin="org.featuremapper.ui"/>
+      <import plugin="org.eclipse.emf.ecore.change"/>
+      <import plugin="org.emftext.commons.antlr3_4_0"/>
+      <import plugin="org.eclipse.debug.core"/>
+      <import plugin="org.eclipse.debug.ui"/>
+      <import plugin="org.eclipse.emf"/>
+      <import plugin="org.eclipse.emf.codegen.ecore"/>
+      <import plugin="org.eclipse.emf.ecore.edit"/>
+      <import plugin="org.eclipse.emf.workspace"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.ui.views"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
    </requires>
 
    <plugin
@@ -64,6 +75,41 @@
 
    <plugin
          id="org.feature.multi.perspective.model.editor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.feature.multi.perspective.mapping"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.feature.multi.perspective.mapping.viewmapping.resource.mtext"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.feature.multi.perspective.mapping.viewmapping.resource.mtext.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.feature.multi.perspective.mapping.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.feature.multi.perspective.mapping.editor"
          download-size="0"
          install-size="0"
          version="0.0.0"
