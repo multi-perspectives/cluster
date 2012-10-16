@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.feature.multi.perspective.classification.resource.clt.ui.CltUIMetaInformation" id="org.feature.multi.perspective.classification.resource.clt.ui.CltUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.feature.multi.perspective.classification.resource.clt.ui.CltEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="clt" icon="icons/editor_icon.gif" id="org.feature.multi.perspective.classification.resource.clt.ui.CltEditor" name="EMFText clt Editor">
+			<contentTypeBinding contentTypeId="org.feature.multi.perspective.classification.resource.clt">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.feature.multi.perspective.classification.resource.clt.ui.CltPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Clt Text Editor" id="org.feature.multi.perspective.classification.resource.clt.ui.CltPreferencePage" class="org.feature.multi.perspective.classification.resource.clt.ui.CltPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.feature.multi.perspective.classification.resource.clt.ui.CltSyntaxColoringPreferencePage" class="org.feature.multi.perspective.classification.resource.clt.ui.CltSyntaxColoringPreferencePage" category="org.feature.multi.perspective.classification.resource.clt.ui.CltPreferencePage">
+		</page>
+		<page name="Brackets" id="org.feature.multi.perspective.classification.resource.clt.ui.CltBracketPreferencePage" class="org.feature.multi.perspective.classification.resource.clt.ui.CltBracketPreferencePage" category="org.feature.multi.perspective.classification.resource.clt.ui.CltPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.feature.multi.perspective.classification.resource.clt.ui.CltNewFileWizard" id="org.feature.multi.perspective.classification.resource.clt.ui.CltNewFileWizard" name="EMFText .clt file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="org.feature.multi.perspective.classification.resource.clt.ui.CltNewProjectWizard" id="org.feature.multi.perspective.classification.resource.clt.ui.CltNewProjectWizard" name="EMFText clt project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.feature.multi.perspective.classification.resource.clt.ui.CltMarkerResolutionGenerator" markerType="org.feature.multi.perspective.classification.resource.clt.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.feature.multi.perspective.classification.resource.clt.ui.CltAnnotationModelFactory" extensions="clt">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.feature.multi.perspective.classification.resource.clt" name=".clt File" base-type="org.eclipse.core.runtime.text" file-extensions="clt">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="clt" id="org.feature.multi.perspective.classification.resource.clt.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.feature.multi.perspective.classification.resource.clt.ui.occurences">
+		</type>
+		<type name="org.feature.multi.perspective.classification.resource.clt.ui.occurences.declaration" super="org.feature.multi.perspective.classification.resource.clt.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.feature.multi.perspective.classification.resource.clt.ui.occurences" label="Occurrences (in .clt files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="clt.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="clt.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="clt.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="clt.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="clt.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="clt.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="clt.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="clt.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="clt.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.feature.multi.perspective.classification.resource.clt.ui.occurences.declaration" label="Declarations (in .clt files)" textPreferenceKey="clt.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="clt.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="clt.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="clt.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="clt.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="clt.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage icon="/icons/launch_type_icon.gif" configTypeID="org.feature.multi.perspective.classification.resource.clt.ui.launchConfigurationType" id="org.feature.multi.perspective.clt.launchImage">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup type="org.feature.multi.perspective.classification.resource.clt.ui.launchConfigurationType" class="org.feature.multi.perspective.classification.resource.clt.ui.launch.CltLaunchConfigurationTabGroup" id="org.feature.multi.perspective.clt.launchConfigurationTabGroup" helpContextId="org.feature.multi.perspective.clt.launchConfigHelpContext">
+			<launchMode mode="debug" perspective="org.eclipse.debug.ui.DebugPerspective" description="Debug clt model.">
+			</launchMode>
+			<launchMode mode="run" description="Run clt model.">
+			</launchMode>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut label="clt Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="org.feature.multi.perspective.clt.launch" modes="run,debug" class="org.feature.multi.perspective.classification.resource.clt.ui.launch.CltLaunchShortcut" description="Launch a clt model" id="org.feature.multi.perspective.clt.launchShortcut">
+			<description description="Run clt model" mode="run">
+			</description>
+			<description description="Debug clt model" mode="debug">
+			</description>
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1">
+						</count>
+						<iterate>
+							<test property="org.feature.multi.perspective.clt.isLaunchable">
+							</test>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType id="org.feature.multi.perspective.classification.resource.clt.ui.launchConfigurationType">
+			</configurationType>
+		</shortcut>
+	</extension>
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="org.feature.multi.perspective.clt.PropertyTester" type="java.lang.Object" namespace="org.feature.multi.perspective.clt" properties="isLaunchable" class="org.feature.multi.perspective.classification.resource.clt.ui.CltPropertyTester">
+		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.feature.multi.perspective.classification.resource.clt.ui.debug.lineBreakpoint" markerType="org.feature.multi.perspective.classification.resource.clt.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.feature.multi.perspective.classification.resource.clt.ui.debug.lineBreakpoint" label="Breakpoints (in .clt files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="org.feature.multi.perspective.classification.resource.clt.ui.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="org.feature.multi.perspective.classification.resource.clt.ui.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="org.feature.multi.perspective.classification.resource.clt.ui.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="org.feature.multi.perspective.classification.resource.clt.ui.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="org.feature.multi.perspective.classification.resource.clt.ui.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="org.feature.multi.perspective.classification.resource.clt.ui.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="org.feature.multi.perspective.classification.resource.clt.ui.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="org.feature.multi.perspective.classification.resource.clt.ui.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="org.feature.multi.perspective.classification.resource.clt.ui.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="org.feature.multi.perspective.classification.resource.clt.ui.CltEditor" class="org.feature.multi.perspective.classification.resource.clt.ui.debug.CltAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.feature.multi.perspective.classification.resource.clt.debug.CltDebugVariable" class="org.feature.multi.perspective.classification.resource.clt.ui.debug.CltAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.feature.multi.perspective.classification.resource.clt.debug.CltDebugVariable" class="org.feature.multi.perspective.classification.resource.clt.ui.debug.CltAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="org.feature.multi.perspective.classification.resource.clt.ui.RulerPopupActions" targetID="org.feature.multi.perspective.classification.resource.clt.EditorRuler">
+			<action id="org.feature.multi.perspective.classification.resource.clt.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="org.feature.multi.perspective.classification.resource.clt.ui.CltEditor" id="org.feature.multi.perspective.classification.resource.clt.ui.BreakpointRulerActions">
+			<action id="org.feature.multi.perspective.classification.resource.clt.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="org.feature.multi.perspective.classification.resource.clt.debugModel" class="org.feature.multi.perspective.classification.resource.clt.ui.debug.CltDebugModelPresentation">
+		</debugModelPresentation>
+	</extension>
+	
+</plugin>

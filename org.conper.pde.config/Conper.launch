@@ -83,6 +83,7 @@
 <setEntry value="org.emftext.access:default"/>
 <setEntry value="org.emftext.commons.antlr3_3_0:default"/>
 <setEntry value="org.emftext.language.owl:default"/>
+<setEntry value="org.feature.multi.perspective.classification.feature:default"/>
 <setEntry value="org.feature.multi.perspective.expression.feature:default"/>
 <setEntry value="org.feature.multi.perspective.feature:default"/>
 <setEntry value="org.feature.multi.perspective.utilities.feature:default"/>

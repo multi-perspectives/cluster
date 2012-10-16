@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.feature.multi.perspective.classification.resource.clt.mopp.CltMetaInformation" id="org.feature.multi.perspective.classification.resource.clt.mopp.CltMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension id="org.feature.multi.perspective.classification.resource.clt.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<super type="org.eclipse.emf.ecore.diagnostic">
+		</super>
+	</extension>
+	
+	<extension id="org.feature.multi.perspective.classification.resource.clt.problem.syntax_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.feature.multi.perspective.classification.resource.clt.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.feature.multi.perspective.classification.resource.clt.problem.print_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.feature.multi.perspective.classification.resource.clt.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.feature.multi.perspective.classification.resource.clt.problem.unresolved_reference" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.feature.multi.perspective.classification.resource.clt.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.feature.multi.perspective.classification.resource.clt.problem.analysis_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.feature.multi.perspective.classification.resource.clt.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.feature.multi.perspective.classification.resource.clt.problem.builder_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.feature.multi.perspective.classification.resource.clt.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.feature.multi.perspective.classification.resource.clt.nature" name="clt nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="org.feature.multi.perspective.classification.resource.clt.mopp.CltNature">
+			</run>
+		</runtime>
+		<builder id="org.feature.multi.perspective.classification.resource.clt.builder">
+		</builder>
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="org.feature.multi.perspective.classification.resource.clt.builder" name="clt Builder">
+		<builder hasNature="true">
+			<run class="org.feature.multi.perspective.classification.resource.clt.mopp.CltBuilderAdapter">
+			</run>
+		</builder>
+	</extension>
+	
+	<extension-point id="org.feature.multi.perspective.classification.resource.clt.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.feature.multi.perspective.classification.resource.clt.mopp.CltResourceFactoryDelegator" type="clt">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.feature.multi.perspective.classification.resource.clt.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.debug.core.breakpoints">
+		<breakpoint class="org.feature.multi.perspective.classification.resource.clt.debug.CltLineBreakpoint" id="org.feature.multi.perspective.classification.resource.clt.debug.breakpoint" markerType="org.feature.multi.perspective.classification.resource.clt.debug.lineBreakpoint.marker" name="clt Breakpoint">
+		</breakpoint>
+	</extension>
+	
+	<extension id="org.feature.multi.perspective.classification.resource.clt.debug.lineBreakpoint.marker" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.debug.core.lineBreakpointMarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<persistent value="true">
+		</persistent>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+		<launchConfigurationType id="org.feature.multi.perspective.classification.resource.clt.ui.launchConfigurationType" delegate="org.feature.multi.perspective.classification.resource.clt.launch.CltLaunchConfigurationDelegate" modes="run,debug" name="clt Application" sourceLocatorId="org.feature.multi.perspective.classification.resource.clt.ui.sourceLocator" sourcePathComputerId="org.feature.multi.perspective.classification.resource.clt.ui.sourcePathComputer" delegateName="clt Launch Tooling" delegateDescription="This will run or debug .clt files.">
+		</launchConfigurationType>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourcePathComputers">
+		<sourcePathComputer class="org.feature.multi.perspective.classification.resource.clt.debug.CltSourcePathComputerDelegate" id="org.feature.multi.perspective.classification.resource.clt.ui.sourcePathComputer">
+		</sourcePathComputer>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourceLocators">
+		<sourceLocator id="org.feature.multi.perspective.classification.resource.clt.ui.sourceLocator" class="org.feature.multi.perspective.classification.resource.clt.debug.CltSourceLocator" name="clt Source Locator">
+		</sourceLocator>
+	</extension>
+	
+	<extension point="org.feature.multi.perspective.classification.resource.clt.default_load_options">
+	<provider
+          class="org.feature.multi.perspective.classification.resource.clt.postprocessor.FillElementProcessor"
+          id="org.feature.multi.perspective.classification.resource.classify.provider">
+    </provider>
+ </extension>
+	
+</plugin>

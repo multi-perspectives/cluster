@@ -10,8 +10,20 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.feature.multi.perspective.classification.resource.classify.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.feature.multi.perspective.classification.resource.clt.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.feature.multi.perspective.mapping.viewmapping.resource.mtext.nature</nature>
+		<nature>org.feature.multi.perspective.classification.resource.classify.nature</nature>
+		<nature>org.feature.multi.perspective.classification.resource.clt.nature</nature>
 	</natures>
 </projectDescription>

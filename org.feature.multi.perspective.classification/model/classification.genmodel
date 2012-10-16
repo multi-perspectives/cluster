@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.feature.multi.perspective.classification/src/gen/java"
+    editDirectory="/org.feature.multi.perspective.classification.edit/src/gen/java"
+    editorDirectory="/org.feature.multi.perspective.classification.editor/src/gen/java"
+    modelPluginID="org.feature.multi.perspective.classification" modelName="Classification"
+    testsDirectory="/org.feature.multi.perspective.classification.tests/src/gen/java"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    usedGenPackages="platform:/plugin/org.featuremapper.models.feature/model/feature.genmodel#//feature ../../org.feature.multi.perspective.mapping/model/viewmapping.genmodel#//viewmapping ../../org.feature.multi.perspective.model/model/viewmodel.genmodel#//viewmodel">
+  <foreignModel>classification.ecore</foreignModel>
+  <genPackages prefix="Classification" basePackage="org.feature.multi.perspective"
+      disposableProviderFactory="true" ecorePackage="classification.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="classification.ecore#//Classifier">
+      <genEnumLiterals ecoreEnumLiteral="classification.ecore#//Classifier/Unclassified"/>
+      <genEnumLiterals ecoreEnumLiteral="classification.ecore#//Classifier/Unbound"/>
+      <genEnumLiterals ecoreEnumLiteral="classification.ecore#//Classifier/Alive"/>
+      <genEnumLiterals ecoreEnumLiteral="classification.ecore#//Classifier/Dead"/>
+    </genEnums>
+    <genClasses ecoreClass="classification.ecore#//ClassificationModel">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//ClassificationModel/featureModel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference classification.ecore#//ClassificationModel/classifications"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//ClassificationModel/viewMapping"/>
+    </genClasses>
+    <genClasses ecoreClass="classification.ecore#//Classification">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/viewgroup"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/classifiedFeatures"/>
+    </genClasses>
+    <genClasses ecoreClass="classification.ecore#//ClassifiedFeature">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//ClassifiedFeature/feature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classification.ecore#//ClassifiedFeature/classified"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
