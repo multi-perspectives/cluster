@@ -1,0 +1,19 @@
+viewmapping
+    featuremodel <../feature/wsn.feature>
+    viewmodel <../viewmodel/domain.viewmodel>
+
+    
+view group "networkdomain" contains
+	"Connection" 
+	"AdHoc" "Wifi-AdHoc" 
+	"Infrastructure" "Wifi-Infrastructure" "GSM"
+	"Routing" "BGP" "LAR"
+	  
+view group "monitoringdomain" contains
+	"Connection"
+	"Monitoring" "Analysis"
+	"CollectionProtocol" "PushSum" "SystemExp" "CS"
+	  
+view group "hardwaredomain" contains
+	 "Sensors" "GPS" "Temperatur" "Pressure"
+	 "Chipset" "ARM" "Intel"   	  
