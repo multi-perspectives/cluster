@@ -11,6 +11,7 @@ Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
   org.emftext.access;resolution:=optional,
   org.eclipse.debug.core;resolution:=optional,
   org.featuremapper.models.feature,
+   org.feature.multi.perspective.model,
   org.emftext.commons.antlr3_4_0,
   org.feature.multi.perspective.mapping,
   org.feature.multi.perspective.model

@@ -3,7 +3,7 @@ FOR <http://www.tudresden.de/viewmapping> <optional/path/to/myLanguage.genmodel>
 START MappingModel
 
 OPTIONS {
-	additionalDependencies = "org.featuremapper.models.feature";
+	additionalDependencies = "org.featuremapper.models.feature, org.feature.multi.perspective.model";
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
 	overrideLaunchConfigurationDelegate = "false";
