@@ -50,7 +50,7 @@ import org.feature.multi.perspective.model.viewmodel.util.ViewmodelValidator;
  *
  * @generated
  */
-public abstract class AbstractGroupImpl extends ElementImpl implements AbstractGroup {
+public class AbstractGroupImpl extends ElementImpl implements AbstractGroup {
    /**
     * The cached value of the '{@link #getViewPointReference() <em>View Point Reference</em>}' reference list.
     * <!-- begin-user-doc -->

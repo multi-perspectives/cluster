@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.feature.multi.perspective.model.viewmodel.ViewmodelPackage#getAbstractGroup()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface AbstractGroup extends Element {

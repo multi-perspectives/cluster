@@ -16,7 +16,7 @@ OPTIONS {
 }
 
 RULES {
-	// syntax definition for class 'StartMetaClass'
+	// syntax definition for class 'MappingModel'
 	MappingModel   ::= 	"viewmapping" !0
 						#4 ("featuremodel" #1 featureModel['<','>']) !0
 						#4 ("viewmodel" #1 viewModel['<','>']) !0

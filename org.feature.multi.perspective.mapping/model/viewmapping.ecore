@@ -13,6 +13,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
         eType="ecore:EClass platform:/plugin/org.featuremapper.models.feature/model/feature.ecore#//Feature"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="viewgroup" lowerBound="1"
-        eType="ecore:EClass ../../org.feature.multi.perspective.model/model/viewmodel.ecore#//Group"/>
+        eType="ecore:EClass ../../org.feature.multi.perspective.model/model/viewmodel.ecore#//AbstractGroup"/>
   </eClassifiers>
 </ecore:EPackage>

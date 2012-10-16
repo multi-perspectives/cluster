@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.zest.core.widgets.Graph;
 import org.feature.multi.perspective.mapping.viewmapping.Mapping;
 import org.feature.multi.perspective.mapping.viewmapping.MappingModel;
@@ -49,9 +48,14 @@ public class NodeModelContentProvider {
          EList<Mapping> mappings = featureMappingModel.getMappings();
          for (Mapping mapping : mappings) {
             EList<Feature> features = mapping.getFeatures();
-            Group viewgroup = mapping.getViewgroup();
-            createConnections(viewgroup, features);
-            
+            AbstractGroup viewgroup = mapping.getViewgroup();
+            if (viewgroup instanceof Group) {
+               Group group = (Group) viewgroup;
+               createConnections(group, features);
+            } else if (viewgroup instanceof CoreGroup) {
+               createConnections(features);
+            }
+
          }
       }
       Collection<FeatureNode> values = featureNodes.values();
@@ -73,76 +77,63 @@ public class NodeModelContentProvider {
     * @param features mapped to the group
     */
    private void createConnections(Group group, EList<Feature> features) {
-         GroupNode groupNode = groupdNodes.get(group);
-         for (Feature feature : features) {
-            FeatureNode featureNode = featureNodes.get(feature);
-            Connection connection = new Connection(groupNode, featureNode);
-            groupNode.getConnectedTo().add(featureNode);
-            featureNode.getConnectedTo().add(groupNode);
-            connections.add(connection);
-         }
+      GroupNode groupNode = groupdNodes.get(group);
+      for (Feature feature : features) {
+         FeatureNode featureNode = featureNodes.get(feature);
+         Connection connection = new Connection(groupNode, featureNode);
+         groupNode.getConnectedTo().add(featureNode);
+         featureNode.getConnectedTo().add(groupNode);
+         connections.add(connection);
+      }
    }
-//
-//   /**
-//    * create all connections between the {@link ViewPoint} and the {@link Feature}
-//    * 
-//    * @param viewPoint the {@link ViewPoint}
-//    * @param elementMapping the mapping containing one or more features
-//    */
-//   private void createConnections(ViewPoint viewPoint, ElementMapping elementMapping) {
-//      if (elementMapping.getTerm() instanceof FeatureRef) {
-//         FeatureRef featureRef = (FeatureRef) elementMapping.getTerm();
-//         ViewPointNode viewPointNode = viewPointNodes.get(viewPoint);
-//         FeatureNode featureNode = featureNodes.get(featureRef.getFeature());
-//         Connection connection = new Connection(viewPointNode, featureNode);
-//         viewPointNode.getConnectedTo().add(featureNode);
-//         featureNode.getConnectedTo().add(viewPointNode);
-//         connections.add(connection);
-//      } else if (elementMapping.getTerm() instanceof And) {
-//         And and = (And) elementMapping.getTerm();
-//         EList<Term> terms = and.getTerms();
-//         for (Term term : terms) {
-//            if (term instanceof FeatureRef) {
-//               FeatureRef featureRef = (FeatureRef) term;
-//               ViewPointNode viewPointNode = viewPointNodes.get(viewPoint);
-//               FeatureNode featureNode = featureNodes.get(featureRef.getFeature());
-//               Connection connection = new Connection(viewPointNode, featureNode);
-//               viewPointNode.getConnectedTo().add(featureNode);
-//               featureNode.getConnectedTo().add(viewPointNode);
-//               connections.add(connection);
-//            }
-//         }
-//      }
-//   }
 
-//   /**
-//    * create all connections between the default group and the features
-//    * 
-//    * @param elementMapping the mapping containing one or more features
-//    */
-//   private void createConnections(ElementMapping elementMapping) {
-//      if (elementMapping.getTerm() instanceof FeatureRef) {
-//         FeatureRef featureRef = (FeatureRef) elementMapping.getTerm();
-//         FeatureNode featureNode = featureNodes.get(featureRef.getFeature());
-//         Connection connection = new Connection(coreGroupNode, featureNode);
-//         coreGroupNode.getConnectedTo().add(featureNode);
-//         featureNode.getConnectedTo().add(coreGroupNode);
-//         connections.add(connection);
-//      } else if (elementMapping.getTerm() instanceof And) {
-//         And and = (And) elementMapping.getTerm();
-//         EList<Term> terms = and.getTerms();
-//         for (Term term : terms) {
-//            if (term instanceof FeatureRef) {
-//               FeatureRef featureRef = (FeatureRef) term;
-//               FeatureNode featureNode = featureNodes.get(featureRef.getFeature());
-//               Connection connection = new Connection(coreGroupNode, featureNode);
-//               coreGroupNode.getConnectedTo().add(featureNode);
-//               featureNode.getConnectedTo().add(coreGroupNode);
-//               connections.add(connection);
-//            }
-//         }
-//      }
-//   }
+   //
+   // /**
+   // * create all connections between the {@link ViewPoint} and the {@link Feature}
+   // *
+   // * @param viewPoint the {@link ViewPoint}
+   // * @param elementMapping the mapping containing one or more features
+   // */
+   // private void createConnections(ViewPoint viewPoint, ElementMapping elementMapping) {
+   // if (elementMapping.getTerm() instanceof FeatureRef) {
+   // FeatureRef featureRef = (FeatureRef) elementMapping.getTerm();
+   // ViewPointNode viewPointNode = viewPointNodes.get(viewPoint);
+   // FeatureNode featureNode = featureNodes.get(featureRef.getFeature());
+   // Connection connection = new Connection(viewPointNode, featureNode);
+   // viewPointNode.getConnectedTo().add(featureNode);
+   // featureNode.getConnectedTo().add(viewPointNode);
+   // connections.add(connection);
+   // } else if (elementMapping.getTerm() instanceof And) {
+   // And and = (And) elementMapping.getTerm();
+   // EList<Term> terms = and.getTerms();
+   // for (Term term : terms) {
+   // if (term instanceof FeatureRef) {
+   // FeatureRef featureRef = (FeatureRef) term;
+   // ViewPointNode viewPointNode = viewPointNodes.get(viewPoint);
+   // FeatureNode featureNode = featureNodes.get(featureRef.getFeature());
+   // Connection connection = new Connection(viewPointNode, featureNode);
+   // viewPointNode.getConnectedTo().add(featureNode);
+   // featureNode.getConnectedTo().add(viewPointNode);
+   // connections.add(connection);
+   // }
+   // }
+   // }
+   // }
+
+   /**
+    * create all connections between the core group and the features
+    * 
+    * @param elementMapping the mapping containing one or more features
+    */
+   private void createConnections(EList<Feature> features) {
+      for (Feature feature : features) {
+         FeatureNode featureNode = featureNodes.get(feature);
+         Connection connection = new Connection(coreGroupNode, featureNode);
+         coreGroupNode.getConnectedTo().add(featureNode);
+         featureNode.getConnectedTo().add(coreGroupNode);
+         connections.add(connection);
+      }
+   }
 
    /**
     * creates feature nodes from the feature model

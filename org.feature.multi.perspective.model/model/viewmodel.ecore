@@ -3,7 +3,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="viewmodel" nsURI="http://org.feature.multi.perspective.model/schema/1.0"
     nsPrefix="viewmodel">
   <eClassifiers xsi:type="ecore:EClass" name="CoreGroup" eSuperTypes="#//AbstractGroup"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractGroup" abstract="true" eSuperTypes="#//Element">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractGroup" eSuperTypes="#//Element">
     <eOperations name="checkForRedundantViewPoints" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="eDiagnosticChain" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="eMap" lowerBound="1">

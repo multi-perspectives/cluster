@@ -61,6 +61,7 @@ public class ViewmodelFactoryImpl extends EFactoryImpl implements ViewmodelFacto
    public EObject create(EClass eClass) {
       switch (eClass.getClassifierID()) {
          case ViewmodelPackage.CORE_GROUP: return createCoreGroup();
+         case ViewmodelPackage.ABSTRACT_GROUP: return createAbstractGroup();
          case ViewmodelPackage.VIEW_POINT: return createViewPoint();
          case ViewmodelPackage.GROUP_MODEL: return createGroupModel();
          case ViewmodelPackage.VIEW_POINT_CONTAINER: return createViewPointContainer();
@@ -78,6 +79,16 @@ public class ViewmodelFactoryImpl extends EFactoryImpl implements ViewmodelFacto
    public CoreGroup createCoreGroup() {
       CoreGroupImpl coreGroup = new CoreGroupImpl();
       return coreGroup;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   public AbstractGroup createAbstractGroup() {
+      AbstractGroupImpl abstractGroup = new AbstractGroupImpl();
+      return abstractGroup;
    }
 
    /**

@@ -35,6 +35,15 @@ public interface ViewmodelFactory extends EFactory {
    CoreGroup createCoreGroup();
 
    /**
+    * Returns a new object of class '<em>Abstract Group</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @return a new object of class '<em>Abstract Group</em>'.
+    * @generated
+    */
+   AbstractGroup createAbstractGroup();
+
+   /**
     * Returns a new object of class '<em>Group</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->

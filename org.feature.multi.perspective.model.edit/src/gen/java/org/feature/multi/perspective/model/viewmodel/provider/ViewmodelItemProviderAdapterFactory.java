@@ -101,6 +101,29 @@ public class ViewmodelItemProviderAdapterFactory extends ViewmodelAdapterFactory
    }
 
    /**
+    * This keeps track of the one adapter used for all {@link org.feature.multi.perspective.model.viewmodel.AbstractGroup} instances.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   protected AbstractGroupItemProvider abstractGroupItemProvider;
+
+   /**
+    * This creates an adapter for a {@link org.feature.multi.perspective.model.viewmodel.AbstractGroup}.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   @Override
+   public Adapter createAbstractGroupAdapter() {
+      if (abstractGroupItemProvider == null) {
+         abstractGroupItemProvider = new AbstractGroupItemProvider(this);
+      }
+
+      return abstractGroupItemProvider;
+   }
+
+   /**
     * This keeps track of the one adapter used for all {@link org.feature.multi.perspective.model.viewmodel.Group} instances.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -292,6 +315,7 @@ public class ViewmodelItemProviderAdapterFactory extends ViewmodelAdapterFactory
     */
    public void dispose() {
       if (coreGroupItemProvider != null) coreGroupItemProvider.dispose();
+      if (abstractGroupItemProvider != null) abstractGroupItemProvider.dispose();
       if (viewPointItemProvider != null) viewPointItemProvider.dispose();
       if (groupModelItemProvider != null) groupModelItemProvider.dispose();
       if (viewPointContainerItemProvider != null) viewPointContainerItemProvider.dispose();
