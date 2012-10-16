@@ -18,4 +18,10 @@ view group "Gold" contains
 	 "OCR" "PDFOCR" "ImageOCR"
 	
 view group "Customized"	contains
-	"UnicodeTextType"		 
+	"UnicodeTextType"
+	
+view group "Core" contains
+	"DocumentManagement" 
+	"DocumentType" "TextType" 
+	"Indexing" "GeneralIndex" "FileNameIndex" 
+	"Search" "GeneralSearch" "FileNameSearch"			 
