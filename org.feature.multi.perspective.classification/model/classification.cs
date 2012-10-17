@@ -20,13 +20,13 @@ OPTIONS {
 RULES {
 	// syntax definition for class 'ClassificationModel'
 	ClassificationModel   ::= "classification" !0    
-							  "references" #1 (("featuremodel" featureModel['<','>'])?|("mapping" #1 viewMapping['<','>'] ))? !0
-							  !0 classifications* !0;
+							  "references" #1 (("featuremodel" #1 featureModel['<','>'])?|("mapping" #1 viewMapping['<','>'] ))? !0
+							  (classifications*);
 	
 	// syntax definition for class 'Classification'
-	Classification ::=  "classify" #1 ("view group" #1 viewgroup['"','"']?)? ":" !0 
+	Classification ::=  ("view group" #1 viewgroup['"','"'] #1 ":" !0)
 						 classifiedFeatures* !0; 
 	
 	// syntax definition for class 'ClassifiedFeature'
-	ClassifiedFeature ::= #4 "feature" #1 feature['"','"'] #1 classified[Unclassified : "", Unbound: "unbound", Dead: "dead", Alive: "alive"] !0;
+	ClassifiedFeature ::= (#4 "feature" #1 feature['"','"'] #1 classified[Unclassified : "", Unbound: "unbound", Dead: "dead", Alive: "alive"]) !0;
 }

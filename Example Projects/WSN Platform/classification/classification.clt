@@ -1,27 +1,26 @@
 classification
 references mapping <platform:/resource/WSN%20Platform/mapping/mapping.mtext> 
-
-classify view group "networkdomain" :
+view group "networkdomain" :
     feature "Connection" alive
     feature "AdHoc" unbound
-    feature "Wifi-AdHoc" dead
-    feature "Infrastructure" alive
+    feature "Wifi-AdHoc" 
+    feature "Infrastructure" 
     feature "Wifi-Infrastructure" 
     feature "GSM" 
     feature "Routing" 
     feature "BGP" 
     feature "LAR" 
 
-classify view group "monitoringdomain" :
-	feature "Connection" dead
-    feature "Monitoring" 
-    feature "Analysis" 
+view group "monitoringdomain" :
+    feature "Connection" dead
+    feature "Monitoring" alive
+    feature "Analysis" alive
     feature "CollectionProtocol" 
     feature "PushSum" 
     feature "SystemExp" 
     feature "CS" 
 
-classify view group "hardwaredomain" :
+view group "hardwaredomain" :
     feature "Sensors" 
     feature "GPS" 
     feature "Temperatur" 
@@ -29,5 +28,3 @@ classify view group "hardwaredomain" :
     feature "Chipset" 
     feature "ARM" 
     feature "Intel"
-
-
