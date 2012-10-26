@@ -63,6 +63,7 @@ public class ClassifierHandler {
 	 * initialize handler but do not parse feature model for initial
 	 * classification
 	 */
+	// TODO Required? it is not possible to add a feature or a model, so what does this constructor do?
 	public ClassifierHandler() {
 		featureToClassification = new HashMap<Feature, BoundedType>();
 		unboundSet = new HashSet<Feature>();
