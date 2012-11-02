@@ -1,7 +1,7 @@
 /**
  * 
  */
-package modelSlicer;
+package org.feature.model.slicer.modelSlicer;
 
 import static org.junit.Assert.*;
 
@@ -51,6 +51,7 @@ public class TestModelSlicer {
 	@Before
 	public void setUp() throws Exception {
 		model = loadModel("testdata/SimplePhone.feature");
+		slicer = new ModelSlicer();
 	}
 
 	@Test

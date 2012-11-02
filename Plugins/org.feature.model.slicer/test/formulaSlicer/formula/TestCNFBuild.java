@@ -3,6 +3,7 @@ package formulaSlicer.formula;
 import java.io.File;
 import java.util.Map;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.PropertyConfigurator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -24,6 +25,7 @@ public class TestCNFBuild {
 	@Before
 	public void setUp() {
 		PropertyConfigurator.configure("conf/log4j.properties");
+		BasicConfigurator.configure();
 		// load activators of dependent plugins
 	}
 
