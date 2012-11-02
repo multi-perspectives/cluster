@@ -476,7 +476,7 @@ public class SATModelBuilder implements ISolverModelBuilder {
 		// Add Imply constraint to parent feature
 		solver.halfOr(parentId, clause);
 
-		clause.push(parentId);
+		clause.push(-parentId);
 		buildOrClause(clause);
 	}
 

@@ -1,4 +1,4 @@
-package org.feature.model.sat;
+package org.feature.model.sat.builder;
 
 import java.io.File;
 import java.util.Map;
