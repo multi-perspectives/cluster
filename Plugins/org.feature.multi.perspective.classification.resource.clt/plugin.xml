@@ -110,7 +110,7 @@
 	
 	<extension point="org.feature.multi.perspective.classification.resource.clt.default_load_options">
 	<provider
-          class="org.feature.multi.perspective.classification.resource.clt.postprocessor.FillElementProcessor"
+          class="org.feature.multi.perspective.classification.resource.clt.postprocessor.StageInitializer"
           id="org.feature.multi.perspective.classification.resource.classify.provider">
     </provider>
  </extension>

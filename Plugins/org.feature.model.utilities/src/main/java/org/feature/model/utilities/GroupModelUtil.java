@@ -90,4 +90,33 @@ public final class GroupModelUtil {
       return groupModel;
    }
    
+   /**
+    * gets all direct and indirect parent groups related to the given group in the view model hierarchy including the given group.
+    * @param group
+    * @return list of all parent view groups including the given view group itself.
+    */
+   public static List<AbstractGroup> getAllAnchestorGroups(AbstractGroup group){
+      List<AbstractGroup> anchestorGroups = new ArrayList<AbstractGroup>();
+      getAllAnchestorGroupsInternal(anchestorGroups, group);
+      return anchestorGroups;
+   }
+   
+   private static void getAllAnchestorGroupsInternal(List<AbstractGroup> anchestorGroups, AbstractGroup group){
+      if (group != null){
+         anchestorGroups.add(group);
+         AbstractGroup parent = getParent(group);
+         getAllAnchestorGroupsInternal(anchestorGroups, parent);
+      }
+   }
+   
+   private static AbstractGroup getParent(AbstractGroup origGroup){
+      AbstractGroup parentGroup = null;
+      if (origGroup instanceof Group) {
+         Group group = (Group) origGroup;
+         parentGroup = group.getParentGroup();
+      }
+      return parentGroup;
+   }
+   
+   
 }

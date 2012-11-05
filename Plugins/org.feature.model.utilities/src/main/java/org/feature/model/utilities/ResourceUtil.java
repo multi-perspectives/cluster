@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -19,6 +20,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.URIUtil;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -256,6 +258,52 @@ public final class ResourceUtil {
       } catch (CoreException e) {
          log.error("Unable to open project '" + project.getName() + "'.");
       }
+   }
+
+   /**
+    * find the relative uri for the given EObjects.
+    * 
+    * @param objectToConvert
+    * @param baseObject
+    * @return
+    */
+   public static String getRelativeURI(EObject objectToConvert, EObject baseObject) {
+      String relative = null;
+
+      if (objectToConvert != null && baseObject != null) {
+         // return relative uri
+         java.net.URI objectToConvertUri = getContainerURI(objectToConvert.eResource());
+         java.net.URI baseObjectUri = getContainerURI(baseObject.eResource());
+         if (objectToConvertUri != null && baseObjectUri != null) {
+            java.net.URI relativeUri = URIUtil.makeRelative(objectToConvertUri, baseObjectUri);
+            relative = relativeUri.toString();
+            // add filename
+            String fileName = getFileName(objectToConvert);
+            relative += "/" + fileName;
+         }
+      }
+      return relative;
+   }
+
+   private static String getFileName(EObject eObject) {
+      String fileName = null;
+      IFile file = getFile(eObject.eResource());
+      if (file != null) {
+         fileName = file.getName();
+      }
+      return fileName;
+   }
+
+   private static java.net.URI getContainerURI(Resource resource) {
+      java.net.URI parent = null;
+      IFile file = getFile(resource);
+      if (file != null) {
+         IContainer container = file.getParent();
+         if (container != null) {
+            parent = container.getRawLocationURI();
+         }
+      }
+      return parent;
    }
 
 }

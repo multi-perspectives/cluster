@@ -3,14 +3,19 @@
  */
 package org.feature.model.utilities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.feature.multi.perspective.mapping.viewmapping.Mapping;
 import org.feature.multi.perspective.mapping.viewmapping.MappingModel;
-import org.feature.multi.perspective.model.viewmodel.GroupModel;
-import org.featuremapper.models.feature.FeatureModel;
+import org.feature.multi.perspective.model.viewmodel.AbstractGroup;
+import org.featuremapper.models.feature.Feature;
 
 /**
  * Utility class for accessing the featuremapping models.
@@ -44,19 +49,44 @@ public final class FeatureMappingUtil {
       return featureMappingModel;
    }
 
-   public static FeatureModel getFeatureModel(MappingModel mapping) {
-      FeatureModel result = null;
-      if (mapping != null) {
-         result = mapping.getFeatureModel();
+  
+   /**
+    * Collects all features that will be contained in the view that is associated with the given group.
+    * @param viewgroup
+    * @param mappingModel
+    * @return list of features belonging to the view defined by the given group.
+    */
+   public static List<Feature> collectViewFeatures(AbstractGroup viewgroup, MappingModel mappingModel) {
+      List<AbstractGroup> allgroups = GroupModelUtil.getAllAnchestorGroups(viewgroup);
+
+      List<Feature> features = new ArrayList<Feature>();
+      for (AbstractGroup group : allgroups) {
+         Mapping parentMapping = getMapping(group, mappingModel);
+         if (parentMapping != null) {
+            features.addAll(parentMapping.getFeatures());
+         }
+      }
+      return features;
+
+   }
+
+   /**
+    * find the mapping in the mapping model that belongs to the given group. May return null, if no direct mapping is specified.
+    * @param group
+    * @param mappingmodel
+    * @return mapping referring to the given group. May return null if no explicit mapping specified.
+    */
+   public static Mapping getMapping(AbstractGroup group, MappingModel mappingmodel) {
+      Mapping result = null;
+      EList<Mapping> mappings = mappingmodel.getMappings();
+      for (Mapping mapping : mappings) {
+         AbstractGroup viewgroup = mapping.getViewgroup();
+         if (EcoreUtil.equals(group, viewgroup)) {
+            result = mapping;
+            break;
+         }
       }
       return result;
    }
-
-   public static GroupModel getSolutionGroupModel(MappingModel featureMapping) {
-      GroupModel gModel = null;
-      if (featureMapping != null) {
-         gModel = featureMapping.getViewModel();
-      }
-      return gModel;
-   }
+   
 }

@@ -4,7 +4,7 @@ START ClassificationModel
 
 OPTIONS {
 	reloadGeneratorModel = "true";
-    additionalDependencies = "org.featuremapper.models.feature, org.feature.multi.perspective.model";
+    additionalDependencies = "org.featuremapper.models.feature, org.feature.multi.perspective.model, org.feature.model.utilities";
 	generateCodeFromGeneratorModel = "true";
 	overrideLaunchConfigurationDelegate = "false";
 	overridePluginXML = "false";
@@ -20,13 +20,13 @@ OPTIONS {
 RULES {
 	// syntax definition for class 'ClassificationModel'
 	ClassificationModel   ::= "classification" !0    
-							  "references" #1 (("featuremodel" #1 featureModel['<','>'])?|("mapping" #1 viewMapping['<','>'] ))? !0
-							  (classifications*);
+							  "references" #1 (("mapping" #1 viewMapping['<','>']) | ("featuremodel" #1 featureModel['<','>']) )+ !0!0
+							  classifications*;
 	
 	// syntax definition for class 'Classification'
-	Classification ::=  ("view group" #1 viewgroup['"','"'] #1 ":" !0)
+	Classification ::=  ("view" #1 viewgroup['"','"'] #1 ":" !0)
 						 classifiedFeatures* !0; 
 	
 	// syntax definition for class 'ClassifiedFeature'
-	ClassifiedFeature ::= (#4 "feature" #1 feature['"','"'] #1 classified[Unclassified : "", Unbound: "unbound", Dead: "dead", Alive: "alive"]) !0;
+	ClassifiedFeature ::= (#3 "feature" #1 feature['"','"'] #1 classified[Unclassified : "", Unbound: "unbound", Dead: "dead", Alive: "alive"]) !0;
 }

@@ -23,7 +23,7 @@ import org.feature.multi.perspective.mapping.viewmapping.MappingModel;
 import org.feature.multi.perspective.model.viewmodel.AbstractGroup;
 import org.featuremapper.models.feature.Feature;
 
-public class FillElementProcessor implements ICltOptionProvider, ICltResourcePostProcessor,
+public class ViewgroupInitializer implements ICltOptionProvider, ICltResourcePostProcessor,
       ICltResourcePostProcessorProvider {
 
    @Override

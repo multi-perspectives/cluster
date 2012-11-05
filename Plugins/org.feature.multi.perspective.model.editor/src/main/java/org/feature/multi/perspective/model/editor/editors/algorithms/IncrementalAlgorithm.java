@@ -50,8 +50,8 @@ public class IncrementalAlgorithm {
     * @param mapping
     */
    public IncrementalAlgorithm(MappingModel mapping) {
-      this.featureModel = FeatureMappingUtil.getFeatureModel(mapping);
-      this.groupModel = FeatureMappingUtil.getSolutionGroupModel(mapping);
+      this.featureModel = mapping.getFeatureModel();
+      this.groupModel = mapping.getViewModel();
       ViewCreator viewCreater = new ViewCreator(mapping);
       List<View> views = viewCreater.getViews();
       initViewMap(views);
@@ -69,8 +69,8 @@ public class IncrementalAlgorithm {
     * @param groupModel
     */
    public IncrementalAlgorithm(List<View> views, MappingModel mapping) {
-      this.featureModel = FeatureMappingUtil.getFeatureModel(mapping);
-      this.groupModel = FeatureMappingUtil.getSolutionGroupModel(mapping);
+      this.featureModel = mapping.getFeatureModel();
+      this.groupModel = mapping.getViewModel();
       initViewMap(views);
    }
 

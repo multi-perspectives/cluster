@@ -45,12 +45,12 @@ public class FilteredFeatureModel {
    public FilteredFeatureModel(Resource mappingResource, ViewPoint viewPoint, ViewmodelMultiPageEditor multiPageEditor) {
       this.multiPageEditor = multiPageEditor;
       MappingModel featureMappingModel = FeatureMappingUtil.getFeatureMapping(mappingResource);
-      FeatureModel featureModel = FeatureMappingUtil.getFeatureModel(featureMappingModel);
+      FeatureModel featureModel = featureMappingModel.getFeatureModel();
       List<Feature> allFeatures = FeatureModelUtil.getAllFeatures(featureModel);
 
       log.info("#allFeatures: " + allFeatures.size());
       // create views
-      GroupModel groupModel = FeatureMappingUtil.getSolutionGroupModel(featureMappingModel);
+      GroupModel groupModel = featureMappingModel.getViewModel();
       ViewCreator viewCreater = new ViewCreator(featureMappingModel);
       List<View> views = viewCreater.getViews();
 
