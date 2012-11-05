@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ASCII"?>
+<viewmodel:GroupModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewmodel="http://org.feature.multi.perspective.model/schema/1.0">
+  <coreGroup name="Core" viewPointReference="V_Core">
+    <groups name="G_1" viewPointReference="V_2 V_0 V_0">
+      <groups name="G_11">
+        <groups name="G_111">
+          <groups name="G_1111" viewPointReference="V_6 V_6">
+            <groups name="G_11111"/>
+            <groups name="G_11112"/>
+            <groups name="G_11113" viewPointReference="V_1 V_1"/>
+          </groups>
+        </groups>
+        <groups name="G_112" viewPointReference="V_3 V_3 V_4 V_4">
+          <groups name="G_1121" viewPointReference="V_4 V_4 V_5 V_5">
+            <groups name="G_11211"/>
+          </groups>
+        </groups>
+        <groups name="G_113" viewPointReference="V_2 V_0 V_0">
+          <groups name="G_1131" viewPointReference="V_8 V_8">
+            <groups name="G_11311" viewPointReference="V_1 V_1 V_6 V_6"/>
+            <groups name="G_11312" viewPointReference="V_4 V_4 V_5 V_5 V_7 V_7"/>
+            <groups name="G_11313" viewPointReference="V_1 V_1"/>
+          </groups>
+          <groups name="G_1132" viewPointReference="V_8 V_8">
+            <groups name="G_11321"/>
+            <groups name="G_11322"/>
+          </groups>
+          <groups name="G_1133" viewPointReference="V_3 V_3">
+            <groups name="G_11331" viewPointReference="V_6 V_6"/>
+          </groups>
+        </groups>
+      </groups>
+    </groups>
+    <groups name="G_2">
+      <groups name="G_21">
+        <groups name="G_211" viewPointReference="V_3 V_3 V_5 V_5">
+          <groups name="G_2111">
+            <groups name="G_21111"/>
+            <groups name="G_21112"/>
+          </groups>
+          <groups name="G_2112" viewPointReference="V_0 V_0 V_8 V_8">
+            <groups name="G_21121" viewPointReference="V_7 V_7"/>
+            <groups name="G_21122" viewPointReference="V_7 V_7"/>
+          </groups>
+          <groups name="G_2113">
+            <groups name="G_21131"/>
+          </groups>
+        </groups>
+      </groups>
+    </groups>
+  </coreGroup>
+  <viewPointContainer>
+    <viewPoints name="V_0" containedInGroup="G_113 G_1 G_2112"/>
+    <viewPoints name="V_1" containedInGroup="G_11313 G_11113 G_11311"/>
+    <viewPoints name="V_2" containedInGroup="G_1 G_113"/>
+    <viewPoints name="V_3" containedInGroup="G_112 G_211 G_1133"/>
+    <viewPoints name="V_4" containedInGroup="G_1121 G_112 G_11312"/>
+    <viewPoints name="V_5" containedInGroup="G_211 G_1121 G_11312"/>
+    <viewPoints name="V_6" containedInGroup="G_11311 G_1111 G_11331"/>
+    <viewPoints name="V_7" containedInGroup="G_21122 G_21121 G_11312"/>
+    <viewPoints name="V_8" containedInGroup="G_2112 G_1132 G_1131"/>
+    <viewPoints name="V_Core" containedInGroup="Core"/>
+  </viewPointContainer>
+</viewmodel:GroupModel>
