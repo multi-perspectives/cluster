@@ -71,7 +71,7 @@ public class Util {
       FeatureModel view = EcoreUtil.copy(featureModel);
       traverseFeatureModelAndRemoveFeatures(view.getRoot(), features);
       if (view.getAllFeatures().size() == features.size()) {
-         removeUnusedConstrtaints(view, featureModel, canBeConsistent);
+         removeUnusedConstraints(view, featureModel, canBeConsistent);
          resource.getContents().add(view);
       } else {
          view = null;
@@ -87,7 +87,7 @@ public class Util {
     * @param featureModel the full {@link FeatureModel}.
     * @param canBeConsistent if an implies constraint can never be fulfilled.
     */
-   private static void removeUnusedConstrtaints(FeatureModel view, FeatureModel featureModel, Flag canBeConsistent) {
+   private static void removeUnusedConstraints(FeatureModel view, FeatureModel featureModel, Flag canBeConsistent) {
       // log.debug("view features:\t" + view.getAllFeatures().size());
       // log.debug("featureModel features:\t" +
       // featureModel.getAllFeatures().size());

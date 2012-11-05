@@ -26,7 +26,7 @@ public class MappingFeaturesReferenceResolver
                        int position,
                        boolean resolveFuzzy,
                        final org.feature.multi.perspective.mapping.viewmapping.resource.mtext.IMtextReferenceResolveResult<org.featuremapper.models.feature.Feature> result) {
-      EObject model = container.eContainer();
+      EObject model = EcoreUtil.getRootContainer(container);
       if (model instanceof MappingModel) {
          MappingModel mappingModel = (MappingModel) model;
          FeatureModel featureModel = mappingModel.getFeatureModel();
@@ -35,20 +35,17 @@ public class MappingFeaturesReferenceResolver
             String featureId = EcoreUtil.getID(feature);
             if (identifier.equals(featureId)) {
                result.addMapping(identifier, feature);
-               return;
+               break;
             }
          }
+      } else {
+         delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
       }
-      delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
    }
 
    public String deResolve(org.featuremapper.models.feature.Feature element,
                            org.feature.multi.perspective.mapping.viewmapping.Mapping container, org.eclipse.emf.ecore.EReference reference) {
-      if (element != null) {
          return element.getName();
-      } else {
-         return delegate.deResolve(element, container, reference);
-      }
    }
 
    public void setOptions(java.util.Map< ? , ? > options) {

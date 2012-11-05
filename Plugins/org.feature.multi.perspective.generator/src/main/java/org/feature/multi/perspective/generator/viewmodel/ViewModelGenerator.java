@@ -7,12 +7,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.feature.model.utilities.GroupModelUtil;
 import org.feature.multi.perspective.model.viewmodel.AbstractGroup;
-import org.feature.multi.perspective.model.viewmodel.ViewmodelFactory;
 import org.feature.multi.perspective.model.viewmodel.CoreGroup;
 import org.feature.multi.perspective.model.viewmodel.Group;
 import org.feature.multi.perspective.model.viewmodel.GroupModel;
 import org.feature.multi.perspective.model.viewmodel.ViewPoint;
 import org.feature.multi.perspective.model.viewmodel.ViewPointContainer;
+import org.feature.multi.perspective.model.viewmodel.ViewmodelFactory;
 
 /**
  * Generator generates view models consisting of view groups and viewpoints.
@@ -39,7 +39,7 @@ public class ViewModelGenerator extends AbstractGenerator {
          for (int maxChildren : noMaxChildren) {
             for (int numberViewPoints : noViewpoints) {
                if (groupModel == null) {
-                     groupModel = generateModel(maxHeight, maxChildren, minGroups, maxGroups, numberViewPoints);
+                  groupModel = generateModel(maxHeight, maxChildren, minGroups, maxGroups, numberViewPoints);
                }
                // create a copy of the initial groupModel before reusing it
                GroupModel groupModelCopy = EcoreUtil.copy(groupModel);
@@ -57,16 +57,16 @@ public class ViewModelGenerator extends AbstractGenerator {
       int allGroupsSize = 0;
       GroupModel groupModel = null;
       do {
-      groupModel = generateCoreGroupModel(maxHeight, maxChildren);
-      allGroupsSize = GroupModelUtil.getAllGroups(groupModel, false).size();
+         groupModel = generateCoreGroupModel(maxHeight, maxChildren);
+         allGroupsSize = GroupModelUtil.getAllGroups(groupModel, false).size();
       }
       while (allGroupsSize < minGroups || allGroupsSize > maxGroups);
       log.info("number groups: " + allGroupsSize);
-      //generateViewPoints(groupModel, numberViewPoints, noGroupsAssignedToViewPoint);
+      // generateViewPoints(groupModel, numberViewPoints, noGroupsAssignedToViewPoint);
       return groupModel;
    }
 
-   private GroupModel generateCoreGroupModel(int maxHeight, int maxChildren){
+   private GroupModel generateCoreGroupModel(int maxHeight, int maxChildren) {
       GroupModel groupModel = ViewmodelFactory.eINSTANCE.createGroupModel();
       CoreGroup coreGroup = ViewmodelFactory.eINSTANCE.createCoreGroup();
       coreGroup.setName("Core");
@@ -75,14 +75,15 @@ public class ViewModelGenerator extends AbstractGenerator {
       generateBalancedTree(coreGroup, maxHeight, maxChildren);
       return groupModel;
    }
-   
+
    private void generateBalancedTree(CoreGroup coreGroup, int maxHeight, int noMaxChildren) {
       int currentHeight = 0;
       String parentId = "";
       createGroups(coreGroup, maxHeight, currentHeight, noMaxChildren, true, parentId);
    }
 
-   private void createGroups(AbstractGroup parent, int maxHeight, int currentHeight, int noMaxChildren, boolean randomChildNumber, String parentId) {
+   private void createGroups(AbstractGroup parent, int maxHeight, int currentHeight, int noMaxChildren, boolean randomChildNumber,
+                             String parentId) {
       if (currentHeight < maxHeight) {
          currentHeight++;
          int children;
@@ -160,7 +161,10 @@ public class ViewModelGenerator extends AbstractGenerator {
       for (int i = 0; i < groupsToAssign; i++) {
          int index = getRandomGenerator().nextInt(noGroups - 1);
          AbstractGroup assignableGroup = allGroups.get(index);
-         assignableGroup.getViewPointReference().add(vp);
+         EList<ViewPoint> viewPointReference = assignableGroup.getViewPointReference();
+         if (!viewPointReference.contains(vp)) {
+            viewPointReference.add(vp);
+         }
       }
    }
 
