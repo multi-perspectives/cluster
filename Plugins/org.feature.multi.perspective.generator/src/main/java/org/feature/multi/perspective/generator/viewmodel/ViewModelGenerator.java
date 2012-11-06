@@ -138,8 +138,8 @@ public class ViewModelGenerator extends AbstractGenerator {
       EList<AbstractGroup> containedInGroup = vp.getContainedInGroup();
       AbstractGroup[] content = (AbstractGroup[]) containedInGroup.toArray(new AbstractGroup[containedInGroup.size()]);
       for (AbstractGroup group : content) {
-         EList<ViewPoint> viewPointReference = group.getViewPointReference();
-         viewPointReference.remove(vp);
+         //EList<ViewPoint> viewPointReference = group.getViewPointReference();
+         //viewPointReference.remove(vp);
          containedInGroup.remove(group);
       }
    }
@@ -161,9 +161,9 @@ public class ViewModelGenerator extends AbstractGenerator {
       for (int i = 0; i < groupsToAssign; i++) {
          int index = getRandomGenerator().nextInt(noGroups - 1);
          AbstractGroup assignableGroup = allGroups.get(index);
-         EList<ViewPoint> viewPointReference = assignableGroup.getViewPointReference();
-         if (!viewPointReference.contains(vp)) {
-            viewPointReference.add(vp);
+         EList<AbstractGroup> containedInGroup = vp.getContainedInGroup();
+         if (!containedInGroup.contains(assignableGroup)){
+            containedInGroup.add(assignableGroup);
          }
       }
    }

@@ -38,7 +38,7 @@ public class AbstractGenerator {
 
    private static String generatedProject = "generatedProject";
    protected static String viewmodelFolder = ViewmodelPackage.eNS_PREFIX;
-   protected static String mappingFolder = "mapping";
+   protected static String mappingFolder = FeatureMappingPackage.eNS_PREFIX;
    protected static String featureFolder = FeaturePackage.eNS_PREFIX;
    private Random generator;
 
