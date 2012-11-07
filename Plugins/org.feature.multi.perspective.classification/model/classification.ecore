@@ -18,6 +18,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="viewgroup" eType="ecore:EClass ../../org.feature.multi.perspective.model/model/viewmodel.ecore#//AbstractGroup"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classifiedFeatures" upperBound="-1"
         eType="#//ClassifiedFeature" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="autoCompleteFeatures" upperBound="-1"
+        eType="#//ClassifiedFeature" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unboundFeatures" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.featuremapper.models.feature/model/feature.ecore#//Feature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aliveFeatures" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.featuremapper.models.feature/model/feature.ecore#//Feature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deadFeatures" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.featuremapper.models.feature/model/feature.ecore#//Feature"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassifiedFeature">
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"

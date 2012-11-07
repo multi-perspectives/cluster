@@ -18,6 +18,7 @@ import org.feature.multi.perspective.classification.ClassificationFactory;
 import org.feature.multi.perspective.classification.ClassificationModel;
 import org.feature.multi.perspective.classification.ClassifiedFeature;
 import org.feature.multi.perspective.classification.Classifier;
+import org.feature.multi.perspective.classification.operation.ClassificationUtil;
 import org.feature.multi.perspective.classification.resource.clt.ICltOptionProvider;
 import org.feature.multi.perspective.classification.resource.clt.ICltOptions;
 import org.feature.multi.perspective.classification.resource.clt.ICltResourcePostProcessor;
@@ -85,18 +86,12 @@ public class StageInitializer implements ICltOptionProvider, ICltResourcePostPro
       List<ClassifiedFeature> newClassifiedFeatures = new ArrayList<ClassifiedFeature>();
       List<Feature> features = FeatureMappingUtil.collectViewFeatures(group, mappingModel);
       for (Feature feature : features) {
-         ClassifiedFeature classifiedFeature = createClassifiedFeature(feature);
+         ClassifiedFeature classifiedFeature = ClassificationUtil.createUnboundFeature(feature);
          newClassifiedFeatures.add(classifiedFeature);
       }
       return newClassifiedFeatures;
    }
 
-   private ClassifiedFeature createClassifiedFeature(Feature feature) {
-      ClassifiedFeature newClassifiedFeature = ClassificationFactory.eINSTANCE.createClassifiedFeature();
-      newClassifiedFeature.setFeature(feature);
-      newClassifiedFeature.setClassified(Classifier.UNCLASSIFIED);
-      return newClassifiedFeature;
-   }
 
    @Override
    public void terminate() {}

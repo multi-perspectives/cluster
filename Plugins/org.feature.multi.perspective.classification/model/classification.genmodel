@@ -24,6 +24,10 @@
     <genClasses ecoreClass="classification.ecore#//Classification">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/viewgroup"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/classifiedFeatures"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/autoCompleteFeatures"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/unboundFeatures"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/aliveFeatures"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/deadFeatures"/>
     </genClasses>
     <genClasses ecoreClass="classification.ecore#//ClassifiedFeature">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//ClassifiedFeature/feature"/>
