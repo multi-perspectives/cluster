@@ -6,7 +6,7 @@
     modelPluginID="org.feature.multi.perspective.classification" modelName="Classification"
     testsDirectory="/org.feature.multi.perspective.classification.tests/src/gen/java"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
-    usedGenPackages="platform:/plugin/org.featuremapper.models.feature/model/feature.genmodel#//feature ../../org.feature.multi.perspective.mapping/model/viewmapping.genmodel#//viewmapping ../../org.feature.multi.perspective.model/model/viewmodel.genmodel#//viewmodel">
+    usedGenPackages="platform:/plugin/org.featuremapper.models.feature/model/feature.genmodel#//feature ../../../../org.feature.multi.perspective.mapping/src/main/model/viewmapping.genmodel#//viewmapping ../../../../org.feature.multi.perspective.model/src/main/model/viewmodel.genmodel#//viewmodel">
   <foreignModel>classification.ecore</foreignModel>
   <genPackages prefix="Classification" basePackage="org.feature.multi.perspective"
       disposableProviderFactory="true" ecorePackage="classification.ecore#/">
@@ -28,6 +28,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/unboundFeatures"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/aliveFeatures"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/deadFeatures"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classification.ecore#//Classification/id"/>
     </genClasses>
     <genClasses ecoreClass="classification.ecore#//ClassifiedFeature">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//ClassifiedFeature/feature"/>

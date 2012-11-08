@@ -158,4 +158,30 @@
 		</debugModelPresentation>
 	</extension>
 	
+	 <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?before=additions">
+         <command
+               commandId="org.feature.multi.perspective.classification.autoclassify"
+               label="Complete Classification"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.feature.multi.perspective.classification.category1"
+            defaultHandler="org.feature.multi.perspective.classification.operation.AutoClassificationHandler"
+            id="org.feature.multi.perspective.classification.autoclassify"
+            name="autoClassify">
+      </command>
+      <category
+            id="org.feature.multi.perspective.classification.category1"
+            name="classificationcategory">
+      </category>
+   </extension>	
+	
 </plugin>

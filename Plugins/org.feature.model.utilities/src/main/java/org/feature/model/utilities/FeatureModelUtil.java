@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.feature.multi.perspective.model.viewmodel.AbstractGroup;
 import org.featuremapper.models.feature.Attribute;
 import org.featuremapper.models.feature.Constraint;
 import org.featuremapper.models.feature.Feature;
@@ -266,8 +265,8 @@ public final class FeatureModelUtil {
       Feature parentFeature = null;
       if (childFeature != null) {
          EObject groupContainer = childFeature.eContainer();
-         if (groupContainer != null) {
-            AbstractGroup parentGroup = (AbstractGroup) groupContainer;
+         if (groupContainer != null && groupContainer instanceof Group) {
+            Group parentGroup = (Group) groupContainer;
             parentFeature = (Feature) parentGroup.eContainer();
          }
       }

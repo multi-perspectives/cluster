@@ -9,12 +9,11 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.feature.multi.perspective.classification,
  org.feature.multi.perspective.classification.impl,
- org.feature.multi.perspective.classification.operation,
  org.feature.multi.perspective.classification.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.ui;bundle-version="3.103.0",
- org.feature.multi.perspective.mapping;bundle-version="1.0.0",
- org.feature.multi.perspective.view.edit;bundle-version="1.0.0",
- org.feature.model.utilities;bundle-version="0.4.0"
+ org.feature.multi.perspective.mapping;bundle-version="1.0.0";visibility:=reexport,
+ org.feature.multi.perspective.view.edit;bundle-version="1.0.0";visibility:=reexport,
+ org.feature.model.utilities;bundle-version="0.4.0";visibility:=reexport,
+ org.eclipse.ui;bundle-version="3.103.0"
 Bundle-ActivationPolicy: lazy

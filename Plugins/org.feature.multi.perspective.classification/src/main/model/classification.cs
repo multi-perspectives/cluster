@@ -9,10 +9,10 @@ OPTIONS {
 	overrideLaunchConfigurationDelegate = "false";
 	overridePluginXML = "false";
 	overrideBuilder = "false";
-	
+
  	srcFolder = "src/main/java";
 	srcGenFolder = "src/gen/java";
-	
+
 	uiSrcFolder = "src/main/java";
 	uiSrcGenFolder = "src/gen/java";
 }
@@ -22,14 +22,11 @@ RULES {
 	ClassificationModel   ::= "classification" !0    
 							  "references" #1 (("mapping" #1 viewMapping['<','>']) | ("featuremodel" #1 featureModel['<','>']) )+ !0!0
 							  classifications*;
-	
+
 	// syntax definition for class 'Classification'
-	Classification ::=  ("view" #1 viewgroup['"','"'] #1 )
-						 "classifies" #1 "{" !0 classifiedFeatures* !1 "}" !0
-						  ("autocomplete" #1 "{" !1 autoCompleteFeatures* !0 "}")? !0;
-						  
-	
+	Classification ::=  ("stage" #1 id['<','>'] #1 "on" "view" #1 viewgroup['"','"'] #1 ":" !0)
+						 classifiedFeatures* !0; 
+
 	// syntax definition for class 'ClassifiedFeature'
-	ClassifiedFeature ::= (#3 feature['"','"'] #1 classified[Unclassified : "", Unbound: "unbound", Dead: "dead", Alive: "alive"]) !0;
-	
+	ClassifiedFeature ::= (#3 "feature" #1 feature['"','"'] #1 classified[Unclassified : "", Unbound: "unbound", Dead: "dead", Alive: "alive"]) !0;
 }

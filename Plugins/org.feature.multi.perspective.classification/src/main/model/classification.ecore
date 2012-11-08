@@ -6,7 +6,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="featureModel" eType="ecore:EClass platform:/plugin/org.featuremapper.models.feature/model/feature.ecore#//FeatureModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classifications" upperBound="-1"
         eType="#//Classification" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="viewMapping" eType="ecore:EClass ../../org.feature.multi.perspective.mapping/model/viewmapping.ecore#//MappingModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="viewMapping" eType="ecore:EClass ../../../../org.feature.multi.perspective.mapping/src/main/model/viewmapping.ecore#//MappingModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Classifier">
     <eLiterals name="Unclassified"/>
@@ -15,7 +15,7 @@
     <eLiterals name="Dead" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Classification">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="viewgroup" eType="ecore:EClass ../../org.feature.multi.perspective.model/model/viewmodel.ecore#//AbstractGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="viewgroup" eType="ecore:EClass ../../../../org.feature.multi.perspective.model/src/main/model/viewmodel.ecore#//AbstractGroup"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classifiedFeatures" upperBound="-1"
         eType="#//ClassifiedFeature" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="autoCompleteFeatures" upperBound="-1"
@@ -26,6 +26,8 @@
         eType="ecore:EClass platform:/plugin/org.featuremapper.models.feature/model/feature.ecore#//Feature"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="deadFeatures" upperBound="-1"
         eType="ecore:EClass platform:/plugin/org.featuremapper.models.feature/model/feature.ecore#//Feature"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassifiedFeature">
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"

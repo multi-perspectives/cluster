@@ -3,12 +3,9 @@
  */
 package org.feature.multi.perspective.model.editor.editors;
 
-import java.util.Collection;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.expressions.EvaluationContext;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
@@ -35,13 +32,14 @@ public class FilterFeatureModelHandler extends AbstractHandler {
     */
    @Override
    public Object execute(ExecutionEvent event) throws ExecutionException {
-         ViewmodelMultiPageEditor multiPageEditor = getActiveEditor();
-                  if (multiPageEditor != null){
-                  multiPageEditor.createFilteredFeatureModel(viewPoint);
-                  } return null;
+      ViewmodelMultiPageEditor multiPageEditor = getActiveEditor();
+      if (multiPageEditor != null) {
+         multiPageEditor.createFilteredFeatureModel(viewPoint);
+      }
+      return null;
    }
 
-   private ViewmodelMultiPageEditor getActiveEditor(){
+   private ViewmodelMultiPageEditor getActiveEditor() {
       ViewmodelMultiPageEditor multiPageEditor = null;
       IWorkbench workbench = PlatformUI.getWorkbench();
       if (workbench != null) {
@@ -51,12 +49,14 @@ public class FilterFeatureModelHandler extends AbstractHandler {
             if (page != null) {
                IEditorPart activeEditor = page.getActiveEditor();
                if (activeEditor instanceof ViewmodelMultiPageEditor) {
-                   multiPageEditor = (ViewmodelMultiPageEditor) activeEditor;
-               }}}}
+                  multiPageEditor = (ViewmodelMultiPageEditor) activeEditor;
+               }
+            }
+         }
+      }
       return multiPageEditor;
    }
-   
-   
+
    /*
     * (non-Javadoc)
     * 
@@ -76,16 +76,16 @@ public class FilterFeatureModelHandler extends AbstractHandler {
    public void setEnabled(Object evaluationContext) {
       super.setEnabled(evaluationContext);
       ViewmodelMultiPageEditor multiPageEditor = getActiveEditor();
-      if (multiPageEditor != null){
-        ISelection selection = multiPageEditor.getSelection();
-        if (selection instanceof IStructuredSelection) {
-         IStructuredSelection structSelection = (IStructuredSelection) selection;
-         Object firstElement = structSelection.getFirstElement();
-               if (firstElement instanceof ViewPoint && multiPageEditor.getMappingResource() != null) {
-                  this.viewPoint = (ViewPoint) firstElement;
-                  enabled = true;
-                  return;
-               }
+      if (multiPageEditor != null) {
+         ISelection selection = multiPageEditor.getSelection();
+         if (selection instanceof IStructuredSelection) {
+            IStructuredSelection structSelection = (IStructuredSelection) selection;
+            Object firstElement = structSelection.getFirstElement();
+            if (firstElement instanceof ViewPoint && multiPageEditor.getMappingResource() != null) {
+               this.viewPoint = (ViewPoint) firstElement;
+               enabled = true;
+               return;
+            }
          }
       }
    }
