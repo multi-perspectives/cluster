@@ -5,6 +5,7 @@ package org.feature.model.csp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +28,10 @@ import org.featuremapper.models.feature.Group;
 
 import choco.Choco;
 import choco.cp.model.CPModel;
+import choco.cp.solver.CPSolver;
 import choco.kernel.model.Model;
 import choco.kernel.model.constraints.Constraint;
+import choco.kernel.model.variables.Variable;
 import choco.kernel.model.variables.integer.IntegerExpressionVariable;
 import choco.kernel.model.variables.integer.IntegerVariable;
 
@@ -40,205 +43,216 @@ import choco.kernel.model.variables.integer.IntegerVariable;
  */
 public class CSPModelBuilder {
 
-   private static Logger log = Logger.getLogger(CSPModelBuilder.class);
+	private static Logger log = Logger.getLogger(CSPModelBuilder.class);
 
-   private CPModel cspModel;
-   private Map<String, IntegerVariable> nodeVariables = new HashMap<String, IntegerVariable>();
+	private CPModel cspModel;
+	private Map<String, IntegerVariable> nodeVariables = new HashMap<String, IntegerVariable>();
 
-   public CPModel getModel() {
-      if (cspModel == null) {
-         cspModel = new CPModel();
-      }
-      return cspModel;
-   }
+	public CPModel getModel() {
+		if (cspModel == null) {
+			cspModel = new CPModel();
+		}
+		return cspModel;
+	}
 
-   /**
-    * Transform a cardinality-based feature model into a constraint model.
-    * 
-    * @param featuremodel
-    */
-   public Model getCSPModel(FeatureModel featuremodel) {
-      Feature rootFeature = featuremodel.getRoot();
-      // according to Benavides2005 transform fm into csp model
-      transformFeature(rootFeature);
+	/**
+	 * Transform a cardinality-based feature model into a constraint model.
+	 * 
+	 * @param featuremodel
+	 */
+	public Model getCSPModel(FeatureModel featuremodel) {
+		Feature rootFeature = featuremodel.getRoot();
+		// according to Benavides2005 transform fm into csp model
+		transformFeature(rootFeature);
 
-      transformConstraints(featuremodel);
-      // TODO: Parse attributes
-      return cspModel;
-   }
+		transformConstraints(featuremodel);
+		// TODO: Parse attributes
+		return cspModel;
+	}
 
-   private void transformFeature(Feature feature) {
-      createFeatureConstraint(feature);
+	private void transformFeature(Feature feature) {
+		createFeatureConstraint(feature);
 
-      EList<Group> groups = feature.getGroups();
-      for (Group group : groups) {
-         transformGroup(group);
-      }
-   }
+		EList<Group> groups = feature.getGroups();
+		for (Group group : groups) {
+			transformGroup(group);
+		}
+	}
 
-   private void transformGroup(Group group) {
-      createGroupConstraint(group);
-      EList<Feature> childFeatures = group.getChildFeatures();
-      for (Feature feature : childFeatures) {
-         transformFeature(feature);
-      }
-   }
+	private void transformGroup(Group group) {
+		createGroupConstraint(group);
+		EList<Feature> childFeatures = group.getChildFeatures();
+		for (Feature feature : childFeatures) {
+			transformFeature(feature);
+		}
+	}
 
-   private void transformConstraints(FeatureModel model) {
-      List<Term> terms = TextExpressionParser.parseExpressions(model);
-      for (Term term : terms) {
-         Constraint compound = checkTerm(term);
-         getModel().addConstraint(compound);
-      }
-   }
+	private void transformConstraints(FeatureModel model) {
+		List<Term> terms = TextExpressionParser.parseExpressions(model);
+		for (Term term : terms) {
+			Constraint compound = checkTerm(term);
+			getModel().addConstraint(compound);
+		}
+	}
 
-   private Constraint checkTerm(Term term) {
-      Constraint result = null;
-      if (term instanceof BinaryOperator) {
-         BinaryOperator binTerm = (BinaryOperator) term;
-         Term leftTerm = binTerm.getOperand1();
-         Constraint leftConstraint = checkTerm(leftTerm);
-         Term rightTerm = binTerm.getOperand2();
-         Constraint rightConstraint = checkTerm(rightTerm);
+	private Constraint checkTerm(Term term) {
+		Constraint result = null;
+		if (term instanceof BinaryOperator) {
+			BinaryOperator binTerm = (BinaryOperator) term;
+			Term leftTerm = binTerm.getOperand1();
+			Constraint leftConstraint = checkTerm(leftTerm);
+			Term rightTerm = binTerm.getOperand2();
+			Constraint rightConstraint = checkTerm(rightTerm);
 
-         if (term instanceof Or) {
-            result = Choco.or(leftConstraint, rightConstraint);
-         } else if (term instanceof And) {
-            result = Choco.and(leftConstraint, rightConstraint);
-         }
-      } else if (term instanceof UnaryOperator) {
-         UnaryOperator unaryTerm = (UnaryOperator) term;
-         Term singleTerm = unaryTerm.getOperand();
-         Constraint singleConstraint = checkTerm(singleTerm);
-         if (term instanceof Not) {
-            result = Choco.not(singleConstraint);
-         } else if (term instanceof Nested) {
-            result = singleConstraint;
-         }
-      } else if (term instanceof FeatureRef) {
-         FeatureRef featureRefTerm = (FeatureRef) term;
-         Feature feature = featureRefTerm.getFeature();
-         if (feature.eIsProxy()) {
-            URI proxyURI = ((org.eclipse.emf.ecore.InternalEObject) feature).eProxyURI();
-            String uriFragment = proxyURI.fragment();
-            log.warn("Proxy found! UriFragment of proxy is: " + uriFragment);
-         }
-         IntegerVariable featureVariable = getOrCreateVariable(feature);
-         result = Choco.gt(featureVariable, 0);
-      }
+			if (term instanceof Or) {
+				result = Choco.or(leftConstraint, rightConstraint);
+			} else if (term instanceof And) {
+				result = Choco.and(leftConstraint, rightConstraint);
+			}
+		} else if (term instanceof UnaryOperator) {
+			UnaryOperator unaryTerm = (UnaryOperator) term;
+			Term singleTerm = unaryTerm.getOperand();
+			Constraint singleConstraint = checkTerm(singleTerm);
+			if (term instanceof Not) {
+				result = Choco.not(singleConstraint);
+			} else if (term instanceof Nested) {
+				result = singleConstraint;
+			}
+		} else if (term instanceof FeatureRef) {
+			FeatureRef featureRefTerm = (FeatureRef) term;
+			Feature feature = featureRefTerm.getFeature();
+			if (feature.eIsProxy()) {
+				URI proxyURI = ((org.eclipse.emf.ecore.InternalEObject) feature)
+						.eProxyURI();
+				String uriFragment = proxyURI.fragment();
+				log.warn("Proxy found! UriFragment of proxy is: " + uriFragment);
+			}
+			IntegerVariable featureVariable = getOrCreateVariable(feature);
+			result = Choco.gt(featureVariable, 0);
+		}
 
-      return result;
-   }
+		return result;
+	}
 
-   private void createFeatureConstraint(Feature feature) {
-      Group parentGroup = feature.getParentGroup();
-      IntegerVariable childVariable = getOrCreateVariable(feature);
+	private void createFeatureConstraint(Feature feature) {
+		Group parentGroup = feature.getParentGroup();
+		IntegerVariable childVariable = getOrCreateVariable(feature);
 
-      int minCardinality = getMinChocoCardinality(feature);
-      int maxCardinality = getMaxChocoCardinality(feature);
+		int minCardinality = getMinChocoCardinality(feature);
+		int maxCardinality = getMaxChocoCardinality(feature);
 
-         Constraint greaterThan = Choco.geq(childVariable, minCardinality);
-         Constraint smallerThan = Choco.leq(childVariable, maxCardinality);
-         Constraint thenConstraint = Choco.and(greaterThan, smallerThan);
+		Constraint greaterThan = Choco.geq(childVariable, minCardinality);
+		Constraint smallerThan = Choco.leq(childVariable, maxCardinality);
+		Constraint thenConstraint = Choco.and(greaterThan, smallerThan);
 
-      if (parentGroup != null) {
-         Feature parentFeature = parentGroup.getParentFeature();
-         IntegerVariable parentVariable = getOrCreateVariable(parentFeature);
+		if (parentGroup != null) {
+			Feature parentFeature = parentGroup.getParentFeature();
+			IntegerVariable parentVariable = getOrCreateVariable(parentFeature);
 
-         // feature value must be in feature cardinality boundaries
-         Constraint parentSelected = Choco.gt(parentVariable, 0);
-         Constraint parentSelectedAndChildCardinality = Choco.implies(parentSelected, thenConstraint);
-         getModel().addConstraint(parentSelectedAndChildCardinality);
+			// feature value must be in feature cardinality boundaries
+			Constraint parentSelected = Choco.gt(parentVariable, 0);
+			Constraint parentSelectedAndChildCardinality = Choco.implies(
+					parentSelected, thenConstraint);
+			getModel().addConstraint(parentSelectedAndChildCardinality);
 
-         Constraint childSelected = Choco.gt(childVariable, 0);
-         Constraint impliesConstraint = Choco.implies(childSelected,parentSelected);
-         getModel().addConstraint(impliesConstraint);
-         
-         
-      } else {
-         // handle rootgroup
-         getModel().addConstraint(thenConstraint);
-      }
+			Constraint childSelected = Choco.gt(childVariable, 0);
+			Constraint impliesConstraint = Choco.implies(childSelected,
+					parentSelected);
+			getModel().addConstraint(impliesConstraint);
 
-   }
+		} else {
+			// handle rootgroup
+			getModel().addConstraint(thenConstraint);
+		}
 
-   private void createGroupConstraint(Group group) {
-      // group with cardinality {n,m} represented as ifThen(ParentFeature>0;sum(ChildFeature A, ChildFeature
-      // B) in {n,m};)
-      // if group cardinality is n=m, then ifThen(ParentFeature>0;sum(ChildFeature A, ChildFeature B) = n)
-      log.debug("Create constraint for group " + group);
-      IntegerVariable parentFeatureVariable = getOrCreateVariable(group.getParentFeature());
+	}
 
-      IntegerExpressionVariable childFeatureSum = createChildFeatureVariable(group);
-      int minCardinality = getMinChocoCardinality(group);
-      int maxCardinality = getMaxChocoCardinality(group);
+	private void createGroupConstraint(Group group) {
+		// group with cardinality {n,m} represented as
+		// ifThen(ParentFeature>0;sum(ChildFeature A, ChildFeature
+		// B) in {n,m};)
+		// if group cardinality is n=m, then
+		// ifThen(ParentFeature>0;sum(ChildFeature A, ChildFeature B) = n)
+		log.debug("Create constraint for group " + group);
+		IntegerVariable parentFeatureVariable = getOrCreateVariable(group
+				.getParentFeature());
 
-      Constraint ifConstraint = Choco.gt(parentFeatureVariable, 0);
+		IntegerExpressionVariable childFeatureSum = createChildFeatureVariable(group);
+		int minCardinality = getMinChocoCardinality(group);
+		int maxCardinality = getMaxChocoCardinality(group);
 
-      Constraint greaterThan = Choco.geq(childFeatureSum, minCardinality);
-      Constraint smallerThan = Choco.leq(childFeatureSum, maxCardinality);
-      
-      Constraint thenConstraint = Choco.and(greaterThan, smallerThan);
-      
-      
-      Constraint groupCardinalityConstraint = Choco.implies(ifConstraint, thenConstraint);
-      getModel().addConstraint(groupCardinalityConstraint);
-   }
+		Constraint ifConstraint = Choco.gt(parentFeatureVariable, 0);
 
-   private int getMaxChocoCardinality(FeatureTreeNode node) {
-      int maxCardinality = node.getMaxCardinality();
-      int cardinality = maxCardinality;
-      if (maxCardinality == -1) {
-         cardinality = Choco.MAX_UPPER_BOUND;
-      }
-      return cardinality;
-   }
+		Constraint greaterThan = Choco.geq(childFeatureSum, minCardinality);
+		Constraint smallerThan = Choco.leq(childFeatureSum, maxCardinality);
 
+		Constraint thenConstraint = Choco.and(greaterThan, smallerThan);
 
-   private int getMinChocoCardinality(FeatureTreeNode node) {
-      int minCardinality = node.getMinCardinality();
-      int cardinality = minCardinality;
-      if (minCardinality == -1) {
-         cardinality = Choco.MIN_LOWER_BOUND;
-      }
-      return cardinality;
-   }
+		Constraint groupCardinalityConstraint = Choco.implies(ifConstraint,
+				thenConstraint);
+		getModel().addConstraint(groupCardinalityConstraint);
+	}
 
-   private IntegerVariable getOrCreateVariable(Feature feature) {
-      String id = EcoreUtil.getID(feature);
-      IntegerVariable integerVariable = nodeVariables.get(id);
-      if (integerVariable == null) {
-         integerVariable = createNodeVariable(feature);
-      }
-      return integerVariable;
-   }
+	private int getMaxChocoCardinality(FeatureTreeNode node) {
+		int maxCardinality = node.getMaxCardinality();
+		int cardinality = maxCardinality;
+		if (maxCardinality == -1) {
+			cardinality = Choco.MAX_UPPER_BOUND;
+		}
+		return cardinality;
+	}
 
-   private IntegerVariable createNodeVariable(Feature node) {
-      String id = EcoreUtil.getID(node);
-      // TODO: wrap node into a [0,1] variable and use the correct [n,m]
-      //int minCardinality = getMinChocoCardinality(node);
-      int minCardinality = 0;
-      int maxCardinality = getMaxChocoCardinality(node);
-      log.debug("Create IntegerVariable for '" + id + "' [" + minCardinality + "," + maxCardinality + "].");
-      IntegerVariable intNodeVariable = Choco.makeIntVar(id, minCardinality, maxCardinality);
-      getModel().addVariable(intNodeVariable);
-      nodeVariables.put(id, intNodeVariable);
-      return intNodeVariable;
-   }
+	private int getMinChocoCardinality(FeatureTreeNode node) {
+		int minCardinality = node.getMinCardinality();
+		int cardinality = minCardinality;
+		if (minCardinality == -1) {
+			cardinality = Choco.MIN_LOWER_BOUND;
+		}
+		return cardinality;
+	}
 
-   private IntegerExpressionVariable createChildFeatureVariable(Group group) {
-      EList<Feature> childFeatures = group.getChildFeatures();
-      List<IntegerVariable> childFeatureVariables = new ArrayList<IntegerVariable>(childFeatures.size());
-      for (Feature feature : childFeatures) {
-         IntegerVariable childFeatureVariable = getOrCreateVariable(feature);
-         childFeatureVariables.add(childFeatureVariable);
-      }
-      IntegerVariable[] childFeatureVariablesArray = new IntegerVariable[childFeatureVariables.size()];
-      childFeatureVariablesArray = childFeatureVariables.toArray(childFeatureVariablesArray);
+	private IntegerVariable getOrCreateVariable(Feature feature) {
+		String id = EcoreUtil.getID(feature);
+		IntegerVariable integerVariable = nodeVariables.get(id);
+		if (integerVariable == null) {
+			integerVariable = createNodeVariable(feature);
+		}
+		return integerVariable;
+	}
 
-      IntegerExpressionVariable childFeatureSum = Choco.sum(childFeatureVariablesArray);
-      log.debug("Create IntegerExpressionVariable for child features of group " + group);
-      return childFeatureSum;
-   }
+	private IntegerVariable createNodeVariable(Feature node) {
+		String id = EcoreUtil.getID(node);
+		// TODO: wrap node into a [0,1] variable and use the correct [n,m]
+		// int minCardinality = getMinChocoCardinality(node);
+		int minCardinality = 0;
+		int maxCardinality = getMaxChocoCardinality(node);
+		log.debug("Create IntegerVariable for '" + id + "' [" + minCardinality
+				+ "," + maxCardinality + "].");
+		IntegerVariable intNodeVariable = Choco.makeIntVar(id, minCardinality,
+				maxCardinality);
+		getModel().addVariable(intNodeVariable);
+		nodeVariables.put(id, intNodeVariable);
+		return intNodeVariable;
+	}
+
+	private IntegerExpressionVariable createChildFeatureVariable(Group group) {
+		EList<Feature> childFeatures = group.getChildFeatures();
+		List<IntegerVariable> childFeatureVariables = new ArrayList<IntegerVariable>(
+				childFeatures.size());
+		for (Feature feature : childFeatures) {
+			IntegerVariable childFeatureVariable = getOrCreateVariable(feature);
+			childFeatureVariables.add(childFeatureVariable);
+		}
+		IntegerVariable[] childFeatureVariablesArray = new IntegerVariable[childFeatureVariables
+				.size()];
+		childFeatureVariablesArray = childFeatureVariables
+				.toArray(childFeatureVariablesArray);
+
+		IntegerExpressionVariable childFeatureSum = Choco
+				.sum(childFeatureVariablesArray);
+		log.debug("Create IntegerExpressionVariable for child features of group "
+				+ group);
+		return childFeatureSum;
+	}
 
 }
