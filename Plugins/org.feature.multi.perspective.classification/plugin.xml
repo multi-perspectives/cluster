@@ -12,5 +12,6 @@
             class="org.feature.multi.perspective.classification.ClassificationPackage"
             genModel="model/classification.genmodel"/>
    </extension>
+  
 
 </plugin>

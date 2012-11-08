@@ -52,8 +52,8 @@ public class ViewCreator {
    }
    
    private void init(MappingModel featureMapping) {
-      GroupModel groupModel = FeatureMappingUtil.getSolutionGroupModel(featureMapping);
-      FeatureModel featureModel = FeatureMappingUtil.getFeatureModel(featureMapping);
+      GroupModel groupModel = featureMapping.getViewModel();
+      FeatureModel featureModel = featureMapping.getFeatureModel();
       init(groupModel, featureModel, featureMapping);
    }
 

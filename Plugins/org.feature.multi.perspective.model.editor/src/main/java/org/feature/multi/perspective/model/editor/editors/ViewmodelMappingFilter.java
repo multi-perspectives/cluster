@@ -38,7 +38,7 @@ public class ViewmodelMappingFilter extends FileExtensionViewerFilter {
          if (element instanceof IFile) {
             IFile file = (IFile) element;
             MappingModel mapping = FeatureMappingUtil.getFeatureMapping(file, resourceSet);
-               GroupModel groupModel = FeatureMappingUtil.getSolutionGroupModel(mapping);
+               GroupModel groupModel = mapping.getViewModel();
                if (groupModel != null){
                      IFile modelFile = ResourceUtil.getFile(groupModel.eResource());
                      select = groupmodelFile.equals(modelFile);

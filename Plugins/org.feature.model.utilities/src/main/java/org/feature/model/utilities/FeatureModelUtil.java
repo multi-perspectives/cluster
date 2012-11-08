@@ -34,6 +34,7 @@ public final class FeatureModelUtil {
    public static String attribute_type_string = "String";
    public static String attribute_id = "id";
    public static String csp_constraintLanguage = "CSP";
+   public static String simple_constraintLanguage = "CSL";
 
    public static String featuremodel_file_extension = "feature";
 
@@ -245,6 +246,34 @@ public final class FeatureModelUtil {
       }
    }
 
+   public static List<Feature> getAllAchestorFeatures(Feature feature) {
+      List<Feature> anchestors = new ArrayList<Feature>();
+      Feature consideredFeature = feature;
+      while (consideredFeature != null) {
+         consideredFeature = getParentFeature(consideredFeature);
+         if (consideredFeature != null) anchestors.add(consideredFeature);
+      }
+      return anchestors;
+   }
+
+   /**
+    * get the parent feature of the given feature. May return null, if the given feature is the root feature.
+    * 
+    * @param childFeature
+    * @return
+    */
+   public static Feature getParentFeature(Feature childFeature) {
+      Feature parentFeature = null;
+      if (childFeature != null) {
+         EObject groupContainer = childFeature.eContainer();
+         if (groupContainer != null && groupContainer instanceof Group) {
+            Group parentGroup = (Group) groupContainer;
+            parentFeature = (Feature) parentGroup.eContainer();
+         }
+      }
+      return parentFeature;
+   }
+
    /**
     * get an attribute by its name
     * 
@@ -278,7 +307,7 @@ public final class FeatureModelUtil {
          if (root.getGroups() != null) {
             for (Group g : root.getGroups()) {
                for (Feature f : g.getChildFeatures()) {
-                  toReturn.addAll(getFeatureRecursive(f));
+                  toReturn.addAll(getChildFeaturesRecursively(f));
                }
             }
          }
@@ -297,7 +326,7 @@ public final class FeatureModelUtil {
       return toReturn;
    }
 
-   private static EList<Feature> getFeatureRecursive(Feature base) {
+   private static EList<Feature> getChildFeaturesRecursively(Feature base) {
       EList<Feature> toReturn = new BasicEList<Feature>();
 
       if (base != null) {
@@ -305,7 +334,7 @@ public final class FeatureModelUtil {
 
          for (Group g : base.getGroups()) {
             for (Feature f : g.getChildFeatures()) {
-               toReturn.addAll(getFeatureRecursive(f));
+               toReturn.addAll(getChildFeaturesRecursively(f));
             }
          }
       }

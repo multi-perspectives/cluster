@@ -6,6 +6,8 @@
  */
 package org.feature.multi.perspective.mapping.viewmapping.resource.mtext.analysis;
 
+import org.feature.model.utilities.ResourceUtil;
+
 public class MappingModelViewModelReferenceResolver implements org.feature.multi.perspective.mapping.viewmapping.resource.mtext.IMtextReferenceResolver<org.feature.multi.perspective.mapping.viewmapping.MappingModel, org.feature.multi.perspective.model.viewmodel.GroupModel> {
 	
 	private org.feature.multi.perspective.mapping.viewmapping.resource.mtext.analysis.MtextDefaultResolverDelegate<org.feature.multi.perspective.mapping.viewmapping.MappingModel, org.feature.multi.perspective.model.viewmodel.GroupModel> delegate = new org.feature.multi.perspective.mapping.viewmapping.resource.mtext.analysis.MtextDefaultResolverDelegate<org.feature.multi.perspective.mapping.viewmapping.MappingModel, org.feature.multi.perspective.model.viewmodel.GroupModel>();
@@ -15,7 +17,7 @@ public class MappingModelViewModelReferenceResolver implements org.feature.multi
 	}
 	
 	public String deResolve(org.feature.multi.perspective.model.viewmodel.GroupModel element, org.feature.multi.perspective.mapping.viewmapping.MappingModel container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+		return ResourceUtil.getRelativeURI(element, container);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {

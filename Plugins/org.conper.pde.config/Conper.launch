@@ -86,6 +86,7 @@
 <setEntry value="org.feature.multi.perspective.classification.feature:default"/>
 <setEntry value="org.feature.multi.perspective.expression.feature:default"/>
 <setEntry value="org.feature.multi.perspective.feature:default"/>
+<setEntry value="org.feature.multi.perspective.generator.feature:default"/>
 <setEntry value="org.feature.multi.perspective.utilities.feature:default"/>
 <setEntry value="org.featuremapper.core.feature:default"/>
 <setEntry value="org.featuremapper.doc.feature:default"/>

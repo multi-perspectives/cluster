@@ -1,0 +1,118 @@
+viewmapping
+   featuremodel <../feature/generic.feature>
+   viewmodel <../viewmodel/balanced_height5_countChildren3_vpCount10_groupsVP3.viewmodel>
+
+view group "Core" contains
+   "FRoot" "F1" "F4" "F4.2" "F5" "F5.2" "F5.2.3" "F7"  
+
+view group "G_1" contains
+   "F4.1" "F5.1"  
+
+view group "G_11" contains
+   "F7.1" "F7.2"  
+
+view group "G_12" contains
+   "F5.1"  
+
+view group "G_13" contains
+   "F6.2" "F2"  
+
+view group "G_111" contains
+   "F5.2.2" "F5.2"  
+
+view group "G_112" contains
+   "F5.1"  
+
+view group "G_113" contains
+   "F6.1" "F7"  
+
+view group "G_1111" contains
+   "F2.2" "F6"  
+
+view group "G_1112" contains
+   "F4"  
+
+view group "G_1113" contains
+   "F6.3" "F6.2"  
+
+view group "G_11111" contains
+   "F3.1"  
+
+view group "G_11121" contains
+   "F2.2"  
+
+view group "G_11122" contains
+   "F5.2.1" "F6"  
+
+view group "G_11131" contains
+   "F6" "F6.3"  
+
+view group "G_1121" contains
+   "F4"  
+
+view group "G_1122" contains
+   "F2.1" "F5"  
+
+view group "G_11211" contains
+   "F7.2" "F6.1"  
+
+view group "G_11221" contains
+   "F3.1"  
+
+view group "G_1131" contains
+   "F3.1"  
+
+view group "G_11311" contains
+   "F5.2.2" "F6.3"  
+
+view group "G_11312" contains
+   "F5.1"  
+
+view group "G_121" contains
+   "F6" "F2.1"  
+
+view group "G_1211" contains
+   "F2.2" "F3.1"  
+
+view group "G_1212" contains
+   "F6.2"  
+
+view group "G_12111" contains
+   "F7.2" "F3"  
+
+view group "G_12112" contains
+   "F3.1"  
+
+view group "G_12113" contains
+   "F4.2" "F5"  
+
+view group "G_12121" contains
+   "F5"  
+
+view group "G_12122" contains
+   "F5.1" "F7.1"  
+
+view group "G_131" contains
+   "F5.2.2" "F3.1"  
+
+view group "G_132" contains
+   "F5.2.1" "F5.2.3"  
+
+view group "G_1311" contains
+   "F3"  
+
+view group "G_13111" contains
+   "F5"  
+
+view group "G_1321" contains
+   "F2.2"  
+
+view group "G_13211" contains
+   "F3" "F7"  
+
+view group "G_13212" contains
+   "F1"  
+
+view group "G_13213" contains
+   "F5.1"  
+

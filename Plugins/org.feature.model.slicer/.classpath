@@ -3,7 +3,7 @@
 	<classpathentry excluding="org/feature/model/slicer/modelSlicer/reasoner/|org/feature/model/slicer/modelSlicer/remover/|org/feature/model/slicer/modelSlicer/scissors/|org/feature/model/slicer/modelSlicer/selector/|org/feature/model/slicer/modelSlicer/transformer/|org/feature/model/slicer/modelSlicer/validate/" kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="src" path="conf"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="lib" path="lib/sat4j-sat.jar"/>
 	<classpathentry kind="output" path="bin"/>

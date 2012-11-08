@@ -6,6 +6,8 @@
  */
 package org.feature.multi.perspective.classification.resource.clt.analysis;
 
+import org.feature.model.utilities.ResourceUtil;
+
 public class ClassificationModelViewMappingReferenceResolver implements org.feature.multi.perspective.classification.resource.clt.ICltReferenceResolver<org.feature.multi.perspective.classification.ClassificationModel, org.feature.multi.perspective.mapping.viewmapping.MappingModel> {
 	
 	private org.feature.multi.perspective.classification.resource.clt.analysis.CltDefaultResolverDelegate<org.feature.multi.perspective.classification.ClassificationModel, org.feature.multi.perspective.mapping.viewmapping.MappingModel> delegate = new org.feature.multi.perspective.classification.resource.clt.analysis.CltDefaultResolverDelegate<org.feature.multi.perspective.classification.ClassificationModel, org.feature.multi.perspective.mapping.viewmapping.MappingModel>();
@@ -15,7 +17,7 @@ public class ClassificationModelViewMappingReferenceResolver implements org.feat
 	}
 	
 	public String deResolve(org.feature.multi.perspective.mapping.viewmapping.MappingModel element, org.feature.multi.perspective.classification.ClassificationModel container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+	   return ResourceUtil.getRelativeURI(element, container);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
