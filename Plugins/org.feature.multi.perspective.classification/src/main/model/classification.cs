@@ -7,9 +7,14 @@ OPTIONS {
     additionalDependencies = "org.featuremapper.models.feature, org.feature.multi.perspective.model, org.feature.model.utilities";
 	generateCodeFromGeneratorModel = "true";
 	overrideLaunchConfigurationDelegate = "false";
+	overrideBuilder = "false";
+
 	overrideManifest = "false";
 	overridePluginXML = "false";
-	overrideBuilder = "false";
+	
+	overrideUIManifest ="false";
+	overrideUIPluginXML = "false";
+	
 
  	srcFolder = "src/main/java";
 	srcGenFolder = "src/gen/java";
