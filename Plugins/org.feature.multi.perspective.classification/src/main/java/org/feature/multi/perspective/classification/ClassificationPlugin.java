@@ -1,50 +1,76 @@
 package org.feature.multi.perspective.classification;
 
-import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.osgi.framework.BundleContext;
+import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.util.ResourceLocator;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class ClassificationPlugin extends AbstractUIPlugin {
+public class ClassificationPlugin extends EMFPlugin {
 
-	// The plug-in ID
-	public static final String PLUGIN_ID = "org.feature.multi.perspective.classification"; //$NON-NLS-1$
+   /**
+    * Keep track of the singleton. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public static final ClassificationPlugin INSTANCE = new ClassificationPlugin();
 
-	// The shared instance
-	private static ClassificationPlugin plugin;
-	
-	/**
-	 * The constructor
-	 */
-	public ClassificationPlugin() {
-	}
+   /**
+    * Keep track of the singleton. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   private static Implementation plugin;
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
-	 */
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
-		plugin = this;
-	}
+   /**
+    * Create the instance. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public ClassificationPlugin() {
+      super(new ResourceLocator[] { });
+   }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
-	 */
-	public void stop(BundleContext context) throws Exception {
-		plugin = null;
-		super.stop(context);
-	}
+   /**
+    * Returns the singleton instance of the Eclipse plugin. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * 
+    * @return the singleton instance.
+    * @generated
+    */
+   @Override
+   public ResourceLocator getPluginResourceLocator() {
+      return plugin;
+   }
 
-	/**
-	 * Returns the shared instance
-	 *
-	 * @return the shared instance
-	 */
-	public static ClassificationPlugin getDefault() {
-		return plugin;
-	}
+   /**
+    * Returns the singleton instance of the Eclipse plugin. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * 
+    * @return the singleton instance.
+    * @generated
+    */
+   public static Implementation getPlugin() {
+      return plugin;
+   }
+
+   /**
+    * The actual implementation of the Eclipse <b>Plugin</b>. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public static class Implementation extends EclipsePlugin {
+
+      /**
+       * Creates an instance. <!-- begin-user-doc --> <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      public Implementation() {
+         super();
+
+         // Remember the static instance.
+         //
+         plugin = this;
+      }
+   }
 
 }
