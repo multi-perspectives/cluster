@@ -28,8 +28,6 @@ import org.feature.multi.perspective.classification.resource.clt.ui.CltEditor;
  */
 public class AutoClassificationHandler extends AbstractHandler {
 
-   private String editorId = "org.feature.multi.perspective.classification.resource.clt.ui.CltEditor";
-
    private boolean enabled = false;
 
    @Override
@@ -55,21 +53,6 @@ public class AutoClassificationHandler extends AbstractHandler {
          model = (ClassificationModel) rootContainer;
       }
       return model;
-   }
-
-   private IEditorPart getActiveEditor() {
-      IEditorPart editor = null;
-      IWorkbench workbench = PlatformUI.getWorkbench();
-      if (workbench != null) {
-         IWorkbenchWindow activeWindow = workbench.getActiveWorkbenchWindow();
-         if (activeWindow != null) {
-            IWorkbenchPage page = activeWindow.getActivePage();
-            if (page != null) {
-               editor = page.getActiveEditor();
-            }
-         }
-      }
-      return editor;
    }
 
    @Override

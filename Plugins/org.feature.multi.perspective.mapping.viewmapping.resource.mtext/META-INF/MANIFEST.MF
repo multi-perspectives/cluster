@@ -17,7 +17,7 @@ Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
   org.feature.multi.perspective.mapping,
   org.feature.multi.perspective.model
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.feature.multi.perspective.mapping.viewmapping.resource.mtext,
   org.feature.multi.perspective.mapping.viewmapping.resource.mtext.analysis,
   org.feature.multi.perspective.mapping.viewmapping.resource.mtext.mopp,

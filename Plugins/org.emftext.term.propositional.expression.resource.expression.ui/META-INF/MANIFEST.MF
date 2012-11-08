@@ -23,6 +23,6 @@ Require-Bundle: org.eclipse.core.resources,
   org.emftext.term.propositional,
   org.featuremapper.models.feature
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.emftext.term.propositional.expression.resource.expression.ui
 Bundle-Activator: org.emftext.term.propositional.expression.resource.expression.ui.ExpressionUIPlugin
