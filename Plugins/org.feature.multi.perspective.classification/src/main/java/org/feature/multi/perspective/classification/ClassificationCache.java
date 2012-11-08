@@ -51,12 +51,13 @@ public class ClassificationCache {
     * @param classification
     * @return
     */
-   private View getView(Classification classification) {
+   public View getView(Classification classification) {
       ViewBuilder viewBuilder = getViewBuilder(classification);
       AbstractGroup viewgroup = classification.getViewgroup();
       return viewBuilder.getView(viewgroup);
    }
 
+   
    /**
     * determine if a feature is contained in a view.
     * 

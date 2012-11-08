@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.feature.multi.perspective.view.View;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.Group;
 
@@ -194,4 +195,25 @@ public final class ClassificationUtil {
       return result;
    }
 
+   /**
+    * get all the features assigned to the view as classified features.
+    * @param classification
+    * @return
+    */
+   public static List<ClassifiedFeature> getAllClassifiedFeaturesOfView(Classification classification){
+      View view = ClassificationCache.getInstance().getView(classification);
+      EList<Feature> features = view.getFeatures();
+      for (Feature feature : features) {
+         getOrCreateClassifiedFeature(classification, feature);
+      }
+      return classification.getClassifiedFeatures();
+   }
+   
+   public static ClassifiedFeature getOrCreateClassifiedFeature(Classification classification, Feature feature) {
+      ClassifiedFeature classifiedFeature = ClassificationUtil.getClassifiedFeature(classification, feature);
+      if (classifiedFeature == null) {
+         classifiedFeature = ClassificationUtil.createdClassifiedFeature(classification, feature);
+      }
+      return classifiedFeature;
+   }
 }

@@ -39,7 +39,7 @@ public class AutoClassification {
    private void autoComplete(Classification classification) {
       wipeOutOldAutoCompletions(classification);
 
-      EList<ClassifiedFeature> classifiedFeatures = classification.getClassifiedFeatures();
+      List<ClassifiedFeature> classifiedFeatures = initClassificationFeatures(classification);
       int size = classifiedFeatures.size();
       List<ClassifiedFeature> featureCopy = new ArrayList<ClassifiedFeature>(size);
       featureCopy.addAll(classifiedFeatures);
@@ -49,6 +49,10 @@ public class AutoClassification {
       }
    }
 
+   private List<ClassifiedFeature> initClassificationFeatures(Classification classification){
+      return ClassificationUtil.getAllClassifiedFeaturesOfView(classification);
+   }
+   
    private void autoCompleteClassifiedFeature(ClassifiedFeature classifiedFeature) {
       Classifier classified = classifiedFeature.getClassified();
       if (Classifier.ALIVE.equals(classified)) {
@@ -84,9 +88,12 @@ public class AutoClassification {
       checkSiblings(classifiedFeature);
       // if eContainer is null, then this is the root feature
       // otherwise select parent features
-
    }
 
+   private void handleChangedFeature(ClassifiedFeature classifiedFeature){
+      autoCompleteClassifiedFeature(classifiedFeature);
+   }
+   
    private void checkSiblings(ClassifiedFeature classifiedFeature) {
       Feature feature = classifiedFeature.getFeature();
       Classification classification = (Classification) classifiedFeature.eContainer();
@@ -107,10 +114,12 @@ public class AutoClassification {
 
          int sizeAlive = aliveSiblings.size();
          int sizeUnboundOrAlive = sizeAlive + siblingsCopy.size();
+         
          if (sizeAlive == maxCardinality) {
             // maximum reached, set unbound features dead
             for (ClassifiedFeature sibling : siblingsCopy) {
                ClassificationUtil.changeClassifier(sibling, Classifier.DEAD);
+               handleChangedFeature(sibling);
             }
          }
 
@@ -146,7 +155,7 @@ public class AutoClassification {
       // set each anchestor alive
       for (Feature feature : anchestors) {
          // check if the parent features are contained in the view and therefore can be configured manually
-         ClassifiedFeature parentClassifiedFeature = getOrCreateFeature(classification, feature);
+         ClassifiedFeature parentClassifiedFeature = ClassificationUtil.getOrCreateClassifiedFeature(classification, feature);
 
          boolean changed = ClassificationUtil.changeClassifier(parentClassifiedFeature, newClassifier);
          if (!changed) {
@@ -159,13 +168,7 @@ public class AutoClassification {
       }
    }
 
-   private ClassifiedFeature getOrCreateFeature(Classification classification, Feature feature) {
-      ClassifiedFeature classifiedFeature = ClassificationUtil.getClassifiedFeature(classification, feature);
-      if (classifiedFeature == null) {
-         classifiedFeature = ClassificationUtil.createdClassifiedFeature(classification, feature);
-      }
-      return classifiedFeature;
-   }
+  
 
    private void setParentFeaturesAlive(ClassifiedFeature classifiedFeature) {
       setParentFeatures(classifiedFeature, Classifier.ALIVE);
