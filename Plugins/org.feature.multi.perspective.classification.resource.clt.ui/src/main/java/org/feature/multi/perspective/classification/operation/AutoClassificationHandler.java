@@ -8,10 +8,7 @@ import java.io.IOException;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.change.ChangeDescription;
-import org.eclipse.emf.ecore.change.util.ChangeRecorder;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.ChangeCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -40,12 +37,12 @@ public class AutoClassificationHandler extends AbstractHandler {
 
    protected EditingDomain domain;
 
-
    @Override
    public Object execute(ExecutionEvent event) throws ExecutionException {
       final ClassificationModel model = getModel(event);
 
       ChangeCommand changeCommand = new ChangeCommand(model) {
+
          @Override
          protected void doExecute() {
             AutoClassification autoClassification = new AutoClassification(model);
@@ -53,7 +50,6 @@ public class AutoClassificationHandler extends AbstractHandler {
          }
       };
       domain.getCommandStack().execute(changeCommand);
-
 
       try {
          model.eResource().save(null);
@@ -85,6 +81,7 @@ public class AutoClassificationHandler extends AbstractHandler {
    @Override
    public void setEnabled(Object evaluationContext) {
       super.setEnabled(evaluationContext);
+      enabled = false;
       IWorkbench workbench = PlatformUI.getWorkbench();
       if (workbench != null) {
          IWorkbenchWindow activeWindow = workbench.getActiveWorkbenchWindow();

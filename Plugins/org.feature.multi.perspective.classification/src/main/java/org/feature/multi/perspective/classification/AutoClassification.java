@@ -1,11 +1,9 @@
 package org.feature.multi.perspective.classification;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ui.PlatformUI;
 import org.feature.model.utilities.FeatureModelUtil;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.Group;
@@ -34,9 +32,13 @@ public class AutoClassification {
       }
    }
 
-
+   private void wipeOutOldAutoCompletions(Classification classification) {
+      classification.getAutoCompleteFeatures().clear();
+   }
 
    private void autoComplete(Classification classification) {
+      wipeOutOldAutoCompletions(classification);
+
       EList<ClassifiedFeature> classifiedFeatures = classification.getClassifiedFeatures();
       int size = classifiedFeatures.size();
       List<ClassifiedFeature> featureCopy = new ArrayList<ClassifiedFeature>(size);
@@ -105,6 +107,12 @@ public class AutoClassification {
 
          int sizeAlive = aliveSiblings.size();
          int sizeUnboundOrAlive = sizeAlive + siblingsCopy.size();
+         if (sizeAlive == maxCardinality) {
+            // maximum reached, set unbound features dead
+            for (ClassifiedFeature sibling : siblingsCopy) {
+               ClassificationUtil.changeClassifier(sibling, Classifier.DEAD);
+            }
+         }
 
          if (sizeUnboundOrAlive < minCardinality) {
             // TODO the minimum number of selected features cannot be reached
