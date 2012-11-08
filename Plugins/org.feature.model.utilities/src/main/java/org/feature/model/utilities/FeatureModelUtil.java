@@ -34,6 +34,7 @@ public final class FeatureModelUtil {
    public static String attribute_type_string = "String";
    public static String attribute_id = "id";
    public static String csp_constraintLanguage = "CSP";
+   public static String simple_constraintLanguage = "CSL";
 
    public static String featuremodel_file_extension = "feature";
 

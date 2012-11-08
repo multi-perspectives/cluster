@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.feature.model.constraint.resource.csl.ui.CslUIMetaInformation" id="org.feature.model.constraint.resource.csl.ui.CslUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.feature.model.constraint.resource.csl.ui.CslEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="csl" icon="icons/editor_icon.gif" id="org.feature.model.constraint.resource.csl.ui.CslEditor" name="EMFText csl Editor">
+			<contentTypeBinding contentTypeId="org.feature.model.constraint.resource.csl">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.feature.model.constraint.resource.csl.ui.CslPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Csl Text Editor" id="org.feature.model.constraint.resource.csl.ui.CslPreferencePage" class="org.feature.model.constraint.resource.csl.ui.CslPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.feature.model.constraint.resource.csl.ui.CslSyntaxColoringPreferencePage" class="org.feature.model.constraint.resource.csl.ui.CslSyntaxColoringPreferencePage" category="org.feature.model.constraint.resource.csl.ui.CslPreferencePage">
+		</page>
+		<page name="Brackets" id="org.feature.model.constraint.resource.csl.ui.CslBracketPreferencePage" class="org.feature.model.constraint.resource.csl.ui.CslBracketPreferencePage" category="org.feature.model.constraint.resource.csl.ui.CslPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.feature.model.constraint.resource.csl.ui.CslNewFileWizard" id="org.feature.model.constraint.resource.csl.ui.CslNewFileWizard" name="EMFText .csl file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="org.feature.model.constraint.resource.csl.ui.CslNewProjectWizard" id="org.feature.model.constraint.resource.csl.ui.CslNewProjectWizard" name="EMFText csl project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.feature.model.constraint.resource.csl.ui.CslMarkerResolutionGenerator" markerType="org.feature.model.constraint.resource.csl.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.feature.model.constraint.resource.csl.ui.CslAnnotationModelFactory" extensions="csl">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.feature.model.constraint.resource.csl" name=".csl File" base-type="org.eclipse.core.runtime.text" file-extensions="csl">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="csl" id="org.feature.model.constraint.resource.csl.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.feature.model.constraint.resource.csl.ui.occurences">
+		</type>
+		<type name="org.feature.model.constraint.resource.csl.ui.occurences.declaration" super="org.feature.model.constraint.resource.csl.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.feature.model.constraint.resource.csl.ui.occurences" label="Occurrences (in .csl files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="csl.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="csl.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="csl.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="csl.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="csl.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="csl.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="csl.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="csl.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="csl.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.feature.model.constraint.resource.csl.ui.occurences.declaration" label="Declarations (in .csl files)" textPreferenceKey="csl.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="csl.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="csl.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="csl.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="csl.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="csl.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage icon="/icons/launch_type_icon.gif" configTypeID="org.feature.model.constraint.resource.csl.ui.launchConfigurationType" id="org.feature.model.csl.launchImage">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup type="org.feature.model.constraint.resource.csl.ui.launchConfigurationType" class="org.feature.model.constraint.resource.csl.ui.launch.CslLaunchConfigurationTabGroup" id="org.feature.model.csl.launchConfigurationTabGroup" helpContextId="org.feature.model.csl.launchConfigHelpContext">
+			<launchMode mode="debug" perspective="org.eclipse.debug.ui.DebugPerspective" description="Debug csl model.">
+			</launchMode>
+			<launchMode mode="run" description="Run csl model.">
+			</launchMode>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut label="csl Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="org.feature.model.csl.launch" modes="run,debug" class="org.feature.model.constraint.resource.csl.ui.launch.CslLaunchShortcut" description="Launch a csl model" id="org.feature.model.csl.launchShortcut">
+			<description description="Run csl model" mode="run">
+			</description>
+			<description description="Debug csl model" mode="debug">
+			</description>
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1">
+						</count>
+						<iterate>
+							<test property="org.feature.model.csl.isLaunchable">
+							</test>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType id="org.feature.model.constraint.resource.csl.ui.launchConfigurationType">
+			</configurationType>
+		</shortcut>
+	</extension>
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="org.feature.model.csl.PropertyTester" type="java.lang.Object" namespace="org.feature.model.csl" properties="isLaunchable" class="org.feature.model.constraint.resource.csl.ui.CslPropertyTester">
+		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.feature.model.constraint.resource.csl.ui.debug.lineBreakpoint" markerType="org.feature.model.constraint.resource.csl.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.feature.model.constraint.resource.csl.ui.debug.lineBreakpoint" label="Breakpoints (in .csl files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="org.feature.model.constraint.resource.csl.ui.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="org.feature.model.constraint.resource.csl.ui.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="org.feature.model.constraint.resource.csl.ui.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="org.feature.model.constraint.resource.csl.ui.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="org.feature.model.constraint.resource.csl.ui.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="org.feature.model.constraint.resource.csl.ui.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="org.feature.model.constraint.resource.csl.ui.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="org.feature.model.constraint.resource.csl.ui.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="org.feature.model.constraint.resource.csl.ui.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="org.feature.model.constraint.resource.csl.ui.CslEditor" class="org.feature.model.constraint.resource.csl.ui.debug.CslAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.feature.model.constraint.resource.csl.debug.CslDebugVariable" class="org.feature.model.constraint.resource.csl.ui.debug.CslAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.feature.model.constraint.resource.csl.debug.CslDebugVariable" class="org.feature.model.constraint.resource.csl.ui.debug.CslAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="org.feature.model.constraint.resource.csl.ui.RulerPopupActions" targetID="org.feature.model.constraint.resource.csl.EditorRuler">
+			<action id="org.feature.model.constraint.resource.csl.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="org.feature.model.constraint.resource.csl.ui.CslEditor" id="org.feature.model.constraint.resource.csl.ui.BreakpointRulerActions">
+			<action id="org.feature.model.constraint.resource.csl.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="org.feature.model.constraint.resource.csl.debugModel" class="org.feature.model.constraint.resource.csl.ui.debug.CslDebugModelPresentation">
+		</debugModelPresentation>
+	</extension>
+	
+</plugin>

@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFText Parser Plugin: csl
+Bundle-SymbolicName: org.feature.model.constraint.resource.csl;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.change,
+ org.eclipse.emf.validation;resolution:=optional,
+ org.emftext.access;resolution:=optional,
+ org.eclipse.debug.core;resolution:=optional,
+ org.featuremapper.models.feature,
+ org.emftext.commons.antlr3_4_0,
+ org.feature.model.constraint,
+ org.feature.model.utilities;bundle-version="0.4.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.feature.model.constraint.resource.csl,
+  org.feature.model.constraint.resource.csl.analysis,
+  org.feature.model.constraint.resource.csl.mopp,
+  org.feature.model.constraint.resource.csl.debug,
+  org.feature.model.constraint.resource.csl.launch,
+  org.feature.model.constraint.resource.csl.grammar,
+  org.feature.model.constraint.resource.csl.util
+Bundle-Activator: org.feature.model.constraint.resource.csl.mopp.CslPlugin

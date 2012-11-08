@@ -8,7 +8,9 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.feature.model.utilities;bundle-version="0.4.0",
  org.emftext.term.propositional.expression.resource.expression;bundle-version="0.4.0",
- org.emftext.term.propositional.edit;bundle-version="0.4.0"
+ org.emftext.term.propositional.edit;bundle-version="0.4.0",
+ org.feature.model.constraint.resource.csl;bundle-version="1.0.0",
+ org.feature.model.constraint;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/choco-cli-2.1.3.jar,
