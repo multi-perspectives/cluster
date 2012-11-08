@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.feature.model.utilities.FeatureModelUtil;
 import org.feature.multi.perspective.classification.Classification;
 import org.feature.multi.perspective.classification.ClassificationModel;
+import org.feature.multi.perspective.classification.ClassificationUtil;
 import org.feature.multi.perspective.classification.ClassifiedFeature;
 import org.feature.multi.perspective.classification.Classifier;
 import org.feature.multi.perspective.mapping.viewmapping.MappingModel;

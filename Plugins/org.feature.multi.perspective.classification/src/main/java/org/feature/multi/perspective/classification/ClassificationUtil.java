@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.feature.multi.perspective.classification.operation;
+package org.feature.multi.perspective.classification;
 
 import org.eclipse.emf.common.util.EList;
 import org.feature.multi.perspective.classification.Classification;

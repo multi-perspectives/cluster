@@ -16,6 +16,7 @@ import org.feature.model.utilities.GroupModelUtil;
 import org.feature.multi.perspective.classification.Classification;
 import org.feature.multi.perspective.classification.ClassificationFactory;
 import org.feature.multi.perspective.classification.ClassificationModel;
+import org.feature.multi.perspective.classification.ClassificationUtil;
 import org.feature.multi.perspective.classification.ClassifiedFeature;
 import org.feature.multi.perspective.classification.Classifier;
 import org.feature.multi.perspective.classification.resource.clt.ICltOptionProvider;
@@ -88,8 +89,8 @@ public class StageInitializer implements ICltOptionProvider, ICltResourcePostPro
       List<ClassifiedFeature> newClassifiedFeatures = new ArrayList<ClassifiedFeature>();
       List<Feature> features = FeatureMappingUtil.collectViewFeatures(group, mappingModel);
       for (Feature feature : features) {
-       // ClassifiedFeature classifiedFeature = ClassificationUtil.createClassifiedFeature(feature);
-       // newClassifiedFeatures.add(classifiedFeature);
+        ClassifiedFeature classifiedFeature = ClassificationUtil.createClassifiedFeature(feature);
+        newClassifiedFeatures.add(classifiedFeature);
       }
       return newClassifiedFeatures;
    }
