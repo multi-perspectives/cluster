@@ -91,14 +91,14 @@ public final class ClassificationUtil {
    public static boolean isChangeAllowed(Classifier oldClassifier, Classifier newClassifier) {
       boolean isAllowed = false;
 
-      if (oldClassifier.equals(newClassifier)) {
-         isAllowed = true;
-      } else if (Classifier.UNCLASSIFIED.equals(oldClassifier)) {
-         // unclassified can be changed to unbound, alive and dead
-         isAllowed = true;
-      } else if (Classifier.UNBOUND.equals(oldClassifier) && !Classifier.UNCLASSIFIED.equals(newClassifier)) {
-         // unbound can be changed to alive and dead
-         isAllowed = true;
+      if (!oldClassifier.equals(newClassifier)) {
+         if (Classifier.UNCLASSIFIED.equals(oldClassifier)) {
+            // unclassified can be changed to unbound, alive and dead
+            isAllowed = true;
+         } else if (Classifier.UNBOUND.equals(oldClassifier) && !Classifier.UNCLASSIFIED.equals(newClassifier)) {
+            // unbound can be changed to alive and dead
+            isAllowed = true;
+         }
       }
       // alive and dead can not be refined further
       return isAllowed;
