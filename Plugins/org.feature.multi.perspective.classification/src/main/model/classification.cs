@@ -32,7 +32,7 @@ RULES {
 	// syntax definition for class 'Classification'
 	Classification ::=  ("stage" #1 id['<','>'] #1 "on" "view" #1 viewgroup['"','"'] #1 ":" !0)
 						 classifiedFeatures* 
-						 (#3 "autocomplete" #1 "{" !1 autoCompleteFeatures* #3 "}")? !0 ; 
+						 (#3 "autocomplete" #1 "{" !0 autoCompleteFeatures* #3 "}")? !0 ; 
 
 	// syntax definition for class 'ClassifiedFeature'
 	ClassifiedFeature ::= (#3 "feature" #1 feature['"','"'] #1 classified[Unclassified : "", Unbound: "unbound", Dead: "dead", Alive: "alive"]) !0;

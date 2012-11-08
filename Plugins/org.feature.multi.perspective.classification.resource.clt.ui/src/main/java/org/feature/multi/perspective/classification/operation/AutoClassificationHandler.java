@@ -3,11 +3,18 @@
  */
 package org.feature.multi.perspective.classification.operation;
 
+import java.io.IOException;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.change.ChangeDescription;
+import org.eclipse.emf.ecore.change.util.ChangeRecorder;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.command.ChangeCommand;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISelectionService;
@@ -19,6 +26,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.emftext.access.EMFTextAccessProxy;
 import org.emftext.access.resource.IEditor;
 import org.emftext.access.resource.IResource;
+import org.feature.multi.perspective.classification.AutoClassification;
 import org.feature.multi.perspective.classification.ClassificationModel;
 import org.feature.multi.perspective.classification.resource.clt.ui.CltEditor;
 
@@ -30,13 +38,27 @@ public class AutoClassificationHandler extends AbstractHandler {
 
    private boolean enabled = false;
 
+   protected EditingDomain domain;
+
+
    @Override
    public Object execute(ExecutionEvent event) throws ExecutionException {
+      final ClassificationModel model = getModel(event);
 
-      ClassificationModel model = getModel(event);
-      if (model != null) {
-         AutoClassification autoClassification = new AutoClassification(model);
-         autoClassification.autoComplete();
+      ChangeCommand changeCommand = new ChangeCommand(model) {
+         @Override
+         protected void doExecute() {
+            AutoClassification autoClassification = new AutoClassification(model);
+            autoClassification.autoComplete();
+         }
+      };
+      domain.getCommandStack().execute(changeCommand);
+
+
+      try {
+         model.eResource().save(null);
+      } catch (IOException e) {
+         e.printStackTrace();
       }
       return null;
    }
@@ -74,6 +96,7 @@ public class AutoClassificationHandler extends AbstractHandler {
             if (page != null) {
                IEditorPart editor = page.getActiveEditor();
                if (editor instanceof CltEditor) {
+                  domain = ((CltEditor) editor).getEditingDomain();
                   ISelection editorSelection = editor.getEditorSite().getSelectionProvider().getSelection();
                   enabled = selection.equals(editorSelection);
                }

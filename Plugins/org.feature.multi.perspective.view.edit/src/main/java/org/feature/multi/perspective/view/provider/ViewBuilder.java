@@ -1,6 +1,5 @@
 package org.feature.multi.perspective.view.provider;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -47,21 +46,25 @@ public class ViewBuilder {
 
    /**
     * get the mapping model used to determine views.
+    * 
     * @return
     */
-   public MappingModel getViewMapping(){
+   public MappingModel getViewMapping() {
       return viewContainer.getFeatureMapping();
    }
-   
+
    /**
     * get all created views;
+    * 
     * @return
     */
-   public List<View> getAllViews(){
+   public List<View> getAllViews() {
       return viewContainer.getViews();
    }
+
    /**
     * get the according view, i.e., a set of features for the given view group.
+    * 
     * @param group
     * @return
     */
@@ -97,6 +100,18 @@ public class ViewBuilder {
 
       viewContainer.getViews().add(view);
       return view;
+   }
+
+   /**
+    * check if the given feature is contained in the view belonging to the given viewgroup.
+    * 
+    * @param feature
+    * @param viewgroup
+    * @return
+    */
+   public boolean isFeatureContained(Feature feature, AbstractGroup viewgroup) {
+      View view = getView(viewgroup);
+      return view.getFeatures().contains(feature);
    }
 
 }
