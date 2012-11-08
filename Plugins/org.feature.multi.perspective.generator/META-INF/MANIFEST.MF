@@ -10,7 +10,8 @@ Require-Bundle: org.eclipse.ui,
  org.featuremapper.validation.owl;bundle-version="0.8.6",
  org.feature.model.utilities;bundle-version="0.4.0",
  org.feature.model.csp;bundle-version="0.4.0",
- org.feature.multi.perspective.model.editor;bundle-version="0.4.0"
+ org.feature.multi.perspective.model.editor;bundle-version="0.4.0",
+ org.feature.multi.perspective.classification;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: org.featuremapper.models.feature

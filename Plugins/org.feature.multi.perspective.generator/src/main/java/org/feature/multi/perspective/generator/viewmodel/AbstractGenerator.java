@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.feature.model.utilities.FeatureModelUtil;
 import org.feature.model.utilities.HighQualityRandom;
 import org.feature.model.utilities.ResourceUtil;
+import org.feature.multi.perspective.classification.ClassificationPackage;
 import org.feature.multi.perspective.model.viewmodel.ViewmodelPackage;
 import org.feature.multi.perspective.model.viewmodel.GroupModel;
 import org.featuremapper.models.feature.FeatureModel;
@@ -40,6 +41,9 @@ public class AbstractGenerator {
    protected static String viewmodelFolder = ViewmodelPackage.eNS_PREFIX;
    protected static String mappingFolder = FeatureMappingPackage.eNS_PREFIX;
    protected static String featureFolder = FeaturePackage.eNS_PREFIX;
+   protected static String classificationFolder = ClassificationPackage.eNS_PREFIX;
+   
+
    private Random generator;
 
    public static String balanced = "balanced";
@@ -51,21 +55,21 @@ public class AbstractGenerator {
 
    public static String coreViewpointName = "V_Core";
    
-   protected static int[] assignedFeaturesPerGroup = new int[] { 3 };
+   public static boolean generateViewmodel = true;
+
    protected static int[] height = new int[] { 5 };
    protected static int[] noMaxChildren = new int[] { 3 };
+   protected static int noGroupsAssignedToViewPoint = 3;
 
    protected static int[] noViewpoints = new int[] {
    10 };
 //   10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
-
-
-   protected static int noGroupsAssignedToViewPoint = 3;
    
+   protected static int[] assignedFeaturesPerGroup = new int[] { 3 };
 
-   public static boolean generateViewmodel = true;
    public static boolean generateConsistentMapping = true;
    public static boolean reuseMapping = true;
+   
    
    
    protected Random getRandomGenerator() {

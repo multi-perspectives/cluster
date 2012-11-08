@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.feature.model.utilities.WorkbenchUtil;
 import org.feature.multi.perspective.generator.viewmodel.AbstractGenerator;
+import org.feature.multi.perspective.generator.viewmodel.ClassificationGenerator;
 import org.feature.multi.perspective.generator.viewmodel.FeatureMappingGenerator;
 import org.feature.multi.perspective.generator.viewmodel.ViewModelGenerator;
 
@@ -32,7 +33,7 @@ public class GeneratorCommandHandler extends AbstractHandler {
 
    @Override
    public Object execute(ExecutionEvent event) throws ExecutionException {
-      generateMultiPerspectiveModel(); 
+      //generateMultiPerspectiveModel(); 
        createJob();
       return null;
    }
@@ -87,12 +88,19 @@ public class GeneratorCommandHandler extends AbstractHandler {
       boolean generateConsistentMapping = AbstractGenerator.generateConsistentMapping;
       boolean reuseMapping = AbstractGenerator.reuseMapping;
 
+      boolean generateClassification = true;
+      
       if (generateViewmodel) {
          ViewModelGenerator generator = new ViewModelGenerator();
          generator.generateViewModel();
       }
       FeatureMappingGenerator fmGenerator = new FeatureMappingGenerator();
       fmGenerator.generateMapping(generateConsistentMapping, reuseMapping);
+      
+      if (generateClassification){
+        ClassificationGenerator clGenerator = new ClassificationGenerator();
+        clGenerator.generateClassification();
+      }
    }
 
    @Override
