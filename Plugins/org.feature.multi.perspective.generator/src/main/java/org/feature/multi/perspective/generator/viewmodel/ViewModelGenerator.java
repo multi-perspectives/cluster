@@ -47,7 +47,7 @@ public class ViewModelGenerator extends AbstractGenerator {
                String type =
                   balanced + param_height + maxHeight + param_countChildren + maxChildren + param_vpCount + numberViewPoints
                         + param_groupsVP + noGroupsAssignedToViewPoint;
-               persistModel(groupModelCopy, type, viewmodelFolder);
+               persistModel(groupModelCopy, type, viewmodelFolder, viewmodelFolder);
             }
          }
       }

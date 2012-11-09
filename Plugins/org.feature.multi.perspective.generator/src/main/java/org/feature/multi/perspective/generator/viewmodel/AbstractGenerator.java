@@ -22,11 +22,12 @@ import org.feature.model.utilities.FeatureModelUtil;
 import org.feature.model.utilities.HighQualityRandom;
 import org.feature.model.utilities.ResourceUtil;
 import org.feature.multi.perspective.classification.ClassificationPackage;
-import org.feature.multi.perspective.model.viewmodel.ViewmodelPackage;
+import org.feature.multi.perspective.mapping.viewmapping.MappingModel;
+import org.feature.multi.perspective.mapping.viewmapping.ViewmappingPackage;
 import org.feature.multi.perspective.model.viewmodel.GroupModel;
+import org.feature.multi.perspective.model.viewmodel.ViewmodelPackage;
 import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.feature.FeaturePackage;
-import org.featuremapper.models.featuremapping.FeatureMappingModel;
 import org.featuremapper.models.featuremapping.FeatureMappingPackage;
 
 /**
@@ -39,10 +40,9 @@ public class AbstractGenerator {
 
    private static String generatedProject = "generatedProject";
    protected static String viewmodelFolder = ViewmodelPackage.eNS_PREFIX;
-   protected static String mappingFolder = FeatureMappingPackage.eNS_PREFIX;
+   protected static String mappingFolder = ViewmappingPackage.eNS_PREFIX;
    protected static String featureFolder = FeaturePackage.eNS_PREFIX;
    protected static String classificationFolder = ClassificationPackage.eNS_PREFIX;
-   
 
    private Random generator;
 
@@ -54,24 +54,21 @@ public class AbstractGenerator {
    public static String param_FCount = "_FCount";
 
    public static String coreViewpointName = "V_Core";
-   
+
    public static boolean generateViewmodel = true;
 
    protected static int[] height = new int[] { 5 };
    protected static int[] noMaxChildren = new int[] { 3 };
    protected static int noGroupsAssignedToViewPoint = 3;
 
-   protected static int[] noViewpoints = new int[] {
-   10 };
-//   10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
-   
+   protected static int[] noViewpoints = new int[] { 10 };
+   // 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+
    protected static int[] assignedFeaturesPerGroup = new int[] { 3 };
 
    public static boolean generateConsistentMapping = true;
    public static boolean reuseMapping = true;
-   
-   
-   
+
    protected Random getRandomGenerator() {
       if (generator == null) {
          generator = new HighQualityRandom();
@@ -79,10 +76,10 @@ public class AbstractGenerator {
       return generator;
    }
 
-   protected void persistModel(EObject model, String type, String nsPrefix) {
+   protected void persistModel(EObject model, String type, String nsPrefix, String modelFolder) {
       // String time = DateUtil.getFormattedCurrentTime();
       IProject genProject = ResourceUtil.getProject(generatedProject);
-      IFolder projectFolder = ResourceUtil.getProjectFolder(nsPrefix, genProject);
+      IFolder projectFolder = ResourceUtil.getProjectFolder(modelFolder, genProject);
       if (projectFolder != null) {
          IPath path = projectFolder.getRawLocation();
          if (path != null) {
@@ -98,7 +95,6 @@ public class AbstractGenerator {
       }
    }
 
-   
    protected void saveGroupModel(GroupModel groupModel) {
       Resource resource = groupModel.eResource();
       try {
@@ -107,7 +103,7 @@ public class AbstractGenerator {
          log.error("Could not save changed groupModel");
       }
    }
-   
+
    protected List<GroupModel> getAllViewModels(ResourceSet resourceSet) {
       List<GroupModel> models = new ArrayList<GroupModel>();
       IProject project = ResourceUtil.getProject(generatedProject);
@@ -144,16 +140,16 @@ public class AbstractGenerator {
       return models;
    }
 
-   protected List<FeatureMappingModel> getAllMappingModels(ResourceSet resourceSet) {
-      List<FeatureMappingModel> models = new ArrayList<FeatureMappingModel>();
+   protected List<MappingModel> getAllMappingModels(ResourceSet resourceSet) {
+      List<MappingModel> models = new ArrayList<MappingModel>();
       IProject project = ResourceUtil.getProject(generatedProject);
       IFolder viewmodel = ResourceUtil.getProjectFolder(mappingFolder, project);
       try {
          List<IFile> files = ResourceUtil.getFiles(viewmodel);
          for (IFile file : files) {
             EObject model = ResourceUtil.getModel(file, resourceSet);
-            if (model instanceof FeatureMappingModel) {
-               FeatureMappingModel mappingModel = (FeatureMappingModel) model;
+            if (model instanceof MappingModel) {
+               MappingModel mappingModel = (MappingModel) model;
                models.add(mappingModel);
             }
          }
