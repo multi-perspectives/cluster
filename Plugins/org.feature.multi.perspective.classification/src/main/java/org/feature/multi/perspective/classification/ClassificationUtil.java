@@ -222,14 +222,15 @@ public final class ClassificationUtil {
    }
 
    public static List<FeatureExpression> getConstraintsContainingFeature(ClassifiedFeature classifiedFeature) {
+      List<FeatureExpression> contained = new ArrayList<FeatureExpression>();
       List<FeatureExpression> constraints = ClassificationCache.getInstance().getConstraints(classifiedFeature);
       Feature feature = classifiedFeature.getFeature();
       for (FeatureExpression featureExpression : constraints) {
          if (containsFeature(featureExpression, feature)) {
-            constraints.add(featureExpression);
+            contained.add(featureExpression);
          }
       }
-      return constraints;
+      return contained;
    }
 
    private static boolean containsFeature(FeatureExpression expression, Feature feature) {

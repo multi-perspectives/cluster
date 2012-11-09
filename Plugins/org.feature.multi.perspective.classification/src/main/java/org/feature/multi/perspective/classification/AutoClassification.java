@@ -20,6 +20,8 @@ import org.featuremapper.models.feature.Group;
  */
 public class AutoClassification {
 
+   List<ChangeFeature> featuresToComplete = new ArrayList<ChangeFeature>();
+
    ClassificationModel classificationModel;
 
    // cache checked feature model groups per classification
@@ -51,12 +53,14 @@ public class AutoClassification {
       for (ClassifiedFeature classifiedFeature : featureCopy) {
          autoCompleteClassifiedFeature(classifiedFeature);
       }
+      // autocomplete cached features
+      handleChangeFeatures();
    }
 
-   private List<ClassifiedFeature> initClassificationFeatures(Classification classification){
+   private List<ClassifiedFeature> initClassificationFeatures(Classification classification) {
       return ClassificationUtil.getAllClassifiedFeaturesOfView(classification);
    }
-   
+
    private void autoCompleteClassifiedFeature(ClassifiedFeature classifiedFeature) {
       Classifier classified = classifiedFeature.getClassified();
       if (Classifier.ALIVE.equals(classified)) {
@@ -77,7 +81,7 @@ public class AutoClassification {
    }
 
    private void handleUnboundFeature(ClassifiedFeature classifiedFeature) {
-      setParentFeaturesUnbound(classifiedFeature);
+      setParentFeatures(classifiedFeature, Classifier.UNBOUND);
    }
 
    private void handleDeadFeature(ClassifiedFeature classifiedFeature) {
@@ -97,19 +101,19 @@ public class AutoClassification {
 
    private void checkConstraintsForAliveFeature(ClassifiedFeature classifiedFeature) {
       Feature feature = classifiedFeature.getFeature();
-      Classification classification = (Classification)classifiedFeature.eContainer();
+      Classification classification = (Classification) classifiedFeature.eContainer();
       List<FeatureExpression> constraintsContainingFeature = ClassificationUtil.getConstraintsContainingFeature(classifiedFeature);
       for (FeatureExpression featureExpression : constraintsContainingFeature) {
          if (featureExpression instanceof Require) {
             Require require = (Require) featureExpression;
             Feature leftFeature = require.getLeftFeature();
-            if (EcoreUtil.equals(leftFeature, feature)){
+            if (EcoreUtil.equals(leftFeature, feature)) {
                // all required features must be set alive
                Feature rightFeature = require.getRightFeature();
                handleAutoCompleteFeature(rightFeature, Classifier.ALIVE, classification);
             }
          } else if (featureExpression instanceof Exclude) {
-            //    all excluded features must be set to dead 
+            // all excluded features must be set to dead
             Exclude exclude = (Exclude) featureExpression;
             Feature excludedfeature = getExcludedFeature(exclude, feature);
             handleAutoCompleteFeature(excludedfeature, Classifier.DEAD, classification);
@@ -117,28 +121,46 @@ public class AutoClassification {
       }
    }
 
-   private Feature getExcludedFeature(Exclude exclude, Feature feature){
-     Feature result;
+   private Feature getExcludedFeature(Exclude exclude, Feature feature) {
+      Feature result;
       Feature leftFeature = exclude.getLeftFeature();
       Feature rightFeature = exclude.getRightFeature();
-      if (EcoreUtil.equals(leftFeature, feature)){
+      if (EcoreUtil.equals(leftFeature, feature)) {
          result = rightFeature;
       } else {
          result = leftFeature;
       }
       return result;
    }
-   
-   private void handleAutoCompleteFeature(Feature feature, Classifier newClassifier, Classification classification){
+
+   private void handleAutoCompleteFeature(Feature feature, Classifier newClassifier, Classification classification) {
       ClassifiedFeature classifiedFeature = ClassificationUtil.getOrCreateClassifiedFeature(classification, feature);
-      ClassificationUtil.changeClassifier(classifiedFeature,newClassifier);
-      handleChangedFeature(classifiedFeature);
+      handleAutoCompleteFeature(classifiedFeature, newClassifier);
    }
-   
-   private void handleChangedFeature(ClassifiedFeature classifiedFeature){
-      // autoCompleteClassifiedFeature(classifiedFeature);
+
+   private void handleAutoCompleteFeature(ClassifiedFeature classifiedFeature, Classifier newClassifier) {
+      ChangeFeature change = new ChangeFeature(classifiedFeature, newClassifier);
+      featuresToComplete.add(change);
    }
-   
+
+   private void handleChangeFeatures() {
+      List<ChangeFeature> copy = new ArrayList<ChangeFeature>();
+      copy.addAll(featuresToComplete);
+      for (ChangeFeature changeFeature : copy) {
+         handleChangeFeature(changeFeature);
+      }
+      featuresToComplete.removeAll(copy);
+   }
+
+   private void handleChangeFeature(ChangeFeature changeFeature) {
+      ClassifiedFeature feature = changeFeature.getFeature();
+      Classifier newClassifier = changeFeature.getNewClassifier();
+      boolean isChanged = ClassificationUtil.changeClassifier(feature, newClassifier);
+      if (isChanged) {
+         autoCompleteClassifiedFeature(feature);
+      }
+   }
+
    private void checkSiblings(ClassifiedFeature classifiedFeature) {
       Feature feature = classifiedFeature.getFeature();
       Classification classification = (Classification) classifiedFeature.eContainer();
@@ -159,12 +181,11 @@ public class AutoClassification {
 
          int sizeAlive = aliveSiblings.size();
          int sizeUnboundOrAlive = sizeAlive + siblingsCopy.size();
-         
+
          if (sizeAlive == maxCardinality) {
             // maximum reached, set unbound features dead
             for (ClassifiedFeature sibling : siblingsCopy) {
-               ClassificationUtil.changeClassifier(sibling, Classifier.DEAD);
-               handleChangedFeature(sibling);
+               handleAutoCompleteFeature(sibling, Classifier.DEAD);
             }
          }
 
@@ -200,28 +221,34 @@ public class AutoClassification {
       // set each anchestor alive
       for (Feature feature : anchestors) {
          // check if the parent features are contained in the view and therefore can be configured manually
-         ClassifiedFeature parentClassifiedFeature = ClassificationUtil.getOrCreateClassifiedFeature(classification, feature);
-
-         boolean changed = ClassificationUtil.changeClassifier(parentClassifiedFeature, newClassifier);
-         if (!changed) {
-            System.out.println("Classifier not changed to " + newClassifier.getName() + " of Feature '"
-                               + parentClassifiedFeature.getFeature().getName() + "'. Is: "
-                               + parentClassifiedFeature.getClassified().getName());
-            // TODO set error marker on classifiedFeature
-            // "Autocompletion Error: Could not change classification of parent feature feature.getName()"
-         }
+         handleAutoCompleteFeature(feature, newClassifier, classification);
       }
    }
-
-  
 
    private void setParentFeaturesAlive(ClassifiedFeature classifiedFeature) {
       setParentFeatures(classifiedFeature, Classifier.ALIVE);
    }
 
-   private void setParentFeaturesUnbound(ClassifiedFeature classifiedFeature) {
-      // parent features need to be alive or unbound
-      setParentFeatures(classifiedFeature, Classifier.UNBOUND);
+
+
+   private class ChangeFeature {
+
+      private ClassifiedFeature feature;
+      private Classifier newClassifier;
+
+      public ChangeFeature(ClassifiedFeature feature, Classifier newClassifier) {
+         this.feature = feature;
+         this.newClassifier = newClassifier;
+      }
+
+      public ClassifiedFeature getFeature() {
+         return feature;
+      }
+
+      public Classifier getNewClassifier() {
+         return newClassifier;
+      }
+
    }
 
 }
