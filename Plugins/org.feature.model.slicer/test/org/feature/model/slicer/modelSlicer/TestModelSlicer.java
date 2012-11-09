@@ -50,12 +50,12 @@ public class TestModelSlicer {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		model = loadModel("testdata/SimplePhone.feature");
 		slicer = new ModelSlicer();
 	}
 
 	@Test
 	public void testRemoveOneFeature() {
+		model = loadModel("testdata/SimplePhone.feature");
 		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
 		IFeatureSolver solver = new SimpleSAT4JSolver(builder, model);
 		
@@ -65,7 +65,6 @@ public class TestModelSlicer {
 		SimpleClassifier classifier = new SimpleClassifier();
 		ClassifierHandler cHandler = classifier.classify(solver, boundAlive, boundDead);
 
-		// TODO Nullpointer if boundAlive and BoundDead is empty
 		FeatureModel trimmed = slicer.slice(model, cHandler);
 		Set<Feature> unwanted = findFeature(trimmed, "MMS");
 		assertTrue(unwanted.isEmpty());

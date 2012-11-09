@@ -12,7 +12,7 @@ import org.featuremapper.models.feature.FeatureModel;
 /**
  * 
  * Class is a meta-data container for a feature model that handles the
- * classificatin state of all features
+ * classification state of all features
  * 
  * @author saller
  * 
@@ -60,28 +60,14 @@ public class ClassifierHandler {
 	private FeatureModel featureModel;
 
 	/**
-	 * initialize handler but do not parse feature model for initial
-	 * classification
-	 */
-	// TODO Required? it is not possible to add a feature or a model, so what does this constructor do?
-	public ClassifierHandler() {
-		featureToClassification = new HashMap<Feature, BoundedType>();
-		unboundSet = new HashSet<Feature>();
-		boundAliveSet = new HashSet<Feature>();
-		boundDeadSet = new HashSet<Feature>();
-		notClassifiedSet = new HashSet<Feature>();
-		computedClassificationSet = new HashSet<Feature>();
-	}
-
-	/**
-	 * initialize handler wiht the classified feature model and derive basic
+	 * initialize handler with the classified feature model and derive basic
 	 * classification (not transitive closure)
 	 * 
 	 * @param fm
 	 *            (partially) classified feature model
 	 */
 	public ClassifierHandler(FeatureModel fm) {
-		this.featureModel = fm;
+		featureModel = fm;
 		featureToClassification = new HashMap<Feature, BoundedType>();
 		unboundSet = new HashSet<Feature>();
 		boundAliveSet = new HashSet<Feature>();
@@ -302,5 +288,4 @@ public class ClassifierHandler {
 	public Set<Feature> getComputedClassifications() {
 		return computedClassificationSet;
 	}
-
 }

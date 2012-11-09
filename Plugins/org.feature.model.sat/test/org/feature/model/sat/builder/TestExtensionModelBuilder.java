@@ -40,6 +40,23 @@ public class TestExtensionModelBuilder {
 		solver = new DimacsStringSolver();
 		builder = new SATModelBuilder(new GateTranslator(solver));
 	}
+	
+	/**
+	 * Test method for
+	 * {@link org.feature.model.sat.builder.SATModelBuilder#buildSolverModel(org.featuremapper.models.feature.FeatureModel)}
+	 * .
+	 * 
+	 * @throws IOException
+	 */
+	@Test
+	public void testBuildSmallModel() throws IOException {
+		FeatureModel model = new ModelLoader().loadModel("testdata/SimplePhoneSATSmallOr.feature");
+		builder.buildSolverModel(model);
+
+		String result = new CNFConverter().convertToReadable(solver.getOut().toString(), model, builder);
+		String expected = "testdata" + File.separator + "expected" + File.separator + "SimplePhoneSATSmall.txt";
+		assertEquals(new FileHandler().readFile(expected), result.trim());
+	}
 
 	@Test
 	public void testBuildModel() throws IOException {

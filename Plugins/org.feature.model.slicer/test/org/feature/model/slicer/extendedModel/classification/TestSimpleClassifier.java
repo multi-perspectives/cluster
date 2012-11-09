@@ -5,30 +5,17 @@ package org.feature.model.slicer.extendedModel.classification;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.PropertyConfigurator;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.feature.model.ModelLoader;
 import org.feature.model.sat.builder.SATModelBuilder;
 import org.feature.model.sat.solver.IFeatureSolver;
 import org.feature.model.sat.solver.SimpleSAT4JSolver;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
-import org.featuremapper.models.feature.FeaturePackage;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sat4j.minisat.SolverFactory;
 
@@ -54,7 +41,6 @@ public class TestSimpleClassifier {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		model = new ModelLoader().loadModel("testdata/SimplePhoneSATSmall.feature");
 		classifier = new SimpleClassifier();
 	}
 
@@ -65,6 +51,8 @@ public class TestSimpleClassifier {
 	 */
 	@Test
 	public void testClassifyIFeatureSolver() {
+		model = new ModelLoader().loadModel("testdata/SimplePhoneSATSmall.feature");
+		
 		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
 		builder.buildSolverModel(model);
 		IFeatureSolver solver = new SimpleSAT4JSolver(builder, model);
@@ -98,22 +86,23 @@ public class TestSimpleClassifier {
 	 */
 	@Test
 	public void testClassifyIFeatureSolverSetOfFeatureSetOfFeature() {
+		model = new ModelLoader().loadModel("testdata/SimplePhoneSATSmall.feature");
+		
 		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
 		builder.buildSolverModel(model);
 		IFeatureSolver solver = new SimpleSAT4JSolver(builder, model);
 
 		Set<Feature> boundAlive = new HashSet<>();
-		boundAlive.add(new ModelLoader().findFeature(model, "Communication"));
+		boundAlive.add(new ModelLoader().findFeature(model, "Extras"));
 		Set<Feature> boundDead = new HashSet<>();
 
 		assertFalse(boundAlive.isEmpty());
-		SimpleClassifier classifier = new SimpleClassifier();
 		ClassifierHandler cHandler = classifier.classify(solver, boundAlive, boundDead);
-		assertEquals(3, cHandler.getBoundAliveFeatures().size());
-		Set<String> alive = new HashSet<>(Arrays.asList(new String[] { "SMS", "Message, Communication" }));
+		Set<String> alive = new HashSet<>(Arrays.asList(new String[] { "SMS", "Message", "Extras" }));
 		for (Feature feature : cHandler.getBoundAliveFeatures()) {
-			assertTrue("feature " + feature.getName() + " should not be alive", alive.contains(feature.getName()));
+			assertTrue("feature " + feature.getName() + " should not be alive", alive.remove(feature.getName()));
 		}
+		assertTrue("features " + alive.toString() + " should be alive", alive.isEmpty());
 
 		assertEquals(0, cHandler.getBoundDeadFeatures().size());
 		assertEquals(9, cHandler.getUnboundFeatures().size());
@@ -126,6 +115,8 @@ public class TestSimpleClassifier {
 	 */
 	@Test
 	public void testClassifyIFeatureSolverSetOfFeatureSetOfFeatureWithEmptyLists() {
+		model = new ModelLoader().loadModel("testdata/SimplePhoneSATSmall.feature");
+		
 		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
 		builder.buildSolverModel(model);
 		IFeatureSolver solver = new SimpleSAT4JSolver(builder, model);
@@ -135,7 +126,13 @@ public class TestSimpleClassifier {
 
 		SimpleClassifier classifier = new SimpleClassifier();
 		ClassifierHandler cHandler = classifier.classify(solver, boundAlive, boundDead);
-		assertEquals(2, cHandler.getBoundAliveFeatures().size());
+		
+		Set<String> alive = new HashSet<>(Arrays.asList(new String[] { "SMS", "Message" }));
+		for (Feature feature : cHandler.getBoundAliveFeatures()) {
+			assertTrue("feature " + feature.getName() + " should not be alive", alive.remove(feature.getName()));
+		}
+		assertTrue("features " + alive.toString() + " should be alive", alive.isEmpty());
+		
 		assertEquals(0, cHandler.getBoundDeadFeatures().size());
 		assertEquals(4, cHandler.getUnboundFeatures().size());
 	}
