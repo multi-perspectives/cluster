@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.feature.FeaturePackage;
 
@@ -69,5 +70,23 @@ public class ModelLoader {
 
 		// Return root model element
 		return resource.getContents().get(0);
+	}
+
+	/**
+	 * search a feature with the given name
+	 * 
+	 * @param model
+	 *            model with features
+	 * @param featureName
+	 *            name of wanted feature
+	 * @return wanted feature or null
+	 */
+	public Feature findFeature(FeatureModel model, String featureName) {
+		for (Feature feature : model.getAllFeatures()) {
+			if (feature.getName().contentEquals(featureName)) {
+				return feature;
+			}
+		}
+		return null;
 	}
 }
