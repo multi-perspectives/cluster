@@ -1,10 +1,9 @@
 package org.feature.multi.perspective.classification;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.feature.model.constraint.FeatureExpression;
@@ -27,7 +26,7 @@ public class ClassificationCache {
       return cache;
    }
 
-   public List<FeatureExpression> getConstraints(EObject classificationObject) {
+   public Set<FeatureExpression> getConstraints(EObject classificationObject) {
       ViewBuilder viewBuilder = getViewBuilder(classificationObject);
       return viewBuilder.getConstraints();
    }

@@ -5,6 +5,7 @@ package org.feature.multi.perspective.classification;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -223,7 +224,7 @@ public final class ClassificationUtil {
 
    public static List<FeatureExpression> getConstraintsContainingFeature(ClassifiedFeature classifiedFeature) {
       List<FeatureExpression> contained = new ArrayList<FeatureExpression>();
-      List<FeatureExpression> constraints = ClassificationCache.getInstance().getConstraints(classifiedFeature);
+      Set<FeatureExpression> constraints = ClassificationCache.getInstance().getConstraints(classifiedFeature);
       Feature feature = classifiedFeature.getFeature();
       for (FeatureExpression featureExpression : constraints) {
          if (containsFeature(featureExpression, feature)) {

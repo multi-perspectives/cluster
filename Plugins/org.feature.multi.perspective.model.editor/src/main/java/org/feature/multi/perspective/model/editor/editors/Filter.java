@@ -11,6 +11,9 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.feature.model.constraint.FeatureExpression;
+import org.feature.model.csp.TextExpressionParser;
+import org.feature.model.utilities.FeatureModelUtil;
 import org.featuremapper.models.feature.Constraint;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
@@ -44,6 +47,12 @@ public class Filter {
       // root feature not selected
    }
 
+   private void filterConstraints(FeatureModel featureModel){
+     List<Feature> allFeatures = FeatureModelUtil.getAllFeatures(featureModel);
+     List<FeatureExpression> constraints = TextExpressionParser.getConstraints(featureModel);
+     
+   }
+   
    /**
     * removes every constraints which contains features that are not in the new {@link FeatureModel}.
     * 

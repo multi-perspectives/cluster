@@ -1,6 +1,7 @@
 package org.feature.multi.perspective.view.provider;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.feature.model.constraint.FeatureExpression;
@@ -26,7 +27,7 @@ public class ViewBuilder {
 
    private ViewContainer viewContainer;
 
-   private List<FeatureExpression> featureModelConstraints;
+   private Set<FeatureExpression> featureModelConstraints;
 
    private boolean considerViewHierarchy;
 
@@ -50,7 +51,7 @@ public class ViewBuilder {
       featureModelConstraints = TextExpressionParser.getConstraints(featuremodel);
    }
 
-   public List<FeatureExpression> getConstraints() {
+   public Set<FeatureExpression> getConstraints() {
       return featureModelConstraints;
    }
 
