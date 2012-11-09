@@ -1,0 +1,33 @@
+classification
+references mapping <../mapping/mapping.mtext>  
+
+stage <Core_Stage> on view "Core" :
+
+
+stage <Tablet_Stage> on view "HW-Platform" :
+feature "Wifi_AP" alive
+feature "Ad-Hoc" dead
+feature "GPS" unbound
+feature "Temperature" alive
+feature "Pressure" alive
+
+stage <Phone_Stage> on view "HW-Platform" :
+feature "Wifi_AP" unbound
+feature "Ad-Hoc" unbound
+feature "GPS" unbound
+feature "GSM" unbound
+feature "Temperature" dead
+feature "Pressure" dead
+
+stage <Office_Stage> on view "LocationResources" :
+feature "VoIP" alive
+feature "Wifi_AP" alive
+
+stage <City_Stage> on view "LocationResources" :
+feature "GSM" alive
+
+stage <Calls_Stage> on view "RunningApps" :
+feature "PhoneCall" alive
+
+stage <Weather_Stage> on view "RunningApps" :
+feature "WeatherForecast" alive

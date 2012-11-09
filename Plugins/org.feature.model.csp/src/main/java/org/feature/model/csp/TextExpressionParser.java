@@ -23,9 +23,16 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.term.propositional.expression.BinaryOperator;
 import org.emftext.term.propositional.expression.FeatureRef;
+import org.emftext.term.propositional.expression.Nested;
+import org.emftext.term.propositional.expression.Not;
+import org.emftext.term.propositional.expression.Or;
 import org.emftext.term.propositional.expression.Term;
 import org.emftext.term.propositional.expression.UnaryOperator;
 import org.emftext.term.propositional.expression.resource.expression.util.ExpressionResourceUtil;
+import org.feature.model.constraint.ConstraintFactory;
+import org.feature.model.constraint.Exclude;
+import org.feature.model.constraint.FeatureExpression;
+import org.feature.model.constraint.Require;
 import org.feature.model.utilities.FeatureModelUtil;
 import org.featuremapper.models.feature.Constraint;
 import org.featuremapper.models.feature.Feature;
@@ -76,21 +83,29 @@ public class TextExpressionParser {
 
    public static Set<Feature> getFeaturesFromTerm(Term term) {
       Set<Feature> constrainedFeatures = new LinkedHashSet<Feature>();
+      Set<FeatureRef> references = getFeatureRefsFromTerm(term);
+      for (FeatureRef featureRef : references) {
+         constrainedFeatures.add(featureRef.getFeature());
+      }
+      return constrainedFeatures;
+   }
+
+   public static Set<FeatureRef> getFeatureRefsFromTerm(Term term) {
+      Set<FeatureRef> constrainedFeatures = new LinkedHashSet<FeatureRef>();
       if (term instanceof BinaryOperator) {
          BinaryOperator binTerm = (BinaryOperator) term;
          Term leftTerm = binTerm.getOperand1();
-         constrainedFeatures.addAll(getFeaturesFromTerm(leftTerm));
+         constrainedFeatures.addAll(getFeatureRefsFromTerm(leftTerm));
          Term rightTerm = binTerm.getOperand2();
-         constrainedFeatures.addAll(getFeaturesFromTerm(rightTerm));
+         constrainedFeatures.addAll(getFeatureRefsFromTerm(rightTerm));
 
       } else if (term instanceof UnaryOperator) {
          UnaryOperator unaryTerm = (UnaryOperator) term;
          Term singleTerm = unaryTerm.getOperand();
-         constrainedFeatures.addAll(getFeaturesFromTerm(singleTerm));
+         constrainedFeatures.addAll(getFeatureRefsFromTerm(singleTerm));
       } else if (term instanceof FeatureRef) {
          FeatureRef featureRefTerm = (FeatureRef) term;
-         Feature feature = featureRefTerm.getFeature();
-         constrainedFeatures.add(feature);
+         constrainedFeatures.add(featureRefTerm);
       }
       return constrainedFeatures;
    }
@@ -140,6 +155,109 @@ public class TextExpressionParser {
          }
       }
       return term;
+   }
+
+   private static Require createRequires(Feature left, Feature right) {
+      Require createRequire = null;
+      if (left != null && right != null) {
+         createRequire = ConstraintFactory.eINSTANCE.createRequire();
+         createRequire.setLeftFeature(left);
+         createRequire.setRightFeature(right);
+      }
+      return createRequire;
+   }
+
+   private static Exclude createExcludes(List<Feature> notFeatures) {
+      Exclude createExclude = null;
+      if (2 == notFeatures.size()) {
+         createExclude = ConstraintFactory.eINSTANCE.createExclude();
+         createExclude.setLeftFeature(notFeatures.get(0));
+         createExclude.setRightFeature(notFeatures.get(1));
+      }
+      return createExclude;
+   }
+
+   public static Require createRequires(Term term) {
+      Feature right = null;
+      Feature left = null;
+      Set<FeatureRef> features = getFeatureRefsFromTerm(term);
+      if (features.size() == 2) {
+         for (FeatureRef featureRef : features) {
+            EObject container = featureRef.eContainer();
+            if (container instanceof Nested) {
+               container = unnestContainer((Nested) container);
+            }
+            if (container instanceof Not) {
+               left = featureRef.getFeature();
+            } else if (container instanceof Or) {
+               right = featureRef.getFeature();
+            }
+         }
+      }
+      return createRequires(left, right);
+   }
+
+   public static Exclude createExcludes(Term term) {
+      List<Feature> notFeatures = new ArrayList<Feature>(2);
+      Set<FeatureRef> features = getFeatureRefsFromTerm(term);
+      if (features.size() == 2) {
+         for (FeatureRef featureRef : features) {
+            EObject container = featureRef.eContainer();
+            if (container instanceof Nested) {
+               container = unnestContainer((Nested) container);
+            }
+            if (container instanceof Not) {
+               EObject containerofNot = container.eContainer();
+               if (containerofNot instanceof Nested) {
+                  containerofNot = unnestContainer((Nested) containerofNot);
+               }
+               if (containerofNot instanceof Or) {
+                  notFeatures.add(featureRef.getFeature());
+               }
+            }
+         }
+      }
+      return createExcludes(notFeatures);
+   }
+
+   private static Term unnestContainer(Nested container) {
+      EObject eContainer = container.eContainer();
+      if (eContainer instanceof Nested) {
+         return unnestContainer((Nested) eContainer);
+      }
+      Term term = null;
+      if (eContainer != null && eContainer instanceof Term) {
+         term = (Term) eContainer;
+      }
+      return term;
+   }
+
+   /**
+    * get all requires and exclude constraints from the given featuremodel.
+    * @param model
+    * @return
+    */
+   public static List<FeatureExpression> getConstraints(FeatureModel model) {
+      List<FeatureExpression> result = new ArrayList<FeatureExpression>();
+      List<Term> parseExpressions = parseExpressions(model);
+      for (Term term : parseExpressions) {
+         FeatureExpression expression = createFeatureExpression(term);
+         if (expression != null) {
+            result.add(expression);
+         }
+      }
+      
+      System.out.println("found "+ parseExpressions.size() + " terms and " + result.size() + " constraints.");
+      return result;
+   }
+
+   private static FeatureExpression createFeatureExpression(Term term) {
+      FeatureExpression expression = null;
+      expression = createExcludes(term);
+      if (expression == null) {
+         expression = createRequires(term);
+      }
+      return expression;
    }
 
 }

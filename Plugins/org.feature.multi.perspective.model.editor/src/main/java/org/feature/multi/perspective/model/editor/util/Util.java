@@ -27,8 +27,10 @@ import org.emftext.term.propositional.expression.Nested;
 import org.emftext.term.propositional.expression.Not;
 import org.emftext.term.propositional.expression.Or;
 import org.emftext.term.propositional.expression.Term;
+import org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionParser;
 import org.feature.model.csp.TextExpressionParser;
 import org.feature.model.csp.analyze.FeatureModelAnalyzer;
+import org.feature.model.utilities.FeatureModelUtil;
 import org.featuremapper.models.feature.Constraint;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
@@ -305,7 +307,7 @@ public class Util {
                continue;
             }
             if (features.containsAll(constraint.getConstrainedFeatures())) {
-               if (constraint.getLanguage().equals("OWL")) {
+               if (constraint.getLanguage().equals(FeatureModelUtil.csp_constraintLanguage)) {
                   boolean exprCheck = false;
                   for (Feature feature2 : features) {
                      if (constraint.getExpression().contains(feature2.getName())) {

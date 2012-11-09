@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.feature.model.csp.analyze.FeatureModelAnalyzer;
 import org.feature.model.csp.analyze.FeatureVariant;
-import org.feature.model.utilities.FeatureMappingUtil;
 import org.feature.model.utilities.GroupModelUtil;
 import org.feature.model.utilities.ResourceUtil;
 import org.feature.multi.perspective.mapping.viewmapping.Mapping;
@@ -261,8 +260,7 @@ public class FeatureMappingGenerator extends AbstractGenerator {
       String fmFile = ResourceUtil.getFile(featureModel.eResource()).getName();
       String viewModelFile = ResourceUtil.getFile(groupModel.eResource()).getName();
       String type = fmFile + "_" + viewModelFile + param_FCount + assignedFeatureCount;
-      persistModel(featureMapping, type, "mtext");
-
+      persistModel(featureMapping, type, "mtext", mappingFolder);
    }
 
    private void mapUnmappedFeatures(MappingModel featureMapping, GroupModel groupModel) {

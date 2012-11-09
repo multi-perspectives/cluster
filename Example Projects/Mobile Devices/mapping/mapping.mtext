@@ -1,0 +1,17 @@
+viewmapping
+   featuremodel <../feature/mobiledevices.feature>
+   viewmodel <..//multiperspective/mobiledevices.viewmodel>
+
+view group "Core" contains
+"MobileDevice"
+
+view group "HW-Platform" contains
+"Wifi_AP" "Ad-Hoc" "GPS" "GSM"
+ "Temperature" "Pressure" 
+
+view group "LocationResources" contains
+"VoIP" "Wifi_AP" "GSM"
+
+view group "RunningApps" contains
+"PhoneCall" "WeatherForecast"
+
