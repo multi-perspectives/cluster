@@ -49,7 +49,7 @@ public class Filter {
 
    private void filterConstraints(FeatureModel featureModel){
      List<Feature> allFeatures = FeatureModelUtil.getAllFeatures(featureModel);
-     List<FeatureExpression> constraints = TextExpressionParser.getConstraints(featureModel);
+     //List<FeatureExpression> constraints = TextExpressionParser.getConstraints(featureModel);
      
    }
    
