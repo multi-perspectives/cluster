@@ -117,7 +117,6 @@ public class ClassificationGenerator extends AbstractGenerator {
                }
                ClassificationUtil.changeClassifier(feature, classifier);
             }
-            classifyModel.getClassifications().add(classification);
          }
       }
    }
