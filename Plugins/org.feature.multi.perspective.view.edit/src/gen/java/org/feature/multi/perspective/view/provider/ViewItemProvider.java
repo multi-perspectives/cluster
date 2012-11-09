@@ -62,7 +62,7 @@ public class ViewItemProvider
 
          addFeaturesPropertyDescriptor(object);
          addIdPropertyDescriptor(object);
-         addViewgroupPropertyDescriptor(object);
+         addViewgroupsPropertyDescriptor(object);
       }
       return itemPropertyDescriptors;
    }
@@ -112,19 +112,19 @@ public class ViewItemProvider
    }
 
    /**
-    * This adds a property descriptor for the Viewgroup feature.
+    * This adds a property descriptor for the Viewgroups feature.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * @generated
     */
-   protected void addViewgroupPropertyDescriptor(Object object) {
+   protected void addViewgroupsPropertyDescriptor(Object object) {
       itemPropertyDescriptors.add
          (createItemPropertyDescriptor
             (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
              getResourceLocator(),
-             getString("_UI_View_viewgroup_feature"),
-             getString("_UI_PropertyDescriptor_description", "_UI_View_viewgroup_feature", "_UI_View_type"),
-             ViewPackage.Literals.VIEW__VIEWGROUP,
+             getString("_UI_View_viewgroups_feature"),
+             getString("_UI_PropertyDescriptor_description", "_UI_View_viewgroups_feature", "_UI_View_type"),
+             ViewPackage.Literals.VIEW__VIEWGROUPS,
              true,
              false,
              true,

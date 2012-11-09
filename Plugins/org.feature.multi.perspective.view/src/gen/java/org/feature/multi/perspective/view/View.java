@@ -20,7 +20,7 @@ import org.featuremapper.models.feature.Feature;
  * <ul>
  *   <li>{@link org.feature.multi.perspective.view.View#getFeatures <em>Features</em>}</li>
  *   <li>{@link org.feature.multi.perspective.view.View#getId <em>Id</em>}</li>
- *   <li>{@link org.feature.multi.perspective.view.View#getViewgroup <em>Viewgroup</em>}</li>
+ *   <li>{@link org.feature.multi.perspective.view.View#getViewgroups <em>Viewgroups</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,29 +72,19 @@ public interface View extends EObject {
    void setId(String value);
 
    /**
-    * Returns the value of the '<em><b>Viewgroup</b></em>' reference.
+    * Returns the value of the '<em><b>Viewgroups</b></em>' reference list.
+    * The list contents are of type {@link org.feature.multi.perspective.model.viewmodel.AbstractGroup}.
     * <!-- begin-user-doc -->
     * <p>
-    * If the meaning of the '<em>Viewgroup</em>' reference isn't clear,
+    * If the meaning of the '<em>Viewgroups</em>' reference list isn't clear,
     * there really should be more of a description here...
     * </p>
     * <!-- end-user-doc -->
-    * @return the value of the '<em>Viewgroup</em>' reference.
-    * @see #setViewgroup(AbstractGroup)
-    * @see org.feature.multi.perspective.view.ViewPackage#getView_Viewgroup()
+    * @return the value of the '<em>Viewgroups</em>' reference list.
+    * @see org.feature.multi.perspective.view.ViewPackage#getView_Viewgroups()
     * @model
     * @generated
     */
-   AbstractGroup getViewgroup();
-
-   /**
-    * Sets the value of the '{@link org.feature.multi.perspective.view.View#getViewgroup <em>Viewgroup</em>}' reference.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * @param value the new value of the '<em>Viewgroup</em>' reference.
-    * @see #getViewgroup()
-    * @generated
-    */
-   void setViewgroup(AbstractGroup value);
+   EList<AbstractGroup> getViewgroups();
 
 } // View

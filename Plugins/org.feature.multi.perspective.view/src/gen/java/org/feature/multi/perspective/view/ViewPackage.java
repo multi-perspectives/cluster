@@ -121,13 +121,13 @@ public interface ViewPackage extends EPackage {
    int VIEW__ID = 1;
 
    /**
-    * The feature id for the '<em><b>Viewgroup</b></em>' reference.
+    * The feature id for the '<em><b>Viewgroups</b></em>' reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * @generated
     * @ordered
     */
-   int VIEW__VIEWGROUP = 2;
+   int VIEW__VIEWGROUPS = 2;
 
    /**
     * The number of structural features of the '<em>View</em>' class.
@@ -204,15 +204,15 @@ public interface ViewPackage extends EPackage {
    EAttribute getView_Id();
 
    /**
-    * Returns the meta object for the reference '{@link org.feature.multi.perspective.view.View#getViewgroup <em>Viewgroup</em>}'.
+    * Returns the meta object for the reference list '{@link org.feature.multi.perspective.view.View#getViewgroups <em>Viewgroups</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @return the meta object for the reference '<em>Viewgroup</em>'.
-    * @see org.feature.multi.perspective.view.View#getViewgroup()
+    * @return the meta object for the reference list '<em>Viewgroups</em>'.
+    * @see org.feature.multi.perspective.view.View#getViewgroups()
     * @see #getView()
     * @generated
     */
-   EReference getView_Viewgroup();
+   EReference getView_Viewgroups();
 
    /**
     * Returns the factory that creates the instances of the model.
@@ -289,12 +289,12 @@ public interface ViewPackage extends EPackage {
       EAttribute VIEW__ID = eINSTANCE.getView_Id();
 
       /**
-       * The meta object literal for the '<em><b>Viewgroup</b></em>' reference feature.
+       * The meta object literal for the '<em><b>Viewgroups</b></em>' reference list feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
        * @generated
        */
-      EReference VIEW__VIEWGROUP = eINSTANCE.getView_Viewgroup();
+      EReference VIEW__VIEWGROUPS = eINSTANCE.getView_Viewgroups();
 
    }
 

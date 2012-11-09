@@ -164,7 +164,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
     * <!-- end-user-doc -->
     * @generated
     */
-   public EReference getView_Viewgroup() {
+   public EReference getView_Viewgroups() {
       return (EReference)viewEClass.getEStructuralFeatures().get(2);
    }
 
@@ -203,7 +203,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
       viewEClass = createEClass(VIEW);
       createEReference(viewEClass, VIEW__FEATURES);
       createEAttribute(viewEClass, VIEW__ID);
-      createEReference(viewEClass, VIEW__VIEWGROUP);
+      createEReference(viewEClass, VIEW__VIEWGROUPS);
    }
 
    /**
@@ -248,7 +248,7 @@ public class ViewPackageImpl extends EPackageImpl implements ViewPackage {
       initEClass(viewEClass, View.class, "View", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
       initEReference(getView_Features(), theFeaturePackage.getFeature(), null, "features", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
       initEAttribute(getView_Id(), ecorePackage.getEString(), "id", null, 1, 1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEReference(getView_Viewgroup(), theViewmodelPackage.getAbstractGroup(), null, "viewgroup", null, 0, 1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEReference(getView_Viewgroups(), theViewmodelPackage.getAbstractGroup(), null, "viewgroups", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
       // Create resource
       createResource(eNS_URI);

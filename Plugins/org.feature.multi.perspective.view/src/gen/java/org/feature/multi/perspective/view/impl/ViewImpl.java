@@ -32,7 +32,7 @@ import org.featuremapper.models.feature.Feature;
  * <ul>
  *   <li>{@link org.feature.multi.perspective.view.impl.ViewImpl#getFeatures <em>Features</em>}</li>
  *   <li>{@link org.feature.multi.perspective.view.impl.ViewImpl#getId <em>Id</em>}</li>
- *   <li>{@link org.feature.multi.perspective.view.impl.ViewImpl#getViewgroup <em>Viewgroup</em>}</li>
+ *   <li>{@link org.feature.multi.perspective.view.impl.ViewImpl#getViewgroups <em>Viewgroups</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,14 +70,14 @@ public class ViewImpl extends EObjectImpl implements View {
    protected String id = ID_EDEFAULT;
 
    /**
-    * The cached value of the '{@link #getViewgroup() <em>Viewgroup</em>}' reference.
+    * The cached value of the '{@link #getViewgroups() <em>Viewgroups</em>}' reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * @see #getViewgroup()
+    * @see #getViewgroups()
     * @generated
     * @ordered
     */
-   protected AbstractGroup viewgroup;
+   protected EList<AbstractGroup> viewgroups;
 
    /**
     * <!-- begin-user-doc -->
@@ -136,37 +136,11 @@ public class ViewImpl extends EObjectImpl implements View {
     * <!-- end-user-doc -->
     * @generated
     */
-   public AbstractGroup getViewgroup() {
-      if (viewgroup != null && viewgroup.eIsProxy()) {
-         InternalEObject oldViewgroup = (InternalEObject)viewgroup;
-         viewgroup = (AbstractGroup)eResolveProxy(oldViewgroup);
-         if (viewgroup != oldViewgroup) {
-            if (eNotificationRequired())
-               eNotify(new ENotificationImpl(this, Notification.RESOLVE, ViewPackage.VIEW__VIEWGROUP, oldViewgroup, viewgroup));
-         }
+   public EList<AbstractGroup> getViewgroups() {
+      if (viewgroups == null) {
+         viewgroups = new EObjectResolvingEList<AbstractGroup>(AbstractGroup.class, this, ViewPackage.VIEW__VIEWGROUPS);
       }
-      return viewgroup;
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * @generated
-    */
-   public AbstractGroup basicGetViewgroup() {
-      return viewgroup;
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * @generated
-    */
-   public void setViewgroup(AbstractGroup newViewgroup) {
-      AbstractGroup oldViewgroup = viewgroup;
-      viewgroup = newViewgroup;
-      if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, ViewPackage.VIEW__VIEWGROUP, oldViewgroup, viewgroup));
+      return viewgroups;
    }
 
    /**
@@ -181,9 +155,8 @@ public class ViewImpl extends EObjectImpl implements View {
             return getFeatures();
          case ViewPackage.VIEW__ID:
             return getId();
-         case ViewPackage.VIEW__VIEWGROUP:
-            if (resolve) return getViewgroup();
-            return basicGetViewgroup();
+         case ViewPackage.VIEW__VIEWGROUPS:
+            return getViewgroups();
       }
       return super.eGet(featureID, resolve, coreType);
    }
@@ -204,8 +177,9 @@ public class ViewImpl extends EObjectImpl implements View {
          case ViewPackage.VIEW__ID:
             setId((String)newValue);
             return;
-         case ViewPackage.VIEW__VIEWGROUP:
-            setViewgroup((AbstractGroup)newValue);
+         case ViewPackage.VIEW__VIEWGROUPS:
+            getViewgroups().clear();
+            getViewgroups().addAll((Collection<? extends AbstractGroup>)newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -225,8 +199,8 @@ public class ViewImpl extends EObjectImpl implements View {
          case ViewPackage.VIEW__ID:
             setId(ID_EDEFAULT);
             return;
-         case ViewPackage.VIEW__VIEWGROUP:
-            setViewgroup((AbstractGroup)null);
+         case ViewPackage.VIEW__VIEWGROUPS:
+            getViewgroups().clear();
             return;
       }
       super.eUnset(featureID);
@@ -244,8 +218,8 @@ public class ViewImpl extends EObjectImpl implements View {
             return features != null && !features.isEmpty();
          case ViewPackage.VIEW__ID:
             return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-         case ViewPackage.VIEW__VIEWGROUP:
-            return viewgroup != null;
+         case ViewPackage.VIEW__VIEWGROUPS:
+            return viewgroups != null && !viewgroups.isEmpty();
       }
       return super.eIsSet(featureID);
    }

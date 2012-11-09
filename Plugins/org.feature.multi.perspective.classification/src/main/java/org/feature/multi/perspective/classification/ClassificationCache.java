@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -68,8 +69,8 @@ public class ClassificationCache {
     */
    public View getView(Classification classification) {
       ViewBuilder viewBuilder = getViewBuilder(classification);
-      AbstractGroup viewgroup = classification.getViewgroups().get(0);
-      return viewBuilder.getView(viewgroup);
+       EList<AbstractGroup> viewgroups = classification.getViewgroups();
+      return viewBuilder.getView(viewgroups);
    }
 
    /**
