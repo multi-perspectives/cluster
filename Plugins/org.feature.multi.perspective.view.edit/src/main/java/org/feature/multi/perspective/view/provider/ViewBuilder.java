@@ -35,11 +35,15 @@ public class ViewBuilder {
    private void init(boolean initViews, MappingModel viewMapping) {
       viewContainer = ViewFactory.eINSTANCE.createViewContainer();
       viewContainer.setFeatureMapping(viewMapping);
+
       initConstraints(viewMapping.getFeatureModel());
+
       if (initViews) {
          createAllViews();
       }
    }
+
+  
 
    private void initConstraints(FeatureModel featuremodel) {
       featureModelConstraints = TextExpressionParser.getConstraints(featuremodel);
@@ -101,6 +105,10 @@ public class ViewBuilder {
          }
       }
       return view;
+   }
+
+   private void clearAllViews() {
+      viewContainer.getViews().clear();
    }
 
    private View createView(AbstractGroup group) {

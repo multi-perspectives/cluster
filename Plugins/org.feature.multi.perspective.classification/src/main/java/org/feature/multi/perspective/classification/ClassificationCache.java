@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.feature.model.constraint.FeatureExpression;
@@ -26,11 +27,11 @@ public class ClassificationCache {
       return cache;
    }
 
-   public List<FeatureExpression> getConstraints(EObject classificationObject){
+   public List<FeatureExpression> getConstraints(EObject classificationObject) {
       ViewBuilder viewBuilder = getViewBuilder(classificationObject);
       return viewBuilder.getConstraints();
    }
-   
+
    private ViewBuilder getViewBuilder(EObject classificationObject) {
       ViewBuilder result = null;
       EObject rootContainer = EcoreUtil.getRootContainer(classificationObject);
@@ -38,18 +39,20 @@ public class ClassificationCache {
          ClassificationModel model = (ClassificationModel) rootContainer;
          MappingModel viewMapping = model.getViewMapping();
          String resourceUri = viewMapping.eResource().getURI().toString();
-         if (!viewBuilders.containsKey(resourceUri)) {
-            initViewBuilder(model, resourceUri);
+         if (viewBuilders.containsKey(resourceUri)) {
+            result = viewBuilders.get(resourceUri);
+         } else {
+            result = initViewBuilder(model, resourceUri);
          }
-         result = viewBuilders.get(resourceUri);
       }
       return result;
    }
 
-   private void initViewBuilder(ClassificationModel model, String key) {
+   private ViewBuilder initViewBuilder(ClassificationModel model, String key) {
       MappingModel viewMapping = model.getViewMapping();
       ViewBuilder viewBuilder = new ViewBuilder(viewMapping, false);
       this.viewBuilders.put(key, viewBuilder);
+      return viewBuilder;
    }
 
    /**
@@ -64,7 +67,6 @@ public class ClassificationCache {
       return viewBuilder.getView(viewgroup);
    }
 
-   
    /**
     * determine if a feature is contained in a view.
     * 
