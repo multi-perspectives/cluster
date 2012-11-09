@@ -12,9 +12,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.commands.AbstractHandler;
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -22,33 +19,19 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.IJobChangeEvent;
-import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Shell;
 import org.feature.model.utilities.FeatureMappingUtil;
 import org.feature.model.utilities.FeatureModelUtil;
-import org.feature.model.utilities.WorkbenchUtil;
 import org.feature.multi.perspective.mapping.viewmapping.MappingModel;
-import org.feature.multi.perspective.mapping.viewmapping.ViewmappingPackage;
-import org.feature.multi.perspective.model.viewmodel.GroupModel;
-import org.feature.multi.perspective.model.viewmodel.ViewPointContainer;
 import org.feature.multi.perspective.model.editor.editors.View;
 import org.feature.multi.perspective.model.editor.editors.ViewCreator;
 import org.feature.multi.perspective.model.editor.editors.algorithms.BruteForceAlgorithm;
 import org.feature.multi.perspective.model.editor.editors.algorithms.IncrementalAlgorithm;
 import org.feature.multi.perspective.model.editor.editors.algorithms.ViewPointWrapper;
+import org.feature.multi.perspective.model.viewmodel.GroupModel;
+import org.feature.multi.perspective.model.viewmodel.ViewPointContainer;
 import org.featuremapper.models.feature.FeatureModel;
-import org.featuremapper.models.featuremapping.FeatureMappingModel;
-import org.featuremapper.models.featuremapping.FeatureMappingPackage;
-import org.featuremapper.models.featuremapping.FeatureModelRef;
 
 /**
  * Handler that triggers both consistency check algorithm to compare their preformance.
@@ -56,17 +39,7 @@ import org.featuremapper.models.featuremapping.FeatureModelRef;
  * @author <a href=mailto:info@juliaschroeter.de>Julia Schroeter</a>
  * 
  */
-public class ConsistencyCheckHandler extends AbstractHandler {
-
-   private Job job;
-
-   private static String generatedProject = "generatedProject";
-   // private static String[] genProjects = new String[] {
-   // "vp100nc_cnf5000", "vp100nc_cnf5000",
-   // "vp100nc_cnf10000", "vp100nc_cnf10000", "vp100nc_cnf10000",
-   // "vp100nc_cnf2000","vp100nc_cnf2000","vp100nc_cnf2000" };
-
-   protected static String mappingFolder = ViewmappingPackage.eNS_PREFIX;
+public class ConsistencyCheckHandler extends AbstractCheckHandler {
 
    private static Logger log = Logger.getLogger(ConsistencyCheckHandler.class);
 
@@ -102,13 +75,9 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       heuristicConsistentVPRatio = new LinkedList<Double>();
    }
 
-   @Override
-   public Object execute(ExecutionEvent event) throws ExecutionException {
-      createJob();
-      return null;
-   }
 
-   private void measurePerformance() {
+
+   protected void measurePerformance() {
       // for (int i = 0; i < genProjects.length; i++) {
       log.debug("-------------------------------");
       // String projectPart = genProjects[i];
@@ -116,53 +85,6 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       String projectName = generatedProject;
       checkProjectConsistency(projectName);
       // }
-   }
-
-   private void createJob() {
-
-      final Job job = new Job("Measure Performance of Consistency Check") {
-
-         protected IStatus run(IProgressMonitor monitor) {
-            try {
-               measurePerformance();
-               if (monitor.isCanceled()) return Status.CANCEL_STATUS;
-               return Status.OK_STATUS;
-            }
-            finally {
-               // schedule(60000); // start again in an hour
-            }
-         }
-      };
-
-      job.addJobChangeListener(new JobChangeAdapter() {
-
-         public void done(IJobChangeEvent event) {
-            if (event.getResult().isOK())
-               postMessage("Performance Measurement completed successfully");
-            else
-               postError("Performance Measurement did not complete successfully");
-         }
-
-         private void postError(String msg) {
-            Shell shell = WorkbenchUtil.getShell();
-            if (shell != null) {
-               MessageBox msgBox = new MessageBox(shell, SWT.OK | SWT.ICON_ERROR);
-               msgBox.setMessage(msg);
-               msgBox.open();
-            }
-         }
-
-         private void postMessage(String msg) {
-            Shell shell = WorkbenchUtil.getShell();
-            if (shell != null) {
-               MessageBox msgBox = new MessageBox(shell, SWT.OK | SWT.ICON_INFORMATION);
-               msgBox.setMessage(msg);
-               msgBox.open();
-            }
-         }
-      });
-      job.setSystem(true);
-      job.schedule(); // start as soon as possible
    }
 
    private void checkProjectConsistency(String projectName) {
@@ -186,9 +108,6 @@ public class ConsistencyCheckHandler extends AbstractHandler {
                         checkConsistency(mapping);
                      }
                   }
-               }
-               if (log.isDebugEnabled()) {
-                  printPerformanceMeasure();
                }
             } catch (CoreException e) {
                log.error("Could not determine children of folder " + projectFolder);
@@ -220,7 +139,7 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       }
    }
 
-   private void printPerformanceMeasure() {
+   protected void printPerformanceMeasure() {
       // TODO: avg. time algorithm
       printCollection("NumberFeatures    ", numberFeatures);
       printCollection("NumberConstraints ", numberConstraints);
@@ -358,12 +277,6 @@ public class ConsistencyCheckHandler extends AbstractHandler {
       return viewPoints;
    }
 
-   @Override
-   public void dispose() {
-      if (job != null) {
-         job.cancel();
-      }
-      super.dispose();
-   }
+   
 
 }
