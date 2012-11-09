@@ -20,6 +20,9 @@ import org.emftext.term.propositional.expression.Not;
 import org.emftext.term.propositional.expression.Or;
 import org.emftext.term.propositional.expression.Term;
 import org.emftext.term.propositional.expression.UnaryOperator;
+import org.feature.model.constraint.Exclude;
+import org.feature.model.constraint.FeatureExpression;
+import org.feature.model.constraint.Require;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.feature.FeatureTreeNode;
@@ -85,13 +88,66 @@ public class CSPModelBuilder {
    }
 
    private void transformConstraints(FeatureModel model) {
-      List<Term> terms = TextExpressionParser.parseExpressions(model);
-      for (Term term : terms) {
-         Constraint compound = checkTerm(term);
-         getModel().addConstraint(compound);
-      }
+//      List<FeatureExpression> parseExpressions = ConstraintParser.parseExpressions(model);
+//      for (FeatureExpression featureExpression : parseExpressions) {
+//         Constraint compound = checkExpression(featureExpression);
+//         getModel().addConstraint(compound);
+//      }
+
+       List<Term> terms = TextExpressionParser.parseExpressions(model);
+       for (Term term : terms) {
+       Constraint compound = checkTerm(term);
+       getModel().addConstraint(compound);
+       }
    }
 
+   private Constraint checkExpression(FeatureExpression featureExpression) {
+      Constraint result = null;
+      
+      Feature leftFeature = featureExpression.getLeftFeature();
+      Feature rightFeature = featureExpression.getRightFeature();
+      resolveProxy(leftFeature);
+      resolveProxy(rightFeature);
+      IntegerVariable leftFeatureVariable = getOrCreateVariable(leftFeature);
+      IntegerVariable rightFeatureVariable = getOrCreateVariable(rightFeature);
+      
+      if (featureExpression instanceof Require) {
+         result = createRequiresConstraint(leftFeatureVariable, rightFeatureVariable);
+      } else if (featureExpression instanceof Exclude) {
+         result = createExcludesConstraint(leftFeatureVariable, rightFeatureVariable);
+      }
+      return result;
+   }
+
+   private Constraint createExcludesConstraint(IntegerVariable leftFeature, IntegerVariable rightFeature) {
+      Constraint leftSelected = Choco.gt(leftFeature, 0);
+      Constraint rightNotSelected = Choco.eq(rightFeature, 0);
+      Constraint leftRight = Choco.implies(leftSelected, rightNotSelected);
+      
+      Constraint rightSelected = Choco.gt(rightFeature, 0);
+      Constraint leftNotSelected = Choco.eq(leftFeature, 0);
+      Constraint rightLeft = Choco.implies(rightSelected, leftNotSelected);
+      
+      Constraint excludeConstraint = Choco.or(leftRight, rightLeft);
+      return excludeConstraint;
+   }
+
+   private Constraint createRequiresConstraint(IntegerVariable leftFeature, IntegerVariable rightFeature) {
+      Constraint leftConstraint = Choco.gt(leftFeature, 0);
+      Constraint rightConstraint = Choco.gt(rightFeature, 0);
+      Constraint impliesConstraint = Choco.implies(leftConstraint, rightConstraint);
+      return impliesConstraint;
+   }
+
+   private void resolveProxy(Feature feature){
+      if (feature.eIsProxy()) {
+         URI proxyURI = ((org.eclipse.emf.ecore.InternalEObject) feature).eProxyURI();
+         String uriFragment = proxyURI.fragment();
+         log.warn("Proxy found! UriFragment of proxy is: " + uriFragment);
+      }
+   }
+   
+   
    private Constraint checkTerm(Term term) {
       Constraint result = null;
       if (term instanceof BinaryOperator) {
@@ -118,11 +174,7 @@ public class CSPModelBuilder {
       } else if (term instanceof FeatureRef) {
          FeatureRef featureRefTerm = (FeatureRef) term;
          Feature feature = featureRefTerm.getFeature();
-         if (feature.eIsProxy()) {
-            URI proxyURI = ((org.eclipse.emf.ecore.InternalEObject) feature).eProxyURI();
-            String uriFragment = proxyURI.fragment();
-            log.warn("Proxy found! UriFragment of proxy is: " + uriFragment);
-         }
+         resolveProxy(feature);
          IntegerVariable featureVariable = getOrCreateVariable(feature);
          result = Choco.gt(featureVariable, 0);
       }
@@ -137,9 +189,9 @@ public class CSPModelBuilder {
       int minCardinality = getMinChocoCardinality(feature);
       int maxCardinality = getMaxChocoCardinality(feature);
 
-         Constraint greaterThan = Choco.geq(childVariable, minCardinality);
-         Constraint smallerThan = Choco.leq(childVariable, maxCardinality);
-         Constraint thenConstraint = Choco.and(greaterThan, smallerThan);
+      Constraint greaterThan = Choco.geq(childVariable, minCardinality);
+      Constraint smallerThan = Choco.leq(childVariable, maxCardinality);
+      Constraint thenConstraint = Choco.and(greaterThan, smallerThan);
 
       if (parentGroup != null) {
          Feature parentFeature = parentGroup.getParentFeature();
@@ -151,10 +203,9 @@ public class CSPModelBuilder {
          getModel().addConstraint(parentSelectedAndChildCardinality);
 
          Constraint childSelected = Choco.gt(childVariable, 0);
-         Constraint impliesConstraint = Choco.implies(childSelected,parentSelected);
+         Constraint impliesConstraint = Choco.implies(childSelected, parentSelected);
          getModel().addConstraint(impliesConstraint);
-         
-         
+
       } else {
          // handle rootgroup
          getModel().addConstraint(thenConstraint);
@@ -177,10 +228,9 @@ public class CSPModelBuilder {
 
       Constraint greaterThan = Choco.geq(childFeatureSum, minCardinality);
       Constraint smallerThan = Choco.leq(childFeatureSum, maxCardinality);
-      
+
       Constraint thenConstraint = Choco.and(greaterThan, smallerThan);
-      
-      
+
       Constraint groupCardinalityConstraint = Choco.implies(ifConstraint, thenConstraint);
       getModel().addConstraint(groupCardinalityConstraint);
    }
@@ -193,7 +243,6 @@ public class CSPModelBuilder {
       }
       return cardinality;
    }
-
 
    private int getMinChocoCardinality(FeatureTreeNode node) {
       int minCardinality = node.getMinCardinality();
@@ -216,7 +265,7 @@ public class CSPModelBuilder {
    private IntegerVariable createNodeVariable(Feature node) {
       String id = EcoreUtil.getID(node);
       // TODO: wrap node into a [0,1] variable and use the correct [n,m]
-      //int minCardinality = getMinChocoCardinality(node);
+      // int minCardinality = getMinChocoCardinality(node);
       int minCardinality = 0;
       int maxCardinality = getMaxChocoCardinality(node);
       log.debug("Create IntegerVariable for '" + id + "' [" + minCardinality + "," + maxCardinality + "].");

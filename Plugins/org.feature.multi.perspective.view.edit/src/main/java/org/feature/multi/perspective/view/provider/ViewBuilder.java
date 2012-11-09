@@ -3,6 +3,8 @@ package org.feature.multi.perspective.view.provider;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.feature.model.constraint.FeatureExpression;
+import org.feature.model.csp.TextExpressionParser;
 import org.feature.model.utilities.FeatureMappingUtil;
 import org.feature.model.utilities.GroupModelUtil;
 import org.feature.multi.perspective.mapping.viewmapping.MappingModel;
@@ -12,6 +14,7 @@ import org.feature.multi.perspective.view.View;
 import org.feature.multi.perspective.view.ViewContainer;
 import org.feature.multi.perspective.view.ViewFactory;
 import org.featuremapper.models.feature.Feature;
+import org.featuremapper.models.feature.FeatureModel;
 
 /**
  * create all views specified by the given viewmapping.
@@ -23,6 +26,8 @@ public class ViewBuilder {
 
    private ViewContainer viewContainer;
 
+   private List<FeatureExpression> featureModelConstraints;
+
    public ViewBuilder(MappingModel viewMapping, boolean initViews) {
       init(initViews, viewMapping);
    }
@@ -30,9 +35,18 @@ public class ViewBuilder {
    private void init(boolean initViews, MappingModel viewMapping) {
       viewContainer = ViewFactory.eINSTANCE.createViewContainer();
       viewContainer.setFeatureMapping(viewMapping);
+      initConstraints(viewMapping.getFeatureModel());
       if (initViews) {
          createAllViews();
       }
+   }
+
+   private void initConstraints(FeatureModel featuremodel) {
+      featureModelConstraints = TextExpressionParser.getConstraints(featuremodel);
+   }
+
+   public List<FeatureExpression> getConstraints() {
+      return featureModelConstraints;
    }
 
    private void createAllViews() {

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.feature.model.constraint.Exclude;
+import org.feature.model.constraint.FeatureExpression;
+import org.feature.model.constraint.Require;
 import org.feature.model.utilities.FeatureModelUtil;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.Group;
@@ -88,10 +92,51 @@ public class AutoClassification {
       checkSiblings(classifiedFeature);
       // if eContainer is null, then this is the root feature
       // otherwise select parent features
+      checkConstraintsForAliveFeature(classifiedFeature);
    }
 
+   private void checkConstraintsForAliveFeature(ClassifiedFeature classifiedFeature) {
+      Feature feature = classifiedFeature.getFeature();
+      Classification classification = (Classification)classifiedFeature.eContainer();
+      List<FeatureExpression> constraintsContainingFeature = ClassificationUtil.getConstraintsContainingFeature(classifiedFeature);
+      for (FeatureExpression featureExpression : constraintsContainingFeature) {
+         if (featureExpression instanceof Require) {
+            Require require = (Require) featureExpression;
+            Feature leftFeature = require.getLeftFeature();
+            if (EcoreUtil.equals(leftFeature, feature)){
+               // all required features must be set alive
+               Feature rightFeature = require.getRightFeature();
+               handleAutoCompleteFeature(rightFeature, Classifier.ALIVE, classification);
+            }
+         } else if (featureExpression instanceof Exclude) {
+            //    all excluded features must be set to dead 
+            Exclude exclude = (Exclude) featureExpression;
+            Feature excludedfeature = getExcludedFeature(exclude, feature);
+            handleAutoCompleteFeature(excludedfeature, Classifier.DEAD, classification);
+         }
+      }
+   }
+
+   private Feature getExcludedFeature(Exclude exclude, Feature feature){
+     Feature result;
+      Feature leftFeature = exclude.getLeftFeature();
+      Feature rightFeature = exclude.getRightFeature();
+      if (EcoreUtil.equals(leftFeature, feature)){
+         result = rightFeature;
+      } else {
+         result = leftFeature;
+      }
+      return result;
+   }
+   
+   private void handleAutoCompleteFeature(Feature feature, Classifier newClassifier, Classification classification){
+      ClassifiedFeature classifiedFeature = ClassificationUtil.getOrCreateClassifiedFeature(classification, feature);
+      ClassificationUtil.changeClassifier(classifiedFeature,newClassifier);
+      handleChangedFeature(classifiedFeature);
+   }
+   
    private void handleChangedFeature(ClassifiedFeature classifiedFeature){
-      autoCompleteClassifiedFeature(classifiedFeature);
+      // autoCompleteClassifiedFeature(classifiedFeature);
    }
    
    private void checkSiblings(ClassifiedFeature classifiedFeature) {

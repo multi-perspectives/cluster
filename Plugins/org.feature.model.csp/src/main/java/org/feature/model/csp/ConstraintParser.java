@@ -18,9 +18,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.term.propositional.expression.resource.expression.util.ExpressionResourceUtil;
 import org.feature.model.constraint.Constraint;
 import org.feature.model.constraint.FeatureExpression;
+import org.feature.model.constraint.resource.csl.util.CslResourceUtil;
 import org.feature.model.utilities.FeatureModelUtil;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
@@ -29,28 +29,28 @@ import org.featuremapper.models.feature.FeaturePackage;
 public class ConstraintParser {
 
    private static Logger log = Logger.getLogger(ConstraintParser.class);
-   
-   public static List<Constraint> parseExpressions(FeatureModel featuremodel) {
-      List<Constraint> constraints = new ArrayList<Constraint>();
+
+   public static List<FeatureExpression> parseExpressions(FeatureModel featuremodel) {
+      List<FeatureExpression> constraints = new ArrayList<FeatureExpression>();
       URI uri = EcoreUtil.getURI(featuremodel);
       Resource resource = featuremodel.eResource();
       ResourceSet resourceSet = new ResourceSetImpl();
       if (resource != null) {
          resourceSet = resource.getResourceSet();
       }
-      List<org.featuremapper.models.feature.Constraint> simpleConstraints = FeatureModelUtil.getConstraints(featuremodel, FeatureModelUtil.simple_constraintLanguage);
+      List<org.featuremapper.models.feature.Constraint> simpleConstraints =
+         FeatureModelUtil.getConstraints(featuremodel, FeatureModelUtil.simple_constraintLanguage);
       for (org.featuremapper.models.feature.Constraint simpleConstraint : simpleConstraints) {
          String expression = simpleConstraint.getExpression();
-         Constraint con = parseExpression(expression, uri, resourceSet);
-         if (expression != null) {
+         FeatureExpression con = parseExpression(expression, uri, resourceSet);
+         if (con != null && con != null) {
             log.debug("Expression '" + expression + "' extracted.");
             constraints.add(con);
          }
       }
       return constraints;
    }
-   
-   
+
    /**
     * parse a constraint expression and return the term model
     * 
@@ -58,8 +58,8 @@ public class ConstraintParser {
     * @param featuremodelURI an uri to create a temporary file from
     * @return
     */
-   public static Constraint parseExpression(String expression, URI featuremodelURI, ResourceSet resourceSet) {
-      Constraint con = null;
+   public static FeatureExpression parseExpression(String expression, URI featuremodelURI, ResourceSet resourceSet) {
+      FeatureExpression featureExpression = null;
       InputStream inputStream = new ByteArrayInputStream(expression.getBytes());
 
       EPackage.Registry.INSTANCE.put(FeaturePackage.eNS_URI, FeaturePackage.eINSTANCE);
@@ -80,11 +80,12 @@ public class ConstraintParser {
             EList<EObject> contents = resource.getContents();
             // an expression must contain only one Term
             if (contents.size() == 1 && contents.get(0) instanceof Constraint) {
-               con = (Constraint) contents.get(0);
+               Constraint con = (Constraint) contents.get(0);
+               featureExpression = con.getExpression();
             }
-            boolean resolved = ExpressionResourceUtil.resolveAll(resource);
+            boolean resolved = CslResourceUtil.resolveAll(resource);
             if (resolved) {
-               log.debug("All proxies of the expression have been resolved.");
+               log.debug("All proxies of the expression are resolved.");
             } else {
                // log.warn("Not all proxies of the expression could be resolved.");
             }
@@ -93,36 +94,35 @@ public class ConstraintParser {
             log.warn("Could not load temporary expression resource '" + uri + "'.");
          }
       }
-      return con;
+      return featureExpression;
    }
-   
+
    /**
     * return all constrained features.
+    * 
     * @param featuremodel
     * @return
     */
    public static Set<Feature> getConstrainedFeatures(FeatureModel featuremodel) {
       Set<Feature> constrainedFeatures = new LinkedHashSet<Feature>();
-      List<Constraint> expressions = parseExpressions(featuremodel);
-      for (Constraint constraint : expressions) {
+      List<FeatureExpression> expressions = parseExpressions(featuremodel);
+      for (FeatureExpression constraint : expressions) {
          constrainedFeatures.addAll(getFeaturesFromConstraint(constraint));
       }
       return constrainedFeatures;
    }
 
-   public static Set<Feature> getFeaturesFromConstraint(Constraint con) {
+   public static Set<Feature> getFeaturesFromConstraint(FeatureExpression con) {
       Set<Feature> constrainedFeatures = new LinkedHashSet<Feature>();
-      FeatureExpression expression = con.getExpression();
-      Feature leftFeature = expression.getLeftFeature();
-      Feature rightFeature = expression.getRightFeature();
-      if (leftFeature != null){
+      Feature leftFeature = con.getLeftFeature();
+      Feature rightFeature = con.getRightFeature();
+      if (leftFeature != null) {
          constrainedFeatures.add(leftFeature);
       }
-      if (rightFeature != null){
+      if (rightFeature != null) {
          constrainedFeatures.add(rightFeature);
       }
       return constrainedFeatures;
    }
 
-   
 }

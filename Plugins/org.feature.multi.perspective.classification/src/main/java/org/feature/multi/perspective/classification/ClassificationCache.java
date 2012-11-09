@@ -1,10 +1,12 @@
 package org.feature.multi.perspective.classification;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.feature.model.constraint.FeatureExpression;
 import org.feature.multi.perspective.mapping.viewmapping.MappingModel;
 import org.feature.multi.perspective.model.viewmodel.AbstractGroup;
 import org.feature.multi.perspective.view.View;
@@ -24,6 +26,11 @@ public class ClassificationCache {
       return cache;
    }
 
+   public List<FeatureExpression> getConstraints(EObject classificationObject){
+      ViewBuilder viewBuilder = getViewBuilder(classificationObject);
+      return viewBuilder.getConstraints();
+   }
+   
    private ViewBuilder getViewBuilder(EObject classificationObject) {
       ViewBuilder result = null;
       EObject rootContainer = EcoreUtil.getRootContainer(classificationObject);

@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.feature.model.constraint.FeatureExpression;
 import org.feature.multi.perspective.view.View;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.Group;
@@ -159,12 +160,14 @@ public final class ClassificationUtil {
       }
       return result;
    }
-/**
- * add the given classified feature to the classification.
- * beware the method does not check for uniqueness of the classified feature!
- * @param classification
- * @param classifiedFeature
- */
+
+   /**
+    * add the given classified feature to the classification. beware the method does not check for uniqueness of the
+    * classified feature!
+    * 
+    * @param classification
+    * @param classifiedFeature
+    */
    public static void addClassifiedFeature(Classification classification, ClassifiedFeature classifiedFeature) {
       Feature feature = classifiedFeature.getFeature();
       boolean containedInView = ClassificationCache.getInstance().isFeatureContainedInView(classification, feature);
@@ -197,10 +200,11 @@ public final class ClassificationUtil {
 
    /**
     * get all the features assigned to the view as classified features.
+    * 
     * @param classification
     * @return
     */
-   public static List<ClassifiedFeature> getAllClassifiedFeaturesOfView(Classification classification){
+   public static List<ClassifiedFeature> getAllClassifiedFeaturesOfView(Classification classification) {
       View view = ClassificationCache.getInstance().getView(classification);
       EList<Feature> features = view.getFeatures();
       for (Feature feature : features) {
@@ -208,12 +212,31 @@ public final class ClassificationUtil {
       }
       return classification.getClassifiedFeatures();
    }
-   
+
    public static ClassifiedFeature getOrCreateClassifiedFeature(Classification classification, Feature feature) {
       ClassifiedFeature classifiedFeature = ClassificationUtil.getClassifiedFeature(classification, feature);
       if (classifiedFeature == null) {
          classifiedFeature = ClassificationUtil.createdClassifiedFeature(classification, feature);
       }
       return classifiedFeature;
+   }
+
+   public static List<FeatureExpression> getConstraintsContainingFeature(ClassifiedFeature classifiedFeature) {
+      List<FeatureExpression> constraints = ClassificationCache.getInstance().getConstraints(classifiedFeature);
+      Feature feature = classifiedFeature.getFeature();
+      for (FeatureExpression featureExpression : constraints) {
+         if (containsFeature(featureExpression, feature)) {
+            constraints.add(featureExpression);
+         }
+      }
+      return constraints;
+   }
+
+   private static boolean containsFeature(FeatureExpression expression, Feature feature) {
+      Feature leftFeature = expression.getLeftFeature();
+      Feature rightFeature = expression.getRightFeature();
+      boolean isContained = (EcoreUtil.equals(leftFeature, feature) || EcoreUtil.equals(rightFeature, feature));
+      return isContained;
+
    }
 }

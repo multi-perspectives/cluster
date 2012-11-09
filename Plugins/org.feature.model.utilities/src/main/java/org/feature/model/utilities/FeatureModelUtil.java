@@ -162,7 +162,7 @@ public final class FeatureModelUtil {
     */
    public static Constraint createConstraint(String expression) {
       Constraint constraint = FeatureFactory.eINSTANCE.createConstraint();
-      constraint.setLanguage(csp_constraintLanguage);
+      constraint.setLanguage(simple_constraintLanguage);
       constraint.setExpression(expression);
       return constraint;
    }
