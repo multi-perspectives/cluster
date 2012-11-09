@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.feature.model.constraint.Exclude;
 import org.feature.model.constraint.FeatureExpression;
@@ -67,8 +69,6 @@ public class AutoClassification {
          handleAliveFeature(classifiedFeature);
       } else if (Classifier.DEAD.equals(classified)) {
          handleDeadFeature(classifiedFeature);
-      } else if (Classifier.UNBOUND.equals(classified)) {
-         handleUnboundFeature(classifiedFeature);
       } else if (Classifier.UNCLASSIFIED.equals(classified)) {
          handleUnclassifiedFeature(classifiedFeature);
       }
@@ -77,25 +77,39 @@ public class AutoClassification {
    private void handleUnclassifiedFeature(ClassifiedFeature classifiedFeature) {
       // set feature undbound and handle it as unboundfeature
       classifiedFeature.setClassified(Classifier.UNBOUND);
-      handleUnboundFeature(classifiedFeature);
-   }
-
-   private void handleUnboundFeature(ClassifiedFeature classifiedFeature) {
-      setParentFeatures(classifiedFeature, Classifier.UNBOUND);
    }
 
    private void handleDeadFeature(ClassifiedFeature classifiedFeature) {
-      // TODO Auto-generated method stub
+      // set children dead
+      setChildFeaturesDead(classifiedFeature, Classifier.DEAD);
+      // set features that require this feature dead
+      checkConstraintsForDeadFeature(classifiedFeature);
+   }
+
+   private void checkConstraintsForDeadFeature(ClassifiedFeature classifiedFeature) {
+      Feature feature = classifiedFeature.getFeature();
+      Classification classification = (Classification) classifiedFeature.eContainer();
+      List<FeatureExpression> constraintsContainingFeature = ClassificationUtil.getConstraintsContainingFeature(classifiedFeature);
+      for (FeatureExpression featureExpression : constraintsContainingFeature) {
+         if (featureExpression instanceof Require) {
+            Require require = (Require) featureExpression;
+            Feature rightFeature = require.getRightFeature();
+            if (EcoreUtil.equals(rightFeature, feature)) {
+               // all features that require this feature must be set dead
+               Feature leftFeature = require.getRightFeature();
+               handleAutoCompleteFeature(leftFeature, Classifier.DEAD, classification);
+            }
+         }
+      }
+
    }
 
    private void handleAliveFeature(ClassifiedFeature classifiedFeature) {
-      // TODO select parent features
-      setParentFeaturesAlive(classifiedFeature);
-      // TODO select constraint requires edge features
-      // TODO select group cardinality sibling features
+      // select parent features
+      setParentFeatures(classifiedFeature, Classifier.ALIVE);
+      // select group cardinality sibling features
       checkSiblings(classifiedFeature);
-      // if eContainer is null, then this is the root feature
-      // otherwise select parent features
+      // check Constraints
       checkConstraintsForAliveFeature(classifiedFeature);
    }
 
@@ -163,6 +177,7 @@ public class AutoClassification {
 
    private void checkSiblings(ClassifiedFeature classifiedFeature) {
       Feature feature = classifiedFeature.getFeature();
+      Classifier classified = classifiedFeature.getClassified();
       Classification classification = (Classification) classifiedFeature.eContainer();
       Group parentGroup = feature.getParentGroup();
       // if parent group is null, than this is the root feature and nothing need to be done.
@@ -184,11 +199,12 @@ public class AutoClassification {
 
          if (sizeAlive == maxCardinality) {
             // maximum reached, set unbound features dead
-            for (ClassifiedFeature sibling : siblingsCopy) {
-               handleAutoCompleteFeature(sibling, Classifier.DEAD);
+            if (Classifier.ALIVE.equals(classified)) {
+               for (ClassifiedFeature sibling : siblingsCopy) {
+                  handleAutoCompleteFeature(sibling, Classifier.DEAD);
+               }
             }
          }
-
          if (sizeUnboundOrAlive < minCardinality) {
             // TODO the minimum number of selected features cannot be reached
             // consider more features, that are not yet contained in the classification
@@ -225,11 +241,23 @@ public class AutoClassification {
       }
    }
 
-   private void setParentFeaturesAlive(ClassifiedFeature classifiedFeature) {
-      setParentFeatures(classifiedFeature, Classifier.ALIVE);
+   private void setChildFeaturesDead(ClassifiedFeature classifiedFeature, Classifier newClassifier) {
+      // otherwise select child features recursively
+      Feature parentFeature = classifiedFeature.getFeature();
+      Classification classification = (Classification) classifiedFeature.eContainer();
+
+      TreeIterator<EObject> eAllContents = parentFeature.eAllContents();
+      while (eAllContents.hasNext()) {
+         EObject element = eAllContents.next();
+         if (element instanceof Group) {
+            Group group = (Group) element;
+            List<ClassifiedFeature> childFeatures = ClassificationUtil.getClassifiedFeaturesOfGroup(group, classification);
+            for (ClassifiedFeature childFeature : childFeatures) {
+               handleAutoCompleteFeature(childFeature, Classifier.DEAD);
+            }
+         }
+      }
    }
-
-
 
    private class ChangeFeature {
 
