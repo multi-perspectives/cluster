@@ -35,6 +35,9 @@ public class CltTokenStyleInformationProvider {
 		if ("views".equals(tokenName)) {
 			return new org.feature.multi.perspective.classification.resource.clt.mopp.CltTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
+		if ("stages".equals(tokenName)) {
+			return new org.feature.multi.perspective.classification.resource.clt.mopp.CltTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
 		if ("autocomplete".equals(tokenName)) {
 			return new org.feature.multi.perspective.classification.resource.clt.mopp.CltTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}

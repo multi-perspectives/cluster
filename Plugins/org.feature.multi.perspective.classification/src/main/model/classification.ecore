@@ -29,6 +29,8 @@
         eType="ecore:EClass platform:/plugin/org.featuremapper.models.feature/model/feature.ecore#//Feature"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compose" upperBound="-1"
+        eType="#//Classification"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassifiedFeature">
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"

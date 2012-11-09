@@ -236,6 +236,15 @@ public class ClassificationPackageImpl extends EPackageImpl implements Classific
     * <!-- end-user-doc -->
    * @generated
    */
+   public EReference getClassification_Compose() {
+    return (EReference)classificationEClass.getEStructuralFeatures().get(7);
+  }
+
+   /**
+   * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+   * @generated
+   */
    public EClass getClassifiedFeature() {
     return classifiedFeatureEClass;
   }
@@ -308,6 +317,7 @@ public class ClassificationPackageImpl extends EPackageImpl implements Classific
     createEReference(classificationEClass, CLASSIFICATION__ALIVE_FEATURES);
     createEReference(classificationEClass, CLASSIFICATION__DEAD_FEATURES);
     createEAttribute(classificationEClass, CLASSIFICATION__ID);
+    createEReference(classificationEClass, CLASSIFICATION__COMPOSE);
 
     classifiedFeatureEClass = createEClass(CLASSIFIED_FEATURE);
     createEReference(classifiedFeatureEClass, CLASSIFIED_FEATURE__FEATURE);
@@ -365,6 +375,7 @@ public class ClassificationPackageImpl extends EPackageImpl implements Classific
     initEReference(getClassification_AliveFeatures(), theFeaturePackage.getFeature(), null, "aliveFeatures", null, 0, -1, Classification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getClassification_DeadFeatures(), theFeaturePackage.getFeature(), null, "deadFeatures", null, 0, -1, Classification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getClassification_Id(), ecorePackage.getEString(), "id", null, 1, 1, Classification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getClassification_Compose(), this.getClassification(), null, "compose", null, 0, -1, Classification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(classifiedFeatureEClass, ClassifiedFeature.class, "ClassifiedFeature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getClassifiedFeature_Feature(), theFeaturePackage.getFeature(), null, "feature", null, 1, 1, ClassifiedFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

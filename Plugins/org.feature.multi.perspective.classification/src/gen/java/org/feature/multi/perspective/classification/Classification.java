@@ -25,6 +25,7 @@ import org.featuremapper.models.feature.Feature;
  *   <li>{@link org.feature.multi.perspective.classification.Classification#getAliveFeatures <em>Alive Features</em>}</li>
  *   <li>{@link org.feature.multi.perspective.classification.Classification#getDeadFeatures <em>Dead Features</em>}</li>
  *   <li>{@link org.feature.multi.perspective.classification.Classification#getId <em>Id</em>}</li>
+ *   <li>{@link org.feature.multi.perspective.classification.Classification#getCompose <em>Compose</em>}</li>
  * </ul>
  * </p>
  *
@@ -154,5 +155,21 @@ public interface Classification extends EObject {
    * @generated
    */
    void setId(String value);
+
+   /**
+   * Returns the value of the '<em><b>Compose</b></em>' reference list.
+   * The list contents are of type {@link org.feature.multi.perspective.classification.Classification}.
+   * <!-- begin-user-doc -->
+    * <p>
+    * If the meaning of the '<em>Compose</em>' reference list isn't clear,
+    * there really should be more of a description here...
+    * </p>
+    * <!-- end-user-doc -->
+   * @return the value of the '<em>Compose</em>' reference list.
+   * @see org.feature.multi.perspective.classification.ClassificationPackage#getClassification_Compose()
+   * @model
+   * @generated
+   */
+   EList<Classification> getCompose();
 
 } // Classification

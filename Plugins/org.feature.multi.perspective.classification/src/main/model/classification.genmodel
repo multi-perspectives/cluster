@@ -29,6 +29,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/aliveFeatures"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/deadFeatures"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classification.ecore#//Classification/id"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/compose"/>
     </genClasses>
     <genClasses ecoreClass="classification.ecore#//ClassifiedFeature">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//ClassifiedFeature/feature"/>

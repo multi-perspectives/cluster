@@ -39,8 +39,10 @@ RULES {
 							  classifications*;
 
 	// syntax definition for class 'Classification'
-	Classification ::=  "stage" #1 id['<','>'] #1 "on" "views" (#1 viewgroups['"','"'] (_[COMMA] viewgroups['"','"'])*)? #1 ":" !0
-						 classifiedFeatures* 
+	Classification ::=  "stage" #1 id['<','>'] #1 "on" 
+						(("views" (#1 viewgroups['"','"'] (_[COMMA] #1 viewgroups['"','"'])*)? #1 ) |
+						("stages" (#1 compose['"','"'] (_[COMMA] #1 compose['"','"'])*)? #1 ))?
+						 ":" !0 classifiedFeatures* 
 						 (#3 "autocomplete" #1 "{" !0 autoCompleteFeatures* #3 "}")? !0 ; 
 
 	// syntax definition for class 'ClassifiedFeature'

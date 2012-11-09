@@ -41,6 +41,7 @@ import org.featuremapper.models.feature.Feature;
  *   <li>{@link org.feature.multi.perspective.classification.impl.ClassificationImpl#getAliveFeatures <em>Alive Features</em>}</li>
  *   <li>{@link org.feature.multi.perspective.classification.impl.ClassificationImpl#getDeadFeatures <em>Dead Features</em>}</li>
  *   <li>{@link org.feature.multi.perspective.classification.impl.ClassificationImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.feature.multi.perspective.classification.impl.ClassificationImpl#getCompose <em>Compose</em>}</li>
  * </ul>
  * </p>
  *
@@ -126,6 +127,16 @@ public class ClassificationImpl extends EObjectImpl implements Classification {
    * @ordered
    */
    protected String id = ID_EDEFAULT;
+
+   /**
+   * The cached value of the '{@link #getCompose() <em>Compose</em>}' reference list.
+   * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+   * @see #getCompose()
+   * @generated
+   * @ordered
+   */
+   protected EList<Classification> compose;
 
    /**
    * <!-- begin-user-doc -->
@@ -251,6 +262,19 @@ public class ClassificationImpl extends EObjectImpl implements Classification {
     * <!-- end-user-doc -->
    * @generated
    */
+   public EList<Classification> getCompose() {
+    if (compose == null)
+    {
+      compose = new EObjectResolvingEList<Classification>(Classification.class, this, ClassificationPackage.CLASSIFICATION__COMPOSE);
+    }
+    return compose;
+  }
+
+   /**
+   * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+   * @generated
+   */
    @Override
    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
     switch (featureID)
@@ -286,6 +310,8 @@ public class ClassificationImpl extends EObjectImpl implements Classification {
         return getDeadFeatures();
       case ClassificationPackage.CLASSIFICATION__ID:
         return getId();
+      case ClassificationPackage.CLASSIFICATION__COMPOSE:
+        return getCompose();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -327,6 +353,10 @@ public class ClassificationImpl extends EObjectImpl implements Classification {
       case ClassificationPackage.CLASSIFICATION__ID:
         setId((String)newValue);
         return;
+      case ClassificationPackage.CLASSIFICATION__COMPOSE:
+        getCompose().clear();
+        getCompose().addAll((Collection<? extends Classification>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -361,6 +391,9 @@ public class ClassificationImpl extends EObjectImpl implements Classification {
       case ClassificationPackage.CLASSIFICATION__ID:
         setId(ID_EDEFAULT);
         return;
+      case ClassificationPackage.CLASSIFICATION__COMPOSE:
+        getCompose().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -388,6 +421,8 @@ public class ClassificationImpl extends EObjectImpl implements Classification {
         return deadFeatures != null && !deadFeatures.isEmpty();
       case ClassificationPackage.CLASSIFICATION__ID:
         return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+      case ClassificationPackage.CLASSIFICATION__COMPOSE:
+        return compose != null && !compose.isEmpty();
     }
     return super.eIsSet(featureID);
   }

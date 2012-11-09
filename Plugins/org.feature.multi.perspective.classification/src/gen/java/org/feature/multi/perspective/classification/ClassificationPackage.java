@@ -176,13 +176,22 @@ public interface ClassificationPackage extends EPackage {
    int CLASSIFICATION__ID = 6;
 
    /**
+   * The feature id for the '<em><b>Compose</b></em>' reference list.
+   * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+   int CLASSIFICATION__COMPOSE = 7;
+
+   /**
    * The number of structural features of the '<em>Classification</em>' class.
    * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-   int CLASSIFICATION_FEATURE_COUNT = 7;
+   int CLASSIFICATION_FEATURE_COUNT = 8;
 
    /**
    * The meta object id for the '{@link org.feature.multi.perspective.classification.impl.ClassifiedFeatureImpl <em>Classified Feature</em>}' class.
@@ -363,6 +372,17 @@ public interface ClassificationPackage extends EPackage {
    EAttribute getClassification_Id();
 
    /**
+   * Returns the meta object for the reference list '{@link org.feature.multi.perspective.classification.Classification#getCompose <em>Compose</em>}'.
+   * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Compose</em>'.
+   * @see org.feature.multi.perspective.classification.Classification#getCompose()
+   * @see #getClassification()
+   * @generated
+   */
+   EReference getClassification_Compose();
+
+   /**
    * Returns the meta object for class '{@link org.feature.multi.perspective.classification.ClassifiedFeature <em>Classified Feature</em>}'.
    * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -525,6 +545,14 @@ public interface ClassificationPackage extends EPackage {
      * @generated
      */
       EAttribute CLASSIFICATION__ID = eINSTANCE.getClassification_Id();
+
+      /**
+     * The meta object literal for the '<em><b>Compose</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+     * @generated
+     */
+      EReference CLASSIFICATION__COMPOSE = eINSTANCE.getClassification_Compose();
 
       /**
      * The meta object literal for the '{@link org.feature.multi.perspective.classification.impl.ClassifiedFeatureImpl <em>Classified Feature</em>}' class.
