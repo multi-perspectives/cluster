@@ -88,23 +88,23 @@ public class CSPModelBuilder {
    }
 
    private void transformConstraints(FeatureModel model) {
-       List<Term> terms = TextExpressionParser.parseExpressions(model);
-       for (Term term : terms) {
-       Constraint compound = checkTerm(term);
-       getModel().addConstraint(compound);
-       }
+      List<Term> terms = TextExpressionParser.parseExpressions(model);
+      for (Term term : terms) {
+         Constraint compound = checkTerm(term);
+         getModel().addConstraint(compound);
+      }
    }
 
    private Constraint checkExpression(FeatureExpression featureExpression) {
       Constraint result = null;
-      
+
       Feature leftFeature = featureExpression.getLeftFeature();
       Feature rightFeature = featureExpression.getRightFeature();
       resolveProxy(leftFeature);
       resolveProxy(rightFeature);
       IntegerVariable leftFeatureVariable = getOrCreateVariable(leftFeature);
       IntegerVariable rightFeatureVariable = getOrCreateVariable(rightFeature);
-      
+
       if (featureExpression instanceof Require) {
          result = createRequiresConstraint(leftFeatureVariable, rightFeatureVariable);
       } else if (featureExpression instanceof Exclude) {
@@ -117,11 +117,11 @@ public class CSPModelBuilder {
       Constraint leftSelected = Choco.gt(leftFeature, 0);
       Constraint rightNotSelected = Choco.eq(rightFeature, 0);
       Constraint leftRight = Choco.implies(leftSelected, rightNotSelected);
-      
+
       Constraint rightSelected = Choco.gt(rightFeature, 0);
       Constraint leftNotSelected = Choco.eq(leftFeature, 0);
       Constraint rightLeft = Choco.implies(rightSelected, leftNotSelected);
-      
+
       Constraint excludeConstraint = Choco.or(leftRight, rightLeft);
       return excludeConstraint;
    }
@@ -133,53 +133,52 @@ public class CSPModelBuilder {
       return impliesConstraint;
    }
 
-   private void resolveProxy(Feature feature){
+   private void resolveProxy(Feature feature) {
       if (feature.eIsProxy()) {
          URI proxyURI = ((org.eclipse.emf.ecore.InternalEObject) feature).eProxyURI();
          String uriFragment = proxyURI.fragment();
          log.warn("Proxy found! UriFragment of proxy is: " + uriFragment);
       }
    }
-   
-   
-private Constraint checkTerm(Term term) {
-        Constraint result = null;
-        if (term instanceof BinaryOperator) {
-            BinaryOperator binTerm = (BinaryOperator) term;
-            Term leftTerm = binTerm.getOperand1();
-            Constraint leftConstraint = checkTerm(leftTerm);
-            Term rightTerm = binTerm.getOperand2();
-            Constraint rightConstraint = checkTerm(rightTerm);
 
-            if (term instanceof Or) {
-                result = Choco.or(leftConstraint, rightConstraint);
-            } else if (term instanceof And) {
-                result = Choco.and(leftConstraint, rightConstraint);
-            }
-        } else if (term instanceof UnaryOperator) {
-            UnaryOperator unaryTerm = (UnaryOperator) term;
-            Term singleTerm = unaryTerm.getOperand();
-            Constraint singleConstraint = checkTerm(singleTerm);
-            if (term instanceof Not) {
-                result = Choco.not(singleConstraint);
-            } else if (term instanceof Nested) {
-                result = singleConstraint;
-            }
-        } else if (term instanceof FeatureRef) {
-            FeatureRef featureRefTerm = (FeatureRef) term;
-            Feature feature = featureRefTerm.getFeature();
-            if (feature.eIsProxy()) {
-                URI proxyURI = ((org.eclipse.emf.ecore.InternalEObject) feature)
-                        .eProxyURI();
-                String uriFragment = proxyURI.fragment();
-                log.warn("Proxy found! UriFragment of proxy is: " + uriFragment);
-            }
-            IntegerVariable featureVariable = getOrCreateVariable(feature);
-            result = Choco.gt(featureVariable, 0);
-        }
+   private Constraint checkTerm(Term term) {
+      Constraint result = null;
+      if (term instanceof BinaryOperator) {
+         BinaryOperator binTerm = (BinaryOperator) term;
+         Term leftTerm = binTerm.getOperand1();
+         Constraint leftConstraint = checkTerm(leftTerm);
+         Term rightTerm = binTerm.getOperand2();
+         Constraint rightConstraint = checkTerm(rightTerm);
 
-        return result;
-    }
+         if (term instanceof Or) {
+            result = Choco.or(leftConstraint, rightConstraint);
+         } else if (term instanceof And) {
+            result = Choco.and(leftConstraint, rightConstraint);
+         }
+      } else if (term instanceof UnaryOperator) {
+         UnaryOperator unaryTerm = (UnaryOperator) term;
+         Term singleTerm = unaryTerm.getOperand();
+         Constraint singleConstraint = checkTerm(singleTerm);
+         if (term instanceof Not) {
+            result = Choco.not(singleConstraint);
+         } else if (term instanceof Nested) {
+            result = singleConstraint;
+         }
+      } else if (term instanceof FeatureRef) {
+         FeatureRef featureRefTerm = (FeatureRef) term;
+         Feature feature = featureRefTerm.getFeature();
+         if (feature.eIsProxy()) {
+            URI proxyURI = ((org.eclipse.emf.ecore.InternalEObject) feature).eProxyURI();
+            String uriFragment = proxyURI.fragment();
+            log.warn("Proxy found! UriFragment of proxy is: " + uriFragment);
+         }
+         IntegerVariable featureVariable = getOrCreateVariable(feature);
+         result = Choco.gt(featureVariable, 0);
+      }
+
+      return result;
+   }
+
    private void createFeatureConstraint(Feature feature) {
       Group parentGroup = feature.getParentGroup();
       IntegerVariable childVariable = getOrCreateVariable(feature);
