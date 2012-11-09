@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.feature.multi.perspective.model.editor.algorithm"
+            defaultHandler="org.feature.multi.perspective.measure.performance.ConsistencyCheckHandler"
+            description="Measure Viewpoint Validation"
+            id="org.feature.multi.perspective.model.measure.viewpoint"
+            name="measureValidation">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="true"
+            locationURI="menu:org.eclipse.ui.main.menu?before=additions">
+         <menu
+               id="org.feature.multi.perspective.model.editor"
+               label="Multi-Perspective Editor">
+            <command
+                  commandId="org.feature.multi.perspective.model.measure.viewpoint"
+                  label="Measure Viewpoint Validation"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>   
+   
+</plugin>

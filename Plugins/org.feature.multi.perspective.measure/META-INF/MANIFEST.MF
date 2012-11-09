@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Measure
+Bundle-SymbolicName: org.feature.multi.perspective.measure;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.feature.multi.perspective.measure.MeasurePlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.feature.multi.perspective.model.editor;bundle-version="0.4.0",
+ org.feature.multi.perspective.mapping;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.feature.model.utilities,
+ org.featuremapper.models.feature,
+ org.featuremapper.models.featuremapping
