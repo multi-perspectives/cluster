@@ -102,6 +102,43 @@ public final class ClassificationUtil {
       }
       return isAllowed;
    }
+   
+   /**
+    * refines the classifier of the given classified feature only, if is is allowed. If it is the same classifier then
+    * do nothing.
+    * 
+    * @param classifiedFeature
+    * @param newClassifier
+    * @param classification classification that has to be adapted to the new classifier
+    * @return
+    */
+   public static boolean changeClassifier(ClassifiedFeature classifiedFeature, Classifier newClassifier, Classification classification) {
+	   if(changeClassifier(classifiedFeature, newClassifier))
+	   {
+		   if(newClassifier == Classifier.ALIVE)
+		   {
+			   classification.getAliveFeatures().add(classifiedFeature.getFeature());
+			   classification.getDeadFeatures().remove(classifiedFeature.getFeature());
+			   classification.getUnboundFeatures().remove(classifiedFeature.getFeature());		   
+		   }
+		   else if(newClassifier == Classifier.DEAD)
+		   {
+			   classification.getAliveFeatures().remove(classifiedFeature.getFeature());
+			   classification.getDeadFeatures().add(classifiedFeature.getFeature());
+			   classification.getUnboundFeatures().add(classifiedFeature.getFeature());
+		   }
+		   else if(newClassifier == Classifier.UNBOUND)
+		   {
+			   classification.getAliveFeatures().remove(classifiedFeature.getFeature());
+			   classification.getDeadFeatures().remove(classifiedFeature.getFeature());
+			   classification.getUnboundFeatures().add(classifiedFeature.getFeature());
+		   }
+		   return true;
+	   }
+	   else
+		   return false;
+      
+   }
 
    public static boolean isChangeAllowed(Classifier oldClassifier, Classifier newClassifier) {
       boolean isAllowed = false;

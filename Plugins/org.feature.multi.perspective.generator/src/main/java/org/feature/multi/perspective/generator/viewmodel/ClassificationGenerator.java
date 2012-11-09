@@ -91,7 +91,9 @@ public class ClassificationGenerator extends AbstractGenerator {
             List<ClassifiedFeature> classifiedFeatures = ClassificationUtil.getAllClassifiedFeaturesOfView(classification);
 
             for (ClassifiedFeature feature : classifiedFeatures) {
+            	
                Classifier classifier = Classifier.UNCLASSIFIED;
+               
                int randomUnbound = (int) Math.floor((Math.random() * 99) + 1);
                int randomUnclassified = (int) Math.floor((Math.random() * 99) + 1);
 
@@ -104,18 +106,20 @@ public class ClassificationGenerator extends AbstractGenerator {
                // No classification
                {}
                // if both would match, unclassified wins
-               else if (randomUnbound <= percentOfUnboundOverrideEachInterpretation
+               else if ((randomUnbound <= percentOfUnboundOverrideEachInterpretation)
                         && (randomUnclassified <= percentOfUnclassifiedOverrideEachInterpretation)) {
                   // classifier = Classifier.UNBOUND;
-               } else {
-                  if (productVariants[i].getAliveFeatures().contains(feature)) {
+               } 
+               
+               else {
+                  if (productVariants[i].getAliveFeatures().contains(feature.getFeature())) {
                      classifier = Classifier.ALIVE;
-                  } else if (productVariants[i].getDeadFeatures().contains(feature)) {
+                  } else if (productVariants[i].getDeadFeatures().contains(feature.getFeature())) {
                      classifier = Classifier.DEAD;
                   } else
                      log.error("Feature classification is UNKNOWN! - Classification cannot be determined, set to unclassified");
                }
-               ClassificationUtil.changeClassifier(feature, classifier);
+               ClassificationUtil.changeClassifier(feature, classifier, classification);
             }
          }
       }
