@@ -4,7 +4,6 @@
 package org.feature.multi.perspective.measure.performance;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.MatchResult;
@@ -13,11 +12,6 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -41,6 +35,8 @@ import org.featuremapper.models.feature.FeatureModel;
  */
 public class ConsistencyCheckHandler extends AbstractCheckHandler {
 
+   String measure = "Measure Performance of Consistency Check";
+
    private static Logger log = Logger.getLogger(ConsistencyCheckHandler.class);
 
    List<Long> bruteforceTimeList = new LinkedList<Long>();
@@ -60,60 +56,40 @@ public class ConsistencyCheckHandler extends AbstractCheckHandler {
       return bruteForceConsistentVPRatio;
    }
 
-   public void resetLists() {
-      bruteforceTimeList = new LinkedList<Long>();
-      heuristicTimeList = new LinkedList<Long>();
-      numberFeatures = new LinkedList<Integer>();
-      numberViews = new LinkedList<Integer>();
-      numberViewPoints = new LinkedList<Integer>();
-      numberConstraints = new LinkedList<Integer>();
-      groupTreeHeight = new LinkedList<String>();
-      groupMaxChildren = new LinkedList<String>();
-      groupsPerVP = new LinkedList<String>();
-      featuresPerGroup = new LinkedList<String>();
-      bruteForceConsistentVPRatio = new LinkedList<Double>();
-      heuristicConsistentVPRatio = new LinkedList<Double>();
+   public void clearLists() {
+      bruteforceTimeList.clear();
+      heuristicTimeList.clear();
+      numberFeatures.clear();
+      numberViews.clear();
+      numberViewPoints.clear();
+      numberConstraints.clear();
+      groupTreeHeight.clear();
+      groupMaxChildren.clear();
+      groupsPerVP.clear();
+      featuresPerGroup.clear();
+      bruteForceConsistentVPRatio.clear();
+      heuristicConsistentVPRatio.clear();
    }
 
-
-
-   protected void measurePerformance() {
-      // for (int i = 0; i < genProjects.length; i++) {
+   protected void measurePerformance(String projectName) {
       log.debug("-------------------------------");
-      // String projectPart = genProjects[i];
-      // String projectName = generatedProject + "_" + projectPart;
-      String projectName = generatedProject;
-      checkProjectConsistency(projectName);
+      String folderName = mappingFolder;
+      log.debug("check consistency of " + projectName);
+      try {
+         checkModelsInProject(projectName, folderName);
+      } catch (CoreException e) {
+         log.error("Could not determine children of folder " + folderName);
+      }
       // }
    }
 
-   private void checkProjectConsistency(String projectName) {
-      log.debug("check consistency of " + projectName);
-      IWorkspace workspace = ResourcesPlugin.getWorkspace();
-      IProject project = workspace.getRoot().getProject(projectName);
-      if (project.exists()) {
-         resetLists();
-         IFolder projectFolder = project.getFolder(mappingFolder);
-         if (projectFolder.exists()) {
-            IResource[] members;
-            try {
-               members = projectFolder.members();
-               for (IResource iResource : members) {
-                  if (iResource instanceof IFile) {
-                     IFile file = (IFile) iResource;
-                     ResourceSet resourceSet = new ResourceSetImpl();
-                      MappingModel mapping = FeatureMappingUtil.getFeatureMapping(file, resourceSet);
-                     if (mapping != null) {
-                        determineInfo(file);
-                        checkConsistency(mapping);
-                     }
-                  }
-               }
-            } catch (CoreException e) {
-               log.error("Could not determine children of folder " + projectFolder);
-            }
-         }
+   protected void check(IFile file) {
+      ResourceSet resourceSet = new ResourceSetImpl();
+      MappingModel mapping = FeatureMappingUtil.getFeatureMapping(file, resourceSet);
+      if (mapping != null) {
 
+         determineInfo(file);
+         checkConsistency(mapping);
       }
    }
 
@@ -147,62 +123,12 @@ public class ConsistencyCheckHandler extends AbstractCheckHandler {
       printCollection("NumberViews       ", numberViews);
       printCollection("Time Bruteforce   ", bruteforceTimeList);
       printCollection("Time Heuristic    ", heuristicTimeList);
-      printStringCollection("Group TreeHeight  ", groupTreeHeight);
-      printStringCollection("Group MaxChildren ", groupMaxChildren);
-      printStringCollection("Groups per VP     ", groupsPerVP);
-      printStringCollection("Features per Group", featuresPerGroup);
-      printDoubleCollection("ConsistentRatio Bruteforce", bruteForceConsistentVPRatio);
-      printDoubleCollection("ConsistentRatio Heuristic ", heuristicConsistentVPRatio);
-   }
-
-   private StringBuffer initStringBuffer(String description) {
-      StringBuffer s = new StringBuffer();
-      s.append(description);
-      s.append("{");
-      return s;
-   }
-
-   private void finalizeStringBuffer(StringBuffer s) {
-      s.append("}");
-      log.debug(s);
-   }
-
-   private void printDoubleCollection(String description, List<Double> bruteForceConsistentVPRatio2) {
-      StringBuffer s = initStringBuffer(description);
-      for (Double ratio : bruteForceConsistentVPRatio2) {
-         // DecimalFormat df = new DecimalFormat("0.00");
-         // String ratioStr = df.format(ratio);
-         s.append(ratio);
-         s.append(", ");
-      }
-      finalizeStringBuffer(s);
-   }
-
-   private void printStringCollection(String description, List<String> list) {
-      StringBuffer s = initStringBuffer(description);
-      for (String l : list) {
-         s.append(l);
-         s.append(", ");
-      }
-      finalizeStringBuffer(s);
-   }
-
-   private void printCollection(String description, Collection<Integer> list) {
-      StringBuffer s = initStringBuffer(description);
-      for (Integer l : list) {
-         s.append(l);
-         s.append(", ");
-      }
-      finalizeStringBuffer(s);
-   }
-
-   private void printCollection(String description, List<Long> list) {
-      StringBuffer s = initStringBuffer(description);
-      for (Long l : list) {
-         s.append(l);
-         s.append(", ");
-      }
-      finalizeStringBuffer(s);
+      printStringCollection("Group TreeHeight   ", groupTreeHeight);
+      printStringCollection("Group MaxChildren  ", groupMaxChildren);
+      printStringCollection("Groups per VP      ", groupsPerVP);
+      printStringCollection("Features per Group ", featuresPerGroup);
+      printDoubleCollection("ConsistentRatio Bruteforce ", bruteForceConsistentVPRatio);
+      printDoubleCollection("ConsistentRatio Heuristic  ", heuristicConsistentVPRatio);
    }
 
    private void printVPCollection(String description, List<ViewPointWrapper> list) {
@@ -228,41 +154,41 @@ public class ConsistencyCheckHandler extends AbstractCheckHandler {
    private void checkConsistency(MappingModel featureMapping) {
       GroupModel groupModel = featureMapping.getViewModel();
       FeatureModel featureModel = featureMapping.getFeatureModel();
-         ViewCreator viewCreator = new ViewCreator(featureMapping);
-         List<View> views = viewCreator.getViews();
-         log.debug("GroupModel " + groupModel.eResource().getURI());
+      ViewCreator viewCreator = new ViewCreator(featureMapping);
+      List<View> views = viewCreator.getViews();
+      log.debug("GroupModel " + groupModel.eResource().getURI());
 
-         ViewPointContainer container = groupModel.getViewPointContainer();
-         int viewpoints = 0;
-         if (container != null) {
-            viewpoints = container.getViewPoints().size();
-         }
-         numberViewPoints.add(viewpoints);
-         numberFeatures.add(FeatureModelUtil.getAllFeatures(featureModel).size());
-         numberConstraints.add(FeatureModelUtil.getConstraints(featureModel, FeatureModelUtil.csp_constraintLanguage).size());
-         numberViews.add(views.size());
+      ViewPointContainer container = groupModel.getViewPointContainer();
+      int viewpoints = 0;
+      if (container != null) {
+         viewpoints = container.getViewPoints().size();
+      }
+      numberViewPoints.add(viewpoints);
+      numberFeatures.add(FeatureModelUtil.getAllFeatures(featureModel).size());
+      numberConstraints.add(FeatureModelUtil.getConstraints(featureModel, FeatureModelUtil.csp_constraintLanguage).size());
+      numberViews.add(views.size());
 
-         long startB = System.currentTimeMillis();
-         List<ViewPointWrapper> bfViewPoints = runBruteForce(views, groupModel, featureModel);
-         long endB = System.currentTimeMillis();
-         long timeB = endB - startB;
-         bruteforceTimeList.add(timeB);
+      long startB = System.currentTimeMillis();
+      List<ViewPointWrapper> bfViewPoints = runBruteForce(views, groupModel, featureModel);
+      long endB = System.currentTimeMillis();
+      long timeB = endB - startB;
+      bruteforceTimeList.add(timeB);
 
-         printVPCollection("BruteForce VPs", bfViewPoints);
-         double bRatio = getRatio(bfViewPoints);
-         bruteForceConsistentVPRatio.add(bRatio);
+      printVPCollection("BruteForce VPs", bfViewPoints);
+      double bRatio = getRatio(bfViewPoints);
+      bruteForceConsistentVPRatio.add(bRatio);
 
-         long startH = System.currentTimeMillis();
-         List<ViewPointWrapper> hViewPoints = runHeuristic(featureMapping);
-         long endH = System.currentTimeMillis();
-         long timeH = endH - startH;
-         heuristicTimeList.add(timeH);
-         printVPCollection("Heuristic VPs ", hViewPoints);
-         double hRatio = getRatio(hViewPoints);
-         heuristicConsistentVPRatio.add(hRatio);
+      long startH = System.currentTimeMillis();
+      List<ViewPointWrapper> hViewPoints = runHeuristic(featureMapping);
+      long endH = System.currentTimeMillis();
+      long timeH = endH - startH;
+      heuristicTimeList.add(timeH);
+      printVPCollection("Heuristic VPs ", hViewPoints);
+      double hRatio = getRatio(hViewPoints);
+      heuristicConsistentVPRatio.add(hRatio);
 
-         log.debug("Bruteforce [" + bRatio + "] " + timeB + "ms , Heuristic [" + hRatio + "]" + timeH + "ms");
-         log.debug("-------------------------------");
+      log.debug("Bruteforce [" + bRatio + "] " + timeB + "ms , Heuristic [" + hRatio + "]" + timeH + "ms");
+      log.debug("-------------------------------");
    }
 
    private List<ViewPointWrapper> runHeuristic(MappingModel featureMapping) {
@@ -277,6 +203,14 @@ public class ConsistencyCheckHandler extends AbstractCheckHandler {
       return viewPoints;
    }
 
-   
+   @Override
+   String getMeasureName() {
+      return measure;
+   }
+
+   @Override
+   Logger getLogger() {
+      return log;
+   }
 
 }
