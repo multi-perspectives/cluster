@@ -25,6 +25,9 @@
       <import plugin="org.feature.model.csp" version="0.4.0" match="greaterOrEqual"/>
       <import plugin="org.feature.multi.perspective.model.editor" version="0.4.0" match="greaterOrEqual"/>
       <import plugin="org.featuremapper.models.feature"/>
+      <import plugin="org.feature.multi.perspective.classification" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.feature.multi.perspective.mapping" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.featuremapper.models.featuremapping"/>
    </requires>
 
    <plugin
@@ -33,5 +36,11 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
+   <plugin
+         id="org.feature.multi.perspective.measure"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
 
 </feature>

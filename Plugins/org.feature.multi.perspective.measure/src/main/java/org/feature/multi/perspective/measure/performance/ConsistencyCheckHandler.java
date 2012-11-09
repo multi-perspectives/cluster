@@ -37,6 +37,7 @@ import org.feature.model.utilities.FeatureMappingUtil;
 import org.feature.model.utilities.FeatureModelUtil;
 import org.feature.model.utilities.WorkbenchUtil;
 import org.feature.multi.perspective.mapping.viewmapping.MappingModel;
+import org.feature.multi.perspective.mapping.viewmapping.ViewmappingPackage;
 import org.feature.multi.perspective.model.viewmodel.GroupModel;
 import org.feature.multi.perspective.model.viewmodel.ViewPointContainer;
 import org.feature.multi.perspective.model.editor.editors.View;
@@ -65,7 +66,7 @@ public class ConsistencyCheckHandler extends AbstractHandler {
    // "vp100nc_cnf10000", "vp100nc_cnf10000", "vp100nc_cnf10000",
    // "vp100nc_cnf2000","vp100nc_cnf2000","vp100nc_cnf2000" };
 
-   protected static String mappingFolder = FeatureMappingPackage.eNS_PREFIX;
+   protected static String mappingFolder = ViewmappingPackage.eNS_PREFIX;
 
    private static Logger log = Logger.getLogger(ConsistencyCheckHandler.class);
 
