@@ -23,6 +23,15 @@ OPTIONS {
 	uiSrcGenFolder = "src/gen/java";
 }
 
+TOKENS {
+	DEFINE COMMA $(','|';')$;
+	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))* $ ;
+}
+
+TOKENSTYLES {
+	"COMMENT" COLOR #AAAAAA;
+}	
+
 RULES {
 	// syntax definition for class 'ClassificationModel'
 	ClassificationModel   ::= "classification" !0    
@@ -30,7 +39,7 @@ RULES {
 							  classifications*;
 
 	// syntax definition for class 'Classification'
-	Classification ::=  "stage" #1 id['<','>'] #1 "on" "view" #1 viewgroups['"','"'] #1 ":" !0
+	Classification ::=  "stage" #1 id['<','>'] #1 "on" "views" (#1 viewgroups['"','"'] (_[COMMA] viewgroups['"','"'])*)? #1 ":" !0
 						 classifiedFeatures* 
 						 (#3 "autocomplete" #1 "{" !0 autoCompleteFeatures* #3 "}")? !0 ; 
 

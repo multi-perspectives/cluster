@@ -1,89 +1,89 @@
 classification
 references mapping <../mapping/mapping.mtext>  
 
-stage <Tablet_Stage> on view "HW-Platform" :
-feature "Wifi_AP" alive
-feature "Ad-Hoc" dead
-feature "GPS" unbound
-feature "Temperature" alive
-feature "Pressure" alive
-   feature "GSM" dead
-   autocomplete {
-   feature "Infrastructure" alive
-   feature "Connection" alive
-   feature "MobileDevice" alive
-   feature "BGP" alive
-   feature "Sensors" alive
-   feature "Routing" alive
-   feature "Wifi_Ad-Hoc" dead
-   }
+stage <Tablet_Stage> on views {} : view  
+  
+  
+  
+  
+  
+     
+    
+     
+     
+     
+     
+     
+     
+     
+   
 
-stage <Phone_Stage> on view "HW-Platform" :
-feature "Wifi_AP" unbound
-feature "Ad-Hoc" unbound
-feature "GPS" unbound
-feature "GSM" unbound
-feature "Temperature" dead
-feature "Pressure" dead
-   autocomplete {
-   feature "Infrastructure" unbound
-   feature "Connection" unbound
-   feature "MobileDevice" unbound
-   feature "Sensors" unbound
-   }
+stage <Phone_Stage> on views {} : view  
+  
+  
+  
+  
+  
+  
+    
+     
+     
+     
+     
+   
 
-stage <Office_Stage> on view "LocationResources" :
-feature "VoIP" alive
-feature "Wifi_AP" alive
-   feature "GSM" dead
-   autocomplete {
-   feature "PhoneCall" alive
-   feature "Application" alive
-   feature "MobileDevice" alive
-   feature "LAR" dead
-   feature "Infrastructure" alive
-   feature "Connection" alive
-   feature "BGP" alive
-   feature "Routing" alive
-   feature "Wifi_Ad-Hoc" dead
-   }
+stage <Office_Stage> on views {} : view  
+  
+  
+     
+    
+     
+     
+     
+     
+     
+     
+     
+     
+     
+   
 
-stage <City_Stage> on view "LocationResources" :
-feature "GSM" alive
-   feature "VoIP" unbound
-   feature "Wifi_AP" dead
-   autocomplete {
-   feature "Infrastructure" alive
-   feature "Connection" alive
-   feature "MobileDevice" alive
-   feature "BGP" alive
-   feature "PhoneCall" unbound
-   feature "Application" unbound
-   feature "Routing" alive
-   feature "Wifi_Ad-Hoc" dead
-   }
+stage <City_Stage> on views {} : view  
+  
+     
+     
+    
+     
+     
+     
+     
+     
+     
+     
+     
+   
 
-stage <Calls_Stage> on view "RunningApps" :
-feature "PhoneCall" alive
-   feature "WeatherForecast" unbound
-   autocomplete {
-   feature "Application" alive
-   feature "MobileDevice" alive
-   feature "VoIP" unbound
-   feature "Cellular" unbound
-   feature "Connection" unbound
-   feature "Routing" unbound
-   }
+stage <Calls_Stage> on views {} : view  
+  
+     
+    
+     
+     
+     
+     
+     
+     
+   
 
-stage <Weather_Stage> on view "RunningApps" :
-feature "WeatherForecast" alive
-   feature "PhoneCall" unbound
-   autocomplete {
-   feature "Application" alive
-   feature "MobileDevice" alive
-   feature "Temperature" alive
-   feature "Pressure" alive
-   feature "Connection" unbound
-   feature "Routing" unbound
-   feature "Sensors" alive
-   }
+stage <Weather_Stage> on views {} : view  
+  
+     
+    
+     
+     
+     
+     
+     
+     
+     
+   

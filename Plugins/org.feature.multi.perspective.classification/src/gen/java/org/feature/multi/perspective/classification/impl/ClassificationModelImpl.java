@@ -43,236 +43,246 @@ import org.featuremapper.models.feature.FeatureModel;
  */
 public class ClassificationModelImpl extends EObjectImpl implements ClassificationModel {
    /**
-	 * The cached value of the '{@link #getFeatureModel() <em>Feature Model</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getFeatureModel() <em>Feature Model</em>}' reference.
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @see #getFeatureModel()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getFeatureModel()
+   * @generated
+   * @ordered
+   */
    protected FeatureModel featureModel;
 
    /**
-	 * The cached value of the '{@link #getClassifications() <em>Classifications</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getClassifications() <em>Classifications</em>}' containment reference list.
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @see #getClassifications()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getClassifications()
+   * @generated
+   * @ordered
+   */
    protected EList<Classification> classifications;
 
    /**
-	 * The cached value of the '{@link #getViewMapping() <em>View Mapping</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getViewMapping() <em>View Mapping</em>}' reference.
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @see #getViewMapping()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getViewMapping()
+   * @generated
+   * @ordered
+   */
    protected MappingModel viewMapping;
 
    /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
    protected ClassificationModelImpl() {
-		super();
-	}
+    super();
+  }
 
    /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
    @Override
    protected EClass eStaticClass() {
-		return ClassificationPackage.Literals.CLASSIFICATION_MODEL;
-	}
+    return ClassificationPackage.Literals.CLASSIFICATION_MODEL;
+  }
 
    /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
    public FeatureModel getFeatureModel() {
-		if (featureModel != null && featureModel.eIsProxy()) {
-			InternalEObject oldFeatureModel = (InternalEObject)featureModel;
-			featureModel = (FeatureModel)eResolveProxy(oldFeatureModel);
-			if (featureModel != oldFeatureModel) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL, oldFeatureModel, featureModel));
-			}
-		}
-		return featureModel;
-	}
+    if (featureModel != null && featureModel.eIsProxy())
+    {
+      InternalEObject oldFeatureModel = (InternalEObject)featureModel;
+      featureModel = (FeatureModel)eResolveProxy(oldFeatureModel);
+      if (featureModel != oldFeatureModel)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL, oldFeatureModel, featureModel));
+      }
+    }
+    return featureModel;
+  }
 
    /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
    public FeatureModel basicGetFeatureModel() {
-		return featureModel;
-	}
+    return featureModel;
+  }
 
    /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
    public void setFeatureModel(FeatureModel newFeatureModel) {
-		FeatureModel oldFeatureModel = featureModel;
-		featureModel = newFeatureModel;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL, oldFeatureModel, featureModel));
-	}
+    FeatureModel oldFeatureModel = featureModel;
+    featureModel = newFeatureModel;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL, oldFeatureModel, featureModel));
+  }
 
    /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
    public EList<Classification> getClassifications() {
-		if (classifications == null) {
-			classifications = new EObjectContainmentEList<Classification>(Classification.class, this, ClassificationPackage.CLASSIFICATION_MODEL__CLASSIFICATIONS);
-		}
-		return classifications;
-	}
+    if (classifications == null)
+    {
+      classifications = new EObjectContainmentEList<Classification>(Classification.class, this, ClassificationPackage.CLASSIFICATION_MODEL__CLASSIFICATIONS);
+    }
+    return classifications;
+  }
 
    /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
    public MappingModel getViewMapping() {
-		if (viewMapping != null && viewMapping.eIsProxy()) {
-			InternalEObject oldViewMapping = (InternalEObject)viewMapping;
-			viewMapping = (MappingModel)eResolveProxy(oldViewMapping);
-			if (viewMapping != oldViewMapping) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING, oldViewMapping, viewMapping));
-			}
-		}
-		return viewMapping;
-	}
+    if (viewMapping != null && viewMapping.eIsProxy())
+    {
+      InternalEObject oldViewMapping = (InternalEObject)viewMapping;
+      viewMapping = (MappingModel)eResolveProxy(oldViewMapping);
+      if (viewMapping != oldViewMapping)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING, oldViewMapping, viewMapping));
+      }
+    }
+    return viewMapping;
+  }
 
    /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
    public MappingModel basicGetViewMapping() {
-		return viewMapping;
-	}
+    return viewMapping;
+  }
 
    /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
    public void setViewMapping(MappingModel newViewMapping) {
-		MappingModel oldViewMapping = viewMapping;
-		viewMapping = newViewMapping;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING, oldViewMapping, viewMapping));
-	}
+    MappingModel oldViewMapping = viewMapping;
+    viewMapping = newViewMapping;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING, oldViewMapping, viewMapping));
+  }
 
    /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
    @Override
    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ClassificationPackage.CLASSIFICATION_MODEL__CLASSIFICATIONS:
-				return ((InternalEList<?>)getClassifications()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case ClassificationPackage.CLASSIFICATION_MODEL__CLASSIFICATIONS:
+        return ((InternalEList<?>)getClassifications()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
    /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
    @Override
    public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL:
-				if (resolve) return getFeatureModel();
-				return basicGetFeatureModel();
-			case ClassificationPackage.CLASSIFICATION_MODEL__CLASSIFICATIONS:
-				return getClassifications();
-			case ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING:
-				if (resolve) return getViewMapping();
-				return basicGetViewMapping();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL:
+        if (resolve) return getFeatureModel();
+        return basicGetFeatureModel();
+      case ClassificationPackage.CLASSIFICATION_MODEL__CLASSIFICATIONS:
+        return getClassifications();
+      case ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING:
+        if (resolve) return getViewMapping();
+        return basicGetViewMapping();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
    /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
    @SuppressWarnings("unchecked")
    @Override
    public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL:
-				setFeatureModel((FeatureModel)newValue);
-				return;
-			case ClassificationPackage.CLASSIFICATION_MODEL__CLASSIFICATIONS:
-				getClassifications().clear();
-				getClassifications().addAll((Collection<? extends Classification>)newValue);
-				return;
-			case ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING:
-				setViewMapping((MappingModel)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL:
+        setFeatureModel((FeatureModel)newValue);
+        return;
+      case ClassificationPackage.CLASSIFICATION_MODEL__CLASSIFICATIONS:
+        getClassifications().clear();
+        getClassifications().addAll((Collection<? extends Classification>)newValue);
+        return;
+      case ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING:
+        setViewMapping((MappingModel)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
    /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
    @Override
    public void eUnset(int featureID) {
-		switch (featureID) {
-			case ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL:
-				setFeatureModel((FeatureModel)null);
-				return;
-			case ClassificationPackage.CLASSIFICATION_MODEL__CLASSIFICATIONS:
-				getClassifications().clear();
-				return;
-			case ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING:
-				setViewMapping((MappingModel)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL:
+        setFeatureModel((FeatureModel)null);
+        return;
+      case ClassificationPackage.CLASSIFICATION_MODEL__CLASSIFICATIONS:
+        getClassifications().clear();
+        return;
+      case ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING:
+        setViewMapping((MappingModel)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
    /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
    @Override
    public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL:
-				return featureModel != null;
-			case ClassificationPackage.CLASSIFICATION_MODEL__CLASSIFICATIONS:
-				return classifications != null && !classifications.isEmpty();
-			case ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING:
-				return viewMapping != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL:
+        return featureModel != null;
+      case ClassificationPackage.CLASSIFICATION_MODEL__CLASSIFICATIONS:
+        return classifications != null && !classifications.isEmpty();
+      case ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING:
+        return viewMapping != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //ClassificationModelImpl

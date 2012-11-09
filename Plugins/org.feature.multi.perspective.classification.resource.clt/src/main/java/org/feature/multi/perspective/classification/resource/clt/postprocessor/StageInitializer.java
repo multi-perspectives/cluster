@@ -60,10 +60,12 @@ public class StageInitializer implements ICltOptionProvider, ICltResourcePostPro
          for (AbstractGroup group : allGroups) {
             boolean create = true;
             for (Classification classification : classifications) {
-               AbstractGroup viewgroup = classification.getViewgroup();
-               if (viewgroup != null && EcoreUtil.equals(group, viewgroup)) {
-                  create = false;
-                  break;
+               EList<AbstractGroup> viewgroups = classification.getViewgroups();
+               for (AbstractGroup viewgroup : viewgroups) {
+                  if (viewgroup != null && EcoreUtil.equals(group, viewgroup)) {
+                     create = false;
+                     break;
+                  }
                }
             }
             if (create) {
@@ -79,7 +81,7 @@ public class StageInitializer implements ICltOptionProvider, ICltResourcePostPro
       Classification classification = ClassificationFactory.eINSTANCE.createClassification();
       String name = group.getName();
       classification.setId(name);
-      classification.setViewgroup(group);
+      classification.getViewgroups().add(group);
       List<ClassifiedFeature> newClassifiedFeatures = createClassifiedFeatures(group, mappingModel);
       classification.getClassifiedFeatures().addAll(newClassifiedFeatures);
       return classification;

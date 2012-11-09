@@ -298,26 +298,20 @@ public class CltPrinter implements org.feature.multi.perspective.classification.
 		out.print("on");
 		out.print(" ");
 		// DEFINITION PART BEGINS (CsString)
-		out.print("view");
-		// DEFINITION PART BEGINS (WhiteSpaces)
+		out.print("views");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderInQuotes)
-		count = printCountingMap.get("viewgroups");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__VIEWGROUPS));
-			java.util.List<?> list = (java.util.List<?>) o;
-			int index = list.size() - count;
-			if (index >= 0) {
-				o = list.get(index);
-			} else {
-				o = null;
-			}
-			if (o != null) {
-				org.feature.multi.perspective.classification.resource.clt.ICltTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getClassificationViewgroupsReferenceResolver().deResolve((org.feature.multi.perspective.model.viewmodel.AbstractGroup) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__VIEWGROUPS)), element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__VIEWGROUPS), element));
-			}
-			printCountingMap.put("viewgroups", count - 1);
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_org_feature_multi_perspective_classification_Classification_0(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
 		}
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		out.print(" ");
@@ -346,7 +340,7 @@ public class CltPrinter implements org.feature.multi.perspective.classification.
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
 		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
-		print_org_feature_multi_perspective_classification_Classification_0(element, localtab, out1, printCountingMap1);
+		print_org_feature_multi_perspective_classification_Classification_1(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
 		} else {
@@ -361,6 +355,77 @@ public class CltPrinter implements org.feature.multi.perspective.classification.
 	}
 	
 	public void print_org_feature_multi_perspective_classification_Classification_0(org.feature.multi.perspective.classification.Classification element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (WhiteSpaces)
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderInQuotes)
+		count = printCountingMap.get("viewgroups");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__VIEWGROUPS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				org.feature.multi.perspective.classification.resource.clt.ICltTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getClassificationViewgroupsReferenceResolver().deResolve((org.feature.multi.perspective.model.viewmodel.AbstractGroup) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__VIEWGROUPS)), element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__VIEWGROUPS), element));
+				out.print(" ");
+			}
+			printCountingMap.put("viewgroups", count - 1);
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_org_feature_multi_perspective_classification_Classification_0_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+	}
+	
+	public void print_org_feature_multi_perspective_classification_Classification_0_0(org.feature.multi.perspective.classification.Classification element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		// DEFINITION PART BEGINS (PlaceholderInQuotes)
+		count = printCountingMap.get("viewgroups");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__VIEWGROUPS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				org.feature.multi.perspective.classification.resource.clt.ICltTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getClassificationViewgroupsReferenceResolver().deResolve((org.feature.multi.perspective.model.viewmodel.AbstractGroup) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__VIEWGROUPS)), element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__VIEWGROUPS), element));
+				out.print(" ");
+			}
+			printCountingMap.put("viewgroups", count - 1);
+		}
+	}
+	
+	public void print_org_feature_multi_perspective_classification_Classification_1(org.feature.multi.perspective.classification.Classification element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (WhiteSpaces)

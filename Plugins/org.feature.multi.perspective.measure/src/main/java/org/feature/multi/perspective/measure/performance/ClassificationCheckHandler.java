@@ -1,6 +1,5 @@
 package org.feature.multi.perspective.measure.performance;
 
-import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,11 +7,10 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.feature.model.utilities.ResourceUtil;
 import org.feature.multi.perspective.classification.AutoClassification;
 import org.feature.multi.perspective.classification.ClassificationModel;
-import org.feature.multi.perspective.classification.resource.clt.ICltParseResult;
-import org.feature.multi.perspective.classification.resource.clt.ICltTextParser;
-import org.feature.multi.perspective.classification.resource.clt.mopp.CltMetaInformation;
 
 public class ClassificationCheckHandler extends AbstractCheckHandler {
 
@@ -52,19 +50,22 @@ public class ClassificationCheckHandler extends AbstractCheckHandler {
 
    @Override
    void check(IFile file) {
-      CltMetaInformation metaInfo = new CltMetaInformation();
-      try {
-         InputStream contents = file.getContents();
-         ICltTextParser createParser = metaInfo.createParser(contents, null);
-         ICltParseResult parse = createParser.parse();
-         EObject root = parse.getRoot();
-         if (root instanceof ClassificationModel) {
-            ClassificationModel classificationModel = (ClassificationModel) root;
-            measureClassification(classificationModel);
-         }
-      } catch (CoreException e) {
-         log.error(e.getMessage());
+      EObject model = ResourceUtil.getModel(file, new ResourceSetImpl());
+      if (model instanceof ClassificationModel) {
+
+         //
+         // CltMetaInformation metaInfo = new CltMetaInformation();
+         // try {
+         // InputStream contents = file.getContents();
+         // ICltTextParser createParser = metaInfo.createParser(contents, null);
+         // ICltParseResult parse = createParser.parse();
+         // EObject root = parse.getRoot();
+         ClassificationModel classificationModel = (ClassificationModel) model;
+         measureClassification(classificationModel);
       }
+      // } catch (CoreException e) {
+      // log.error(e.getMessage());
+      // }
    }
 
    private void measureClassification(ClassificationModel classificationModel) {
