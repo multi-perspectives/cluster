@@ -15,7 +15,8 @@
     <eLiterals name="Dead" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Classification">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="viewgroup" eType="ecore:EClass ../../../../org.feature.multi.perspective.model/src/main/model/viewmodel.ecore#//AbstractGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="viewgroups" upperBound="-1"
+        eType="ecore:EClass ../../../../org.feature.multi.perspective.model/src/main/model/viewmodel.ecore#//AbstractGroup"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classifiedFeatures" upperBound="-1"
         eType="#//ClassifiedFeature" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="autoCompleteFeatures" upperBound="-1"

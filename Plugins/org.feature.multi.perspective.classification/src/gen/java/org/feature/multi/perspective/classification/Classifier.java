@@ -19,250 +19,244 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum Classifier implements Enumerator {
    /**
-   * The '<em><b>Unclassified</b></em>' literal object.
-   * <!-- begin-user-doc -->
+	 * The '<em><b>Unclassified</b></em>' literal object.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @see #UNCLASSIFIED_VALUE
-   * @generated
-   * @ordered
-   */
+	 * @see #UNCLASSIFIED_VALUE
+	 * @generated
+	 * @ordered
+	 */
    UNCLASSIFIED(0, "Unclassified", "Unclassified"),
 
    /**
-   * The '<em><b>Unbound</b></em>' literal object.
-   * <!-- begin-user-doc -->
+	 * The '<em><b>Unbound</b></em>' literal object.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @see #UNBOUND_VALUE
-   * @generated
-   * @ordered
-   */
+	 * @see #UNBOUND_VALUE
+	 * @generated
+	 * @ordered
+	 */
    UNBOUND(1, "Unbound", "Unbound"),
 
    /**
-   * The '<em><b>Alive</b></em>' literal object.
-   * <!-- begin-user-doc -->
+	 * The '<em><b>Alive</b></em>' literal object.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @see #ALIVE_VALUE
-   * @generated
-   * @ordered
-   */
+	 * @see #ALIVE_VALUE
+	 * @generated
+	 * @ordered
+	 */
    ALIVE(2, "Alive", "Alive"),
 
    /**
-   * The '<em><b>Dead</b></em>' literal object.
-   * <!-- begin-user-doc -->
+	 * The '<em><b>Dead</b></em>' literal object.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @see #DEAD_VALUE
-   * @generated
-   * @ordered
-   */
+	 * @see #DEAD_VALUE
+	 * @generated
+	 * @ordered
+	 */
    DEAD(3, "Dead", "Dead");
 
    /**
-   * The '<em><b>Unclassified</b></em>' literal value.
-   * <!-- begin-user-doc -->
+	 * The '<em><b>Unclassified</b></em>' literal value.
+	 * <!-- begin-user-doc -->
     * <p>
     * If the meaning of '<em><b>Unclassified</b></em>' literal object isn't clear,
     * there really should be more of a description here...
     * </p>
     * <!-- end-user-doc -->
-   * @see #UNCLASSIFIED
-   * @model name="Unclassified"
-   * @generated
-   * @ordered
-   */
+	 * @see #UNCLASSIFIED
+	 * @model name="Unclassified"
+	 * @generated
+	 * @ordered
+	 */
    public static final int UNCLASSIFIED_VALUE = 0;
 
    /**
-   * The '<em><b>Unbound</b></em>' literal value.
-   * <!-- begin-user-doc -->
+	 * The '<em><b>Unbound</b></em>' literal value.
+	 * <!-- begin-user-doc -->
     * <p>
     * If the meaning of '<em><b>Unbound</b></em>' literal object isn't clear,
     * there really should be more of a description here...
     * </p>
     * <!-- end-user-doc -->
-   * @see #UNBOUND
-   * @model name="Unbound"
-   * @generated
-   * @ordered
-   */
+	 * @see #UNBOUND
+	 * @model name="Unbound"
+	 * @generated
+	 * @ordered
+	 */
    public static final int UNBOUND_VALUE = 1;
 
    /**
-   * The '<em><b>Alive</b></em>' literal value.
-   * <!-- begin-user-doc -->
+	 * The '<em><b>Alive</b></em>' literal value.
+	 * <!-- begin-user-doc -->
     * <p>
     * If the meaning of '<em><b>Alive</b></em>' literal object isn't clear,
     * there really should be more of a description here...
     * </p>
     * <!-- end-user-doc -->
-   * @see #ALIVE
-   * @model name="Alive"
-   * @generated
-   * @ordered
-   */
+	 * @see #ALIVE
+	 * @model name="Alive"
+	 * @generated
+	 * @ordered
+	 */
    public static final int ALIVE_VALUE = 2;
 
    /**
-   * The '<em><b>Dead</b></em>' literal value.
-   * <!-- begin-user-doc -->
+	 * The '<em><b>Dead</b></em>' literal value.
+	 * <!-- begin-user-doc -->
     * <p>
     * If the meaning of '<em><b>Dead</b></em>' literal object isn't clear,
     * there really should be more of a description here...
     * </p>
     * <!-- end-user-doc -->
-   * @see #DEAD
-   * @model name="Dead"
-   * @generated
-   * @ordered
-   */
+	 * @see #DEAD
+	 * @model name="Dead"
+	 * @generated
+	 * @ordered
+	 */
    public static final int DEAD_VALUE = 3;
 
    /**
-   * An array of all the '<em><b>Classifier</b></em>' enumerators.
-   * <!-- begin-user-doc -->
+	 * An array of all the '<em><b>Classifier</b></em>' enumerators.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    private static final Classifier[] VALUES_ARRAY =
-      new Classifier[]
-    {
-      UNCLASSIFIED,
-      UNBOUND,
-      ALIVE,
-      DEAD,
-    };
+      new Classifier[] {
+			UNCLASSIFIED,
+			UNBOUND,
+			ALIVE,
+			DEAD,
+		};
 
    /**
-   * A public read-only list of all the '<em><b>Classifier</b></em>' enumerators.
-   * <!-- begin-user-doc -->
+	 * A public read-only list of all the '<em><b>Classifier</b></em>' enumerators.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    public static final List<Classifier> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
    /**
-   * Returns the '<em><b>Classifier</b></em>' literal with the specified literal value.
-   * <!-- begin-user-doc -->
+	 * Returns the '<em><b>Classifier</b></em>' literal with the specified literal value.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    public static Classifier get(String literal) {
-    for (int i = 0; i < VALUES_ARRAY.length; ++i)
-    {
-      Classifier result = VALUES_ARRAY[i];
-      if (result.toString().equals(literal))
-      {
-        return result;
-      }
-    }
-    return null;
-  }
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			Classifier result = VALUES_ARRAY[i];
+			if (result.toString().equals(literal)) {
+				return result;
+			}
+		}
+		return null;
+	}
 
    /**
-   * Returns the '<em><b>Classifier</b></em>' literal with the specified name.
-   * <!-- begin-user-doc -->
+	 * Returns the '<em><b>Classifier</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    public static Classifier getByName(String name) {
-    for (int i = 0; i < VALUES_ARRAY.length; ++i)
-    {
-      Classifier result = VALUES_ARRAY[i];
-      if (result.getName().equals(name))
-      {
-        return result;
-      }
-    }
-    return null;
-  }
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			Classifier result = VALUES_ARRAY[i];
+			if (result.getName().equals(name)) {
+				return result;
+			}
+		}
+		return null;
+	}
 
    /**
-   * Returns the '<em><b>Classifier</b></em>' literal with the specified integer value.
-   * <!-- begin-user-doc -->
+	 * Returns the '<em><b>Classifier</b></em>' literal with the specified integer value.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    public static Classifier get(int value) {
-    switch (value)
-    {
-      case UNCLASSIFIED_VALUE: return UNCLASSIFIED;
-      case UNBOUND_VALUE: return UNBOUND;
-      case ALIVE_VALUE: return ALIVE;
-      case DEAD_VALUE: return DEAD;
-    }
-    return null;
-  }
+		switch (value) {
+			case UNCLASSIFIED_VALUE: return UNCLASSIFIED;
+			case UNBOUND_VALUE: return UNBOUND;
+			case ALIVE_VALUE: return ALIVE;
+			case DEAD_VALUE: return DEAD;
+		}
+		return null;
+	}
 
    /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    private final int value;
 
    /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    private final String name;
 
    /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    private final String literal;
 
    /**
-   * Only this class can construct instances.
-   * <!-- begin-user-doc -->
+	 * Only this class can construct instances.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    private Classifier(int value, String name, String literal) {
-    this.value = value;
-    this.name = name;
-    this.literal = literal;
-  }
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
+	}
 
    /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    public int getValue() {
-    return value;
-  }
+	  return value;
+	}
 
    /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    public String getName() {
-    return name;
-  }
+	  return name;
+	}
 
    /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    public String getLiteral() {
-    return literal;
-  }
+	  return literal;
+	}
 
    /**
-   * Returns the literal value of the enumerator, which is its string representation.
-   * <!-- begin-user-doc -->
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    @Override
    public String toString() {
-    return literal;
-  }
+		return literal;
+	}
    
 } //Classifier

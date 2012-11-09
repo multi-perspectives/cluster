@@ -15,7 +15,7 @@ public class CltReferenceResolverSwitch implements org.feature.multi.perspective
 	
 	protected org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationModelViewMappingReferenceResolver classificationModelViewMappingReferenceResolver = new org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationModelViewMappingReferenceResolver();
 	protected org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationModelFeatureModelReferenceResolver classificationModelFeatureModelReferenceResolver = new org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationModelFeatureModelReferenceResolver();
-	protected org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationViewgroupReferenceResolver classificationViewgroupReferenceResolver = new org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationViewgroupReferenceResolver();
+	protected org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationViewgroupsReferenceResolver classificationViewgroupsReferenceResolver = new org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationViewgroupsReferenceResolver();
 	protected org.feature.multi.perspective.classification.resource.clt.analysis.ClassifiedFeatureFeatureReferenceResolver classifiedFeatureFeatureReferenceResolver = new org.feature.multi.perspective.classification.resource.clt.analysis.ClassifiedFeatureFeatureReferenceResolver();
 	
 	public org.feature.multi.perspective.classification.resource.clt.ICltReferenceResolver<org.feature.multi.perspective.classification.ClassificationModel, org.feature.multi.perspective.mapping.viewmapping.MappingModel> getClassificationModelViewMappingReferenceResolver() {
@@ -26,8 +26,8 @@ public class CltReferenceResolverSwitch implements org.feature.multi.perspective
 		return getResolverChain(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel_FeatureModel(), classificationModelFeatureModelReferenceResolver);
 	}
 	
-	public org.feature.multi.perspective.classification.resource.clt.ICltReferenceResolver<org.feature.multi.perspective.classification.Classification, org.feature.multi.perspective.model.viewmodel.AbstractGroup> getClassificationViewgroupReferenceResolver() {
-		return getResolverChain(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification_Viewgroup(), classificationViewgroupReferenceResolver);
+	public org.feature.multi.perspective.classification.resource.clt.ICltReferenceResolver<org.feature.multi.perspective.classification.Classification, org.feature.multi.perspective.model.viewmodel.AbstractGroup> getClassificationViewgroupsReferenceResolver() {
+		return getResolverChain(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification_Viewgroups(), classificationViewgroupsReferenceResolver);
 	}
 	
 	public org.feature.multi.perspective.classification.resource.clt.ICltReferenceResolver<org.feature.multi.perspective.classification.ClassifiedFeature, org.featuremapper.models.feature.Feature> getClassifiedFeatureFeatureReferenceResolver() {
@@ -41,7 +41,7 @@ public class CltReferenceResolverSwitch implements org.feature.multi.perspective
 		}
 		classificationModelViewMappingReferenceResolver.setOptions(options);
 		classificationModelFeatureModelReferenceResolver.setOptions(options);
-		classificationViewgroupReferenceResolver.setOptions(options);
+		classificationViewgroupsReferenceResolver.setOptions(options);
 		classifiedFeatureFeatureReferenceResolver.setOptions(options);
 	}
 	
@@ -69,8 +69,8 @@ public class CltReferenceResolverSwitch implements org.feature.multi.perspective
 			CltFuzzyResolveResult<org.feature.multi.perspective.model.viewmodel.AbstractGroup> frr = new CltFuzzyResolveResult<org.feature.multi.perspective.model.viewmodel.AbstractGroup>(result);
 			String referenceName = reference.getName();
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
-			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("viewgroup")) {
-				classificationViewgroupReferenceResolver.resolve(identifier, (org.feature.multi.perspective.classification.Classification) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("viewgroups")) {
+				classificationViewgroupsReferenceResolver.resolve(identifier, (org.feature.multi.perspective.classification.Classification) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
 			}
 		}
 		if (org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature().isInstance(container)) {
@@ -90,8 +90,8 @@ public class CltReferenceResolverSwitch implements org.feature.multi.perspective
 		if (reference == org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel_FeatureModel()) {
 			return getResolverChain(reference, classificationModelFeatureModelReferenceResolver);
 		}
-		if (reference == org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification_Viewgroup()) {
-			return getResolverChain(reference, classificationViewgroupReferenceResolver);
+		if (reference == org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification_Viewgroups()) {
+			return getResolverChain(reference, classificationViewgroupsReferenceResolver);
 		}
 		if (reference == org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature_Feature()) {
 			return getResolverChain(reference, classifiedFeatureFeatureReferenceResolver);

@@ -84,7 +84,7 @@ public class ClassificationGenerator extends AbstractGenerator {
          for (int i = 0; i < numberOfParalellViewInterpretationScenarios; i++) {
 
             Classification classification = ClassificationFactory.eINSTANCE.createClassification();
-            classification.setViewgroup(g);
+            classification.getViewgroups().add(g);
             classification.setId(g.getName() + "_" + i);
             classifyModel.getClassifications().add(classification);
             

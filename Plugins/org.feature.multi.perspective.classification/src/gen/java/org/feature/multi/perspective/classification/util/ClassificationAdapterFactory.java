@@ -21,144 +21,136 @@ import org.feature.multi.perspective.classification.*;
  */
 public class ClassificationAdapterFactory extends AdapterFactoryImpl {
    /**
-   * The cached model package.
-   * <!-- begin-user-doc -->
+	 * The cached model package.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    protected static ClassificationPackage modelPackage;
 
    /**
-   * Creates an instance of the adapter factory.
-   * <!-- begin-user-doc -->
+	 * Creates an instance of the adapter factory.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    public ClassificationAdapterFactory() {
-    if (modelPackage == null)
-    {
-      modelPackage = ClassificationPackage.eINSTANCE;
-    }
-  }
+		if (modelPackage == null) {
+			modelPackage = ClassificationPackage.eINSTANCE;
+		}
+	}
 
    /**
-   * Returns whether this factory is applicable for the type of the object.
-   * <!-- begin-user-doc -->
+	 * Returns whether this factory is applicable for the type of the object.
+	 * <!-- begin-user-doc -->
     * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
     * <!-- end-user-doc -->
-   * @return whether this factory is applicable for the type of the object.
-   * @generated
-   */
+	 * @return whether this factory is applicable for the type of the object.
+	 * @generated
+	 */
    @Override
    public boolean isFactoryForType(Object object) {
-    if (object == modelPackage)
-    {
-      return true;
-    }
-    if (object instanceof EObject)
-    {
-      return ((EObject)object).eClass().getEPackage() == modelPackage;
-    }
-    return false;
-  }
+		if (object == modelPackage) {
+			return true;
+		}
+		if (object instanceof EObject) {
+			return ((EObject)object).eClass().getEPackage() == modelPackage;
+		}
+		return false;
+	}
 
    /**
-   * The switch that delegates to the <code>createXXX</code> methods.
-   * <!-- begin-user-doc -->
+	 * The switch that delegates to the <code>createXXX</code> methods.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    protected ClassificationSwitch<Adapter> modelSwitch =
-      new ClassificationSwitch<Adapter>()
-    {
-      @Override
-      public Adapter caseClassificationModel(ClassificationModel object)
-      {
-        return createClassificationModelAdapter();
-      }
-      @Override
-      public Adapter caseClassification(Classification object)
-      {
-        return createClassificationAdapter();
-      }
-      @Override
-      public Adapter caseClassifiedFeature(ClassifiedFeature object)
-      {
-        return createClassifiedFeatureAdapter();
-      }
-      @Override
-      public Adapter defaultCase(EObject object)
-      {
-        return createEObjectAdapter();
-      }
-    };
+      new ClassificationSwitch<Adapter>() {
+			@Override
+			public Adapter caseClassificationModel(ClassificationModel object) {
+				return createClassificationModelAdapter();
+			}
+			@Override
+			public Adapter caseClassification(Classification object) {
+				return createClassificationAdapter();
+			}
+			@Override
+			public Adapter caseClassifiedFeature(ClassifiedFeature object) {
+				return createClassifiedFeatureAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
 
    /**
-   * Creates an adapter for the <code>target</code>.
-   * <!-- begin-user-doc -->
+	 * Creates an adapter for the <code>target</code>.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @param target the object to adapt.
-   * @return the adapter for the <code>target</code>.
-   * @generated
-   */
+	 * @param target the object to adapt.
+	 * @return the adapter for the <code>target</code>.
+	 * @generated
+	 */
    @Override
    public Adapter createAdapter(Notifier target) {
-    return modelSwitch.doSwitch((EObject)target);
-  }
+		return modelSwitch.doSwitch((EObject)target);
+	}
 
 
    /**
-   * Creates a new adapter for an object of class '{@link org.feature.multi.perspective.classification.ClassificationModel <em>Model</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.feature.multi.perspective.classification.ClassificationModel <em>Model</em>}'.
+	 * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
     * it's useful to ignore a case when inheritance will catch all the cases anyway.
     * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.feature.multi.perspective.classification.ClassificationModel
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.feature.multi.perspective.classification.ClassificationModel
+	 * @generated
+	 */
    public Adapter createClassificationModelAdapter() {
-    return null;
-  }
+		return null;
+	}
 
    /**
-   * Creates a new adapter for an object of class '{@link org.feature.multi.perspective.classification.Classification <em>Classification</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.feature.multi.perspective.classification.Classification <em>Classification</em>}'.
+	 * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
     * it's useful to ignore a case when inheritance will catch all the cases anyway.
     * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.feature.multi.perspective.classification.Classification
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.feature.multi.perspective.classification.Classification
+	 * @generated
+	 */
    public Adapter createClassificationAdapter() {
-    return null;
-  }
+		return null;
+	}
 
    /**
-   * Creates a new adapter for an object of class '{@link org.feature.multi.perspective.classification.ClassifiedFeature <em>Classified Feature</em>}'.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.feature.multi.perspective.classification.ClassifiedFeature <em>Classified Feature</em>}'.
+	 * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
     * it's useful to ignore a case when inheritance will catch all the cases anyway.
     * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.feature.multi.perspective.classification.ClassifiedFeature
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @see org.feature.multi.perspective.classification.ClassifiedFeature
+	 * @generated
+	 */
    public Adapter createClassifiedFeatureAdapter() {
-    return null;
-  }
+		return null;
+	}
 
    /**
-   * Creates a new adapter for the default case.
-   * <!-- begin-user-doc -->
+	 * Creates a new adapter for the default case.
+	 * <!-- begin-user-doc -->
     * This default implementation returns null.
     * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @generated
-   */
+	 * @return the new adapter.
+	 * @generated
+	 */
    public Adapter createEObjectAdapter() {
-    return null;
-  }
+		return null;
+	}
 
 } //ClassificationAdapterFactory
