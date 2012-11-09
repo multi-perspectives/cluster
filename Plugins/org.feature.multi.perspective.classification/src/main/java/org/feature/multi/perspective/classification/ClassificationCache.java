@@ -50,7 +50,7 @@ public class ClassificationCache {
 
    private ViewBuilder initViewBuilder(ClassificationModel model, String key) {
       MappingModel viewMapping = model.getViewMapping();
-      ViewBuilder viewBuilder = new ViewBuilder(viewMapping, false);
+      ViewBuilder viewBuilder = new ViewBuilder(viewMapping, false, false);
       this.viewBuilders.put(key, viewBuilder);
       return viewBuilder;
    }

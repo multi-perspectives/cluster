@@ -67,9 +67,25 @@ public final class FeatureMappingUtil {
          }
       }
       return features;
-
    }
 
+   /**
+    *  get the features that are mapped to the given group
+    *  
+    * @param group
+    * @param mappingModel
+    * @return
+    */
+   public static List<Feature> getGroupFeatures(AbstractGroup group, MappingModel mappingModel){
+      List<Feature> features = new ArrayList<Feature>();
+     Mapping mapping = FeatureMappingUtil.getMapping(group, mappingModel);
+     if (mapping != null){
+        features.addAll(mapping.getFeatures());
+     }
+     return features;
+   }
+   
+   
    /**
     * find the mapping in the mapping model that belongs to the given group. May return null, if no direct mapping is specified.
     * @param group

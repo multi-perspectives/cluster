@@ -28,7 +28,10 @@ public class ViewBuilder {
 
    private List<FeatureExpression> featureModelConstraints;
 
-   public ViewBuilder(MappingModel viewMapping, boolean initViews) {
+   private boolean considerViewHierarchy;
+
+   public ViewBuilder(MappingModel viewMapping, boolean initViews, boolean considerViewHierarchy) {
+      this.considerViewHierarchy = considerViewHierarchy;
       init(initViews, viewMapping);
    }
 
@@ -42,8 +45,6 @@ public class ViewBuilder {
          createAllViews();
       }
    }
-
-  
 
    private void initConstraints(FeatureModel featuremodel) {
       featureModelConstraints = TextExpressionParser.getConstraints(featuremodel);
@@ -117,7 +118,13 @@ public class ViewBuilder {
       view.setId(group.getName());
       EList<Feature> features = view.getFeatures();
       MappingModel viewMapping = viewContainer.getFeatureMapping();
-      List<Feature> collectedFeatures = FeatureMappingUtil.collectViewFeatures(group, viewMapping);
+      List<Feature> collectedFeatures;
+
+      if (considerViewHierarchy) {
+         collectedFeatures = FeatureMappingUtil.collectViewFeatures(group, viewMapping);
+      } else {
+         collectedFeatures = FeatureMappingUtil.getGroupFeatures(group, viewMapping);
+      }
       features.addAll(collectedFeatures);
 
       viewContainer.getViews().add(view);
