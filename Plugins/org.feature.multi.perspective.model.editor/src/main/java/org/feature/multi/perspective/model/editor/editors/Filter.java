@@ -4,9 +4,11 @@
 package org.feature.multi.perspective.model.editor.editors;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
@@ -47,12 +49,23 @@ public class Filter {
       // root feature not selected
    }
 
-   private void filterConstraints(FeatureModel featureModel){
-     List<Feature> allFeatures = FeatureModelUtil.getAllFeatures(featureModel);
-     //List<FeatureExpression> constraints = TextExpressionParser.getConstraints(featureModel);
-     
+   private void filterConstraints(FeatureModel featureModel) {
+      List<Feature> allFeatures = FeatureModelUtil.getAllFeatures(featureModel);
+      Set<FeatureExpression> constraints = TextExpressionParser.getConstraints(featureModel);
+      Set<FeatureExpression> featureConstraints = new HashSet<FeatureExpression>();
+      for (Feature feature : allFeatures) {
+         for (FeatureExpression featureExpression : constraints) {
+
+         }
+      }
    }
-   
+
+   private boolean containsFeature(Feature feature, FeatureExpression expression) {
+      Feature leftFeature = expression.getLeftFeature();
+      Feature rightFeature = expression.getRightFeature();
+      return (EcoreUtil.equals(leftFeature, feature) || EcoreUtil.equals(rightFeature, feature));
+   }
+
    /**
     * removes every constraints which contains features that are not in the new {@link FeatureModel}.
     * 

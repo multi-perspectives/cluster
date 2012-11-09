@@ -1,0 +1,189 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * 
+ */
+package org.feature.multi.perspective.classification.resource.clt.mopp;
+
+/**
+ * This class contains some constants that are used during code completion.
+ */
+public class CltExpectationConstants {
+	
+	public final static int EXPECTATIONS[][] = new int[48][];
+	
+	public static void initialize0() {
+		EXPECTATIONS[0] = new int[2];
+		EXPECTATIONS[0][0] = 0;
+		EXPECTATIONS[0][1] = 0;
+		EXPECTATIONS[1] = new int[2];
+		EXPECTATIONS[1][0] = 1;
+		EXPECTATIONS[1][1] = 1;
+		EXPECTATIONS[2] = new int[2];
+		EXPECTATIONS[2][0] = 2;
+		EXPECTATIONS[2][1] = 2;
+		EXPECTATIONS[3] = new int[2];
+		EXPECTATIONS[3][0] = 3;
+		EXPECTATIONS[3][1] = 2;
+		EXPECTATIONS[4] = new int[2];
+		EXPECTATIONS[4][0] = 4;
+		EXPECTATIONS[4][1] = 3;
+		EXPECTATIONS[5] = new int[2];
+		EXPECTATIONS[5][0] = 2;
+		EXPECTATIONS[5][1] = 4;
+		EXPECTATIONS[6] = new int[2];
+		EXPECTATIONS[6][0] = 3;
+		EXPECTATIONS[6][1] = 4;
+		EXPECTATIONS[7] = new int[3];
+		EXPECTATIONS[7][0] = 5;
+		EXPECTATIONS[7][1] = 4;
+		EXPECTATIONS[7][2] = 0;
+		EXPECTATIONS[8] = new int[2];
+		EXPECTATIONS[8][0] = 2;
+		EXPECTATIONS[8][1] = 5;
+		EXPECTATIONS[9] = new int[2];
+		EXPECTATIONS[9][0] = 3;
+		EXPECTATIONS[9][1] = 5;
+		EXPECTATIONS[10] = new int[3];
+		EXPECTATIONS[10][0] = 5;
+		EXPECTATIONS[10][1] = 5;
+		EXPECTATIONS[10][2] = 1;
+		EXPECTATIONS[11] = new int[2];
+		EXPECTATIONS[11][0] = 6;
+		EXPECTATIONS[11][1] = 6;
+		EXPECTATIONS[12] = new int[2];
+		EXPECTATIONS[12][0] = 2;
+		EXPECTATIONS[12][1] = 7;
+		EXPECTATIONS[13] = new int[2];
+		EXPECTATIONS[13][0] = 3;
+		EXPECTATIONS[13][1] = 7;
+		EXPECTATIONS[14] = new int[3];
+		EXPECTATIONS[14][0] = 5;
+		EXPECTATIONS[14][1] = 7;
+		EXPECTATIONS[14][2] = 2;
+		EXPECTATIONS[15] = new int[2];
+		EXPECTATIONS[15][0] = 2;
+		EXPECTATIONS[15][1] = 8;
+		EXPECTATIONS[16] = new int[2];
+		EXPECTATIONS[16][0] = 3;
+		EXPECTATIONS[16][1] = 8;
+		EXPECTATIONS[17] = new int[3];
+		EXPECTATIONS[17][0] = 5;
+		EXPECTATIONS[17][1] = 8;
+		EXPECTATIONS[17][2] = 3;
+		EXPECTATIONS[18] = new int[2];
+		EXPECTATIONS[18][0] = 2;
+		EXPECTATIONS[18][1] = 9;
+		EXPECTATIONS[19] = new int[2];
+		EXPECTATIONS[19][0] = 3;
+		EXPECTATIONS[19][1] = 9;
+		EXPECTATIONS[20] = new int[3];
+		EXPECTATIONS[20][0] = 5;
+		EXPECTATIONS[20][1] = 9;
+		EXPECTATIONS[20][2] = 4;
+		EXPECTATIONS[21] = new int[3];
+		EXPECTATIONS[21][0] = 5;
+		EXPECTATIONS[21][1] = 10;
+		EXPECTATIONS[21][2] = 5;
+		EXPECTATIONS[22] = new int[2];
+		EXPECTATIONS[22][0] = 7;
+		EXPECTATIONS[22][1] = 11;
+		EXPECTATIONS[23] = new int[2];
+		EXPECTATIONS[23][0] = 8;
+		EXPECTATIONS[23][1] = 12;
+		EXPECTATIONS[24] = new int[2];
+		EXPECTATIONS[24][0] = 9;
+		EXPECTATIONS[24][1] = 13;
+		EXPECTATIONS[25] = new int[2];
+		EXPECTATIONS[25][0] = 10;
+		EXPECTATIONS[25][1] = 14;
+		EXPECTATIONS[26] = new int[2];
+		EXPECTATIONS[26][0] = 11;
+		EXPECTATIONS[26][1] = 15;
+		EXPECTATIONS[27] = new int[3];
+		EXPECTATIONS[27][0] = 12;
+		EXPECTATIONS[27][1] = 16;
+		EXPECTATIONS[27][2] = 6;
+		EXPECTATIONS[28] = new int[2];
+		EXPECTATIONS[28][0] = 13;
+		EXPECTATIONS[28][1] = 16;
+		EXPECTATIONS[29] = new int[3];
+		EXPECTATIONS[29][0] = 5;
+		EXPECTATIONS[29][1] = 16;
+		EXPECTATIONS[29][2] = 7;
+		EXPECTATIONS[30] = new int[3];
+		EXPECTATIONS[30][0] = 12;
+		EXPECTATIONS[30][1] = 17;
+		EXPECTATIONS[30][2] = 8;
+		EXPECTATIONS[31] = new int[2];
+		EXPECTATIONS[31][0] = 13;
+		EXPECTATIONS[31][1] = 17;
+		EXPECTATIONS[32] = new int[3];
+		EXPECTATIONS[32][0] = 5;
+		EXPECTATIONS[32][1] = 17;
+		EXPECTATIONS[32][2] = 9;
+		EXPECTATIONS[33] = new int[2];
+		EXPECTATIONS[33][0] = 14;
+		EXPECTATIONS[33][1] = 18;
+		EXPECTATIONS[34] = new int[3];
+		EXPECTATIONS[34][0] = 12;
+		EXPECTATIONS[34][1] = 19;
+		EXPECTATIONS[34][2] = 10;
+		EXPECTATIONS[35] = new int[2];
+		EXPECTATIONS[35][0] = 15;
+		EXPECTATIONS[35][1] = 19;
+		EXPECTATIONS[36] = new int[3];
+		EXPECTATIONS[36][0] = 12;
+		EXPECTATIONS[36][1] = 20;
+		EXPECTATIONS[36][2] = 11;
+		EXPECTATIONS[37] = new int[2];
+		EXPECTATIONS[37][0] = 15;
+		EXPECTATIONS[37][1] = 20;
+		EXPECTATIONS[38] = new int[3];
+		EXPECTATIONS[38][0] = 5;
+		EXPECTATIONS[38][1] = 21;
+		EXPECTATIONS[38][2] = 12;
+		EXPECTATIONS[39] = new int[3];
+		EXPECTATIONS[39][0] = 5;
+		EXPECTATIONS[39][1] = 22;
+		EXPECTATIONS[39][2] = 13;
+		EXPECTATIONS[40] = new int[2];
+		EXPECTATIONS[40][0] = 16;
+		EXPECTATIONS[40][1] = 23;
+		EXPECTATIONS[41] = new int[2];
+		EXPECTATIONS[41][0] = 17;
+		EXPECTATIONS[41][1] = 24;
+		EXPECTATIONS[42] = new int[3];
+		EXPECTATIONS[42][0] = 12;
+		EXPECTATIONS[42][1] = 25;
+		EXPECTATIONS[42][2] = 14;
+		EXPECTATIONS[43] = new int[2];
+		EXPECTATIONS[43][0] = 13;
+		EXPECTATIONS[43][1] = 25;
+		EXPECTATIONS[44] = new int[3];
+		EXPECTATIONS[44][0] = 5;
+		EXPECTATIONS[44][1] = 25;
+		EXPECTATIONS[44][2] = 15;
+		EXPECTATIONS[45] = new int[3];
+		EXPECTATIONS[45][0] = 12;
+		EXPECTATIONS[45][1] = 26;
+		EXPECTATIONS[45][2] = 16;
+		EXPECTATIONS[46] = new int[2];
+		EXPECTATIONS[46][0] = 13;
+		EXPECTATIONS[46][1] = 26;
+		EXPECTATIONS[47] = new int[3];
+		EXPECTATIONS[47][0] = 5;
+		EXPECTATIONS[47][1] = 26;
+		EXPECTATIONS[47][2] = 17;
+	}
+	
+	public static void initialize() {
+		initialize0();
+	}
+	
+	static {
+		initialize();
+	}
+	
+}
