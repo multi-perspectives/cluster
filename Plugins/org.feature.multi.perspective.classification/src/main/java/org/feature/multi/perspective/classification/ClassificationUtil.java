@@ -4,12 +4,17 @@
 package org.feature.multi.perspective.classification;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.feature.model.constraint.FeatureExpression;
+import org.feature.multi.perspective.classification.impl.ClassificationFactoryImpl;
+import org.feature.multi.perspective.model.viewmodel.AbstractGroup;
+import org.feature.multi.perspective.model.viewmodel.impl.ViewmodelFactoryImpl;
 import org.feature.multi.perspective.view.View;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.Group;
@@ -122,7 +127,7 @@ public final class ClassificationUtil {
     * @return
     */
    public static ClassifiedFeature getClassifiedFeature(Classification classification, Feature feature) {
-      boolean isContained = ClassificationCache.getInstance().isFeatureContainedInView(classification, feature);
+      boolean isContained = ClassificationCache.getInstance().isFeatureContainedInAnyViews(classification, feature);
       return getClassifiedFeature(classification, feature, isContained);
    }
 
@@ -162,7 +167,7 @@ public final class ClassificationUtil {
     */
    public static void addClassifiedFeature(Classification classification, ClassifiedFeature classifiedFeature) {
       Feature feature = classifiedFeature.getFeature();
-      boolean containedInView = ClassificationCache.getInstance().isFeatureContainedInView(classification, feature);
+      boolean containedInView = ClassificationCache.getInstance().isFeatureContainedInAnyViews(classification, feature);
       if (containedInView) {
          classification.getClassifiedFeatures().add(classifiedFeature);
       } else {
@@ -240,5 +245,104 @@ public final class ClassificationUtil {
       boolean isContained = (EcoreUtil.equals(leftFeature, feature) || EcoreUtil.equals(rightFeature, feature));
       return isContained;
 
+   }
+   
+   public static Classification composition(Classification stage1, Classification stage2){
+	   //Union both classifications and compose intersecting feature-classifications
+	   Classification composedClassification = ClassificationFactoryImpl.eINSTANCE.createClassification();
+	   
+	   //TODO:Wie View-Gruppen aus den Classifications zuordnen?
+	   
+	   composedClassification.getViewgroups().addAll(stage1.getViewgroups());
+	   composedClassification.getViewgroups().addAll(stage2.getViewgroups());
+	   
+	   HashMap<Feature, Set<ClassifiedFeature>> featureToClassifications = new HashMap<Feature, Set<ClassifiedFeature>>();
+	   
+
+	   for(ClassifiedFeature c: stage1.getClassifiedFeatures()) {
+		   if(!featureToClassifications.containsKey(c.getFeature())) {
+			   HashSet<ClassifiedFeature> listOfFeatures = new HashSet<ClassifiedFeature>();
+			   listOfFeatures.add(c);
+		   }
+		   else
+			   featureToClassifications.get(c.getFeature()).add(c);			   
+	   }
+	   
+	   for(ClassifiedFeature c: stage2.getClassifiedFeatures()) {
+		   if(!featureToClassifications.containsKey(c.getFeature())) {
+			   HashSet<ClassifiedFeature> listOfFeatures = new HashSet<ClassifiedFeature>();
+			   listOfFeatures.add(c);
+		   }
+		   else
+			   featureToClassifications.get(c.getFeature()).add(c);			   
+	   }
+
+	   for(Feature f : featureToClassifications.keySet()) {
+		   Set<ClassifiedFeature> classifications = featureToClassifications.get(f);
+		   addClassifiedFeature(composedClassification, composeSetOfClassifiedFeatures(classifications));
+	   }
+	   
+	   return composedClassification;
+   }
+   
+   private static ClassifiedFeature composeSetOfClassifiedFeatures (Set<ClassifiedFeature> classifications) {
+	   ClassifiedFeature feature = null;
+	   
+	   for(ClassifiedFeature f : classifications) {
+		   Classifier classifier = composeClassifiedFeatures(feature, f);
+		   if(feature == null) {
+			   feature = createClassifiedFeature(f.getFeature(), classifier);
+		   }		  
+		   changeClassifier(feature, classifier);
+	   }
+	   
+	   return feature;
+   }
+   
+   private static Classifier composeClassifiedFeatures(ClassifiedFeature feature1, ClassifiedFeature feature2){
+	   
+	   if(feature1 == null && feature2 != null )
+		   return feature2.getClassified();
+	   else if(feature1 != null && feature2 == null )
+		   return feature1.getClassified();
+	   else if(feature1 == null && feature2 == null )
+		   return null;
+	   
+	   //Same Classification
+	   if(feature1.getClassified() == feature2.getClassified())
+		   return feature1.getClassified();
+	   //Contradiction Classifications
+	   else if(feature1.getClassified().equals(Classifier.ALIVE) && feature1.getClassified().equals(Classifier.DEAD))
+		   return null;
+	   else if(feature1.getClassified().equals(Classifier.DEAD) && feature1.getClassified().equals(Classifier.ALIVE))
+		   return null;
+	   
+	   //Unbound gets overitten by ALIVE and DEAD
+	   else if(feature1.getClassified().equals(Classifier.UNBOUND) && feature1.getClassified().equals(Classifier.ALIVE))
+		   return Classifier.ALIVE;
+	   else if(feature1.getClassified().equals(Classifier.ALIVE) && feature1.getClassified().equals(Classifier.UNBOUND))
+		   return Classifier.ALIVE;
+	   else if(feature1.getClassified().equals(Classifier.UNBOUND) && feature1.getClassified().equals(Classifier.DEAD))
+		   return Classifier.DEAD;
+	   else if(feature1.getClassified().equals(Classifier.DEAD) && feature1.getClassified().equals(Classifier.UNBOUND))
+		   return Classifier.DEAD;
+	   
+	 //Unbound gets overitten by ALIVE and DEAD and UNBOUND
+	   else if(feature1.getClassified().equals(Classifier.UNCLASSIFIED) && feature1.getClassified().equals(Classifier.ALIVE))
+		   return Classifier.ALIVE;
+	   else if(feature1.getClassified().equals(Classifier.ALIVE) && feature1.getClassified().equals(Classifier.UNCLASSIFIED))
+		   return Classifier.ALIVE;
+	   else if(feature1.getClassified().equals(Classifier.UNCLASSIFIED) && feature1.getClassified().equals(Classifier.DEAD))
+		   return Classifier.DEAD;
+	   else if(feature1.getClassified().equals(Classifier.DEAD) && feature1.getClassified().equals(Classifier.UNCLASSIFIED))
+		   return Classifier.DEAD;
+	   else if(feature1.getClassified().equals(Classifier.UNCLASSIFIED) && feature1.getClassified().equals(Classifier.UNBOUND))
+		   return Classifier.UNBOUND;
+	   else if(feature1.getClassified().equals(Classifier.UNBOUND) && feature1.getClassified().equals(Classifier.UNCLASSIFIED))
+		   return Classifier.UNBOUND;
+	   
+	   else 
+		   return null;
+	   
    }
 }

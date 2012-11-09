@@ -22,7 +22,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//ClassificationModel/viewMapping"/>
     </genClasses>
     <genClasses ecoreClass="classification.ecore#//Classification">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/viewgroup"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/viewgroups"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/classifiedFeatures"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/autoCompleteFeatures"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classification.ecore#//Classification/unboundFeatures"/>

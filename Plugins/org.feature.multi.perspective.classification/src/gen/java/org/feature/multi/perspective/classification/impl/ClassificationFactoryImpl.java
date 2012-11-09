@@ -21,154 +21,148 @@ import org.feature.multi.perspective.classification.*;
  */
 public class ClassificationFactoryImpl extends EFactoryImpl implements ClassificationFactory {
    /**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    public static ClassificationFactory init() {
-    try
-    {
-      ClassificationFactory theClassificationFactory = (ClassificationFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.conper.de/classification"); 
-      if (theClassificationFactory != null)
-      {
-        return theClassificationFactory;
-      }
-    }
-    catch (Exception exception)
-    {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new ClassificationFactoryImpl();
-  }
+		try {
+			ClassificationFactory theClassificationFactory = (ClassificationFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.conper.de/classification"); 
+			if (theClassificationFactory != null) {
+				return theClassificationFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new ClassificationFactoryImpl();
+	}
 
    /**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    public ClassificationFactoryImpl() {
-    super();
-  }
+		super();
+	}
 
    /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    @Override
    public EObject create(EClass eClass) {
-    switch (eClass.getClassifierID())
-    {
-      case ClassificationPackage.CLASSIFICATION_MODEL: return createClassificationModel();
-      case ClassificationPackage.CLASSIFICATION: return createClassification();
-      case ClassificationPackage.CLASSIFIED_FEATURE: return createClassifiedFeature();
-      default:
-        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
+		switch (eClass.getClassifierID()) {
+			case ClassificationPackage.CLASSIFICATION_MODEL: return createClassificationModel();
+			case ClassificationPackage.CLASSIFICATION: return createClassification();
+			case ClassificationPackage.CLASSIFIED_FEATURE: return createClassifiedFeature();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
 
    /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    @Override
    public Object createFromString(EDataType eDataType, String initialValue) {
-    switch (eDataType.getClassifierID())
-    {
-      case ClassificationPackage.CLASSIFIER:
-        return createClassifierFromString(eDataType, initialValue);
-      default:
-        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-    }
-  }
+		switch (eDataType.getClassifierID()) {
+			case ClassificationPackage.CLASSIFIER:
+				return createClassifierFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
 
    /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    @Override
    public String convertToString(EDataType eDataType, Object instanceValue) {
-    switch (eDataType.getClassifierID())
-    {
-      case ClassificationPackage.CLASSIFIER:
-        return convertClassifierToString(eDataType, instanceValue);
-      default:
-        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-    }
-  }
+		switch (eDataType.getClassifierID()) {
+			case ClassificationPackage.CLASSIFIER:
+				return convertClassifierToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
 
    /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    public ClassificationModel createClassificationModel() {
-    ClassificationModelImpl classificationModel = new ClassificationModelImpl();
-    return classificationModel;
-  }
+		ClassificationModelImpl classificationModel = new ClassificationModelImpl();
+		return classificationModel;
+	}
 
    /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    public Classification createClassification() {
-    ClassificationImpl classification = new ClassificationImpl();
-    return classification;
-  }
+		ClassificationImpl classification = new ClassificationImpl();
+		return classification;
+	}
 
    /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    public ClassifiedFeature createClassifiedFeature() {
-    ClassifiedFeatureImpl classifiedFeature = new ClassifiedFeatureImpl();
-    return classifiedFeature;
-  }
+		ClassifiedFeatureImpl classifiedFeature = new ClassifiedFeatureImpl();
+		return classifiedFeature;
+	}
 
    /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    public Classifier createClassifierFromString(EDataType eDataType, String initialValue) {
-    Classifier result = Classifier.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
+		Classifier result = Classifier.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
 
    /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    public String convertClassifierToString(EDataType eDataType, Object instanceValue) {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
+		return instanceValue == null ? null : instanceValue.toString();
+	}
 
    /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
    public ClassificationPackage getClassificationPackage() {
-    return (ClassificationPackage)getEPackage();
-  }
+		return (ClassificationPackage)getEPackage();
+	}
 
    /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
+	 * @deprecated
+	 * @generated
+	 */
    @Deprecated
    public static ClassificationPackage getPackage() {
-    return ClassificationPackage.eINSTANCE;
-  }
+		return ClassificationPackage.eINSTANCE;
+	}
 
 } //ClassificationFactoryImpl
