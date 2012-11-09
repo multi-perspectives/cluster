@@ -236,6 +236,7 @@ public class TextExpressionParser {
 
    /**
     * get all requires and exclude constraints from the given featuremodel.
+    * 
     * @param model
     * @return
     */
@@ -244,21 +245,21 @@ public class TextExpressionParser {
       return map.keySet();
    }
 
-   public static Map<FeatureExpression,Term> getTermsMappedToConstraints(FeatureModel featureModel){
-      Map<FeatureExpression,Term> result = new HashMap<FeatureExpression,Term>();
+   public static Map<FeatureExpression, Term> getTermsMappedToConstraints(FeatureModel featureModel) {
+      Map<FeatureExpression, Term> result = new HashMap<FeatureExpression, Term>();
       List<Term> parseExpressions = parseExpressions(featureModel);
       for (Term term : parseExpressions) {
          FeatureExpression expression = createFeatureExpression(term);
          if (expression != null) {
-            result.put(expression,term);
+            result.put(expression, term);
          }
       }
-      
-      log.debug("found "+ parseExpressions.size() + " terms and " + result.size() + " constraints.");
+
+      log.debug("found " + parseExpressions.size() + " terms and " + result.size() + " constraints.");
       return result;
-      
+
    }
-   
+
    private static FeatureExpression createFeatureExpression(Term term) {
       FeatureExpression expression = null;
       expression = createExcludes(term);

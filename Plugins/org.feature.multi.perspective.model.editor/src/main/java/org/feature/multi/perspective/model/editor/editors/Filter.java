@@ -3,6 +3,7 @@
  */
 package org.feature.multi.perspective.model.editor.editors;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -10,14 +11,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.term.propositional.expression.Term;
+import org.emftext.term.propositional.expression.resource.expression.mopp.ExpressionMetaInformation;
 import org.feature.model.constraint.FeatureExpression;
 import org.feature.model.csp.TextExpressionParser;
+import org.feature.model.csp.TextExpressionPrinter;
 import org.feature.model.utilities.FeatureModelUtil;
 import org.featuremapper.models.feature.Constraint;
 import org.featuremapper.models.feature.Feature;
+import org.featuremapper.models.feature.FeatureFactory;
 import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.feature.Group;
 
@@ -31,6 +37,8 @@ public class Filter {
    private Map<String, Feature> featureMap;
    private FeatureModel orgFeatureModel;
 
+   private static Logger log = Logger.getLogger(Filter.class);
+   
    public Filter(FeatureModel org, Map<String, Feature> featureMap) {
       this.featureMap = featureMap;
       orgFeatureModel = org;
@@ -44,26 +52,25 @@ public class Filter {
             fm.eSet(eAttribute, org.eGet(eAttribute));
          }
          fm.getConstraints().clear();
-         checkConstraints(orgFeatureModel.getConstraints(), fm.getAllFeatures());
+        // checkConstraints(orgFeatureModel.getConstraints(), fm.getAllFeatures());
+         filterConstraints(orgFeatureModel);
       }
       // root feature not selected
    }
 
    private void filterConstraints(FeatureModel featureModel) {
-      List<Feature> allFeatures = FeatureModelUtil.getAllFeatures(featureModel);
-      Set<FeatureExpression> constraints = TextExpressionParser.getConstraints(featureModel);
-      Set<FeatureExpression> featureConstraints = new HashSet<FeatureExpression>();
-      for (Feature feature : allFeatures) {
-         for (FeatureExpression featureExpression : constraints) {
-
+       Map<FeatureExpression, Term> constraints = TextExpressionParser.getTermsMappedToConstraints(featureModel);
+      for (FeatureExpression featureExpression : constraints.keySet()) {
+         if (isRelevant(featureExpression)) {
+            Term term = constraints.get(featureExpression);
+            try {
+               addConstraintToModel(term);
+            } catch (IOException e) {
+               log.error("Error while printing expression." + e.getLocalizedMessage());
+            }
          }
       }
-   }
-
-   private boolean containsFeature(Feature feature, FeatureExpression expression) {
-      Feature leftFeature = expression.getLeftFeature();
-      Feature rightFeature = expression.getRightFeature();
-      return (EcoreUtil.equals(leftFeature, feature) || EcoreUtil.equals(rightFeature, feature));
+      
    }
 
    /**
@@ -72,45 +79,25 @@ public class Filter {
     * @param constraints
     * @param featureModelFeatures
     */
-   private void checkConstraints(EList<Constraint> constraints, EList<Feature> featureModelFeatures) {
-      Map<String, Feature> fmfMap = new HashMap<String, Feature>();
-      for (Feature feature : featureModelFeatures) {
-         fmfMap.put(feature.getName(), feature);
-      }
-      List<Constraint> tempConstraints = new LinkedList<Constraint>();
-      tempConstraints.addAll(constraints);
-      for (Constraint constraint : tempConstraints) {
-         EList<Feature> constrainedFeatures = constraint.getConstrainedFeatures();
-         boolean remove = false;
-         for (Feature feature : constrainedFeatures) {
-            if (!this.featureMap.containsKey(feature.getName())) {
-               remove = true;
-               break;
-            }
-         }
-         String expr = constraint.getExpression();
-         expr = expr.replaceAll("\"", "");
-         int index = expr.toLowerCase().indexOf("not ", 0);
-         if (index == 0) {
-            expr = expr.substring(4);
-         }
-         if (!this.featureMap.containsKey(expr)) {
-            remove = true;
-         }
-         if (!remove) { // replace old references with new
-            Constraint copy = EcoreUtil.copy(constraint);
-            List<Feature> features = new LinkedList<Feature>();
-            for (Feature feature : constrainedFeatures) {
-               features.add(fmfMap.get(feature.getName()));
-            }
-            copy.setExpression(constraint.getExpression());
-            copy.setLanguage(constraint.getLanguage());
-            copy.getConstrainedFeatures().addAll(features);
-            this.fm.getConstraints().add(copy);
-         }
-      }
+   private void addConstraintToModel(Term term) throws IOException {
+      Constraint constraint = FeatureFactory.eINSTANCE.createConstraint();
+      constraint.setLanguage(FeatureModelUtil.csp_constraintLanguage);
+      String printExpression = TextExpressionPrinter.printExpression(term);
+      constraint.setExpression(printExpression);
+      this.fm.getConstraints().add(constraint);      
    }
 
+   private boolean isRelevant(FeatureExpression expression) {
+      boolean relevant = false;
+      Feature leftFeature = expression.getLeftFeature();
+      Feature rightFeature = expression.getRightFeature();
+      boolean isLeft = this.featureMap.containsKey(leftFeature.getName());
+      boolean isRight = this.featureMap.containsKey(rightFeature.getName());
+      relevant = isLeft && isRight;
+      return relevant;
+   }
+
+   
    /**
     * 
     * @param orgFeature
