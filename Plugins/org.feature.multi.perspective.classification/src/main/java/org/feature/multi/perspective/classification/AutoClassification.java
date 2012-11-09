@@ -71,12 +71,31 @@ public class AutoClassification {
          handleDeadFeature(classifiedFeature);
       } else if (Classifier.UNCLASSIFIED.equals(classified)) {
          handleUnclassifiedFeature(classifiedFeature);
+      } else if (Classifier.UNBOUND.equals(classified)) {
+         handleUnboundFeature(classifiedFeature);
       }
    }
 
    private void handleUnclassifiedFeature(ClassifiedFeature classifiedFeature) {
       // set feature undbound and handle it as unboundfeature
       classifiedFeature.setClassified(Classifier.UNBOUND);
+      handleUnboundFeature(classifiedFeature);
+   }
+
+   private void handleUnboundFeature(ClassifiedFeature classifiedFeature) {
+      // set parents unbound
+      setParentFeatures(classifiedFeature, Classifier.UNBOUND);
+   }
+
+   private void handleAliveFeature(ClassifiedFeature classifiedFeature) {
+      // select parent features
+      setParentFeatures(classifiedFeature, Classifier.ALIVE);
+      // check children
+      checkChildren(classifiedFeature);
+      // select group cardinality sibling features
+      checkSiblings(classifiedFeature);
+      // check Constraints
+      checkConstraintsForAliveFeature(classifiedFeature);
    }
 
    private void handleDeadFeature(ClassifiedFeature classifiedFeature) {
@@ -104,13 +123,12 @@ public class AutoClassification {
 
    }
 
-   private void handleAliveFeature(ClassifiedFeature classifiedFeature) {
-      // select parent features
-      setParentFeatures(classifiedFeature, Classifier.ALIVE);
-      // select group cardinality sibling features
-      checkSiblings(classifiedFeature);
-      // check Constraints
-      checkConstraintsForAliveFeature(classifiedFeature);
+   private void checkChildren(ClassifiedFeature classifiedFeature) {
+      EList<Group> groups = classifiedFeature.getFeature().getGroups();
+      Classification classification = (Classification) classifiedFeature.eContainer();
+      for (Group group : groups) {
+         checkChildren(group, classification);
+      }
    }
 
    private void checkConstraintsForAliveFeature(ClassifiedFeature classifiedFeature) {
@@ -158,12 +176,15 @@ public class AutoClassification {
    }
 
    private void handleChangeFeatures() {
-      List<ChangeFeature> copy = new ArrayList<ChangeFeature>();
-      copy.addAll(featuresToComplete);
-      for (ChangeFeature changeFeature : copy) {
-         handleChangeFeature(changeFeature);
+      do {
+         List<ChangeFeature> copy = new ArrayList<ChangeFeature>();
+         copy.addAll(featuresToComplete);
+         for (ChangeFeature changeFeature : copy) {
+            handleChangeFeature(changeFeature);
+         }
+         featuresToComplete.removeAll(copy);
       }
-      featuresToComplete.removeAll(copy);
+      while (featuresToComplete.size() > 0);
    }
 
    private void handleChangeFeature(ChangeFeature changeFeature) {
@@ -177,17 +198,20 @@ public class AutoClassification {
 
    private void checkSiblings(ClassifiedFeature classifiedFeature) {
       Feature feature = classifiedFeature.getFeature();
-      Classifier classified = classifiedFeature.getClassified();
       Classification classification = (Classification) classifiedFeature.eContainer();
       Group parentGroup = feature.getParentGroup();
       // if parent group is null, than this is the root feature and nothing need to be done.
+      checkChildren(parentGroup, classification);
+   }
+
+   private void checkChildren(Group parentGroup, Classification classification) {
       if (parentGroup != null) {
          int minCardinality = parentGroup.getMinCardinality();
          int maxCardinality = parentGroup.getMaxCardinality();
 
-         List<ClassifiedFeature> allSiblingFeatures = ClassificationUtil.getClassifiedFeaturesOfGroup(parentGroup, classification);
+         List<ClassifiedFeature> siblingClassificationFeatures = ClassificationUtil.getFeaturesOfGroup(parentGroup, classification, true);
          List<ClassifiedFeature> siblingsCopy = new ArrayList<ClassifiedFeature>();
-         siblingsCopy.addAll(allSiblingFeatures);
+         siblingsCopy.addAll(siblingClassificationFeatures);
 
          List<ClassifiedFeature> aliveSiblings = filterClassifiedFeatures(siblingsCopy, Classifier.ALIVE);
          siblingsCopy.removeAll(aliveSiblings);
@@ -199,20 +223,22 @@ public class AutoClassification {
 
          if (sizeAlive == maxCardinality) {
             // maximum reached, set unbound features dead
-            if (Classifier.ALIVE.equals(classified)) {
-               for (ClassifiedFeature sibling : siblingsCopy) {
-                  handleAutoCompleteFeature(sibling, Classifier.DEAD);
-               }
+            for (ClassifiedFeature sibling : siblingsCopy) {
+               handleAutoCompleteFeature(sibling, Classifier.DEAD);
             }
          }
          if (sizeUnboundOrAlive < minCardinality) {
             // TODO the minimum number of selected features cannot be reached
             // consider more features, that are not yet contained in the classification
+            List<ClassifiedFeature> newSiblingClassificationFeatures =
+               ClassificationUtil.getFeaturesOfGroup(parentGroup, classification, false);
+            for (ClassifiedFeature newSibling : newSiblingClassificationFeatures) {
+               handleAutoCompleteFeature(newSibling, Classifier.UNBOUND);
+            }
          }
          if (sizeAlive > maxCardinality) {
             // TODO the maximum number of selected features is exceeded
          }
-
       }
    }
 
@@ -251,7 +277,7 @@ public class AutoClassification {
          EObject element = eAllContents.next();
          if (element instanceof Group) {
             Group group = (Group) element;
-            List<ClassifiedFeature> childFeatures = ClassificationUtil.getClassifiedFeaturesOfGroup(group, classification);
+            List<ClassifiedFeature> childFeatures = ClassificationUtil.getFeaturesOfGroup(group, classification, true);
             for (ClassifiedFeature childFeature : childFeatures) {
                handleAutoCompleteFeature(childFeature, Classifier.DEAD);
             }

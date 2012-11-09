@@ -113,15 +113,6 @@ public final class ClassificationUtil {
       return isAllowed;
    }
 
-   public static void cleanUpFeatureReference(Feature feature, Classification classification) {
-      EList<Feature> deadFeatures = classification.getDeadFeatures();
-      deadFeatures.remove(feature);
-      EList<Feature> unboundFeatures = classification.getUnboundFeatures();
-      unboundFeatures.remove(feature);
-      EList<Feature> aliveFeatures = classification.getAliveFeatures();
-      aliveFeatures.remove(feature);
-   }
-
    /**
     * get the classifiedfeature.
     * 
@@ -185,14 +176,23 @@ public final class ClassificationUtil {
     * @param classification
     * @return
     */
-   public static List<ClassifiedFeature> getClassifiedFeaturesOfGroup(Group group, Classification classification) {
+   public static List<ClassifiedFeature> getFeaturesOfGroup(Group group, Classification classification, boolean onlyContainedInView) {
       // consider only classified features of the according view
       EList<Feature> childFeatures = group.getChildFeatures();
       List<ClassifiedFeature> result = new ArrayList<>(childFeatures.size());
       for (Feature feature : childFeatures) {
          ClassifiedFeature classifiedFeature = getClassifiedFeature(classification, feature);
-         if (classifiedFeature != null) {
-            result.add(classifiedFeature);
+         if (onlyContainedInView) {
+            if (classifiedFeature != null) {
+               result.add(classifiedFeature);
+            }
+         } else {
+            if (classifiedFeature == null) {
+               classifiedFeature = getOrCreateClassifiedFeature(classification, feature);
+               if (classifiedFeature != null){
+                  result.add(classifiedFeature);
+               }
+            }
          }
       }
       return result;

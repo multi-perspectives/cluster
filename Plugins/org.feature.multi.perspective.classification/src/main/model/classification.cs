@@ -30,7 +30,7 @@ RULES {
 							  classifications*;
 
 	// syntax definition for class 'Classification'
-	Classification ::=  ("stage" #1 id['<','>'] #1 "on" "view" #1 viewgroup['"','"'] #1 ":" !0)
+	Classification ::=  "stage" #1 id['<','>'] #1 "on" "view" #1 viewgroup['"','"'] #1 ":" !0
 						 classifiedFeatures* 
 						 (#3 "autocomplete" #1 "{" !0 autoCompleteFeatures* #3 "}")? !0 ; 
 
