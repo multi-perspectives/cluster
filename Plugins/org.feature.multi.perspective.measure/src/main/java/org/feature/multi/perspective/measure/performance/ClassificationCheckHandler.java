@@ -52,20 +52,9 @@ public class ClassificationCheckHandler extends AbstractCheckHandler {
    void check(IFile file) {
       EObject model = ResourceUtil.getModel(file, new ResourceSetImpl());
       if (model instanceof ClassificationModel) {
-
-         //
-         // CltMetaInformation metaInfo = new CltMetaInformation();
-         // try {
-         // InputStream contents = file.getContents();
-         // ICltTextParser createParser = metaInfo.createParser(contents, null);
-         // ICltParseResult parse = createParser.parse();
-         // EObject root = parse.getRoot();
          ClassificationModel classificationModel = (ClassificationModel) model;
          measureClassification(classificationModel);
       }
-      // } catch (CoreException e) {
-      // log.error(e.getMessage());
-      // }
    }
 
    private void measureClassification(ClassificationModel classificationModel) {

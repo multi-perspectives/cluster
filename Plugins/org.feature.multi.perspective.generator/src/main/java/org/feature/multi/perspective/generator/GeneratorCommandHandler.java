@@ -33,8 +33,7 @@ public class GeneratorCommandHandler extends AbstractHandler {
 
    @Override
    public Object execute(ExecutionEvent event) throws ExecutionException {
-      //generateMultiPerspectiveModel(); 
-       createJob();
+      createJob();
       return null;
    }
 
