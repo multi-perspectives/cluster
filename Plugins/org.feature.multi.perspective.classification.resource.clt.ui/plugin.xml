@@ -168,6 +168,11 @@
                label="Complete Classification"
                style="push">
          </command>
+         <command
+               commandId="org.feature.multi.perspective.classification.autocompose"
+               label="Compose Stages"
+               style="push">
+         </command>
       </menuContribution>
    </extension>
    <extension
@@ -177,6 +182,12 @@
             defaultHandler="org.feature.multi.perspective.classification.operation.AutoClassificationHandler"
             id="org.feature.multi.perspective.classification.autoclassify"
             name="autoClassify">
+      </command>
+      <command
+            categoryId="org.feature.multi.perspective.classification.category1"
+            defaultHandler="org.feature.multi.perspective.classification.operation.CompositionHandler"
+            id="org.feature.multi.perspective.classification.autocompose"
+            name="autoCompose">
       </command>
       <category
             id="org.feature.multi.perspective.classification.category1"

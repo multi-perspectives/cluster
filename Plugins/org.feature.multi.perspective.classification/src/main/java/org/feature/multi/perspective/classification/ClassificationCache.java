@@ -67,10 +67,15 @@ public class ClassificationCache {
     * @param classification
     * @return
     */
-   public View getView(Classification classification) {
-      ViewBuilder viewBuilder = getViewBuilder(classification);
-       EList<AbstractGroup> viewgroups = classification.getViewgroups();
-      return viewBuilder.getView(viewgroups);
+   public View getView(Classification classification, ClassificationModel model) {
+      View view = null;
+      ViewBuilder viewBuilder = getViewBuilder(model);
+      EList<AbstractGroup> viewgroups = classification.getViewgroups();
+
+      if (viewBuilder != null) {
+         view = viewBuilder.getView(viewgroups);
+      }
+      return view;
    }
 
    /**
@@ -104,16 +109,38 @@ public class ClassificationCache {
    }
 
    /**
-    * determine if a feature is contained in a view.
+    * determine if a feature is contained in the view of the given classification.
     * 
     * @param classification
     * @param feature
     * @return
     */
-   public boolean isFeatureContainedInAnyViews(Classification classification, Feature feature) {
+   public boolean isFeatureContainedInView(Classification classification, Feature feature, ClassificationModel model) {
+      ViewBuilder viewBuilder = getViewBuilder(model);
       for (AbstractGroup viewgroup : classification.getViewgroups()) {
-         ViewBuilder viewBuilder = getViewBuilder(classification);
-         if (viewBuilder.isFeatureContained(feature, viewgroup)) return true;
+         if (viewBuilder.isFeatureContained(feature, viewgroup)) {
+            return true;
+         }
+      }
+      return false;
+   }
+
+   /**
+    * determine if a feature is contained in the view of the given classification. May return false if the view could
+    * not be determined.
+    * 
+    * @param classification
+    * @param feature
+    * @return
+    */
+   public boolean isFeatureContainedInView(Classification classification, Feature feature) {
+      ViewBuilder viewBuilder = getViewBuilder(classification);
+      if (viewBuilder != null) {
+         for (AbstractGroup viewgroup : classification.getViewgroups()) {
+            if (viewBuilder.isFeatureContained(feature, viewgroup)) {
+               return true;
+            }
+         }
       }
       return false;
    }

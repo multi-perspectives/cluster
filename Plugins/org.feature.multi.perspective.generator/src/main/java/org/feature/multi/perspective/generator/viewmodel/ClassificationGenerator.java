@@ -86,7 +86,7 @@ public class ClassificationGenerator extends AbstractGenerator {
             classification.setId(g.getName() + "_" + i);
             classifyModel.getClassifications().add(classification);
 
-            List<ClassifiedFeature> classifiedFeatures = ClassificationUtil.getAllClassifiedFeaturesOfView(classification);
+            List<ClassifiedFeature> classifiedFeatures = ClassificationUtil.getAllClassifiedFeaturesOfView(classification, classifyModel);
 
             for (ClassifiedFeature feature : classifiedFeatures) {
 

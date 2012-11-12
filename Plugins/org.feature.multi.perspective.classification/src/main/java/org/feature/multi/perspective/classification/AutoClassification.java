@@ -60,7 +60,7 @@ public class AutoClassification {
    }
 
    private List<ClassifiedFeature> initClassificationFeatures(Classification classification) {
-      return ClassificationUtil.getAllClassifiedFeaturesOfView(classification);
+      return ClassificationUtil.getAllClassifiedFeaturesOfView(classification, classificationModel);
    }
 
    private void autoCompleteClassifiedFeature(ClassifiedFeature classifiedFeature) {
