@@ -47,7 +47,7 @@ public class FeatureRefFeatureReferenceResolver
 
    public String deResolve(org.featuremapper.models.feature.Feature element,
                            org.emftext.term.propositional.expression.FeatureRef container, org.eclipse.emf.ecore.EReference reference) {
-      return delegate.deResolve(element, container, reference);
+      return element.getName();
    }
 
    public void setOptions(java.util.Map< ? , ? > options) {

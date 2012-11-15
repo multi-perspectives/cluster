@@ -49,11 +49,11 @@ public class ViewgroupInitializer implements ICltOptionProvider, ICltResourcePos
          if (mappedGroup != null) {
             boolean create = true;
             for (Classification classification : classifications) {
-               AbstractGroup viewgroup = classification.getViewgroup();
-               if (viewgroup != null && EcoreUtil.equals(mappedGroup, viewgroup)) {
-                  create = false;
-                  break;
-               }
+                classification.getViewgroups();
+//               if (viewgroup != null && EcoreUtil.equals(mappedGroup, viewgroup)) {
+//                  create = false;
+//                  break;
+//               }
             }
             if (create) {
                Classification newClassification = createClassification(mapping);
@@ -67,7 +67,7 @@ public class ViewgroupInitializer implements ICltOptionProvider, ICltResourcePos
    private Classification createClassification(Mapping mapping) {
       Classification classification = ClassificationFactory.eINSTANCE.createClassification();
       AbstractGroup group = mapping.getViewgroup();
-      classification.setViewgroup(group);
+      classification.getViewgroups().add(group);
       List<ClassifiedFeature> newClassifiedFeatures = createClassifiedFeatures(mapping);
       classification.getClassifiedFeatures().addAll(newClassifiedFeatures);
       return classification;

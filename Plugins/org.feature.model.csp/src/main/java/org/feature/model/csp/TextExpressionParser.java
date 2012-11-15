@@ -8,8 +8,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -234,21 +236,28 @@ public class TextExpressionParser {
 
    /**
     * get all requires and exclude constraints from the given featuremodel.
+    * 
     * @param model
     * @return
     */
-   public static List<FeatureExpression> getConstraints(FeatureModel model) {
-      List<FeatureExpression> result = new ArrayList<FeatureExpression>();
-      List<Term> parseExpressions = parseExpressions(model);
+   public static Set<FeatureExpression> getConstraints(FeatureModel model) {
+      Map<FeatureExpression, Term> map = getTermsMappedToConstraints(model);
+      return map.keySet();
+   }
+
+   public static Map<FeatureExpression, Term> getTermsMappedToConstraints(FeatureModel featureModel) {
+      Map<FeatureExpression, Term> result = new HashMap<FeatureExpression, Term>();
+      List<Term> parseExpressions = parseExpressions(featureModel);
       for (Term term : parseExpressions) {
          FeatureExpression expression = createFeatureExpression(term);
          if (expression != null) {
-            result.add(expression);
+            result.put(expression, term);
          }
       }
-      
-      System.out.println("found "+ parseExpressions.size() + " terms and " + result.size() + " constraints.");
+
+      log.debug("found " + parseExpressions.size() + " terms and " + result.size() + " constraints.");
       return result;
+
    }
 
    private static FeatureExpression createFeatureExpression(Term term) {

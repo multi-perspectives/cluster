@@ -1,6 +1,9 @@
 package org.feature.multi.perspective.view.provider;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.feature.model.constraint.FeatureExpression;
@@ -26,7 +29,7 @@ public class ViewBuilder {
 
    private ViewContainer viewContainer;
 
-   private List<FeatureExpression> featureModelConstraints;
+   private Set<FeatureExpression> featureModelConstraints;
 
    private boolean considerViewHierarchy;
 
@@ -50,7 +53,7 @@ public class ViewBuilder {
       featureModelConstraints = TextExpressionParser.getConstraints(featuremodel);
    }
 
-   public List<FeatureExpression> getConstraints() {
+   public Set<FeatureExpression> getConstraints() {
       return featureModelConstraints;
    }
 
@@ -58,7 +61,9 @@ public class ViewBuilder {
       GroupModel viewModel = viewContainer.getFeatureMapping().getViewModel();
       List<AbstractGroup> allGroups = GroupModelUtil.getAllGroups(viewModel, true);
       for (AbstractGroup abstractGroup : allGroups) {
-         createView(abstractGroup);
+         List<AbstractGroup> groups = new ArrayList<AbstractGroup>(1);
+         groups.add(abstractGroup);
+         createView(groups);
       }
 
    }
@@ -88,44 +93,65 @@ public class ViewBuilder {
     * @return
     */
    public View getView(AbstractGroup group) {
-      View view = getViewInternal(group);
+      List<AbstractGroup> cache = new ArrayList<AbstractGroup>();
+      cache.add(group);
+      View view = getViewInternal(cache);
       if (view == null) {
-         view = createView(group);
+         view = createView(cache);
       }
       return view;
    }
 
-   private View getViewInternal(AbstractGroup group) {
-      View view = null;
-      EList<View> views = viewContainer.getViews();
-      for (View cview : views) {
-         AbstractGroup viewgroup = cview.getViewgroup();
-         if (viewgroup.equals(group)) {
-            view = cview;
-            break;
-         }
+   public View getView(List<AbstractGroup> groups) {
+      View view = getViewInternal(groups);
+      if (view == null) {
+         view = createView(groups);
       }
       return view;
    }
+
+   private View getViewInternal(List<AbstractGroup> groups) {
+      View view = null;
+      EList<View> views = viewContainer.getViews();
+      for (View cview : views) {
+         EList<AbstractGroup> viewgroups = cview.getViewgroups();
+         if (groups.size() == viewgroups.size() && 
+          viewgroups.containsAll(groups))
+               view = cview;
+               break;
+            }
+      return view;
+   }
+
 
    private void clearAllViews() {
       viewContainer.getViews().clear();
    }
 
-   private View createView(AbstractGroup group) {
+   private String getGroupsName(List<AbstractGroup> groups){
+      String name = "";
+      for (AbstractGroup abstractGroup : groups) {
+         name += "_" + abstractGroup.getName();
+      }
+      return name;
+   }
+   
+   private View createView(List<AbstractGroup> groups) {
       View view = ViewFactory.eINSTANCE.createView();
-      view.setViewgroup(group);
-      view.setId(group.getName());
+      view.getViewgroups().addAll(groups);
+      view.setId(getGroupsName(groups));
       EList<Feature> features = view.getFeatures();
       MappingModel viewMapping = viewContainer.getFeatureMapping();
-      List<Feature> collectedFeatures;
+      Set<Feature> collectedFeatures = new HashSet<Feature>();
 
+      for (AbstractGroup group : groups) {
       if (considerViewHierarchy) {
-         collectedFeatures = FeatureMappingUtil.collectViewFeatures(group, viewMapping);
+         collectedFeatures.addAll(FeatureMappingUtil.collectViewFeatures(group, viewMapping));
       } else {
-         collectedFeatures = FeatureMappingUtil.getGroupFeatures(group, viewMapping);
+         collectedFeatures.addAll(FeatureMappingUtil.getGroupFeatures(group, viewMapping));
       }
       features.addAll(collectedFeatures);
+      }
 
       viewContainer.getViews().add(view);
       return view;

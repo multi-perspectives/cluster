@@ -1,11 +1,14 @@
 package org.feature.multi.perspective.classification;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.feature.model.constraint.FeatureExpression;
 import org.feature.multi.perspective.mapping.viewmapping.MappingModel;
@@ -27,7 +30,7 @@ public class ClassificationCache {
       return cache;
    }
 
-   public List<FeatureExpression> getConstraints(EObject classificationObject) {
+   public Set<FeatureExpression> getConstraints(EObject classificationObject) {
       ViewBuilder viewBuilder = getViewBuilder(classificationObject);
       return viewBuilder.getConstraints();
    }
@@ -38,11 +41,14 @@ public class ClassificationCache {
       if (rootContainer instanceof ClassificationModel) {
          ClassificationModel model = (ClassificationModel) rootContainer;
          MappingModel viewMapping = model.getViewMapping();
-         String resourceUri = viewMapping.eResource().getURI().toString();
-         if (viewBuilders.containsKey(resourceUri)) {
-            result = viewBuilders.get(resourceUri);
-         } else {
-            result = initViewBuilder(model, resourceUri);
+         Resource eResource = viewMapping.eResource();
+         if (eResource != null) {
+            String resourceUri = eResource.getURI().toString();
+            if (viewBuilders.containsKey(resourceUri)) {
+               result = viewBuilders.get(resourceUri);
+            } else {
+               result = initViewBuilder(model, resourceUri);
+            }
          }
       }
       return result;
@@ -56,15 +62,37 @@ public class ClassificationCache {
    }
 
    /**
-    * get the corresponding view for a classification.
+    * get the first corresponding view for a classification.
     * 
     * @param classification
     * @return
     */
-   public View getView(Classification classification) {
+   public View getView(Classification classification, ClassificationModel model) {
+      View view = null;
+      ViewBuilder viewBuilder = getViewBuilder(model);
+      EList<AbstractGroup> viewgroups = classification.getViewgroups();
+
+      if (viewBuilder != null) {
+         view = viewBuilder.getView(viewgroups);
+      }
+      return view;
+   }
+
+   /**
+    * get the all corresponding views for a (composed) classification.
+    * 
+    * @param classification
+    * @return
+    */
+   public Set<View> getViewsComplete(Classification classification) {
       ViewBuilder viewBuilder = getViewBuilder(classification);
-      AbstractGroup viewgroup = classification.getViewgroup();
-      return viewBuilder.getView(viewgroup);
+      List<AbstractGroup> viewgroups = classification.getViewgroups();
+      HashSet<View> allViews = new HashSet<View>();
+      for (AbstractGroup group : viewgroups) {
+         View v = viewBuilder.getView(group);
+         allViews.add(v);
+      }
+      return allViews;
    }
 
    /**
@@ -74,10 +102,47 @@ public class ClassificationCache {
     * @param feature
     * @return
     */
-   public boolean isFeatureContainedInView(Classification classification, Feature feature) {
-      AbstractGroup viewgroup = classification.getViewgroup();
+   public boolean isFeatureContainedInFirstView(Classification classification, Feature feature) {
+      AbstractGroup viewgroup = classification.getViewgroups().get(0);
       ViewBuilder viewBuilder = getViewBuilder(classification);
       return viewBuilder.isFeatureContained(feature, viewgroup);
+   }
+
+   /**
+    * determine if a feature is contained in the view of the given classification.
+    * 
+    * @param classification
+    * @param feature
+    * @return
+    */
+   public boolean isFeatureContainedInView(Classification classification, Feature feature, ClassificationModel model) {
+      ViewBuilder viewBuilder = getViewBuilder(model);
+      for (AbstractGroup viewgroup : classification.getViewgroups()) {
+         if (viewBuilder.isFeatureContained(feature, viewgroup)) {
+            return true;
+         }
+      }
+      return false;
+   }
+
+   /**
+    * determine if a feature is contained in the view of the given classification. May return false if the view could
+    * not be determined.
+    * 
+    * @param classification
+    * @param feature
+    * @return
+    */
+   public boolean isFeatureContainedInView(Classification classification, Feature feature) {
+      ViewBuilder viewBuilder = getViewBuilder(classification);
+      if (viewBuilder != null) {
+         for (AbstractGroup viewgroup : classification.getViewgroups()) {
+            if (viewBuilder.isFeatureContained(feature, viewgroup)) {
+               return true;
+            }
+         }
+      }
+      return false;
    }
 
 }

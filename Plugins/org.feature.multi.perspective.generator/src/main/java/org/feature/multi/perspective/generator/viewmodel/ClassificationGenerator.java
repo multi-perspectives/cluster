@@ -13,7 +13,6 @@ import org.feature.model.csp.analyze.FeatureVariant;
 import org.feature.multi.perspective.classification.Classification;
 import org.feature.multi.perspective.classification.ClassificationFactory;
 import org.feature.multi.perspective.classification.ClassificationModel;
-import org.feature.multi.perspective.classification.ClassificationPackage;
 import org.feature.multi.perspective.classification.ClassificationUtil;
 import org.feature.multi.perspective.classification.ClassifiedFeature;
 import org.feature.multi.perspective.classification.Classifier;
@@ -22,7 +21,6 @@ import org.feature.multi.perspective.mapping.viewmapping.Mapping;
 import org.feature.multi.perspective.mapping.viewmapping.MappingModel;
 import org.feature.multi.perspective.model.viewmodel.AbstractGroup;
 import org.feature.multi.perspective.model.viewmodel.CoreGroup;
-import org.feature.multi.perspective.model.viewmodel.GroupModel;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 
@@ -61,7 +59,7 @@ public class ClassificationGenerator extends AbstractGenerator {
       List<MappingModel> allMappingModels = getAllMappingModels(set);
       for (MappingModel featureMapping : allMappingModels) {
          generateClassification(featureMapping);
-         persistModel(classifyModel, "classification_" + featureMapping.eResource().getTimeStamp() , "clt", classificationFolder);
+         persistModel(classifyModel, "classification_" + featureMapping.eResource().getTimeStamp(), "clt", classificationFolder);
       }
    }
 
@@ -84,14 +82,16 @@ public class ClassificationGenerator extends AbstractGenerator {
          for (int i = 0; i < numberOfParalellViewInterpretationScenarios; i++) {
 
             Classification classification = ClassificationFactory.eINSTANCE.createClassification();
-            classification.setViewgroup(g);
+            classification.getViewgroups().add(g);
             classification.setId(g.getName() + "_" + i);
             classifyModel.getClassifications().add(classification);
-            
-            List<ClassifiedFeature> classifiedFeatures = ClassificationUtil.getAllClassifiedFeaturesOfView(classification);
+
+            List<ClassifiedFeature> classifiedFeatures = ClassificationUtil.getAllClassifiedFeaturesOfView(classification, classifyModel);
 
             for (ClassifiedFeature feature : classifiedFeatures) {
+
                Classifier classifier = Classifier.UNCLASSIFIED;
+
                int randomUnbound = (int) Math.floor((Math.random() * 99) + 1);
                int randomUnclassified = (int) Math.floor((Math.random() * 99) + 1);
 
@@ -104,18 +104,20 @@ public class ClassificationGenerator extends AbstractGenerator {
                // No classification
                {}
                // if both would match, unclassified wins
-               else if (randomUnbound <= percentOfUnboundOverrideEachInterpretation
+               else if ((randomUnbound <= percentOfUnboundOverrideEachInterpretation)
                         && (randomUnclassified <= percentOfUnclassifiedOverrideEachInterpretation)) {
                   // classifier = Classifier.UNBOUND;
-               } else {
-                  if (productVariants[i].getAliveFeatures().contains(feature)) {
+               }
+
+               else {
+                  if (productVariants[i].getAliveFeatures().contains(feature.getFeature())) {
                      classifier = Classifier.ALIVE;
-                  } else if (productVariants[i].getDeadFeatures().contains(feature)) {
+                  } else if (productVariants[i].getDeadFeatures().contains(feature.getFeature())) {
                      classifier = Classifier.DEAD;
                   } else
                      log.error("Feature classification is UNKNOWN! - Classification cannot be determined, set to unclassified");
                }
-               ClassificationUtil.changeClassifier(feature, classifier);
+               ClassificationUtil.changeClassifier(feature, classifier, classification);
             }
          }
       }
