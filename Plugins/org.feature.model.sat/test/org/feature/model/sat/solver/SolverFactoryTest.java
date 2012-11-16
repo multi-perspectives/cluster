@@ -2,15 +2,16 @@ package org.feature.model.sat.solver;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.sat4j.core.Vec;
 import org.sat4j.core.VecInt;
 import org.sat4j.minisat.SolverFactory;
 import org.sat4j.specs.ContradictionException;
+import org.sat4j.specs.IVecInt;
 import org.sat4j.specs.TimeoutException;
 import org.sat4j.tools.GateTranslator;
 
@@ -426,92 +427,114 @@ public class SolverFactoryTest {
 
 	@Test
 	public void testSimplePhoneSATSmall() throws ContradictionException, TimeoutException {
+		Vec<IVecInt> conditions = new Vec<>();
 		// SmallFeaturePhone (1)
 		VecInt clause0 = new VecInt();
 		clause0.push(1);
+		conditions.push(clause0);
 		solver.addClause(clause0);
 
 		// Message (2)
 		VecInt clause1 = new VecInt();
 		clause1.push(1);
 		clause1.push(-2);
+		conditions.push(clause1);
 		solver.addClause(clause1);
 		
 		VecInt clause2 = new VecInt();
 		clause2.push(2);
 		clause2.push(-1);
+		conditions.push(clause2);
 		solver.addClause(clause2);
 
 		// SMS (3)
 		VecInt clause3 = new VecInt();
 		clause3.push(3);
 		clause3.push(-2);
+		conditions.push(clause3);
 		solver.addClause(clause3);
 		
 		VecInt clause8 = new VecInt();
 		clause8.push(2);
 		clause8.push(-3);
+		conditions.push(clause8);
 		solver.addClause(clause8);
 
 		// Extras (4)
 		VecInt clause4 = new VecInt();
 		clause4.push(-4);
 		clause4.push(1);
+		conditions.push(clause4);
 		solver.addClause(clause4);
 
 		// MP3 (5) v Camera (6)
 		VecInt clause5 = new VecInt();
 		clause5.push(-5);
 		clause5.push(4);
+		conditions.push(clause5);
 		solver.addClause(clause5);
 		
 		VecInt clause6 = new VecInt();
 		clause6.push(-6);
 		clause6.push(4);
+		conditions.push(clause6);
 		solver.addClause(clause6);
 		
 		VecInt clause7 = new VecInt();
 		clause7.push(5);
 		clause7.push(6);
 		clause7.push(-4);
-		solver.addAtLeast(clause6, 1);
+		conditions.push(clause7);
+		solver.addAtLeast(clause7, 1);
 		
 		
 
 		assertTrue(solver.isSatisfiable());
+		
+		solver = new GateTranslator(SolverFactory.newDefault());
+		solver.addAllClauses(conditions);
 		VecInt bound1 = new VecInt();
 		bound1.push(3);
 		assertNotNull(solver.findModel(bound1));
 
+		solver = new GateTranslator(SolverFactory.newDefault());
+		solver.addAllClauses(conditions);
 		VecInt bound2 = new VecInt();
 		bound2.push(-3);
 		assertNull(solver.findModel(bound2));
 
+		solver = new GateTranslator(SolverFactory.newDefault());
+		solver.addAllClauses(conditions);
 		VecInt bound3 = new VecInt();
 		bound3.push(5);
 		bound3.push(3);
 		assertNotNull(solver.findModel(bound3));
 
+		solver = new GateTranslator(SolverFactory.newDefault());
+		solver.addAllClauses(conditions);
 		VecInt bound4 = new VecInt();
 		bound4.push(5);
 		bound4.push(-3);
 		assertNull(solver.findModel(bound4));
 
+		solver = new GateTranslator(SolverFactory.newDefault());
+		solver.addAllClauses(conditions);
 		VecInt bound5 = new VecInt();
 		bound5.push(4);
 		bound5.push(-3);
 		assertNull(solver.findModel(bound5));
-		solver.clearLearntClauses();
 
-
+		solver = new GateTranslator(SolverFactory.newDefault());
+		solver.addAllClauses(conditions);
 		VecInt bound6 = new VecInt();
 		bound6.push(4);
 		bound6.push(3);
 		assertNotNull(solver.findModel(bound6));
 
+		solver = new GateTranslator(SolverFactory.newDefault());
+		solver.addAllClauses(conditions);
 		VecInt bound7 = new VecInt();
 		bound7.push(4);
-
 		int[] model = solver.findModel(bound7);
 		assertNotNull(model);
 

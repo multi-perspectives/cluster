@@ -32,8 +32,8 @@ public class TestModelBuilder {
 
 	@Before
 	public void setUp() {
-		PropertyConfigurator.configure("conf/log4j.properties");
 		// load activators of dependent plugins
+		PropertyConfigurator.configure("conf/log4j.properties");
 	}
 
 	@Test

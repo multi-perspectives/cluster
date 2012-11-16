@@ -5,8 +5,8 @@ Message -SMS
 -Message SMS 
 SmallFeaturePhone -Extras 
 SmallFeaturePhone -Extras 
-SmallFeaturePhone -MP3 
-SmallFeaturePhone -Camera 
 Extras -MP3 
+SmallFeaturePhone -MP3 
 Extras -Camera 
+SmallFeaturePhone -Camera 
 MP3 Camera -Extras

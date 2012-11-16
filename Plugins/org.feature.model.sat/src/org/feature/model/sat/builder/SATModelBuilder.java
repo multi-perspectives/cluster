@@ -40,6 +40,11 @@ import org.sat4j.tools.GateTranslator;
 public class SATModelBuilder implements ISolverModelBuilder {
 
 	/**
+	 * covert some clauses to readable forms
+	 */
+	private CNFConverter converter = new CNFConverter();
+
+	/**
 	 * counter of features within the feature model. is also used to derive
 	 * uniqe id for the transformation
 	 */
@@ -353,93 +358,110 @@ public class SATModelBuilder implements ISolverModelBuilder {
 		}
 	}
 
-	private void buildAlternativeChildren(Feature featureIdentifier, List<Feature> alternativeIdentifiers)
-			throws BuilderException, ContradictionException, UnknownStatementException {
-		VecInt clause = new VecInt();
-
-		int parentId = getMapping(featureIdentifier);
-		int rootId = getMapping(rootFeature);
-
-		for (int i = 0; i < alternativeIdentifiers.size(); i++) {
-			int featureId = getMapping(alternativeIdentifiers.get(i));
-			clause.push(featureId);
-
-			// TODO: Find better solution!
-			int[] redundantClause = { rootId, -featureId };
-			solver.addClause(new VecInt(redundantClause));
-		}
-
-		logger.debug("add alternative clause '" + featureIdentifier.getName() + "' -> '"
-				+ new CNFConverter().convertClauseToReadable(clause.toArray(), this) + "'");
-
-		// Add Imply constraint to parent feature
-		solver.halfOr(parentId, clause);
-
-		clause.push(-parentId);
-		solver.addAtLeast(clause, 1);
-		solver.addAtMost(clause, 1);
-	}
-
-	private void buildOptionalChildren(Feature featureIdentifier, List<Feature> optionalIdentifiers)
-			throws BuilderException, ContradictionException, UnknownStatementException {
-
-		VecInt clause = new VecInt();
-
-		int parentId = getMapping(featureIdentifier);
-		int rootId = getMapping(rootFeature);
-
-		for (int i = 0; i < optionalIdentifiers.size(); i++) {
-			int featureId = getMapping(optionalIdentifiers.get(i));
-			clause.push(featureId);
-
-			// TODO: Find better solution!
-			int[] redundantClause = { rootId, -featureId };
-			solver.addClause(new VecInt(redundantClause));
-		}
-
-		// Add Imply -> constraint to parent feature
-		solver.halfOr(parentId, clause);
-	}
-
-	private void buildMandatoryChildren(Feature featureIdentifier, List<Feature> mandatoryIdentifiers)
-			throws BuilderException, ContradictionException, UnknownStatementException {
-
-		int parentId = getMapping(featureIdentifier);
-
-		for (Feature f : mandatoryIdentifiers) {
-			VecInt mandatory = new VecInt();
-			mandatory.push(getMapping(f));
-			solver.and(parentId, mandatory);
-			logger.debug("add mandatory clause '" + featureIdentifier.getName() + "' <-> '" + f.getName() + "'");
-		}
-	}
-
-	private void buildOrChildren(Feature featureIdentifier, List<Feature> orIdentifiers) throws BuilderException,
+	private void buildAlternativeChildren(Feature parent, List<Feature> alternativeFeatures) throws BuilderException,
 			ContradictionException, UnknownStatementException {
-		
-		int[] clause = new int[orIdentifiers.size()];
 
-		int parentId = getMapping(featureIdentifier);
+		int[] clause = new int[alternativeFeatures.size()];
+
+		int parentId = getMapping(parent);
 		int rootId = getMapping(rootFeature);
 
-		for (int i = 0; i < orIdentifiers.size(); i++) {
-			int featureId = getMapping(orIdentifiers.get(i));
+		for (int i = 0; i < alternativeFeatures.size(); i++) {
+			int featureId = getMapping(alternativeFeatures.get(i));
 			clause[i] = featureId;
 
+			// Add Imply -> constraint to parent feature
+			int[] temp = { parentId, -featureId };
+			solver.addClause(new VecInt(temp));
+			logger.debug("add alternative clause '" + parent.getName() + "' -> '"
+					+ alternativeFeatures.get(i).getName() + "'");
+
 			// TODO: Find better solution!
 			int[] redundantClause = { rootId, -featureId };
 			solver.addClause(new VecInt(redundantClause));
 		}
-		// clause[orIdentifiers.size()] = -getMapping(featureIdentifier);
-		logger.debug("add or clause '" + featureIdentifier.getName() + "' -> '"
-				+ new CNFConverter().convertClauseToReadable(clause, this) + "'");
 
-		// Add Imply constraint to parent feature
-		solver.halfOr(parentId, new VecInt(clause));
+		logger.debug("add clause at least '" + converter.convertClauseToReadable(clause, this) + "'");
+		VecInt atLeast = new VecInt(clause);
+		atLeast.push(-parentId);
+		solver.addAtLeast(atLeast, 1);
 
-		VecInt orClause = new VecInt(clause);
-		orClause.push(-parentId);
-		solver.addAtLeast(orClause, 1);
+		logger.debug("add clause at most '" + converter.convertClauseToReadable(clause, this) + "'");
+		for (int i : clause) {
+			int[] temp = { parentId, i };
+			solver.addClause(new VecInt(temp));
+		}
+		for(int i = 0; i < clause.length; i++) {
+			for(int j = i+1; j < clause.length; j++) {
+				int[] temp = { -clause[i], -clause[j] };
+				solver.addClause(new VecInt(temp));
+			}
+		}
+	}
+
+	private void buildOptionalChildren(Feature parent, List<Feature> optionalFeatures) throws BuilderException,
+			ContradictionException, UnknownStatementException {
+
+		int parentId = getMapping(parent);
+		int rootId = getMapping(rootFeature);
+
+		for (int i = 0; i < optionalFeatures.size(); i++) {
+			int featureId = getMapping(optionalFeatures.get(i));
+
+			// Add Imply -> constraint to parent feature
+			int[] temp = { parentId, -featureId };
+			solver.addClause(new VecInt(temp));
+			logger.debug("add optional clause '" + parent.getName() + "' -> '" + optionalFeatures.get(i).getName()
+					+ "'");
+
+			// TODO: Find better solution!
+			int[] redundantClause = { rootId, -featureId };
+			solver.addClause(new VecInt(redundantClause));
+		}
+	}
+
+	private void buildMandatoryChildren(Feature parent, List<Feature> mandatoryFeatures) throws BuilderException,
+			ContradictionException, UnknownStatementException {
+
+		int parentId = getMapping(parent);
+
+		for (Feature feature : mandatoryFeatures) {
+			int featureId = getMapping(feature);
+			logger.debug("add mandatory clause '" + parent.getName() + "' <-> '" + feature.getName() + "'");
+
+			int[] temp1 = { parentId, -featureId };
+			solver.addClause(new VecInt(temp1));
+			int[] temp2 = { -parentId, featureId };
+			solver.addClause(new VecInt(temp2));
+		}
+	}
+
+	private void buildOrChildren(Feature parent, List<Feature> orFeatures) throws BuilderException,
+			ContradictionException, UnknownStatementException {
+
+		int[] clause = new int[orFeatures.size() + 1];
+
+		int parentId = getMapping(parent);
+		int rootId = getMapping(rootFeature);
+
+		for (int i = 0; i < orFeatures.size(); i++) {
+			int featureId = getMapping(orFeatures.get(i));
+			clause[i] = featureId;
+
+			// Add Imply -> constraint to parent feature
+			int[] temp = { parentId, -featureId };
+			solver.addClause(new VecInt(temp));
+			logger.debug("add or clause '" + parent.getName() + "' -> '" + orFeatures.get(i).getName() + "'");
+
+			// TODO: Find better solution!
+			int[] redundantClause = { rootId, -featureId };
+			solver.addClause(new VecInt(redundantClause));
+		}
+
+		// add or condition
+		clause[orFeatures.size()] = -parentId;
+		logger.debug("add clause at least '" + converter.convertClauseToReadable(clause, this) + "'");
+		solver.addAtLeast(new VecInt(clause), 1);
 	}
 
 	/**

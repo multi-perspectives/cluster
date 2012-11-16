@@ -54,6 +54,9 @@ public class CNFConverter {
 	public String convertSATModelToReadable(int[] model, ISolverModelBuilder builder) {
 		StringBuffer buffer = new StringBuffer();
 		for (int i : model) {
+			if (i == 0) {
+				continue;
+			}
 			if (i < 0) {
 				buffer.append("-");
 			}
