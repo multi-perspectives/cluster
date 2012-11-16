@@ -9,6 +9,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.PropertyConfigurator;
 import org.feature.model.FileHandler;
 import org.feature.model.ModelLoader;
+import org.feature.model.sat.solver.CNFConverter;
 import org.featuremapper.models.feature.FeatureModel;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -53,7 +54,7 @@ public class TestExtensionModelBuilder {
 		FeatureModel model = new ModelLoader().loadModel("testdata/SimplePhoneSATSmallOr.feature");
 		builder.buildSolverModel(model);
 
-		String result = new CNFConverter().convertToReadable(solver.getOut().toString(), model, builder);
+		String result = new CNFConverter().convertCNFToReadable(solver.getOut().toString(), model, builder);
 		String expected = "testdata" + File.separator + "expected" + File.separator + "SimplePhoneSATSmall.txt";
 		assertEquals(new FileHandler().readFile(expected), result.trim());
 	}
@@ -63,7 +64,7 @@ public class TestExtensionModelBuilder {
 		FeatureModel model = new ModelLoader().loadModel("testdata/SimplePhoneSAT.feature");
 		builder.buildSolverModel(model);
 
-		String result = new CNFConverter().convertToReadable(solver.getOut().toString(), model, builder);
+		String result = new CNFConverter().convertCNFToReadable(solver.getOut().toString(), model, builder);
 		String expected = "testdata" + File.separator + "expected" + File.separator + "SimplePhoneSAT.txt";
 		assertEquals(new FileHandler().readFile(expected), result.trim());
 	}
@@ -80,7 +81,7 @@ public class TestExtensionModelBuilder {
 		FeatureModel model = new ModelLoader().loadModel("testdata/SimplePhoneSATSmallOr.feature");
 		builder.buildSolverModel(model);
 
-		String result = new CNFConverter().convertToReadable(solver.getOut().toString(), model, builder);
+		String result = new CNFConverter().convertCNFToReadable(solver.getOut().toString(), model, builder);
 		String expected = "testdata" + File.separator + "expected" + File.separator + "SimplePhoneSATSmallOr.txt";
 		assertEquals(new FileHandler().readFile(expected), result.trim());
 	}
@@ -97,7 +98,7 @@ public class TestExtensionModelBuilder {
 		FeatureModel model = new ModelLoader().loadModel("testdata/SimplePhoneSATSmallAlternative.feature");
 		builder.buildSolverModel(model);
 
-		String result = new CNFConverter().convertToReadable(solver.getOut().toString(), model, builder);
+		String result = new CNFConverter().convertCNFToReadable(solver.getOut().toString(), model, builder);
 		String expected = "testdata" + File.separator + "expected" + File.separator
 				+ "SimplePhoneSATSmallAlternative.txt";
 		assertEquals(new FileHandler().readFile(expected), result.trim());

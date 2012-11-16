@@ -6,5 +6,9 @@
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="src" path="conf"/>
 	<classpathentry exported="true" kind="lib" path="lib/sat4j-sat.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-beanutils-1.8.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-beanutils-core-1.8.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-cli-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.sat4j.core.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

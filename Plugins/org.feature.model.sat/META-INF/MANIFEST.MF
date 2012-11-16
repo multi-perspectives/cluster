@@ -51,4 +51,7 @@ Export-Package: org.feature.model,
  org.sat4j.tools.encoding,
  org.sat4j.tools.xplain
 Bundle-ClassPath: lib/sat4j-sat.jar,
- .
+ lib/commons-beanutils-1.8.3.jar,
+ lib/commons-beanutils-core-1.8.3.jar,
+ lib/commons-cli-1.2.jar,
+ lib/org.sat4j.core.jar

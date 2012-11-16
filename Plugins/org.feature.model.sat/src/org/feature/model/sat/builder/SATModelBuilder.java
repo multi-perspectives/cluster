@@ -20,6 +20,7 @@ import org.emftext.term.propositional.expression.UnaryOperator;
 import org.feature.model.sat.TextExpressionParser;
 import org.feature.model.sat.exception.BuilderException;
 import org.feature.model.sat.exception.UnknownStatementException;
+import org.feature.model.sat.solver.CNFConverter;
 import org.featuremapper.models.feature.Constraint;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
@@ -369,7 +370,7 @@ public class SATModelBuilder implements ISolverModelBuilder {
 		}
 
 		logger.debug("add alternative clause '" + featureIdentifier.getName() + "' -> '"
-				+ convertFeatureListToString(alternativeIdentifiers) + "'");
+				+ new CNFConverter().convertClauseToReadable(clause.toArray(), this) + "'");
 
 		// Add Imply constraint to parent feature
 		solver.halfOr(parentId, clause);
@@ -415,14 +416,15 @@ public class SATModelBuilder implements ISolverModelBuilder {
 
 	private void buildOrChildren(Feature featureIdentifier, List<Feature> orIdentifiers) throws BuilderException,
 			ContradictionException, UnknownStatementException {
-		VecInt clause = new VecInt();
+		
+		int[] clause = new int[orIdentifiers.size()];
 
 		int parentId = getMapping(featureIdentifier);
 		int rootId = getMapping(rootFeature);
 
 		for (int i = 0; i < orIdentifiers.size(); i++) {
 			int featureId = getMapping(orIdentifiers.get(i));
-			clause.push(featureId);
+			clause[i] = featureId;
 
 			// TODO: Find better solution!
 			int[] redundantClause = { rootId, -featureId };
@@ -430,13 +432,14 @@ public class SATModelBuilder implements ISolverModelBuilder {
 		}
 		// clause[orIdentifiers.size()] = -getMapping(featureIdentifier);
 		logger.debug("add or clause '" + featureIdentifier.getName() + "' -> '"
-				+ convertFeatureListToString(orIdentifiers) + "'");
+				+ new CNFConverter().convertClauseToReadable(clause, this) + "'");
 
 		// Add Imply constraint to parent feature
-		solver.halfOr(parentId, clause);
+		solver.halfOr(parentId, new VecInt(clause));
 
-		clause.push(-parentId);
-		solver.addAtLeast(clause, 1);
+		VecInt orClause = new VecInt(clause);
+		orClause.push(-parentId);
+		solver.addAtLeast(orClause, 1);
 	}
 
 	/**
@@ -469,18 +472,5 @@ public class SATModelBuilder implements ISolverModelBuilder {
 				return featureToId.get(f);
 		logger.error("Feature '" + featureName + "' could not be found.");
 		return 0;
-	}
-
-	private String convertFeatureListToString(List<Feature> features) {
-		StringBuffer buffer = new StringBuffer();
-		int counter = 1;
-		for (Feature feature : features) {
-			buffer.append(feature.getName());
-			if (counter < features.size()) {
-				buffer.append(", ");
-				counter++;
-			}
-		}
-		return buffer.toString();
 	}
 }
