@@ -25,9 +25,11 @@ import org.featuremapper.models.feature.Constraint;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.feature.Group;
+import org.sat4j.core.Vec;
 import org.sat4j.core.VecInt;
 import org.sat4j.specs.ContradictionException;
 import org.sat4j.specs.ISolver;
+import org.sat4j.specs.IVecInt;
 import org.sat4j.tools.GateTranslator;
 
 /**
@@ -71,6 +73,8 @@ public class SATModelBuilder implements ISolverModelBuilder {
 	 * used sat solver
 	 */
 	private GateTranslator solver;
+	
+	private Vec<IVecInt> listOfClauses = new Vec<>();
 
 	/**
 	 * 
@@ -95,7 +99,7 @@ public class SATModelBuilder implements ISolverModelBuilder {
 
 	@Override
 	public GateTranslator buildSolverModel(FeatureModel featuremodel) {
-
+		
 		rootFeature = featuremodel.getRoot();
 
 		// add initial mapping for root feature
@@ -192,7 +196,15 @@ public class SATModelBuilder implements ISolverModelBuilder {
 		// cross tree constraints
 		if (terms.size() > 0)
 			try {
-				solver.and(getMapping(model.getRoot()), v);
+				int rootId = getMapping(model.getRoot());
+				for(int value : v.toArray()) {
+					int[] temp1 = {value, -rootId};
+					solver.addClause(new VecInt(temp1));
+					listOfClauses.push(new VecInt(temp1));
+					int[] temp2 = {rootId, -value};
+					solver.addClause(new VecInt(temp2));
+					listOfClauses.push(new VecInt(temp2));
+				}
 			} catch (UnknownStatementException e) {
 				logger.error("Root feature could not be found in feature model - all cross tree constraints dicarded");
 			}
@@ -217,7 +229,10 @@ public class SATModelBuilder implements ISolverModelBuilder {
 				// create a new variable that expresses the or relation
 				logger.debug("Adding cross tree constraint or for features: '" + leftConstraint + " || "
 						+ rightConstraint + "'");
-				solver.or(varCounter, new VecInt(values));
+				VecInt temp = new VecInt(values);
+				temp.push(varCounter);
+				solver.addClause(temp);
+				listOfClauses.push(temp);
 				result = varCounter;
 			} else if (term instanceof And) {
 				varCounter++;
@@ -225,7 +240,14 @@ public class SATModelBuilder implements ISolverModelBuilder {
 				// create a new variable that expresses the and relation
 				logger.debug("Adding cross tree constraint and for features: '" + leftConstraint + " && "
 						+ rightConstraint + "'");
-				solver.and(varCounter, new VecInt(values));
+				for(int value : values) {
+					int[] temp1 = {value, -varCounter};
+					solver.addClause(new VecInt(temp1));
+					listOfClauses.push(new VecInt(temp1));
+					int[] temp2 = {varCounter, -value};
+					solver.addClause(new VecInt(temp2));
+					listOfClauses.push(new VecInt(temp2));
+				}
 				result = varCounter;
 			}
 		} else if (term instanceof UnaryOperator) {
@@ -345,6 +367,7 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			VecInt clause = new VecInt(literals);
 			logger.debug("add exclude clause '" + excludeSource + "' <-> '" + exclude + "'");
 			solver.addClause(clause);
+			listOfClauses.push(clause);
 		}
 	}
 
@@ -355,6 +378,7 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			VecInt clause = new VecInt(literals);
 			logger.debug("add require clause '" + reqSource + "' -> '" + require + "'");
 			solver.addClause(clause);
+			listOfClauses.push(clause);
 		}
 	}
 
@@ -373,28 +397,33 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			// Add Imply -> constraint to parent feature
 			int[] temp = { parentId, -featureId };
 			solver.addClause(new VecInt(temp));
+			listOfClauses.push(new VecInt(temp));
 			logger.debug("add alternative clause '" + parent.getName() + "' -> '"
 					+ alternativeFeatures.get(i).getName() + "'");
 
 			// TODO: Find better solution!
 			int[] redundantClause = { rootId, -featureId };
 			solver.addClause(new VecInt(redundantClause));
+			listOfClauses.push(new VecInt(redundantClause));
 		}
 
 		logger.debug("add clause at least '" + converter.convertClauseToReadable(clause, this) + "'");
 		VecInt atLeast = new VecInt(clause);
 		atLeast.push(-parentId);
 		solver.addAtLeast(atLeast, 1);
+		listOfClauses.push(atLeast);
 
 		logger.debug("add clause at most '" + converter.convertClauseToReadable(clause, this) + "'");
 		for (int i : clause) {
 			int[] temp = { parentId, i };
 			solver.addClause(new VecInt(temp));
+			listOfClauses.push(new VecInt(temp));
 		}
 		for(int i = 0; i < clause.length; i++) {
 			for(int j = i+1; j < clause.length; j++) {
 				int[] temp = { -clause[i], -clause[j] };
 				solver.addClause(new VecInt(temp));
+				listOfClauses.push(new VecInt(temp));
 			}
 		}
 	}
@@ -411,12 +440,14 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			// Add Imply -> constraint to parent feature
 			int[] temp = { parentId, -featureId };
 			solver.addClause(new VecInt(temp));
+			listOfClauses.push(new VecInt(temp));
 			logger.debug("add optional clause '" + parent.getName() + "' -> '" + optionalFeatures.get(i).getName()
 					+ "'");
 
 			// TODO: Find better solution!
 			int[] redundantClause = { rootId, -featureId };
 			solver.addClause(new VecInt(redundantClause));
+			listOfClauses.push(new VecInt(redundantClause));
 		}
 	}
 
@@ -431,8 +462,10 @@ public class SATModelBuilder implements ISolverModelBuilder {
 
 			int[] temp1 = { parentId, -featureId };
 			solver.addClause(new VecInt(temp1));
+			listOfClauses.push(new VecInt(temp1));
 			int[] temp2 = { -parentId, featureId };
 			solver.addClause(new VecInt(temp2));
+			listOfClauses.push(new VecInt(temp2));
 		}
 	}
 
@@ -451,17 +484,20 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			// Add Imply -> constraint to parent feature
 			int[] temp = { parentId, -featureId };
 			solver.addClause(new VecInt(temp));
+			listOfClauses.push(new VecInt(temp));
 			logger.debug("add or clause '" + parent.getName() + "' -> '" + orFeatures.get(i).getName() + "'");
 
 			// TODO: Find better solution!
 			int[] redundantClause = { rootId, -featureId };
 			solver.addClause(new VecInt(redundantClause));
+			listOfClauses.push(new VecInt(redundantClause));
 		}
 
 		// add or condition
 		clause[orFeatures.size()] = -parentId;
 		logger.debug("add clause at least '" + converter.convertClauseToReadable(clause, this) + "'");
 		solver.addAtLeast(new VecInt(clause), 1);
+		listOfClauses.push(new VecInt(clause));
 	}
 
 	/**
@@ -475,7 +511,8 @@ public class SATModelBuilder implements ISolverModelBuilder {
 	private void buildRootFeature(Feature rootIdentifier) throws BuilderException, ContradictionException {
 		try {
 			logger.debug("add root clause '" + rootIdentifier.getName() + "'");
-			solver.gateTrue(getMapping(rootIdentifier));
+			solver.addClause(new VecInt(new int[]{getMapping(rootIdentifier)}));
+			listOfClauses.push(new VecInt(new int[]{getMapping(rootIdentifier)}));
 		} catch (UnknownStatementException e) {
 			logger.error("Root feature can not be found");
 		}
