@@ -2,6 +2,12 @@ package org.feature.model.sat.solver;
 
 import static org.junit.Assert.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.feature.model.ModelLoader;
+import org.featuremapper.models.feature.Feature;
+import org.featuremapper.models.feature.FeatureModel;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,6 +17,18 @@ import org.junit.Test;
  *
  */
 public class SimpleSAT4JSolverTest {
+	
+	/**
+	 * to test
+	 */
+	private SimpleSAT4JSolver solver;
+	
+	/**
+	 * model for test
+	 */
+	private FeatureModel model;
+	
+	private SATModelBuilderDummy builder;
 
 	/**
 	 * @throws java.lang.Exception
@@ -24,14 +42,69 @@ public class SimpleSAT4JSolverTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		builder = new SATModelBuilderDummy();
+		model = builder.getFeatureModel();
+		solver = new SimpleSAT4JSolver(builder, model);
 	}
 
 	/**
 	 * Test method for {@link org.feature.model.sat.solver.SimpleSAT4JSolver#isSolvable(java.util.Set, java.util.Set)}.
 	 */
 	@Test
-	public void testIsSolvableSetOfFeatureSetOfFeature() {
-		fail("Not yet implemented"); // TODO
+	public void testIsSolvableSMSMessage() {
+		ModelLoader loader = new ModelLoader();
+		
+		Set<Feature> boundedAlive = new HashSet<>();
+		boundedAlive.add(loader.findFeature(model, "SMS"));
+		boundedAlive.add(loader.findFeature(model, "Message"));
+		Set<Feature> boundedDead = new HashSet<>();
+
+		assertEquals("some features are missing", 2, boundedAlive.size());
+		assertTrue(solver.isSolvable(boundedAlive, boundedDead));
+	}
+	
+	/**
+	 * Test method for {@link org.feature.model.sat.solver.SimpleSAT4JSolver#isSolvable(java.util.Set, java.util.Set)}.
+	 */
+	@Test
+	public void testIsSolvableNotSMS() {
+		ModelLoader loader = new ModelLoader();
+		
+		Set<Feature> boundedAlive = new HashSet<>();
+		Set<Feature> boundedDead = new HashSet<>();
+		boundedDead.add(loader.findFeature(model, "SMS"));
+		
+		assertFalse(solver.isSolvable(boundedAlive, boundedDead));
+	}
+	
+	/**
+	 * Test method for {@link org.feature.model.sat.solver.SimpleSAT4JSolver#isSolvable(java.util.Set, java.util.Set)}.
+	 */
+	@Test
+	public void testIsSolvableSMSExtras() {
+		ModelLoader loader = new ModelLoader();
+		
+		Set<Feature> boundedAlive = new HashSet<>();
+		boundedAlive.add(loader.findFeature(model, "SMS"));
+		boundedAlive.add(loader.findFeature(model, "Extras"));
+		Set<Feature> boundedDead = new HashSet<>();
+		
+		assertTrue(solver.isSolvable(boundedAlive, boundedDead));
+	}
+	
+	/**
+	 * Test method for {@link org.feature.model.sat.solver.SimpleSAT4JSolver#isSolvable(java.util.Set, java.util.Set)}.
+	 */
+	@Test
+	public void testIsSolvableNOTSMSExtras() {
+		ModelLoader loader = new ModelLoader();
+		
+		Set<Feature> boundedAlive = new HashSet<>();
+		boundedAlive.add(loader.findFeature(model, "Extras"));
+		Set<Feature> boundedDead = new HashSet<>();
+		boundedDead.add(loader.findFeature(model, "SMS"));
+		
+		assertFalse(solver.isSolvable(boundedAlive, boundedDead));
 	}
 
 	/**
@@ -39,22 +112,6 @@ public class SimpleSAT4JSolverTest {
 	 */
 	@Test
 	public void testIsSolvable() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link org.feature.model.sat.solver.SimpleSAT4JSolver#getBaseModel()}.
-	 */
-	@Test
-	public void testGetBaseModel() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link org.feature.model.sat.solver.SimpleSAT4JSolver#getFeatureModel()}.
-	 */
-	@Test
-	public void testGetFeatureModel() {
-		fail("Not yet implemented"); // TODO
+		assertTrue(solver.isSolvable());
 	}
 }

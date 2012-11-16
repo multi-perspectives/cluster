@@ -358,4 +358,76 @@ public class SolverFactoryTest {
 		bound.push(3);
 		assertTrue(solver.isSatisfiable(bound));
 	}
+	
+	@Test
+	public void testSimplePhoneSATSmallPlusRedundantClauseToRoot() throws ContradictionException,
+			TimeoutException {
+		// SmallFeaturePhone (1)
+		solver.gateTrue(1);
+		
+		// Message (2)
+		VecInt clause = new VecInt();
+		clause.push(2);
+		solver.and(1, clause);
+		
+		// SMS (3)
+		clause = new VecInt();
+		clause.push(3);
+		solver.and(1, clause);
+		
+		// Extras (4)
+		clause = new VecInt();
+		clause.push(4);
+		solver.halfOr(1, clause);
+		clause = new VecInt();
+		clause.push(-4);
+		clause.push(1);
+		solver.addClause(clause);
+		
+		
+		// MP3 (5) Camera (6)
+		clause = new VecInt();
+		clause.push(5);
+		clause.push(6);
+		solver.halfOr(4, clause);
+		clause.push(-4);
+		solver.addAtLeast(clause, 1);
+		clause = new VecInt();
+		clause.push(-5);
+		clause.push(1);
+		solver.addClause(clause);
+		clause = new VecInt();
+		clause.push(-6);
+		clause.push(1);
+		solver.addClause(clause);
+		
+		assertTrue(solver.isSatisfiable());
+		VecInt bound = new VecInt();
+		bound.push(3);
+		assertTrue(solver.isSatisfiable(bound));
+		
+		bound = new VecInt();
+		bound.push(-3);
+		assertFalse(solver.isSatisfiable(bound));
+		
+		bound = new VecInt();
+		bound.push(5);
+		bound.push(3);
+		assertTrue(solver.isSatisfiable(bound));
+		
+		bound = new VecInt();
+		bound.push(5);
+		bound.push(-3);
+		assertFalse(solver.isSatisfiable(bound));
+		
+		bound = new VecInt();
+		bound.push(4);
+		bound.push(-3);
+		assertFalse(solver.isSatisfiable(bound));
+		
+		bound = new VecInt();
+		bound.push(4);
+		bound.push(3);
+		assertTrue(solver.isSatisfiable(bound));
+	}
 }
