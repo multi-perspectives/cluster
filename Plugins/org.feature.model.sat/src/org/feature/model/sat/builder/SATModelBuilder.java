@@ -27,7 +27,6 @@ import org.featuremapper.models.feature.Group;
 import org.sat4j.core.VecInt;
 import org.sat4j.specs.ContradictionException;
 import org.sat4j.specs.ISolver;
-import org.sat4j.specs.IVecInt;
 import org.sat4j.tools.GateTranslator;
 
 /**
@@ -43,7 +42,7 @@ public class SATModelBuilder implements ISolverModelBuilder {
 	 * counter of features within the feature model. is also used to derive
 	 * uniqe id for the transformation
 	 */
-	private int varCounter;
+	private int varCounter = 0;
 
 	private static Logger logger = Logger.getLogger(SATModelBuilder.class);
 
@@ -75,10 +74,6 @@ public class SATModelBuilder implements ISolverModelBuilder {
 	 *            SAT solver
 	 */
 	public SATModelBuilder(ISolver solver) {
-		varCounter = 1;
-		featureToId = new HashMap<Feature, Integer>();
-		idToFeature = new HashMap<Integer, Feature>();
-
 		this.solver = new GateTranslator(solver);
 	}
 
@@ -104,9 +99,8 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			buildRootFeature(rootFeature);
 			// start transformation feature model into SAT model
 			transformFeature(rootFeature);
-		} catch (BuilderException | ContradictionException e1) {
-			logger.error("Cannot build constraint model for SAT4J");
-			e1.printStackTrace();
+		} catch (BuilderException | ContradictionException e) {
+			logger.error("Cannot build constraint model for SAT4J", e);
 		}
 
 		try {
@@ -114,8 +108,7 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			// model
 			transformRemainingCTConstraints(featuremodel);
 		} catch (ContradictionException e) {
-			logger.error("Cannot build constraint model for SAT4J");
-			e.printStackTrace();
+			logger.error("Cannot build constraint model for SAT4J", e);
 		}
 
 		return solver;
@@ -382,7 +375,8 @@ public class SATModelBuilder implements ISolverModelBuilder {
 		solver.halfOr(parentId, clause);
 
 		clause.push(-parentId);
-		buildXOrClause(clause);
+		solver.addAtLeast(clause, 1);
+		solver.addAtMost(clause, 1);
 	}
 
 	private void buildOptionalChildren(Feature featureIdentifier, List<Feature> optionalIdentifiers)
@@ -409,8 +403,6 @@ public class SATModelBuilder implements ISolverModelBuilder {
 	private void buildMandatoryChildren(Feature featureIdentifier, List<Feature> mandatoryIdentifiers)
 			throws BuilderException, ContradictionException, UnknownStatementException {
 
-//		VecInt mandatory = new VecInt();
-
 		int parentId = getMapping(featureIdentifier);
 
 		for (Feature f : mandatoryIdentifiers) {
@@ -419,12 +411,6 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			solver.and(parentId, mandatory);
 			logger.debug("add mandatory clause '" + featureIdentifier.getName() + "' <-> '" + f.getName() + "'");
 		}
-
-		// add mandatory features for parent feature
-//		solver.and(parentId, mandatory);
-
-		// Add Imply constraint to parent feature
-		// --> not necessary since constraint logical equality is specified
 	}
 
 	private void buildOrChildren(Feature featureIdentifier, List<Feature> orIdentifiers) throws BuilderException,
@@ -450,9 +436,17 @@ public class SATModelBuilder implements ISolverModelBuilder {
 		solver.halfOr(parentId, clause);
 
 		clause.push(-parentId);
-		buildOrClause(clause);
+		solver.addAtLeast(clause, 1);
 	}
 
+	/**
+	 * set root feature to always true
+	 * 
+	 * @param rootIdentifier
+	 *            feature which should be root
+	 * @throws BuilderException
+	 * @throws ContradictionException
+	 */
 	private void buildRootFeature(Feature rootIdentifier) throws BuilderException, ContradictionException {
 		try {
 			logger.debug("add root clause '" + rootIdentifier.getName() + "'");
@@ -461,27 +455,6 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			logger.error("Root feature can not be found");
 		}
 
-	}
-
-	private void buildOrClause(IVecInt ors) throws BuilderException {
-		try {
-			solver.addAtLeast(ors, 1);
-		} catch (ContradictionException e) {
-			String message = e.getMessage();
-			logger.warn(message, e);
-			throw new BuilderException(message, e);
-		}
-	}
-
-	private void buildXOrClause(IVecInt alternatives) throws BuilderException {
-		try {
-			solver.addAtLeast(alternatives, 1);
-			solver.addAtMost(alternatives, 1);
-		} catch (ContradictionException e) {
-			String message = e.getMessage();
-			logger.warn(message, e);
-			throw new BuilderException(message, e);
-		}
 	}
 
 	private void addGroupMapping(Group group) {

@@ -74,6 +74,8 @@ public class SimpleSAT4JSolverTest {
 		Set<Feature> boundedDead = new HashSet<>();
 		boundedDead.add(loader.findFeature(model, "SMS"));
 		
+
+		assertEquals("some features are missing", 1, boundedDead.size());
 		assertFalse(solver.isSolvable(boundedAlive, boundedDead));
 	}
 	
@@ -89,6 +91,7 @@ public class SimpleSAT4JSolverTest {
 		boundedAlive.add(loader.findFeature(model, "Extras"));
 		Set<Feature> boundedDead = new HashSet<>();
 		
+		assertEquals("some features are missing", 2, boundedAlive.size());
 		assertTrue(solver.isSolvable(boundedAlive, boundedDead));
 	}
 	
@@ -104,6 +107,8 @@ public class SimpleSAT4JSolverTest {
 		Set<Feature> boundedDead = new HashSet<>();
 		boundedDead.add(loader.findFeature(model, "SMS"));
 		
+		assertEquals("some features are missing", 1, boundedAlive.size());
+		assertEquals("some features are missing", 1, boundedDead.size());
 		assertFalse(solver.isSolvable(boundedAlive, boundedDead));
 	}
 
