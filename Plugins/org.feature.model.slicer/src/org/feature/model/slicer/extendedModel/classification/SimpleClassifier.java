@@ -69,12 +69,10 @@ public class SimpleClassifier implements IClassifier {
 	 * @param feature
 	 *            to evaluate
 	 */
-	protected Feature classify(IFeatureSolver solver, Feature feature) {
+	Feature classify(IFeatureSolver solver, Feature feature) {
 		logger.info("evaluate feature '" + feature.getName() + "'");
 
-//		Set<Feature> toEvaluate = new HashSet<Feature>(cHandler.getBoundAliveFeatures()); //TODO
-		Set<Feature> toEvaluate = new HashSet<Feature>();
-
+		Set<Feature> toEvaluate = new HashSet<Feature>(cHandler.getBoundAliveFeatures());
 		toEvaluate.add(feature);
 		// Test feature is setting it to alive leads to a contradiction. If yes,
 		// it is a dead feature
@@ -82,9 +80,7 @@ public class SimpleClassifier implements IClassifier {
 			logger.debug("feature '" + feature.getName() + "' is bound dead");
 			cHandler.classifyBoundDead(feature, false);
 		} else {
-//			toEvaluate = new HashSet<Feature>(cHandler.getBoundDeadFeatures()); //TODO
-			toEvaluate = new HashSet<Feature>();
-
+			toEvaluate = new HashSet<Feature>(cHandler.getBoundDeadFeatures());
 			toEvaluate.add(feature);
 			// Test the feature it setting it to dead leads to a contradiction.
 			// If yes, it is a alive feature

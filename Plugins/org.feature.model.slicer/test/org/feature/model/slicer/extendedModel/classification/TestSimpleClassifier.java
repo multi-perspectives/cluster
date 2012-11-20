@@ -56,24 +56,14 @@ public class TestSimpleClassifier {
 
 		ClassifierHandler cHandler = classifier.classify(solver);
 
-		assertEquals(3, cHandler.getBoundAliveFeatures().size());
+		assertEquals(2, cHandler.getBoundAliveFeatures().size());
 		Set<String> alive = new HashSet<>(Arrays.asList(new String[] { "SMS", "Message" }));
 		for (Feature feature : cHandler.getBoundAliveFeatures()) {
 			assertTrue("feature " + feature.getName() + " should not be alive", alive.contains(feature.getName()));
 		}
 
 		assertEquals(0, cHandler.getBoundDeadFeatures().size());
-		assertEquals(4, cHandler.getUnboundFeatures().size());
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.feature.model.slicer.extendedModel.classification.SimpleClassifier#classify(org.feature.model.sat.solver.IFeatureSolver, org.featuremapper.models.feature.Feature)}
-	 * .
-	 */
-	@Test
-	public void testClassifyIFeatureSolverFeature() {
-		fail("Not yet implemented");
+		assertEquals(3, cHandler.getUnboundFeatures().size());
 	}
 
 	/**
@@ -95,6 +85,7 @@ public class TestSimpleClassifier {
 
 		assertFalse(boundAlive.isEmpty());
 		ClassifierHandler cHandler = classifier.classify(solver, boundAlive, boundDead);
+		assertEquals(3, cHandler.getBoundAliveFeatures().size());
 		Set<String> alive = new HashSet<>(Arrays.asList(new String[] { "SMS", "Message", "Extras" }));
 		for (Feature feature : cHandler.getBoundAliveFeatures()) {
 			assertTrue("feature " + feature.getName() + " should not be alive", alive.remove(feature.getName()));
@@ -102,7 +93,7 @@ public class TestSimpleClassifier {
 		assertTrue("features " + alive.toString() + " should be alive", alive.isEmpty());
 
 		assertEquals(0, cHandler.getBoundDeadFeatures().size());
-		assertEquals(9, cHandler.getUnboundFeatures().size());
+		assertEquals(2, cHandler.getUnboundFeatures().size());
 	}
 
 	/**
@@ -123,7 +114,7 @@ public class TestSimpleClassifier {
 
 		SimpleClassifier classifier = new SimpleClassifier();
 		ClassifierHandler cHandler = classifier.classify(solver, boundAlive, boundDead);
-		
+		assertEquals(2, cHandler.getBoundAliveFeatures().size());
 		Set<String> alive = new HashSet<>(Arrays.asList(new String[] { "SMS", "Message" }));
 		for (Feature feature : cHandler.getBoundAliveFeatures()) {
 			assertTrue("feature " + feature.getName() + " should not be alive", alive.remove(feature.getName()));
@@ -131,6 +122,6 @@ public class TestSimpleClassifier {
 		assertTrue("features " + alive.toString() + " should be alive", alive.isEmpty());
 		
 		assertEquals(0, cHandler.getBoundDeadFeatures().size());
-		assertEquals(4, cHandler.getUnboundFeatures().size());
+		assertEquals(3, cHandler.getUnboundFeatures().size());
 	}
 }
