@@ -56,6 +56,8 @@ public class TextExpressionParser {
 			if (term != null) {
 				log.debug("Term for expression '" + expression + "' extracted.");
 				terms.add(term);
+			} else {
+				log.warn("no term extracted");
 			}
 		}
 		return terms;

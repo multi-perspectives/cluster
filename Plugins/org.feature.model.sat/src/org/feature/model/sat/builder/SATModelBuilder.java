@@ -98,7 +98,7 @@ public class SATModelBuilder implements ISolverModelBuilder {
 
 	@Override
 	public GateTranslator buildSolverModel(FeatureModel featuremodel) {
-		
+
 		rootFeature = featuremodel.getRoot();
 
 		// add initial mapping for root feature
@@ -128,17 +128,19 @@ public class SATModelBuilder implements ISolverModelBuilder {
 		if (featureToId.containsKey(newFeature))
 			return;
 		else {
-			int counter = incrementCounter();
-			featureToId.put(newFeature, counter);
-			idToFeature.put(counter, newFeature);
-			logger.debug(counter + " <-> " + newFeature.getName());
+			incrementCounter();
+			featureToId.put(newFeature, getCounter());
+			idToFeature.put(getCounter(), newFeature);
+			logger.debug(getCounter() + " <-> " + newFeature.getName());
 		}
 	}
 
 	@Override
-	public Integer getMapping(Feature featureIdentifier) throws UnknownStatementException {
+	public Integer getMapping(Feature featureIdentifier)
+			throws UnknownStatementException {
 		if (featureToId.get(featureIdentifier) == null)
-			throw new UnknownStatementException("Feature can not be found in the feature model");
+			throw new UnknownStatementException(
+					"Feature can not be found in the feature model");
 		return featureToId.get(featureIdentifier);
 	}
 
@@ -148,12 +150,14 @@ public class SATModelBuilder implements ISolverModelBuilder {
 	}
 
 	@Override
-	public void removeMapping(Feature featureId) throws UnknownStatementException {
+	public void removeMapping(Feature featureId)
+			throws UnknownStatementException {
 		idToFeature.remove(getMapping(featureId));
 		featureToId.remove(featureId);
 	}
 
-	private void transformFeature(Feature feature) throws BuilderException, ContradictionException {
+	private void transformFeature(Feature feature) throws BuilderException,
+			ContradictionException {
 
 		// Handle rest of the features
 		EList<Group> groups = feature.getGroups();
@@ -163,7 +167,8 @@ public class SATModelBuilder implements ISolverModelBuilder {
 
 	}
 
-	private void transformGroup(Group group) throws BuilderException, ContradictionException {
+	private void transformGroup(Group group) throws BuilderException,
+			ContradictionException {
 		try {
 			createGroupConstraint(group);
 			EList<Feature> childFeatures = group.getChildFeatures();
@@ -177,7 +182,8 @@ public class SATModelBuilder implements ISolverModelBuilder {
 
 	}
 
-	private void transformRemainingCTConstraints(FeatureModel model) throws ContradictionException {
+	private void transformRemainingCTConstraints(FeatureModel model)
+			throws ContradictionException {
 
 		VecInt v = new VecInt();
 		List<Term> terms = TextExpressionParser.parseExpressions(model);
@@ -185,7 +191,12 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			// Add resulting (new) variable to the solver model and bind it to
 			// true
 			try {
-				v.push(checkTerm(term));
+				int temp = checkTerm(term);
+				if (temp != 0) {
+					v.push(temp);
+				} else {
+					logger.warn("check term results in zero, term ignored");
+				}
 			} catch (UnknownStatementException e) {
 				logger.error("Not all features in the constraint could be resolved - cross tree constraint dicarded");
 			}
@@ -196,11 +207,13 @@ public class SATModelBuilder implements ISolverModelBuilder {
 		if (terms.size() > 0)
 			try {
 				int rootId = getMapping(model.getRoot());
-				for(int value : v.toArray()) {
-					logger.debug("add csp constraint " + value + " <-> " + rootId);
-					int[] temp1 = {value, -rootId};
+				for (int i = 0; i < v.size(); i++) {
+					int value = v.get(i);
+					logger.debug("add csp constraint " + value + " <-> "
+							+ rootId);
+					int[] temp1 = { value, -rootId };
 					solver.addClause(new VecInt(temp1));
-					int[] temp2 = {rootId, -value};
+					int[] temp2 = { rootId, -value };
 					solver.addClause(new VecInt(temp2));
 				}
 			} catch (UnknownStatementException e) {
@@ -210,7 +223,8 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			checkSATConstrints(model);
 	}
 
-	private int checkTerm(Term term) throws ContradictionException, UnknownStatementException {
+	private int checkTerm(Term term) throws ContradictionException,
+			UnknownStatementException {
 
 		int result = 0;
 
@@ -225,7 +239,8 @@ public class SATModelBuilder implements ISolverModelBuilder {
 				int counter = incrementCounter();
 				int[] values = { leftConstraint, rightConstraint };
 				// create a new variable that expresses the or relation
-				logger.debug("Adding cross tree constraint or for features: '" + counter + " <-" + leftConstraint + " || "
+				logger.debug("Adding cross tree constraint or for features: '"
+						+ counter + " <- " + leftConstraint + " || "
 						+ rightConstraint + "'");
 				VecInt temp = new VecInt(values);
 				temp.push(counter);
@@ -235,12 +250,13 @@ public class SATModelBuilder implements ISolverModelBuilder {
 				int counter = incrementCounter();
 				int[] values = { leftConstraint, rightConstraint };
 				// create a new variable that expresses the and relation
-				logger.debug("Adding cross tree constraint and for features: '" + counter + " <- " + leftConstraint + " && "
+				logger.debug("Adding cross tree constraint and for features: '"
+						+ counter + " <- " + leftConstraint + " && "
 						+ rightConstraint + "'");
-				for(int value : values) {
-					int[] temp1 = {value, -counter};
+				for (int value : values) {
+					int[] temp1 = { value, -counter };
 					solver.addClause(new VecInt(temp1));
-					int[] temp2 = {counter, -value};
+					int[] temp2 = { counter, -value };
 					solver.addClause(new VecInt(temp2));
 				}
 				result = counter;
@@ -251,20 +267,25 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			int singleConstraint = checkTerm(singleTerm);
 			// return the internal feature variable, either negated or not
 			if (term instanceof Not) {
-				logger.debug("Adding cross tree constraint not for feature: '" + singleConstraint + "'");
+				logger.debug("Adding cross tree constraint not for feature: '"
+						+ singleConstraint + "'");
 				result = -(singleConstraint);
 			} else if (term instanceof Nested) {
-				logger.debug("Adding cross tree constraint bound for feature: '" + singleConstraint + "'");
+				logger.debug("Adding cross tree constraint bound for feature: '"
+						+ singleConstraint + "'");
 				result = singleConstraint;
 			}
 		} else if (term instanceof FeatureRef) {
 			FeatureRef featureRefTerm = (FeatureRef) term;
 			Feature feature = featureRefTerm.getFeature();
-			logger.debug("Adding feature to cross tree constaint: '" + feature.getName() + "'");
+			logger.debug("Adding feature to cross tree constaint: '"
+					+ feature.getName() + "'");
 			if (feature.eIsProxy()) {
-				URI proxyURI = ((org.eclipse.emf.ecore.InternalEObject) feature).eProxyURI();
+				URI proxyURI = ((org.eclipse.emf.ecore.InternalEObject) feature)
+						.eProxyURI();
 				String uriFragment = proxyURI.fragment();
-				logger.warn("Proxy found! UriFragment of proxy is: " + uriFragment);
+				logger.warn("Proxy found! UriFragment of proxy is: "
+						+ uriFragment);
 			}
 			result = getMapping(feature);
 		}
@@ -292,10 +313,12 @@ public class SATModelBuilder implements ISolverModelBuilder {
 					try {
 						buildRequireDependencies(reqSource, reqTargets);
 					} catch (BuilderException e) {
-						logger.error("Can not read SAT constraint '" + expr + "'from feature model");
+						logger.error("Can not read SAT constraint '" + expr
+								+ "'from feature model");
 						continue;
 					} catch (ContradictionException e) {
-						logger.error("Can not read SAT constraint '" + expr + "'from feature model");
+						logger.error("Can not read SAT constraint '" + expr
+								+ "'from feature model");
 						continue;
 					}
 				} else if (expr.startsWith("exclude(")) {
@@ -312,10 +335,12 @@ public class SATModelBuilder implements ISolverModelBuilder {
 					try {
 						buildExcludeDependencies(exclSource, exclTargets);
 					} catch (BuilderException e) {
-						logger.error("Can not read SAT constraint '" + expr + "'from feature model");
+						logger.error("Can not read SAT constraint '" + expr
+								+ "'from feature model");
 						continue;
 					} catch (ContradictionException e) {
-						logger.error("Can not read SAT constraint '" + expr + "'from feature model");
+						logger.error("Can not read SAT constraint '" + expr
+								+ "'from feature model");
 						continue;
 					}
 				}
@@ -323,59 +348,74 @@ public class SATModelBuilder implements ISolverModelBuilder {
 		}
 	}
 
-	private void createGroupConstraint(Group group) throws BuilderException, ContradictionException,
-			UnknownStatementException {
+	private void createGroupConstraint(Group group) throws BuilderException,
+			ContradictionException, UnknownStatementException {
 
 		addGroupMapping(group);
 
 		// Optional: o..n
-		if (group.getMaxCardinality() >= group.getChildFeatures().size() && group.getMinCardinality() == 0) {
-			buildOptionalChildren(group.getParentFeature(), group.getChildFeatures());
+		if (group.getMaxCardinality() >= group.getChildFeatures().size()
+				&& group.getMinCardinality() == 0) {
+			buildOptionalChildren(group.getParentFeature(),
+					group.getChildFeatures());
 
 		}
 		// Mandatory: n..n
 		else if (group.getMaxCardinality() == group.getChildFeatures().size()
 				&& group.getMinCardinality() == group.getChildFeatures().size()) {
-			buildMandatoryChildren(group.getParentFeature(), group.getChildFeatures());
+			buildMandatoryChildren(group.getParentFeature(),
+					group.getChildFeatures());
 
 		}
 		// Alternative: x..x; x>0; x<n
-		else if (group.getMaxCardinality() == group.getMinCardinality() && group.getMaxCardinality() >= 1
-				&& group.getMaxCardinality() <= group.getChildFeatures().size() && group.getChildFeatures().size() >= 1) {
-			buildAlternativeChildren(group.getParentFeature(), group.getChildFeatures());
+		else if (group.getMaxCardinality() == group.getMinCardinality()
+				&& group.getMaxCardinality() >= 1
+				&& group.getMaxCardinality() <= group.getChildFeatures().size()
+				&& group.getChildFeatures().size() >= 1) {
+			buildAlternativeChildren(group.getParentFeature(),
+					group.getChildFeatures());
 
 		}
 		// Or: 1..n
-		else if (group.getMinCardinality() > 0 && group.getMaxCardinality() != group.getMinCardinality()
+		else if (group.getMinCardinality() > 0
+				&& group.getMaxCardinality() != group.getMinCardinality()
 				&& group.getMaxCardinality() <= group.getChildFeatures().size()) {
 			buildOrChildren(group.getParentFeature(), group.getChildFeatures());
 
 		} else
-			throw new BuilderException("Unkown combination of feature cardinalities");
+			throw new BuilderException(
+					"Unkown combination of feature cardinalities");
 
 	}
 
-	private void buildExcludeDependencies(String excludeSource, Set<String> excludedIdentifiers)
-			throws BuilderException, ContradictionException {
+	private void buildExcludeDependencies(String excludeSource,
+			Set<String> excludedIdentifiers) throws BuilderException,
+			ContradictionException {
 		for (String exclude : excludedIdentifiers) {
-			int[] literals = { -getFeatureByName(excludeSource), -getFeatureByName(exclude) };
+			int[] literals = { -getFeatureByName(excludeSource),
+					-getFeatureByName(exclude) };
 			VecInt clause = new VecInt(literals);
-			logger.debug("add exclude clause '" + excludeSource + "' <-> '" + exclude + "'");
+			logger.debug("add exclude clause '" + excludeSource + "' <-> '"
+					+ exclude + "'");
 			solver.addClause(clause);
 		}
 	}
 
-	private void buildRequireDependencies(String reqSource, Set<String> requiredIdentifiers) throws BuilderException,
+	private void buildRequireDependencies(String reqSource,
+			Set<String> requiredIdentifiers) throws BuilderException,
 			ContradictionException {
 		for (String require : requiredIdentifiers) {
-			int[] literals = { -getFeatureByName(reqSource), getFeatureByName(require) };
+			int[] literals = { -getFeatureByName(reqSource),
+					getFeatureByName(require) };
 			VecInt clause = new VecInt(literals);
-			logger.debug("add require clause '" + reqSource + "' -> '" + require + "'");
+			logger.debug("add require clause '" + reqSource + "' -> '"
+					+ require + "'");
 			solver.addClause(clause);
 		}
 	}
 
-	private void buildAlternativeChildren(Feature parent, List<Feature> alternativeFeatures) throws BuilderException,
+	private void buildAlternativeChildren(Feature parent,
+			List<Feature> alternativeFeatures) throws BuilderException,
 			ContradictionException, UnknownStatementException {
 
 		int[] clause = new int[alternativeFeatures.size()];
@@ -390,33 +430,36 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			// Add Imply -> constraint to parent feature
 			int[] temp = { parentId, -featureId };
 			solver.addClause(new VecInt(temp));
-			logger.debug("add alternative clause '" + parent.getName() + "' -> '"
-					+ alternativeFeatures.get(i).getName() + "'");
+			logger.debug("add alternative clause '" + parent.getName()
+					+ "' -> '" + alternativeFeatures.get(i).getName() + "'");
 
 			// TODO: Find better solution!
 			int[] redundantClause = { rootId, -featureId };
 			solver.addClause(new VecInt(redundantClause));
 		}
 
-		logger.debug("add clause at least '" + converter.convertClauseToReadable(clause, this) + "'");
+		logger.debug("add clause at least '"
+				+ converter.convertClauseToReadable(clause, this) + "'");
 		VecInt atLeast = new VecInt(clause);
 		atLeast.push(-parentId);
 		solver.addAtLeast(atLeast, 1);
 
-		logger.debug("add clause at most '" + converter.convertClauseToReadable(clause, this) + "'");
+		logger.debug("add clause at most '"
+				+ converter.convertClauseToReadable(clause, this) + "'");
 		for (int i : clause) {
 			int[] temp = { parentId, i };
 			solver.addClause(new VecInt(temp));
 		}
-		for(int i = 0; i < clause.length; i++) {
-			for(int j = i+1; j < clause.length; j++) {
+		for (int i = 0; i < clause.length; i++) {
+			for (int j = i + 1; j < clause.length; j++) {
 				int[] temp = { -clause[i], -clause[j] };
 				solver.addClause(new VecInt(temp));
 			}
 		}
 	}
 
-	private void buildOptionalChildren(Feature parent, List<Feature> optionalFeatures) throws BuilderException,
+	private void buildOptionalChildren(Feature parent,
+			List<Feature> optionalFeatures) throws BuilderException,
 			ContradictionException, UnknownStatementException {
 
 		int parentId = getMapping(parent);
@@ -428,8 +471,8 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			// Add Imply -> constraint to parent feature
 			int[] temp = { parentId, -featureId };
 			solver.addClause(new VecInt(temp));
-			logger.debug("add optional clause '" + parent.getName() + "' -> '" + optionalFeatures.get(i).getName()
-					+ "'");
+			logger.debug("add optional clause '" + parent.getName() + "' -> '"
+					+ optionalFeatures.get(i).getName() + "'");
 
 			// TODO: Find better solution!
 			int[] redundantClause = { rootId, -featureId };
@@ -437,14 +480,16 @@ public class SATModelBuilder implements ISolverModelBuilder {
 		}
 	}
 
-	private void buildMandatoryChildren(Feature parent, List<Feature> mandatoryFeatures) throws BuilderException,
+	private void buildMandatoryChildren(Feature parent,
+			List<Feature> mandatoryFeatures) throws BuilderException,
 			ContradictionException, UnknownStatementException {
 
 		int parentId = getMapping(parent);
 
 		for (Feature feature : mandatoryFeatures) {
 			int featureId = getMapping(feature);
-			logger.debug("add mandatory clause '" + parent.getName() + "' <-> '" + feature.getName() + "'");
+			logger.debug("add mandatory clause '" + parent.getName()
+					+ "' <-> '" + feature.getName() + "'");
 
 			int[] temp1 = { parentId, -featureId };
 			solver.addClause(new VecInt(temp1));
@@ -453,8 +498,9 @@ public class SATModelBuilder implements ISolverModelBuilder {
 		}
 	}
 
-	private void buildOrChildren(Feature parent, List<Feature> orFeatures) throws BuilderException,
-			ContradictionException, UnknownStatementException {
+	private void buildOrChildren(Feature parent, List<Feature> orFeatures)
+			throws BuilderException, ContradictionException,
+			UnknownStatementException {
 
 		int[] clause = new int[orFeatures.size() + 1];
 
@@ -468,7 +514,8 @@ public class SATModelBuilder implements ISolverModelBuilder {
 			// Add Imply -> constraint to parent feature
 			int[] temp = { parentId, -featureId };
 			solver.addClause(new VecInt(temp));
-			logger.debug("add or clause '" + parent.getName() + "' -> '" + orFeatures.get(i).getName() + "'");
+			logger.debug("add or clause '" + parent.getName() + "' -> '"
+					+ orFeatures.get(i).getName() + "'");
 
 			// TODO: Find better solution!
 			int[] redundantClause = { rootId, -featureId };
@@ -477,7 +524,8 @@ public class SATModelBuilder implements ISolverModelBuilder {
 
 		// add or condition
 		clause[orFeatures.size()] = -parentId;
-		logger.debug("add clause at least '" + converter.convertClauseToReadable(clause, this) + "'");
+		logger.debug("add clause at least '"
+				+ converter.convertClauseToReadable(clause, this) + "'");
 		solver.addAtLeast(new VecInt(clause), 1);
 	}
 
@@ -489,10 +537,12 @@ public class SATModelBuilder implements ISolverModelBuilder {
 	 * @throws BuilderException
 	 * @throws ContradictionException
 	 */
-	private void buildRootFeature(Feature rootIdentifier) throws BuilderException, ContradictionException {
+	private void buildRootFeature(Feature rootIdentifier)
+			throws BuilderException, ContradictionException {
 		try {
 			logger.debug("add root clause '" + rootIdentifier.getName() + "'");
-			solver.addClause(new VecInt(new int[]{getMapping(rootIdentifier)}));
+			solver.addClause(new VecInt(
+					new int[] { getMapping(rootIdentifier) }));
 		} catch (UnknownStatementException e) {
 			logger.error("Root feature can not be found");
 		}
@@ -512,11 +562,11 @@ public class SATModelBuilder implements ISolverModelBuilder {
 		logger.error("Feature '" + featureName + "' could not be found.");
 		return 0;
 	}
-	
+
 	private int getCounter() {
 		return varCounter;
 	}
-	
+
 	private int incrementCounter() {
 		return ++varCounter;
 	}
