@@ -59,8 +59,9 @@ public class TestClassifierHandler {
 		assertEquals(0, handler.getBoundAliveFeatures().size());
 		assertEquals(0, handler.getBoundDeadFeatures().size());
 		assertFalse(handler.isCompletelyClassified());
-		assertEquals(13, handler.getNonClassifiedFeatures().size());
-		assertEquals(0, handler.getComputedClassifications().size());
+		assertEquals(12, handler.getNonClassifiedFeatures().size());
+		assertEquals(1, handler.getComputedClassifications().size());
+		assertNotNull(handler.getRootFeature());
 	}
 
 	/**

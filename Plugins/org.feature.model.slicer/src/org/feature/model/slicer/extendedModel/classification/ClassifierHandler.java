@@ -55,6 +55,11 @@ public class ClassifierHandler {
 	private Set<Feature> computedClassificationSet;
 
 	/**
+	 * root feature
+	 */
+	private Feature root;
+
+	/**
 	 * the classified feature model
 	 */
 	private FeatureModel featureModel;
@@ -84,6 +89,8 @@ public class ClassifierHandler {
 	 * derive initial classification (without transitive closure)
 	 */
 	private void init() {
+		classifyRoot(featureModel.getRoot());
+
 		for (Feature f : featureModel.getAllFeatures()) {
 			String classifiedValue = "";
 
@@ -120,6 +127,29 @@ public class ClassifierHandler {
 				break;
 			}
 		}
+	}
+
+	/**
+	 * classify root feature as root
+	 */
+	public void classifyRoot(Feature root) {
+		computedClassificationSet.add(root);
+
+		if (featureToClassification.containsKey(root)) {
+			if (featureToClassification.get(root).equals(BoundedType.ROOT))
+				return;
+			else
+				featureToClassification.remove(root);
+		}
+
+		notClassifiedSet.remove(root);
+		unboundSet.remove(root);
+		boundDeadSet.remove(root);
+		boundAliveSet.remove(root);
+		this.setRoot(root);
+
+		featureToClassification.put(root, BoundedType.ROOT);
+
 	}
 
 	/**
@@ -287,5 +317,20 @@ public class ClassifierHandler {
 	 */
 	public Set<Feature> getComputedClassifications() {
 		return computedClassificationSet;
+	}
+
+	/**
+	 * @return the root
+	 */
+	public Feature getRootFeature() {
+		return root;
+	}
+
+	/**
+	 * @param root
+	 *            the root to set
+	 */
+	private void setRoot(Feature root) {
+		this.root = root;
 	}
 }

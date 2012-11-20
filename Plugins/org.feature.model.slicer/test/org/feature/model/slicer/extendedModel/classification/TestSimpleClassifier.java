@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.feature.model.slicer.extendedModel.classification;
 
 import static org.junit.Assert.*;
@@ -59,7 +56,7 @@ public class TestSimpleClassifier {
 
 		ClassifierHandler cHandler = classifier.classify(solver);
 
-		assertEquals(2, cHandler.getBoundAliveFeatures().size());
+		assertEquals(3, cHandler.getBoundAliveFeatures().size());
 		Set<String> alive = new HashSet<>(Arrays.asList(new String[] { "SMS", "Message" }));
 		for (Feature feature : cHandler.getBoundAliveFeatures()) {
 			assertTrue("feature " + feature.getName() + " should not be alive", alive.contains(feature.getName()));
