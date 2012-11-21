@@ -9,7 +9,7 @@ Camera -M_3
 SmallFeaturePhone -M_3 
 Camera -M_8 
 SmallFeaturePhone -M_8 
-M_3 M_8 -Camera 
-Camera M_3 
-Camera M_8 
--M_3 -M_8
+-M_3 -M_8 
+-M_3 Camera 
+-M_8 Camera 
+M_3 M_8 -Camera
