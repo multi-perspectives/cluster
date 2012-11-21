@@ -44,7 +44,7 @@ public class TestModelSlicer {
 	 * path to expected files
 	 */
 	private String pathToExpected = "testdata" + File.separator + "expected" + File.separator;
-	
+
 	/**
 	 * path to expected files
 	 */
@@ -59,17 +59,42 @@ public class TestModelSlicer {
 	}
 
 	@Test
-	public void testRemoveOneFeature() throws InterruptedException, IOException {
-		model = loader.loadModel("testdata" + File.separator + "SimplePhoneSATSmall.feature");
+	public void testRemoveMandatoryFeature() throws InterruptedException, IOException {
+		model = loader.loadModel("testdata" + File.separator + "SimplePhoneSAT.feature");
+		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
+		builder.buildSolverModel(model);
+		IFeatureSolver solver = new SimpleSAT4JSolver(builder, model);
+
+		SimpleClassifier classifier = new SimpleClassifier();
+		ClassifierHandler cHandler = classifier.classify(solver);
+		assertEquals(2, cHandler.getBoundAliveFeatures().size());
+
+		FeatureModel trimmed = slicer.slice(model, cHandler);
+		assertFalse(trimmed.getAllFeatures().isEmpty());
+		assertNull(loader.findFeature(trimmed, "SMS"));
+		assertNotNull(loader.findFeature(trimmed, "Extras"));
+		assertNotNull(loader.findFeature(trimmed, "Communication"));
+		assertEquals(model, trimmed);
+
+		ModelUtils.save(trimmed, pathToCurrent + "MandatoryFeatureRemoved.feature");
+		FeatureModel expected = loader.loadModel(pathToExpected + "MandatoryFeatureRemoved.feature");
+		MatchModel match = MatchService.doMatch(trimmed, expected, new HashMap<String, Object>());
+		DiffModel diff = DiffService.doDiff(match);
+		assertTrue(diff.getDifferences().isEmpty());
+	}
+
+	@Test
+	public void testRemoveBoundOrFeature() throws InterruptedException, IOException {
+		model = loader.loadModel("testdata" + File.separator + "SimplePhoneSAT.feature");
 		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
 		builder.buildSolverModel(model);
 		IFeatureSolver solver = new SimpleSAT4JSolver(builder, model);
 
 		Set<Feature> boundAlive = new HashSet<>();
-		boundAlive.add(loader.findFeature(model, "SMS"));
+		boundAlive.add(loader.findFeature(model, "MP3")); // or feature
 		Set<Feature> boundDead = new HashSet<>();
 
-		assertNotNull(loader.findFeature(model, "SMS"));
+		assertNotNull(loader.findFeature(model, "MP3"));
 		assertNotNull(loader.findFeature(model, "Extras"));
 
 		SimpleClassifier classifier = new SimpleClassifier();
@@ -77,13 +102,78 @@ public class TestModelSlicer {
 
 		FeatureModel trimmed = slicer.slice(model, cHandler);
 		assertFalse(trimmed.getAllFeatures().isEmpty());
-		assertNull(loader.findFeature(trimmed, "SMS"));
-		assertNotNull(loader.findFeature(trimmed, "Extras"));
+		assertNull(loader.findFeature(trimmed, "MP3"));
+		assertNull(loader.findFeature(trimmed, "Extras"));
+		assertNotNull(loader.findFeature(trimmed, "Camera"));
 		assertEquals(model, trimmed);
 
-		ModelUtils.save(trimmed, pathToCurrent + "OneFeatureRemoved.feature");
-		FeatureModel expected = loader.loadModel(pathToExpected + "OneFeatureRemoved.feature");
-		MatchModel match = MatchService.doMatch(trimmed, expected, new HashMap<String,Object>());
+		ModelUtils.save(trimmed, pathToCurrent + "OrFeatureBoundAndRemoved.feature");
+		FeatureModel expected = loader.loadModel(pathToExpected + "OrFeatureBoundAndRemoved.feature");
+		MatchModel match = MatchService.doMatch(trimmed, expected, new HashMap<String, Object>());
+		DiffModel diff = DiffService.doDiff(match);
+		assertTrue(diff.getDifferences().isEmpty());
+	}
+	
+	@Test
+	public void testRemoveBoundAlternativeFeature() throws InterruptedException, IOException {
+		model = loader.loadModel("testdata" + File.separator + "SimplePhoneSAT.feature");
+		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
+		builder.buildSolverModel(model);
+		IFeatureSolver solver = new SimpleSAT4JSolver(builder, model);
+
+		Set<Feature> boundAlive = new HashSet<>();
+		boundAlive.add(loader.findFeature(model, "M_8")); // Alternative feature
+		Set<Feature> boundDead = new HashSet<>();
+
+		assertNotNull(loader.findFeature(model, "M_8"));
+		assertNotNull(loader.findFeature(model, "Camera"));
+		assertNotNull(loader.findFeature(model, "Extras"));
+
+		SimpleClassifier classifier = new SimpleClassifier();
+		ClassifierHandler cHandler = classifier.classify(solver, boundAlive, boundDead);
+
+		FeatureModel trimmed = slicer.slice(model, cHandler);
+		assertFalse(trimmed.getAllFeatures().isEmpty());
+		assertNull(loader.findFeature(trimmed, "M_8"));
+		assertNull(loader.findFeature(trimmed, "Camera"));
+		assertNull(loader.findFeature(trimmed, "Extras"));
+		assertEquals(model, trimmed);
+
+		trimmed.getConstraints().clear();
+		ModelUtils.save(trimmed, pathToCurrent + "AlternativeFeatureBoundAndRemoved.feature");
+		FeatureModel expected = loader.loadModel(pathToExpected + "AlternativeFeatureBoundAndRemoved.feature");
+		MatchModel match = MatchService.doMatch(trimmed, expected, new HashMap<String, Object>());
+		DiffModel diff = DiffService.doDiff(match);
+		assertTrue(diff.getDifferences().isEmpty());
+	}
+	
+	@Test
+	public void testRemoveBoundOptionalFeature() throws InterruptedException, IOException {
+		model = loader.loadModel("testdata" + File.separator + "SimplePhoneSAT.feature");
+		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
+		builder.buildSolverModel(model);
+		IFeatureSolver solver = new SimpleSAT4JSolver(builder, model);
+
+		Set<Feature> boundAlive = new HashSet<>();
+		boundAlive.add(loader.findFeature(model, "MMS")); // optional
+		Set<Feature> boundDead = new HashSet<>();
+
+		assertNotNull(loader.findFeature(model, "MMS"));
+		assertNotNull(loader.findFeature(model, "Camera"));
+		assertNotNull(loader.findFeature(model, "Extras"));
+
+		SimpleClassifier classifier = new SimpleClassifier();
+		ClassifierHandler cHandler = classifier.classify(solver, boundAlive, boundDead);
+
+		FeatureModel trimmed = slicer.slice(model, cHandler);
+		assertFalse(trimmed.getAllFeatures().isEmpty());
+		assertNull(loader.findFeature(trimmed, "MMS"));
+		assertEquals(model, trimmed);
+
+		trimmed.getConstraints().clear();
+		ModelUtils.save(trimmed, pathToCurrent + "OptionalFeatureBoundAndRemoved.feature");
+		FeatureModel expected = loader.loadModel(pathToExpected + "OptionalFeatureBoundAndRemoved.feature");
+		MatchModel match = MatchService.doMatch(trimmed, expected, new HashMap<String, Object>());
 		DiffModel diff = DiffService.doDiff(match);
 		assertTrue(diff.getDifferences().isEmpty());
 	}

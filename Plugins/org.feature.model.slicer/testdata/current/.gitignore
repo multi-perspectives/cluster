@@ -1,1 +1,5 @@
 /OneFeatureRemoved.feature
+/MandatoryFeatureRemoved.feature
+/OrFeatureBoundAndRemoved.feature
+/AlternativeFeatureBoundAndRemoved.feature
+/OptionalFeatureBoundAndRemoved.feature

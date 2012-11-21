@@ -1,11 +1,17 @@
 package org.feature.model.slicer.modelSlicer;
 
+import org.apache.log4j.Logger;
 import org.feature.model.slicer.extendedModel.classification.ClassifierHandler;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.featuremapper.models.feature.Group;
 
 public class ModelSlicer {
+	
+	/**
+	 * Logger
+	 */
+	private static Logger logger = Logger.getLogger(ModelSlicer.class);
 
 	/**
 	 * remove all features which are classified with dead or alive
@@ -17,15 +23,18 @@ public class ModelSlicer {
 	 * @return
 	 */
 	public FeatureModel slice(FeatureModel model, ClassifierHandler cHandler) {
+		for (Feature toRemove : cHandler.getBoundDeadFeatures()) {
+			logger.debug("remove bound dead feature " + toRemove.getName());
+			remove(toRemove, false);
+		}
+		
 		for (Feature toRemove : cHandler.getBoundAliveFeatures()) {
+			logger.debug("remove bound alive feature " + toRemove.getName());
 			moveGroupsUp(toRemove);
 			remove(toRemove, true);
 		}
 
-		for (Feature toRemove : cHandler.getBoundDeadFeatures()) {
-			moveGroupsUp(toRemove);
-			remove(toRemove, false);
-		}
+
 
 		return model;
 	}
