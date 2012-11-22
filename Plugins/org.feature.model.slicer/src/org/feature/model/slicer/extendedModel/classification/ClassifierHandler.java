@@ -12,7 +12,7 @@ import org.featuremapper.models.feature.FeatureModel;
 /**
  * 
  * Class is a meta-data container for a feature model that handles the
- * classificatin state of all features
+ * classification state of all features
  * 
  * @author saller
  * 
@@ -55,32 +55,24 @@ public class ClassifierHandler {
 	private Set<Feature> computedClassificationSet;
 
 	/**
+	 * root feature
+	 */
+	private Feature root;
+
+	/**
 	 * the classified feature model
 	 */
 	private FeatureModel featureModel;
 
 	/**
-	 * initialize handler but do not parse feature model for initial
-	 * classification
-	 */
-	public ClassifierHandler() {
-		featureToClassification = new HashMap<Feature, BoundedType>();
-		unboundSet = new HashSet<Feature>();
-		boundAliveSet = new HashSet<Feature>();
-		boundDeadSet = new HashSet<Feature>();
-		notClassifiedSet = new HashSet<Feature>();
-		computedClassificationSet = new HashSet<Feature>();
-	}
-
-	/**
-	 * initialize handler wiht the classified feature model and derive basic
+	 * initialize handler with the classified feature model and derive basic
 	 * classification (not transitive closure)
 	 * 
 	 * @param fm
 	 *            (partially) classified feature model
 	 */
 	public ClassifierHandler(FeatureModel fm) {
-		this.featureModel = fm;
+		featureModel = fm;
 		featureToClassification = new HashMap<Feature, BoundedType>();
 		unboundSet = new HashSet<Feature>();
 		boundAliveSet = new HashSet<Feature>();
@@ -97,6 +89,8 @@ public class ClassifierHandler {
 	 * derive initial classification (without transitive closure)
 	 */
 	private void init() {
+		classifyRoot(featureModel.getRoot());
+
 		for (Feature f : featureModel.getAllFeatures()) {
 			String classifiedValue = "";
 
@@ -133,6 +127,29 @@ public class ClassifierHandler {
 				break;
 			}
 		}
+	}
+
+	/**
+	 * classify root feature as root
+	 */
+	public void classifyRoot(Feature root) {
+		computedClassificationSet.add(root);
+
+		if (featureToClassification.containsKey(root)) {
+			if (featureToClassification.get(root).equals(BoundedType.ROOT))
+				return;
+			else
+				featureToClassification.remove(root);
+		}
+
+		notClassifiedSet.remove(root);
+		unboundSet.remove(root);
+		boundDeadSet.remove(root);
+		boundAliveSet.remove(root);
+		this.setRoot(root);
+
+		featureToClassification.put(root, BoundedType.ROOT);
+
 	}
 
 	/**
@@ -302,4 +319,18 @@ public class ClassifierHandler {
 		return computedClassificationSet;
 	}
 
+	/**
+	 * @return the root
+	 */
+	public Feature getRootFeature() {
+		return root;
+	}
+
+	/**
+	 * @param root
+	 *            the root to set
+	 */
+	private void setRoot(Feature root) {
+		this.root = root;
+	}
 }
