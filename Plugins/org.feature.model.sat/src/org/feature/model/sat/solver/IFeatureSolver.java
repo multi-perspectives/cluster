@@ -3,7 +3,6 @@ package org.feature.model.sat.solver;
 import java.util.Set;
 
 import org.feature.model.sat.builder.ISolverModelBuilder;
-import org.feature.model.sat.builder.SATModelBuilder;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 
@@ -25,16 +24,7 @@ public interface IFeatureSolver {
 	 */
 	public ISolverModelBuilder getBaseModel();
 
-	/**
-	 * This method set a new model to the solver and it restart the solver to
-	 * use the new model
-	 * 
-	 * @param model
-	 *            the model to set
-	 * @param fm
-	 *            classified feature model
-	 */
-	public void setBaseModel(SATModelBuilder model, FeatureModel fm);
+
 
 	/**
 	 * 

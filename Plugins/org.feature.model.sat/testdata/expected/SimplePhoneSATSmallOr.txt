@@ -1,0 +1,12 @@
+SmallFeaturePhone 
+SmallFeaturePhone -Message 
+-SmallFeaturePhone Message 
+Message -SMS 
+-Message SMS 
+SmallFeaturePhone -Extras 
+SmallFeaturePhone -Extras 
+Extras -MP3 
+SmallFeaturePhone -MP3 
+Extras -Camera 
+SmallFeaturePhone -Camera 
+MP3 Camera -Extras
