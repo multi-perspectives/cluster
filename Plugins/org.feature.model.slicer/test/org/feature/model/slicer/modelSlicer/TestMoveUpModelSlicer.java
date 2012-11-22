@@ -19,14 +19,14 @@ import org.feature.model.sat.solver.IFeatureSolver;
 import org.feature.model.sat.solver.SimpleSAT4JSolver;
 import org.feature.model.slicer.extendedModel.classification.ClassifierHandler;
 import org.feature.model.slicer.extendedModel.classification.SimpleClassifier;
-import org.feature.model.slicer.modelSlicer.ModelSlicer;
+import org.feature.model.slicer.modelSlicer.MoveUpModelSlicer;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.junit.Before;
 import org.junit.Test;
 import org.sat4j.minisat.SolverFactory;
 
-public class TestModelSlicer {
+public class TestMoveUpModelSlicer {
 
 	private ModelLoader loader = new ModelLoader();
 
@@ -38,7 +38,7 @@ public class TestModelSlicer {
 	/**
 	 * object under test
 	 */
-	private ModelSlicer slicer;
+	private MoveUpModelSlicer slicer;
 
 	/**
 	 * path to expected files
@@ -55,7 +55,7 @@ public class TestModelSlicer {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		slicer = new ModelSlicer();
+		slicer = new MoveUpModelSlicer();
 	}
 
 	@Test
@@ -139,7 +139,6 @@ public class TestModelSlicer {
 		assertNull(loader.findFeature(trimmed, "Extras"));
 		assertEquals(model, trimmed);
 
-		trimmed.getConstraints().clear();
 		ModelUtils.save(trimmed, pathToCurrent + "AlternativeFeatureBoundAndRemoved.feature");
 		FeatureModel expected = loader.loadModel(pathToExpected + "AlternativeFeatureBoundAndRemoved.feature");
 		MatchModel match = MatchService.doMatch(trimmed, expected, new HashMap<String, Object>());
@@ -170,9 +169,36 @@ public class TestModelSlicer {
 		assertNull(loader.findFeature(trimmed, "MMS"));
 		assertEquals(model, trimmed);
 
-		trimmed.getConstraints().clear();
 		ModelUtils.save(trimmed, pathToCurrent + "OptionalFeatureBoundAndRemoved.feature");
 		FeatureModel expected = loader.loadModel(pathToExpected + "OptionalFeatureBoundAndRemoved.feature");
+		MatchModel match = MatchService.doMatch(trimmed, expected, new HashMap<String, Object>());
+		DiffModel diff = DiffService.doDiff(match);
+		assertTrue(diff.getDifferences().isEmpty());
+	}
+	
+	@Test
+	public void testRemoveCameraConstraint() throws InterruptedException, IOException {
+		model = loader.loadModel("testdata" + File.separator + "SimplePhoneSAT.feature");
+		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
+		builder.buildSolverModel(model);
+		IFeatureSolver solver = new SimpleSAT4JSolver(builder, model);
+
+		Set<Feature> boundAlive = new HashSet<>();
+		boundAlive.add(loader.findFeature(model, "Camera")); // part of one constraint
+		Set<Feature> boundDead = new HashSet<>();
+
+		assertNotNull(loader.findFeature(model, "Camera"));
+		assertEquals("some constraints missing?", 2, model.getConstraints().size());
+
+		SimpleClassifier classifier = new SimpleClassifier();
+		ClassifierHandler cHandler = classifier.classify(solver, boundAlive, boundDead);
+		FeatureModel trimmed = slicer.slice(model, cHandler);
+		
+		assertNull(loader.findFeature(trimmed, "Camera"));
+		assertEquals("constraint not removed", 1, model.getConstraints().size());
+
+		ModelUtils.save(trimmed, pathToCurrent + "ConstraintCameraRemoved.feature");
+		FeatureModel expected = loader.loadModel(pathToExpected + "ConstraintCameraRemoved.feature");
 		MatchModel match = MatchService.doMatch(trimmed, expected, new HashMap<String, Object>());
 		DiffModel diff = DiffService.doDiff(match);
 		assertTrue(diff.getDifferences().isEmpty());
