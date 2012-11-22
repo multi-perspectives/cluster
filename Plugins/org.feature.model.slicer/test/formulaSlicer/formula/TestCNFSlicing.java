@@ -6,12 +6,12 @@ import java.util.Set;
 import junit.framework.Assert;
 
 import org.apache.log4j.PropertyConfigurator;
-import org.feature.model.ModelLoader;
 import org.feature.model.sat.builder.ISolverModelBuilder;
 import org.feature.model.sat.builder.SATModelBuilder;
 import org.feature.model.sat.solver.IFeatureSolver;
 import org.feature.model.sat.solver.SimpleSAT4JSolver;
 import org.feature.model.slicer.formulaSlicer.formula.builder.SAT4JCNFFormulaFactory;
+import org.feature.model.utilities.FeatureModelLoader;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.junit.Before;
@@ -30,7 +30,7 @@ public class TestCNFSlicing {
 	@Test
 	public void testSimpleModelSlice() {
 
-		FeatureModel fm = new ModelLoader().loadModel("testdata/SimplePhoneNoCTC.feature");
+		FeatureModel fm = new FeatureModelLoader().load("testdata/SimplePhoneNoCTC.feature");
 
 		Set<Feature> deadFeatures = new HashSet<Feature>();
 		Set<Feature> aliveFeatures = new HashSet<Feature>();
@@ -65,12 +65,12 @@ public class TestCNFSlicing {
 	@Test
 	public void testCTCModelSlice() {
 
-		FeatureModel fm = new ModelLoader().loadModel("testdata/SimplePhoneSAT.feature");
+		FeatureModel fm = new FeatureModelLoader().load("testdata/SimplePhoneSAT.feature");
 
 		Set<Feature> deadFeatures = new HashSet<Feature>();
 		Set<Feature> aliveFeatures = new HashSet<Feature>();
 
-		Feature feature = new ModelLoader().findFeature(fm, "MMS");
+		Feature feature = new FeatureModelLoader().findFeature(fm, "MMS");
 		if (feature != null) {
 			aliveFeatures.add(feature);
 		}

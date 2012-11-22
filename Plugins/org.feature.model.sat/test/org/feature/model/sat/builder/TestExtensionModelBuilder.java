@@ -8,8 +8,8 @@ import java.io.IOException;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.PropertyConfigurator;
 import org.feature.model.FileHandler;
-import org.feature.model.ModelLoader;
 import org.feature.model.sat.solver.CNFConverter;
+import org.feature.model.utilities.FeatureModelLoader;
 import org.featuremapper.models.feature.FeatureModel;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -51,7 +51,7 @@ public class TestExtensionModelBuilder {
 	 */
 	@Test
 	public void testBuildSmallModel() throws IOException {
-		FeatureModel model = new ModelLoader().loadModel("testdata/SimplePhoneSATSmallOr.feature");
+		FeatureModel model = new FeatureModelLoader().load("testdata/SimplePhoneSATSmallOr.feature");
 		builder.buildSolverModel(model);
 
 		String result = new CNFConverter().convertCNFToReadable(solver.getOut().toString(), model, builder);
@@ -61,7 +61,7 @@ public class TestExtensionModelBuilder {
 
 	@Test
 	public void testBuildModel() throws IOException {
-		FeatureModel model = new ModelLoader().loadModel("testdata/SimplePhoneSAT.feature");
+		FeatureModel model = new FeatureModelLoader().load("testdata/SimplePhoneSAT.feature");
 		builder.buildSolverModel(model);
 
 		String result = new CNFConverter().convertCNFToReadable(solver.getOut().toString(), model, builder);
@@ -78,7 +78,7 @@ public class TestExtensionModelBuilder {
 	 */
 	@Test
 	public void testBuildSmallOrModel() throws IOException {
-		FeatureModel model = new ModelLoader().loadModel("testdata/SimplePhoneSATSmallOr.feature");
+		FeatureModel model = new FeatureModelLoader().load("testdata/SimplePhoneSATSmallOr.feature");
 		builder.buildSolverModel(model);
 
 		String result = new CNFConverter().convertCNFToReadable(solver.getOut().toString(), model, builder);
@@ -95,7 +95,7 @@ public class TestExtensionModelBuilder {
 	 */
 	@Test
 	public void testBuildSmallAlternativeModel() throws IOException {
-		FeatureModel model = new ModelLoader().loadModel("testdata/SimplePhoneSATSmallAlternative.feature");
+		FeatureModel model = new FeatureModelLoader().load("testdata/SimplePhoneSATSmallAlternative.feature");
 		builder.buildSolverModel(model);
 
 		String result = new CNFConverter().convertCNFToReadable(solver.getOut().toString(), model, builder);

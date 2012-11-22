@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.feature.model.ModelLoader;
 import org.feature.model.sat.builder.SATModelBuilder;
+import org.feature.model.utilities.FeatureModelLoader;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.junit.Before;
@@ -56,7 +56,7 @@ public class SimpleSAT4JSolverTest {
 	 */
 	@Test
 	public void testIsSolvableSMSMessage() {
-		ModelLoader loader = new ModelLoader();
+		FeatureModelLoader loader = new FeatureModelLoader();
 		
 		Set<Feature> boundedAlive = new HashSet<>();
 		boundedAlive.add(loader.findFeature(model, "SMS"));
@@ -72,7 +72,7 @@ public class SimpleSAT4JSolverTest {
 	 */
 	@Test
 	public void testIsSolvableNotSMS() {
-		ModelLoader loader = new ModelLoader();
+		FeatureModelLoader loader = new FeatureModelLoader();
 		
 		Set<Feature> boundedAlive = new HashSet<>();
 		Set<Feature> boundedDead = new HashSet<>();
@@ -88,7 +88,7 @@ public class SimpleSAT4JSolverTest {
 	 */
 	@Test
 	public void testIsSolvableSMSExtras() {
-		ModelLoader loader = new ModelLoader();
+		FeatureModelLoader loader = new FeatureModelLoader();
 		
 		Set<Feature> boundedAlive = new HashSet<>();
 		boundedAlive.add(loader.findFeature(model, "SMS"));
@@ -104,7 +104,7 @@ public class SimpleSAT4JSolverTest {
 	 */
 	@Test
 	public void testIsSolvableNOTSMSExtras() {
-		ModelLoader loader = new ModelLoader();
+		FeatureModelLoader loader = new FeatureModelLoader();
 		
 		Set<Feature> boundedAlive = new HashSet<>();
 		boundedAlive.add(loader.findFeature(model, "Extras"));
@@ -126,8 +126,8 @@ public class SimpleSAT4JSolverTest {
 	
 	@Test
 	public void testRemoveMandatoryFeature() throws InterruptedException, IOException {
-		ModelLoader loader = new ModelLoader();
-		model = loader.loadModel("testdata" + File.separator + "SimplePhoneSAT.feature");
+		FeatureModelLoader loader = new FeatureModelLoader();
+		model = loader.load("testdata" + File.separator + "SimplePhoneSAT.feature");
 		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
 		builder.buildSolverModel(model);
 		IFeatureSolver solver = new SimpleSAT4JSolver(builder, model);

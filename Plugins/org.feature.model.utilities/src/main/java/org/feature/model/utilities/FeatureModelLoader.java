@@ -1,11 +1,13 @@
-package org.feature.model;
+package org.feature.model.utilities;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.PropertyConfigurator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.compare.util.ModelUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -22,9 +24,9 @@ import org.featuremapper.models.feature.FeaturePackage;
  * @author Ingo Reimund
  * 
  */
-public class ModelLoader {
+public class FeatureModelLoader {
 
-	public ModelLoader() {
+	public FeatureModelLoader() {
 		PropertyConfigurator.configure("conf/log4j.properties");
 		BasicConfigurator.configure();
 
@@ -42,12 +44,12 @@ public class ModelLoader {
 	 *            path to file
 	 * @return feature model
 	 */
-	public FeatureModel loadModel(String pathToModel) {
+	public FeatureModel load(String pathToModel) {
 		// convert model path to uri
 		URI uriToModel = URI.createFileURI(new File(pathToModel).getAbsolutePath());
 
 		// load feature model from uri with a new resource set
-		return FeatureModel.class.cast(loadModel(uriToModel, new ResourceSetImpl()));
+		return FeatureModel.class.cast(load(uriToModel, new ResourceSetImpl()));
 	}
 
 	/**
@@ -59,7 +61,7 @@ public class ModelLoader {
 	 *            set of resources
 	 * @return feature model
 	 */
-	private EObject loadModel(URI uri, ResourceSet resourceSet) {
+	public EObject load(URI uri, ResourceSet resourceSet) {
 		// Get the resource
 		Resource resource = resourceSet.getResource(uri, true);
 
@@ -70,6 +72,19 @@ public class ModelLoader {
 
 		// Return root model element
 		return resource.getContents().get(0);
+	}
+
+	/**
+	 * save an eobject to file
+	 * 
+	 * @param root
+	 *            object to save
+	 * @param path
+	 *            to file
+	 * @throws IOException
+	 */
+	public void save(EObject root, String path) throws IOException {
+		ModelUtils.save(root, path);
 	}
 
 	/**
