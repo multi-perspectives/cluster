@@ -44,12 +44,30 @@ public class MoveUpModelSlicer {
 
 		for (Constraint constraint : new BasicEList<Constraint>(model.getConstraints())) {
 			if (checkConstraint(constraint, bounded)) {
-				logger.debug("remove constraint " + constraint.getExpression());
-				model.getConstraints().remove(constraint);
+				removeConstraint(model, constraint);
 			}
 		}
 
 		return model;
+	}
+
+	/**
+	 * remove the constraint from model and all dependencies
+	 * 
+	 * @param model
+	 * @param constraint
+	 *            to remove
+	 */
+	protected void removeConstraint(FeatureModel model, Constraint constraint) {
+		logger.debug("remove constraint " + constraint.getExpression());
+		model.getConstraints().remove(constraint);
+
+		for (Feature feature : model.getAllFeatures()) {
+			if (feature.getConstraints().contains(constraint)) {
+				logger.debug(feature.getName() + " is part of constraint " + constraint.getExpression());
+				feature.getConstraints().remove(constraint);
+			}
+		}
 	}
 
 	/**
@@ -66,6 +84,7 @@ public class MoveUpModelSlicer {
 		String expression = constraint.getExpression();
 		for (String featureName : featureNames) {
 			if (expression.contains(featureName)) {
+				logger.debug(featureName + " is part of " + expression);
 				return true;
 			}
 		}
