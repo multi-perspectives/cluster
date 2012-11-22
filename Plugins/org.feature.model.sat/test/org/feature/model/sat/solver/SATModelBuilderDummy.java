@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.feature.model.ModelLoader;
 import org.feature.model.sat.builder.ISolverModelBuilder;
 import org.feature.model.sat.builder.SATModelBuilder;
 import org.feature.model.sat.exception.UnknownStatementException;
+import org.feature.model.utilities.FeatureModelLoader;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.sat4j.core.VecInt;
@@ -48,7 +48,7 @@ public class SATModelBuilderDummy implements ISolverModelBuilder {
 	 * create SimplePhoneSAtSmall feature model
 	 */
 	public SATModelBuilderDummy() {
-		model = new ModelLoader().loadModel("testdata/SimplePhoneSATSmall.feature");
+		model = new FeatureModelLoader().load("testdata/SimplePhoneSATSmall.feature");
 		for (Feature feature : model.getAllFeatures()) {
 			addMapping(feature);
 		}

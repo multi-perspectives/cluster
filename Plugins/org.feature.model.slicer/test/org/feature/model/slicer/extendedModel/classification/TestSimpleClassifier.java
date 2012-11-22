@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.feature.model.ModelLoader;
 import org.feature.model.sat.builder.SATModelBuilder;
 import org.feature.model.sat.solver.IFeatureSolver;
 import org.feature.model.sat.solver.SimpleSAT4JSolver;
+import org.feature.model.utilities.FeatureModelLoader;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.junit.Before;
@@ -49,7 +49,7 @@ public class TestSimpleClassifier {
 	 */
 	@Test
 	public void testClassifyIFeatureSolverSmallPhone() {
-		model = new ModelLoader().loadModel("testdata" + File.separator + "SimplePhoneSATSmall.feature");
+		model = new FeatureModelLoader().load("testdata" + File.separator + "SimplePhoneSATSmall.feature");
 		
 		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
 		builder.buildSolverModel(model);
@@ -74,7 +74,7 @@ public class TestSimpleClassifier {
 	 */
 	@Test
 	public void testClassifyIFeatureSolver() {
-		model = new ModelLoader().loadModel("testdata" + File.separator + "SimplePhoneSAT.feature");
+		model = new FeatureModelLoader().load("testdata" + File.separator + "SimplePhoneSAT.feature");
 		
 		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
 		builder.buildSolverModel(model);
@@ -99,14 +99,14 @@ public class TestSimpleClassifier {
 	 */
 	@Test
 	public void testClassifyIFeatureSolverSetOfFeatureSetOfFeature() {
-		model = new ModelLoader().loadModel("testdata" + File.separator + "SimplePhoneSATSmall.feature");
+		model = new FeatureModelLoader().load("testdata" + File.separator + "SimplePhoneSATSmall.feature");
 		
 		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
 		builder.buildSolverModel(model);
 		IFeatureSolver solver = new SimpleSAT4JSolver(builder, model);
 
 		Set<Feature> boundAlive = new HashSet<>();
-		boundAlive.add(new ModelLoader().findFeature(model, "Extras"));
+		boundAlive.add(new FeatureModelLoader().findFeature(model, "Extras"));
 		Set<Feature> boundDead = new HashSet<>();
 
 		assertFalse(boundAlive.isEmpty());
@@ -129,7 +129,7 @@ public class TestSimpleClassifier {
 	 */
 	@Test
 	public void testClassifyIFeatureSolverSetOfFeatureSetOfFeatureWithEmptyLists() {
-		model = new ModelLoader().loadModel("testdata" + File.separator + "SimplePhoneSATSmall.feature");
+		model = new FeatureModelLoader().load("testdata" + File.separator + "SimplePhoneSATSmall.feature");
 		
 		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
 		builder.buildSolverModel(model);

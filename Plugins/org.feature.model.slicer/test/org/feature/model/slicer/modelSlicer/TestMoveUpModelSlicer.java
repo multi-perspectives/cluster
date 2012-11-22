@@ -7,14 +7,14 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.eclipse.emf.compare.util.ModelUtils;
-import org.feature.model.ModelLoader;
 import org.feature.model.sat.builder.SATModelBuilder;
 import org.feature.model.sat.solver.IFeatureSolver;
 import org.feature.model.sat.solver.SimpleSAT4JSolver;
 import org.feature.model.slicer.extendedModel.classification.ClassifierHandler;
 import org.feature.model.slicer.extendedModel.classification.SimpleClassifier;
 import org.feature.model.slicer.modelSlicer.MoveUpModelSlicer;
+import org.feature.model.utilities.FeatureModelLoader;
+import org.feature.model.utilities.ModelComparator;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.junit.Before;
@@ -23,7 +23,7 @@ import org.sat4j.minisat.SolverFactory;
 
 public class TestMoveUpModelSlicer {
 
-	private ModelLoader loader = new ModelLoader();
+	private FeatureModelLoader loader = new FeatureModelLoader();
 
 	/**
 	 * test model
@@ -55,7 +55,7 @@ public class TestMoveUpModelSlicer {
 
 	@Test
 	public void testRemoveMandatoryFeature() throws InterruptedException, IOException {
-		model = loader.loadModel("testdata" + File.separator + "SimplePhoneSAT.feature");
+		model = loader.load("testdata" + File.separator + "SimplePhoneSAT.feature");
 		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
 		builder.buildSolverModel(model);
 		IFeatureSolver solver = new SimpleSAT4JSolver(builder, model);
@@ -71,14 +71,14 @@ public class TestMoveUpModelSlicer {
 		assertNotNull(loader.findFeature(trimmed, "Communication"));
 		assertEquals(model, trimmed);
 
-		ModelUtils.save(trimmed, pathToCurrent + "MandatoryFeatureRemoved.feature");
-		FeatureModel expected = loader.loadModel(pathToExpected + "MandatoryFeatureRemoved.feature");
+		loader.save(trimmed, pathToCurrent + "MandatoryFeatureRemoved.feature");
+		FeatureModel expected = loader.load(pathToExpected + "MandatoryFeatureRemoved.feature");
 		assertTrue(new ModelComparator().unorderdDiff(trimmed, expected));
 	}
 
 	@Test
 	public void testRemoveBoundOrFeature() throws InterruptedException, IOException {
-		model = loader.loadModel("testdata" + File.separator + "SimplePhoneSAT.feature");
+		model = loader.load("testdata" + File.separator + "SimplePhoneSAT.feature");
 		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
 		builder.buildSolverModel(model);
 		IFeatureSolver solver = new SimpleSAT4JSolver(builder, model);
@@ -100,14 +100,14 @@ public class TestMoveUpModelSlicer {
 		assertNotNull(loader.findFeature(trimmed, "Camera"));
 		assertEquals(model, trimmed);
 
-		ModelUtils.save(trimmed, pathToCurrent + "OrFeatureBoundAndRemoved.feature");
-		FeatureModel expected = loader.loadModel(pathToExpected + "OrFeatureBoundAndRemoved.feature");
+		loader.save(trimmed, pathToCurrent + "OrFeatureBoundAndRemoved.feature");
+		FeatureModel expected = loader.load(pathToExpected + "OrFeatureBoundAndRemoved.feature");
 		assertTrue(new ModelComparator().unorderdDiff(trimmed, expected));
 	}
 
 	@Test
 	public void testRemoveBoundAlternativeFeature() throws InterruptedException, IOException {
-		model = loader.loadModel("testdata" + File.separator + "SimplePhoneSAT.feature");
+		model = loader.load("testdata" + File.separator + "SimplePhoneSAT.feature");
 		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
 		builder.buildSolverModel(model);
 		IFeatureSolver solver = new SimpleSAT4JSolver(builder, model);
@@ -130,14 +130,14 @@ public class TestMoveUpModelSlicer {
 		assertNull(loader.findFeature(trimmed, "Extras"));
 		assertEquals(model, trimmed);
 
-		ModelUtils.save(trimmed, pathToCurrent + "AlternativeFeatureBoundAndRemoved.feature");
-		FeatureModel expected = loader.loadModel(pathToExpected + "AlternativeFeatureBoundAndRemoved.feature");
+		loader.save(trimmed, pathToCurrent + "AlternativeFeatureBoundAndRemoved.feature");
+		FeatureModel expected = loader.load(pathToExpected + "AlternativeFeatureBoundAndRemoved.feature");
 		assertTrue(new ModelComparator().unorderdDiff(trimmed, expected));
 	}
 
 	@Test
 	public void testRemoveBoundOptionalFeature() throws InterruptedException, IOException {
-		model = loader.loadModel("testdata" + File.separator + "SimplePhoneSAT.feature");
+		model = loader.load("testdata" + File.separator + "SimplePhoneSAT.feature");
 		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
 		builder.buildSolverModel(model);
 		IFeatureSolver solver = new SimpleSAT4JSolver(builder, model);
@@ -158,14 +158,14 @@ public class TestMoveUpModelSlicer {
 		assertNull(loader.findFeature(trimmed, "MMS"));
 		assertEquals(model, trimmed);
 
-		ModelUtils.save(trimmed, pathToCurrent + "OptionalFeatureBoundAndRemoved.feature");
-		FeatureModel expected = loader.loadModel(pathToExpected + "OptionalFeatureBoundAndRemoved.feature");
+		loader.save(trimmed, pathToCurrent + "OptionalFeatureBoundAndRemoved.feature");
+		FeatureModel expected = loader.load(pathToExpected + "OptionalFeatureBoundAndRemoved.feature");
 		assertTrue(new ModelComparator().unorderdDiff(trimmed, expected));
 	}
 
 	@Test
 	public void testRemoveCameraConstraint() throws InterruptedException, IOException {
-		model = loader.loadModel("testdata" + File.separator + "SimplePhoneSAT.feature");
+		model = loader.load("testdata" + File.separator + "SimplePhoneSAT.feature");
 		SATModelBuilder builder = new SATModelBuilder(SolverFactory.newDefault());
 		builder.buildSolverModel(model);
 		IFeatureSolver solver = new SimpleSAT4JSolver(builder, model);
@@ -185,8 +185,8 @@ public class TestMoveUpModelSlicer {
 		assertNull(loader.findFeature(trimmed, "Camera"));
 		assertEquals("constraint not removed", 1, model.getConstraints().size());
 
-		ModelUtils.save(trimmed, pathToCurrent + "ConstraintCameraRemoved.feature");
-		FeatureModel expected = loader.loadModel(pathToExpected + "ConstraintCameraRemoved.feature");
+		loader.save(trimmed, pathToCurrent + "ConstraintCameraRemoved.feature");
+		FeatureModel expected = loader.load(pathToExpected + "ConstraintCameraRemoved.feature");
 		assertTrue(new ModelComparator().unorderdDiff(trimmed, expected));
 	}
 }
