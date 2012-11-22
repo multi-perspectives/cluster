@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.PropertyConfigurator;
-import org.feature.model.ModelLoader;
+import org.feature.model.utilities.FeatureModelLoader;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.junit.Before;
@@ -44,7 +44,7 @@ public class TestClassifierHandler {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		model = new ModelLoader().loadModel("testdata/SimplePhone.feature");
+		model = new FeatureModelLoader().load("testdata/SimplePhone.feature");
 		handler = new ClassifierHandler(model);
 	}
 
@@ -71,7 +71,7 @@ public class TestClassifierHandler {
 	 */
 	@Test
 	public void testClassifyBoundAlive() {
-		Feature f = new ModelLoader().findFeature(model, "SMS");
+		Feature f = new FeatureModelLoader().findFeature(model, "SMS");
 		
 		assertTrue(handler.getNonClassifiedFeatures().contains(f));
 		assertFalse(handler.getBoundAliveFeatures().contains(f));
@@ -87,7 +87,7 @@ public class TestClassifierHandler {
 	 */
 	@Test
 	public void testClassifyBoundDead() {
-		Feature f = new ModelLoader().findFeature(model, "SMS");
+		Feature f = new FeatureModelLoader().findFeature(model, "SMS");
 		
 		assertTrue(handler.getNonClassifiedFeatures().contains(f));
 		assertFalse(handler.getBoundDeadFeatures().contains(f));
@@ -103,7 +103,7 @@ public class TestClassifierHandler {
 	 */
 	@Test
 	public void testClassifyUnbound() {
-		Feature f = new ModelLoader().findFeature(model, "SMS");
+		Feature f = new FeatureModelLoader().findFeature(model, "SMS");
 		
 		assertTrue(handler.getNonClassifiedFeatures().contains(f));
 		assertFalse(handler.getUnboundFeatures().contains(f));
@@ -119,7 +119,7 @@ public class TestClassifierHandler {
 	 */
 	@Test
 	public void testRemoveClassification() {
-		Feature f = new ModelLoader().findFeature(model, "SMS");
+		Feature f = new FeatureModelLoader().findFeature(model, "SMS");
 		handler.classifyBoundAlive(f, false);
 		
 		assertTrue(handler.getBoundAliveFeatures().contains(f));

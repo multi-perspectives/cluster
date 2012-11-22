@@ -3,8 +3,8 @@ package formulaSlicer.formula;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.PropertyConfigurator;
-import org.feature.model.ModelLoader;
 import org.feature.model.slicer.formulaSlicer.formula.builder.SAT4JCNFFormulaFactory;
+import org.feature.model.utilities.FeatureModelLoader;
 import org.featuremapper.models.feature.FeatureModel;
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,7 +21,7 @@ public class TestCNFBuild {
 
 	@Test
 	public void testSimpleCNFBuild() {
-		FeatureModel fm = new ModelLoader().loadModel("testdata/SimplePhoneNoCTC.feature");
+		FeatureModel fm = new FeatureModelLoader().load("testdata/SimplePhoneNoCTC.feature");
 		
 		SAT4JCNFFormulaFactory builder = new SAT4JCNFFormulaFactory();
 		String cnf = builder.createFormulaName(fm);

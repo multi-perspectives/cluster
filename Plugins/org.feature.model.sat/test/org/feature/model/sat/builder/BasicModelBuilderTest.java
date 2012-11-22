@@ -5,9 +5,9 @@ import static org.junit.Assert.*;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.feature.model.ModelLoader;
 import org.feature.model.sat.exception.UnknownStatementException;
 import org.feature.model.sat.solver.CNFConverter;
+import org.feature.model.utilities.FeatureModelLoader;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
 import org.junit.Before;
@@ -54,7 +54,7 @@ public class BasicModelBuilderTest {
 
 	@Test
 	public void testMapping() throws UnknownStatementException {
-		model = new ModelLoader().loadModel("testdata/SimplePhoneSATSmall.feature");
+		model = new FeatureModelLoader().load("testdata/SimplePhoneSATSmall.feature");
 		builder.buildSolverModel(model);
 
 		for (Feature feature : model.getAllFeatures()) {
@@ -91,8 +91,8 @@ public class BasicModelBuilderTest {
 	 */
 	@Test
 	public void testRootClause() throws UnknownStatementException, TimeoutException {
-		ModelLoader loader = new ModelLoader();
-		model = loader.loadModel("testdata/SimplePhoneSATSmallRootOnly.feature");
+		FeatureModelLoader loader = new FeatureModelLoader();
+		model = loader.load("testdata/SimplePhoneSATSmallRootOnly.feature");
 		builder.buildSolverModel(model);
 
 		ISolver solver = builder.getModel();
@@ -115,8 +115,8 @@ public class BasicModelBuilderTest {
 	 */
 	@Test
 	public void testMandatoryClause() throws UnknownStatementException, TimeoutException {
-		ModelLoader loader = new ModelLoader();
-		model = loader.loadModel("testdata/SimplePhoneSATSmallMandatoryOnly.feature");
+		FeatureModelLoader loader = new FeatureModelLoader();
+		model = loader.load("testdata/SimplePhoneSATSmallMandatoryOnly.feature");
 		builder.buildSolverModel(model);
 
 		ISolver solver = builder.getModel();
@@ -134,8 +134,8 @@ public class BasicModelBuilderTest {
 
 	@Test
 	public void testOrClause() throws UnknownStatementException, TimeoutException {
-		ModelLoader loader = new ModelLoader();
-		model = loader.loadModel("testdata/SimplePhoneSATSmallOptionalWithOrOnly.feature");
+		FeatureModelLoader loader = new FeatureModelLoader();
+		model = loader.load("testdata/SimplePhoneSATSmallOptionalWithOrOnly.feature");
 		builder.buildSolverModel(model);
 
 		ISolver solver = builder.getModel();
@@ -171,9 +171,9 @@ public class BasicModelBuilderTest {
 
 	@Test
 	public void testSmallFeaturePhone() throws UnknownStatementException, TimeoutException {
-		ModelLoader loader = new ModelLoader();
+		FeatureModelLoader loader = new FeatureModelLoader();
 		CNFConverter converter = new CNFConverter();
-		model = loader.loadModel("testdata/SimplePhoneSATSmall.feature");
+		model = loader.load("testdata/SimplePhoneSATSmall.feature");
 		builder.buildSolverModel(model);
 
 		ISolver solver = builder.getModel();
