@@ -170,11 +170,9 @@ public class SAT4JCNFFormulaFactory implements IFormulaFactory {
 
 		TrimSAT4JCNF trimmer = new TrimSAT4JCNF();
 
-		ClassifierHandler handler = new ClassifierHandler(
-				solverModel.getFeatureModel());
 		SimpleClassifier classifier = new SimpleClassifier();
 		
-		handler = classifier.classify(solverModel, boundedAlive, boundedDead);
+		ClassifierHandler handler = classifier.classify(solverModel, boundedAlive, boundedDead);
 		
 		Set<String> aliveStrings = new HashSet<String>();
 

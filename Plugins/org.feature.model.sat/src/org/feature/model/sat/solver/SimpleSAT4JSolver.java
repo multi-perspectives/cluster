@@ -5,7 +5,6 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.feature.model.sat.builder.ISolverModelBuilder;
-import org.feature.model.sat.builder.SATModelBuilder;
 import org.feature.model.sat.exception.UnknownStatementException;
 import org.featuremapper.models.feature.Feature;
 import org.featuremapper.models.feature.FeatureModel;
@@ -50,32 +49,26 @@ public class SimpleSAT4JSolver implements IFeatureSolver {
 	}
 
 	@Override
-	public void setBaseModel(SATModelBuilder model, FeatureModel fm) {
-		this.builder = model;
-		this.featureModel = fm;
-	}
-
-	@Override
-	public boolean isSolvable(Set<Feature> boundedAlive,
-			Set<Feature> boundedDead) {
+	public boolean isSolvable(Set<Feature> boundedAlive, Set<Feature> boundedDead) {
 		IVecInt selected = new VecInt();
 
 		try {
 			for (Feature aliveFeature : boundedAlive) {
 				selected.push(builder.getMapping(aliveFeature));
+				logger.debug("alive feature " + aliveFeature.getName());
 			}
 
 			for (Feature deadFeature : boundedDead) {
 				selected.push(-builder.getMapping(deadFeature));
+				logger.debug("dead feature " + deadFeature.getName());
 			}
 
-			int[] model = builder.getModel().findModel(selected);
-			if (model == null) {
-				logger.info("no products found");
-				return false;
+			if (builder.getModel().isSatisfiable(selected)) {
+				logger.info("product found: " + convertToString(builder.getModel().model()));
+				return true;
 			}
-			logger.info("product found");
-			return true;
+			logger.info("no products found");
+			return false;
 		} catch (TimeoutException e) {
 			logger.error(e.getMessage());
 			return false;
@@ -86,8 +79,7 @@ public class SimpleSAT4JSolver implements IFeatureSolver {
 	}
 
 	@Override
-	public Set<Feature> getConfiguration(Set<Feature> boundedAlive,
-			Set<Feature> boundedDead) {
+	public Set<Feature> getConfiguration(Set<Feature> boundedAlive, Set<Feature> boundedDead) {
 		IVecInt selected = new VecInt();
 
 		try {
@@ -106,7 +98,7 @@ public class SimpleSAT4JSolver implements IFeatureSolver {
 			}
 			logger.info("product found");
 
-			return convert(model);
+			return convertFeatureSet(model);
 		} catch (TimeoutException | UnknownStatementException e) {
 			logger.error(e.getMessage());
 			return null;
@@ -117,15 +109,33 @@ public class SimpleSAT4JSolver implements IFeatureSolver {
 	 * Convert a list of feature ids (representing a configuration) to the
 	 * according set of EMF feature objects
 	 * 
-	 * @param model list of feature ids
+	 * @param model
+	 *            list of feature ids
 	 * @return set of the according EMF feature objects
 	 */
-	private Set<Feature> convert(int[] model) {
+	private Set<Feature> convertFeatureSet(int[] model) {
 		Set<Feature> product = new HashSet<>();
 
 		for (int i : model)
-			product.add(builder.getMapping(i));
+			if (i > 0) {
+				product.add(builder.getMapping(i));
+			}
 		return product;
+	}
+
+	private String convertToString(int[] model) {
+		StringBuffer buffer = new StringBuffer();
+		for (int integer : model) {
+			if (integer < 0) {
+				buffer.append("-");
+				buffer.append(builder.getMapping(Math.abs(integer)).getName());
+				buffer.append(" ");
+			} else {
+				buffer.append(builder.getMapping(integer).getName());
+				buffer.append(" ");
+			}
+		}
+		return buffer.toString();
 	}
 
 	@Override
@@ -133,7 +143,7 @@ public class SimpleSAT4JSolver implements IFeatureSolver {
 		try {
 			return this.getBaseModel().getModel().isSatisfiable();
 		} catch (TimeoutException e) {
-			logger.info("Model" + this.getFeatureModel() + "is not solvable");
+			logger.info("Model" + getFeatureModel() + "is not solvable");
 			return false;
 		}
 	}
@@ -150,11 +160,9 @@ public class SimpleSAT4JSolver implements IFeatureSolver {
 			}
 			logger.info("product found");
 
-			return convert(model);
+			return convertFeatureSet(model);
 		} catch (TimeoutException e) {
-			logger.error("Configuration for model '"
-					+ this.getFeatureModel().getName()
-					+ "' could not be computed");
+			logger.error("Configuration for model '" + this.getFeatureModel().getName() + "' could not be computed");
 			return null;
 		}
 	}
@@ -166,8 +174,7 @@ public class SimpleSAT4JSolver implements IFeatureSolver {
 	}
 
 	@Override
-	public Set<Set<FeatureModel>> getAllConfigurations(
-			Set<Feature> aliveFeatures, Set<Feature> deadFeatures) {
+	public Set<Set<FeatureModel>> getAllConfigurations(Set<Feature> aliveFeatures, Set<Feature> deadFeatures) {
 		logger.warn("findProducts is not implemented");
 		return null;
 	}
