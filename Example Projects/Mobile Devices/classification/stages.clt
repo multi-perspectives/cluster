@@ -1,7 +1,7 @@
 classification
 references mapping <../mapping/mapping.mtext>  
 
-stage <Tablet_Stage> on views {} : view  
+stage <Tablet_Stage> on:   view  
   
   
   
@@ -18,7 +18,7 @@ stage <Tablet_Stage> on views {} : view
      
    
 
-stage <Phone_Stage> on views {} : view  
+stage <Phone_Stage> on:   view  
   
   
   
@@ -32,7 +32,7 @@ stage <Phone_Stage> on views {} : view
      
    
 
-stage <Office_Stage> on views {} : view  
+stage <Office_Stage> on:   view  
   
   
      
@@ -48,7 +48,7 @@ stage <Office_Stage> on views {} : view
      
    
 
-stage <City_Stage> on views {} : view  
+stage <City_Stage> on:   view  
   
      
      
@@ -63,7 +63,7 @@ stage <City_Stage> on views {} : view
      
    
 
-stage <Calls_Stage> on views {} : view  
+stage <Calls_Stage> on:   view  
   
      
     
@@ -75,7 +75,7 @@ stage <Calls_Stage> on views {} : view
      
    
 
-stage <Weather_Stage> on views {} : view  
+stage <Weather_Stage> on:   view  
   
      
     

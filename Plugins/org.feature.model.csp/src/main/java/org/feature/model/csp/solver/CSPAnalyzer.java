@@ -81,8 +81,8 @@ public class CSPAnalyzer {
          boolean isConsistent = analyzer.isSatisfiable();
          log.info("The feature model is satisfiable : " + isConsistent);
 
-         // int derivableVariants = analyzer.getNumberOfDerivableVariants();
-         // log.info("Number of derivable variants     : " + derivableVariants);
+         int derivableVariants = analyzer.getNumberOfDerivableVariants();
+         log.info("Number of derivable variants     : " + derivableVariants);
 
          logFeatureNames(analyzer);
          
