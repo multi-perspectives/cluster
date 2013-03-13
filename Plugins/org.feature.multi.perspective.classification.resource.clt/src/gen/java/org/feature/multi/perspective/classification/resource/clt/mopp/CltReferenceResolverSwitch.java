@@ -17,6 +17,9 @@ public class CltReferenceResolverSwitch implements org.feature.multi.perspective
 	protected org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationModelFeatureModelReferenceResolver classificationModelFeatureModelReferenceResolver = new org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationModelFeatureModelReferenceResolver();
 	protected org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationViewgroupsReferenceResolver classificationViewgroupsReferenceResolver = new org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationViewgroupsReferenceResolver();
 	protected org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationComposeReferenceResolver classificationComposeReferenceResolver = new org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationComposeReferenceResolver();
+	protected org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationAliveFeaturesReferenceResolver classificationAliveFeaturesReferenceResolver = new org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationAliveFeaturesReferenceResolver();
+	protected org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationDeadFeaturesReferenceResolver classificationDeadFeaturesReferenceResolver = new org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationDeadFeaturesReferenceResolver();
+	protected org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationUnboundFeaturesReferenceResolver classificationUnboundFeaturesReferenceResolver = new org.feature.multi.perspective.classification.resource.clt.analysis.ClassificationUnboundFeaturesReferenceResolver();
 	protected org.feature.multi.perspective.classification.resource.clt.analysis.ClassifiedFeatureFeatureReferenceResolver classifiedFeatureFeatureReferenceResolver = new org.feature.multi.perspective.classification.resource.clt.analysis.ClassifiedFeatureFeatureReferenceResolver();
 	
 	public org.feature.multi.perspective.classification.resource.clt.ICltReferenceResolver<org.feature.multi.perspective.classification.ClassificationModel, org.feature.multi.perspective.mapping.viewmapping.MappingModel> getClassificationModelViewMappingReferenceResolver() {
@@ -35,6 +38,18 @@ public class CltReferenceResolverSwitch implements org.feature.multi.perspective
 		return getResolverChain(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification_Compose(), classificationComposeReferenceResolver);
 	}
 	
+	public org.feature.multi.perspective.classification.resource.clt.ICltReferenceResolver<org.feature.multi.perspective.classification.Classification, org.featuremapper.models.feature.Feature> getClassificationAliveFeaturesReferenceResolver() {
+		return getResolverChain(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification_AliveFeatures(), classificationAliveFeaturesReferenceResolver);
+	}
+	
+	public org.feature.multi.perspective.classification.resource.clt.ICltReferenceResolver<org.feature.multi.perspective.classification.Classification, org.featuremapper.models.feature.Feature> getClassificationDeadFeaturesReferenceResolver() {
+		return getResolverChain(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification_DeadFeatures(), classificationDeadFeaturesReferenceResolver);
+	}
+	
+	public org.feature.multi.perspective.classification.resource.clt.ICltReferenceResolver<org.feature.multi.perspective.classification.Classification, org.featuremapper.models.feature.Feature> getClassificationUnboundFeaturesReferenceResolver() {
+		return getResolverChain(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification_UnboundFeatures(), classificationUnboundFeaturesReferenceResolver);
+	}
+	
 	public org.feature.multi.perspective.classification.resource.clt.ICltReferenceResolver<org.feature.multi.perspective.classification.ClassifiedFeature, org.featuremapper.models.feature.Feature> getClassifiedFeatureFeatureReferenceResolver() {
 		return getResolverChain(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature_Feature(), classifiedFeatureFeatureReferenceResolver);
 	}
@@ -48,6 +63,9 @@ public class CltReferenceResolverSwitch implements org.feature.multi.perspective
 		classificationModelFeatureModelReferenceResolver.setOptions(options);
 		classificationViewgroupsReferenceResolver.setOptions(options);
 		classificationComposeReferenceResolver.setOptions(options);
+		classificationAliveFeaturesReferenceResolver.setOptions(options);
+		classificationDeadFeaturesReferenceResolver.setOptions(options);
+		classificationUnboundFeaturesReferenceResolver.setOptions(options);
 		classifiedFeatureFeatureReferenceResolver.setOptions(options);
 	}
 	
@@ -87,6 +105,30 @@ public class CltReferenceResolverSwitch implements org.feature.multi.perspective
 				classificationComposeReferenceResolver.resolve(identifier, (org.feature.multi.perspective.classification.Classification) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
 			}
 		}
+		if (org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification().isInstance(container)) {
+			CltFuzzyResolveResult<org.featuremapper.models.feature.Feature> frr = new CltFuzzyResolveResult<org.featuremapper.models.feature.Feature>(result);
+			String referenceName = reference.getName();
+			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("aliveFeatures")) {
+				classificationAliveFeaturesReferenceResolver.resolve(identifier, (org.feature.multi.perspective.classification.Classification) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			}
+		}
+		if (org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification().isInstance(container)) {
+			CltFuzzyResolveResult<org.featuremapper.models.feature.Feature> frr = new CltFuzzyResolveResult<org.featuremapper.models.feature.Feature>(result);
+			String referenceName = reference.getName();
+			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("deadFeatures")) {
+				classificationDeadFeaturesReferenceResolver.resolve(identifier, (org.feature.multi.perspective.classification.Classification) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			}
+		}
+		if (org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification().isInstance(container)) {
+			CltFuzzyResolveResult<org.featuremapper.models.feature.Feature> frr = new CltFuzzyResolveResult<org.featuremapper.models.feature.Feature>(result);
+			String referenceName = reference.getName();
+			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("unboundFeatures")) {
+				classificationUnboundFeaturesReferenceResolver.resolve(identifier, (org.feature.multi.perspective.classification.Classification) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			}
+		}
 		if (org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature().isInstance(container)) {
 			CltFuzzyResolveResult<org.featuremapper.models.feature.Feature> frr = new CltFuzzyResolveResult<org.featuremapper.models.feature.Feature>(result);
 			String referenceName = reference.getName();
@@ -109,6 +151,15 @@ public class CltReferenceResolverSwitch implements org.feature.multi.perspective
 		}
 		if (reference == org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification_Compose()) {
 			return getResolverChain(reference, classificationComposeReferenceResolver);
+		}
+		if (reference == org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification_AliveFeatures()) {
+			return getResolverChain(reference, classificationAliveFeaturesReferenceResolver);
+		}
+		if (reference == org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification_DeadFeatures()) {
+			return getResolverChain(reference, classificationDeadFeaturesReferenceResolver);
+		}
+		if (reference == org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification_UnboundFeatures()) {
+			return getResolverChain(reference, classificationUnboundFeaturesReferenceResolver);
 		}
 		if (reference == org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature_Feature()) {
 			return getResolverChain(reference, classifiedFeatureFeatureReferenceResolver);

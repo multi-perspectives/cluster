@@ -13,7 +13,7 @@ import java.util.HashMap;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class CltParser extends CltANTLRParserBase {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "COMMA", "COMMENT", "LINEBREAK", "QUOTED_34_34", "QUOTED_60_62", "TEXT", "WHITESPACE", "':'", "'alive'", "'autocomplete'", "'classification'", "'dead'", "'feature'", "'featuremodel'", "'mapping'", "'on'", "'references'", "'stage'", "'stages'", "'unbound'", "'views'", "'{'", "'}'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "COMMA", "COMMENT", "LINEBREAK", "QUOTED_34_34", "QUOTED_60_62", "TEXT", "WHITESPACE", "':'", "'afeatures'", "'alive'", "'autocomplete'", "'classification'", "'dead'", "'dfeatures'", "'feature'", "'featuremodel'", "'mapping'", "'on'", "'references'", "'stage'", "'stages'", "'ufeatures'", "'unbound'", "'views'", "'{'", "'}'"
     };
 
     public static final int EOF=-1;
@@ -33,6 +33,9 @@ public class CltParser extends CltANTLRParserBase {
     public static final int T__24=24;
     public static final int T__25=25;
     public static final int T__26=26;
+    public static final int T__27=27;
+    public static final int T__28=28;
+    public static final int T__29=29;
     public static final int COMMA=4;
     public static final int COMMENT=5;
     public static final int LINEBREAK=6;
@@ -54,7 +57,7 @@ public class CltParser extends CltANTLRParserBase {
     }
     public CltParser(TokenStream input, RecognizerSharedState state) {
         super(input, state);
-        this.state.initializeRuleMemo(19 + 1);
+        this.state.initializeRuleMemo(21 + 1);
          
 
     }
@@ -376,7 +379,7 @@ public class CltParser extends CltANTLRParserBase {
     				break;
     			}
     		}
-    		int followSetID = 40;
+    		int followSetID = 48;
     		int i;
     		for (i = tokenIndexOfLastCompleteElement; i < tokenStream.size(); i++) {
     			org.antlr.runtime3_4_0.CommonToken nextToken = (org.antlr.runtime3_4_0.CommonToken) tokenStream.get(i);
@@ -604,7 +607,7 @@ public class CltParser extends CltANTLRParserBase {
 
 
     // $ANTLR start "parse_org_feature_multi_perspective_classification_ClassificationModel"
-    // Clt.g:521:1: parse_org_feature_multi_perspective_classification_ClassificationModel returns [org.feature.multi.perspective.classification.ClassificationModel element = null] : a0= 'classification' a1= 'references' ( ( (a2= 'mapping' (a3= QUOTED_60_62 ) ) | (a4= 'featuremodel' (a5= QUOTED_60_62 ) ) ) )+ ( (a6_0= parse_org_feature_multi_perspective_classification_Classification ) )* ;
+    // Clt.g:521:1: parse_org_feature_multi_perspective_classification_ClassificationModel returns [org.feature.multi.perspective.classification.ClassificationModel element = null] : a0= 'classification' a1= 'references' ( (a2= 'mapping' (a3= QUOTED_60_62 ) ) | (a4= 'featuremodel' (a5= QUOTED_60_62 ) ) ) ( (a6_0= parse_org_feature_multi_perspective_classification_Classification ) )* ;
     public final org.feature.multi.perspective.classification.ClassificationModel parse_org_feature_multi_perspective_classification_ClassificationModel() throws RecognitionException {
         org.feature.multi.perspective.classification.ClassificationModel element =  null;
 
@@ -624,10 +627,10 @@ public class CltParser extends CltANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 2) ) { return element; }
 
-            // Clt.g:524:2: (a0= 'classification' a1= 'references' ( ( (a2= 'mapping' (a3= QUOTED_60_62 ) ) | (a4= 'featuremodel' (a5= QUOTED_60_62 ) ) ) )+ ( (a6_0= parse_org_feature_multi_perspective_classification_Classification ) )* )
-            // Clt.g:525:2: a0= 'classification' a1= 'references' ( ( (a2= 'mapping' (a3= QUOTED_60_62 ) ) | (a4= 'featuremodel' (a5= QUOTED_60_62 ) ) ) )+ ( (a6_0= parse_org_feature_multi_perspective_classification_Classification ) )*
+            // Clt.g:524:2: (a0= 'classification' a1= 'references' ( (a2= 'mapping' (a3= QUOTED_60_62 ) ) | (a4= 'featuremodel' (a5= QUOTED_60_62 ) ) ) ( (a6_0= parse_org_feature_multi_perspective_classification_Classification ) )* )
+            // Clt.g:525:2: a0= 'classification' a1= 'references' ( (a2= 'mapping' (a3= QUOTED_60_62 ) ) | (a4= 'featuremodel' (a5= QUOTED_60_62 ) ) ) ( (a6_0= parse_org_feature_multi_perspective_classification_Classification ) )*
             {
-            a0=(Token)match(input,14,FOLLOW_14_in_parse_org_feature_multi_perspective_classification_ClassificationModel115); if (state.failed) return element;
+            a0=(Token)match(input,15,FOLLOW_15_in_parse_org_feature_multi_perspective_classification_ClassificationModel115); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -644,7 +647,7 @@ public class CltParser extends CltANTLRParserBase {
             		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[1]);
             	}
 
-            a1=(Token)match(input,20,FOLLOW_20_in_parse_org_feature_multi_perspective_classification_ClassificationModel129); if (state.failed) return element;
+            a1=(Token)match(input,22,FOLLOW_22_in_parse_org_feature_multi_perspective_classification_ClassificationModel129); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -662,251 +665,211 @@ public class CltParser extends CltANTLRParserBase {
             		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[3]);
             	}
 
-            // Clt.g:554:2: ( ( (a2= 'mapping' (a3= QUOTED_60_62 ) ) | (a4= 'featuremodel' (a5= QUOTED_60_62 ) ) ) )+
-            int cnt2=0;
+            // Clt.g:554:2: ( (a2= 'mapping' (a3= QUOTED_60_62 ) ) | (a4= 'featuremodel' (a5= QUOTED_60_62 ) ) )
+            int alt1=2;
+            int LA1_0 = input.LA(1);
+
+            if ( (LA1_0==20) ) {
+                alt1=1;
+            }
+            else if ( (LA1_0==19) ) {
+                alt1=2;
+            }
+            else {
+                if (state.backtracking>0) {state.failed=true; return element;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 1, 0, input);
+
+                throw nvae;
+
+            }
+            switch (alt1) {
+                case 1 :
+                    // Clt.g:555:3: (a2= 'mapping' (a3= QUOTED_60_62 ) )
+                    {
+                    // Clt.g:555:3: (a2= 'mapping' (a3= QUOTED_60_62 ) )
+                    // Clt.g:556:4: a2= 'mapping' (a3= QUOTED_60_62 )
+                    {
+                    a2=(Token)match(input,20,FOLLOW_20_in_parse_org_feature_multi_perspective_classification_ClassificationModel152); if (state.failed) return element;
+
+                    if ( state.backtracking==0 ) {
+                    				if (element == null) {
+                    					element = org.feature.multi.perspective.classification.ClassificationFactory.eINSTANCE.createClassificationModel();
+                    					startIncompleteElement(element);
+                    				}
+                    				collectHiddenTokens(element);
+                    				retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_0_0_0_4_0_0_0_0_0_0, null, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+                    			}
+
+                    if ( state.backtracking==0 ) {
+                    				// expected elements (follow set)
+                    				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[4]);
+                    			}
+
+                    // Clt.g:570:4: (a3= QUOTED_60_62 )
+                    // Clt.g:571:5: a3= QUOTED_60_62
+                    {
+                    a3=(Token)match(input,QUOTED_60_62,FOLLOW_QUOTED_60_62_in_parse_org_feature_multi_perspective_classification_ClassificationModel178); if (state.failed) return element;
+
+                    if ( state.backtracking==0 ) {
+                    					if (terminateParsing) {
+                    						throw new org.feature.multi.perspective.classification.resource.clt.mopp.CltTerminateParsingException();
+                    					}
+                    					if (element == null) {
+                    						element = org.feature.multi.perspective.classification.ClassificationFactory.eINSTANCE.createClassificationModel();
+                    						startIncompleteElement(element);
+                    					}
+                    					if (a3 != null) {
+                    						org.feature.multi.perspective.classification.resource.clt.ICltTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_60_62");
+                    						tokenResolver.setOptions(getOptions());
+                    						org.feature.multi.perspective.classification.resource.clt.ICltTokenResolveResult result = getFreshTokenResolveResult();
+                    						tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING), result);
+                    						Object resolvedObject = result.getResolvedToken();
+                    						if (resolvedObject == null) {
+                    							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStopIndex());
+                    						}
+                    						String resolved = (String) resolvedObject;
+                    						org.feature.multi.perspective.mapping.viewmapping.MappingModel proxy = org.feature.multi.perspective.mapping.viewmapping.ViewmappingFactory.eINSTANCE.createMappingModel();
+                    						collectHiddenTokens(element);
+                    						registerContextDependentProxy(new org.feature.multi.perspective.classification.resource.clt.mopp.CltContextDependentURIFragmentFactory<org.feature.multi.perspective.classification.ClassificationModel, org.feature.multi.perspective.mapping.viewmapping.MappingModel>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getClassificationModelViewMappingReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING), resolved, proxy);
+                    						if (proxy != null) {
+                    							Object value = proxy;
+                    							element.eSet(element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING), value);
+                    							completedElement(value, false);
+                    						}
+                    						collectHiddenTokens(element);
+                    						retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_0_0_0_4_0_0_0_0_0_2, proxy, true);
+                    						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
+                    						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, proxy);
+                    					}
+                    				}
+
+                    }
+
+
+                    if ( state.backtracking==0 ) {
+                    				// expected elements (follow set)
+                    				addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[5]);
+                    			}
+
+                    }
+
+
+                    if ( state.backtracking==0 ) {
+                    			// expected elements (follow set)
+                    			addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[6]);
+                    		}
+
+                    }
+                    break;
+                case 2 :
+                    // Clt.g:617:6: (a4= 'featuremodel' (a5= QUOTED_60_62 ) )
+                    {
+                    // Clt.g:617:6: (a4= 'featuremodel' (a5= QUOTED_60_62 ) )
+                    // Clt.g:618:4: a4= 'featuremodel' (a5= QUOTED_60_62 )
+                    {
+                    a4=(Token)match(input,19,FOLLOW_19_in_parse_org_feature_multi_perspective_classification_ClassificationModel232); if (state.failed) return element;
+
+                    if ( state.backtracking==0 ) {
+                    				if (element == null) {
+                    					element = org.feature.multi.perspective.classification.ClassificationFactory.eINSTANCE.createClassificationModel();
+                    					startIncompleteElement(element);
+                    				}
+                    				collectHiddenTokens(element);
+                    				retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_0_0_0_4_0_1_0_0_0_0, null, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
+                    			}
+
+                    if ( state.backtracking==0 ) {
+                    				// expected elements (follow set)
+                    				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[7]);
+                    			}
+
+                    // Clt.g:632:4: (a5= QUOTED_60_62 )
+                    // Clt.g:633:5: a5= QUOTED_60_62
+                    {
+                    a5=(Token)match(input,QUOTED_60_62,FOLLOW_QUOTED_60_62_in_parse_org_feature_multi_perspective_classification_ClassificationModel258); if (state.failed) return element;
+
+                    if ( state.backtracking==0 ) {
+                    					if (terminateParsing) {
+                    						throw new org.feature.multi.perspective.classification.resource.clt.mopp.CltTerminateParsingException();
+                    					}
+                    					if (element == null) {
+                    						element = org.feature.multi.perspective.classification.ClassificationFactory.eINSTANCE.createClassificationModel();
+                    						startIncompleteElement(element);
+                    					}
+                    					if (a5 != null) {
+                    						org.feature.multi.perspective.classification.resource.clt.ICltTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_60_62");
+                    						tokenResolver.setOptions(getOptions());
+                    						org.feature.multi.perspective.classification.resource.clt.ICltTokenResolveResult result = getFreshTokenResolveResult();
+                    						tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL), result);
+                    						Object resolvedObject = result.getResolvedToken();
+                    						if (resolvedObject == null) {
+                    							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStopIndex());
+                    						}
+                    						String resolved = (String) resolvedObject;
+                    						org.featuremapper.models.feature.FeatureModel proxy = org.featuremapper.models.feature.FeatureFactory.eINSTANCE.createFeatureModel();
+                    						collectHiddenTokens(element);
+                    						registerContextDependentProxy(new org.feature.multi.perspective.classification.resource.clt.mopp.CltContextDependentURIFragmentFactory<org.feature.multi.perspective.classification.ClassificationModel, org.featuremapper.models.feature.FeatureModel>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getClassificationModelFeatureModelReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL), resolved, proxy);
+                    						if (proxy != null) {
+                    							Object value = proxy;
+                    							element.eSet(element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL), value);
+                    							completedElement(value, false);
+                    						}
+                    						collectHiddenTokens(element);
+                    						retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_0_0_0_4_0_1_0_0_0_2, proxy, true);
+                    						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
+                    						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, proxy);
+                    					}
+                    				}
+
+                    }
+
+
+                    if ( state.backtracking==0 ) {
+                    				// expected elements (follow set)
+                    				addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[8]);
+                    			}
+
+                    }
+
+
+                    if ( state.backtracking==0 ) {
+                    			// expected elements (follow set)
+                    			addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[9]);
+                    		}
+
+                    }
+                    break;
+
+            }
+
+
+            if ( state.backtracking==0 ) {
+            		// expected elements (follow set)
+            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[10]);
+            	}
+
+            // Clt.g:684:2: ( (a6_0= parse_org_feature_multi_perspective_classification_Classification ) )*
             loop2:
             do {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( ((LA2_0 >= 17 && LA2_0 <= 18)) ) {
+                if ( (LA2_0==23) ) {
                     alt2=1;
                 }
 
 
                 switch (alt2) {
             	case 1 :
-            	    // Clt.g:555:3: ( (a2= 'mapping' (a3= QUOTED_60_62 ) ) | (a4= 'featuremodel' (a5= QUOTED_60_62 ) ) )
+            	    // Clt.g:685:3: (a6_0= parse_org_feature_multi_perspective_classification_Classification )
             	    {
-            	    // Clt.g:555:3: ( (a2= 'mapping' (a3= QUOTED_60_62 ) ) | (a4= 'featuremodel' (a5= QUOTED_60_62 ) ) )
-            	    int alt1=2;
-            	    int LA1_0 = input.LA(1);
-
-            	    if ( (LA1_0==18) ) {
-            	        alt1=1;
-            	    }
-            	    else if ( (LA1_0==17) ) {
-            	        alt1=2;
-            	    }
-            	    else {
-            	        if (state.backtracking>0) {state.failed=true; return element;}
-            	        NoViableAltException nvae =
-            	            new NoViableAltException("", 1, 0, input);
-
-            	        throw nvae;
-
-            	    }
-            	    switch (alt1) {
-            	        case 1 :
-            	            // Clt.g:556:4: (a2= 'mapping' (a3= QUOTED_60_62 ) )
-            	            {
-            	            // Clt.g:556:4: (a2= 'mapping' (a3= QUOTED_60_62 ) )
-            	            // Clt.g:557:5: a2= 'mapping' (a3= QUOTED_60_62 )
-            	            {
-            	            a2=(Token)match(input,18,FOLLOW_18_in_parse_org_feature_multi_perspective_classification_ClassificationModel158); if (state.failed) return element;
-
-            	            if ( state.backtracking==0 ) {
-            	            					if (element == null) {
-            	            						element = org.feature.multi.perspective.classification.ClassificationFactory.eINSTANCE.createClassificationModel();
-            	            						startIncompleteElement(element);
-            	            					}
-            	            					collectHiddenTokens(element);
-            	            					retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_0_0_0_4_0_0_0_0_0_0, null, true);
-            	            					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
-            	            				}
-
-            	            if ( state.backtracking==0 ) {
-            	            					// expected elements (follow set)
-            	            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[4]);
-            	            				}
-
-            	            // Clt.g:571:5: (a3= QUOTED_60_62 )
-            	            // Clt.g:572:6: a3= QUOTED_60_62
-            	            {
-            	            a3=(Token)match(input,QUOTED_60_62,FOLLOW_QUOTED_60_62_in_parse_org_feature_multi_perspective_classification_ClassificationModel188); if (state.failed) return element;
-
-            	            if ( state.backtracking==0 ) {
-            	            						if (terminateParsing) {
-            	            							throw new org.feature.multi.perspective.classification.resource.clt.mopp.CltTerminateParsingException();
-            	            						}
-            	            						if (element == null) {
-            	            							element = org.feature.multi.perspective.classification.ClassificationFactory.eINSTANCE.createClassificationModel();
-            	            							startIncompleteElement(element);
-            	            						}
-            	            						if (a3 != null) {
-            	            							org.feature.multi.perspective.classification.resource.clt.ICltTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_60_62");
-            	            							tokenResolver.setOptions(getOptions());
-            	            							org.feature.multi.perspective.classification.resource.clt.ICltTokenResolveResult result = getFreshTokenResolveResult();
-            	            							tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING), result);
-            	            							Object resolvedObject = result.getResolvedToken();
-            	            							if (resolvedObject == null) {
-            	            								addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStopIndex());
-            	            							}
-            	            							String resolved = (String) resolvedObject;
-            	            							org.feature.multi.perspective.mapping.viewmapping.MappingModel proxy = org.feature.multi.perspective.mapping.viewmapping.ViewmappingFactory.eINSTANCE.createMappingModel();
-            	            							collectHiddenTokens(element);
-            	            							registerContextDependentProxy(new org.feature.multi.perspective.classification.resource.clt.mopp.CltContextDependentURIFragmentFactory<org.feature.multi.perspective.classification.ClassificationModel, org.feature.multi.perspective.mapping.viewmapping.MappingModel>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getClassificationModelViewMappingReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING), resolved, proxy);
-            	            							if (proxy != null) {
-            	            								Object value = proxy;
-            	            								element.eSet(element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION_MODEL__VIEW_MAPPING), value);
-            	            								completedElement(value, false);
-            	            							}
-            	            							collectHiddenTokens(element);
-            	            							retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_0_0_0_4_0_0_0_0_0_2, proxy, true);
-            	            							copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
-            	            							copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, proxy);
-            	            						}
-            	            					}
-
-            	            }
-
-
-            	            if ( state.backtracking==0 ) {
-            	            					// expected elements (follow set)
-            	            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[5]);
-            	            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[6]);
-            	            					addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[7]);
-            	            				}
-
-            	            }
-
-
-            	            if ( state.backtracking==0 ) {
-            	            				// expected elements (follow set)
-            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[8]);
-            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[9]);
-            	            				addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[10]);
-            	            			}
-
-            	            }
-            	            break;
-            	        case 2 :
-            	            // Clt.g:622:8: (a4= 'featuremodel' (a5= QUOTED_60_62 ) )
-            	            {
-            	            // Clt.g:622:8: (a4= 'featuremodel' (a5= QUOTED_60_62 ) )
-            	            // Clt.g:623:5: a4= 'featuremodel' (a5= QUOTED_60_62 )
-            	            {
-            	            a4=(Token)match(input,17,FOLLOW_17_in_parse_org_feature_multi_perspective_classification_ClassificationModel254); if (state.failed) return element;
-
-            	            if ( state.backtracking==0 ) {
-            	            					if (element == null) {
-            	            						element = org.feature.multi.perspective.classification.ClassificationFactory.eINSTANCE.createClassificationModel();
-            	            						startIncompleteElement(element);
-            	            					}
-            	            					collectHiddenTokens(element);
-            	            					retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_0_0_0_4_0_1_0_0_0_0, null, true);
-            	            					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
-            	            				}
-
-            	            if ( state.backtracking==0 ) {
-            	            					// expected elements (follow set)
-            	            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[11]);
-            	            				}
-
-            	            // Clt.g:637:5: (a5= QUOTED_60_62 )
-            	            // Clt.g:638:6: a5= QUOTED_60_62
-            	            {
-            	            a5=(Token)match(input,QUOTED_60_62,FOLLOW_QUOTED_60_62_in_parse_org_feature_multi_perspective_classification_ClassificationModel284); if (state.failed) return element;
-
-            	            if ( state.backtracking==0 ) {
-            	            						if (terminateParsing) {
-            	            							throw new org.feature.multi.perspective.classification.resource.clt.mopp.CltTerminateParsingException();
-            	            						}
-            	            						if (element == null) {
-            	            							element = org.feature.multi.perspective.classification.ClassificationFactory.eINSTANCE.createClassificationModel();
-            	            							startIncompleteElement(element);
-            	            						}
-            	            						if (a5 != null) {
-            	            							org.feature.multi.perspective.classification.resource.clt.ICltTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_60_62");
-            	            							tokenResolver.setOptions(getOptions());
-            	            							org.feature.multi.perspective.classification.resource.clt.ICltTokenResolveResult result = getFreshTokenResolveResult();
-            	            							tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL), result);
-            	            							Object resolvedObject = result.getResolvedToken();
-            	            							if (resolvedObject == null) {
-            	            								addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStopIndex());
-            	            							}
-            	            							String resolved = (String) resolvedObject;
-            	            							org.featuremapper.models.feature.FeatureModel proxy = org.featuremapper.models.feature.FeatureFactory.eINSTANCE.createFeatureModel();
-            	            							collectHiddenTokens(element);
-            	            							registerContextDependentProxy(new org.feature.multi.perspective.classification.resource.clt.mopp.CltContextDependentURIFragmentFactory<org.feature.multi.perspective.classification.ClassificationModel, org.featuremapper.models.feature.FeatureModel>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getClassificationModelFeatureModelReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL), resolved, proxy);
-            	            							if (proxy != null) {
-            	            								Object value = proxy;
-            	            								element.eSet(element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION_MODEL__FEATURE_MODEL), value);
-            	            								completedElement(value, false);
-            	            							}
-            	            							collectHiddenTokens(element);
-            	            							retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_0_0_0_4_0_1_0_0_0_2, proxy, true);
-            	            							copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
-            	            							copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, proxy);
-            	            						}
-            	            					}
-
-            	            }
-
-
-            	            if ( state.backtracking==0 ) {
-            	            					// expected elements (follow set)
-            	            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[12]);
-            	            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[13]);
-            	            					addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[14]);
-            	            				}
-
-            	            }
-
-
-            	            if ( state.backtracking==0 ) {
-            	            				// expected elements (follow set)
-            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[15]);
-            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[16]);
-            	            				addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[17]);
-            	            			}
-
-            	            }
-            	            break;
-
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    if ( cnt2 >= 1 ) break loop2;
-            	    if (state.backtracking>0) {state.failed=true; return element;}
-                        EarlyExitException eee =
-                            new EarlyExitException(2, input);
-                        throw eee;
-                }
-                cnt2++;
-            } while (true);
-
-
-            if ( state.backtracking==0 ) {
-            		// expected elements (follow set)
-            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[18]);
-            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[19]);
-            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[20]);
-            	}
-
-            // Clt.g:696:2: ( (a6_0= parse_org_feature_multi_perspective_classification_Classification ) )*
-            loop3:
-            do {
-                int alt3=2;
-                int LA3_0 = input.LA(1);
-
-                if ( (LA3_0==21) ) {
-                    alt3=1;
-                }
-
-
-                switch (alt3) {
-            	case 1 :
-            	    // Clt.g:697:3: (a6_0= parse_org_feature_multi_perspective_classification_Classification )
+            	    // Clt.g:685:3: (a6_0= parse_org_feature_multi_perspective_classification_Classification )
+            	    // Clt.g:686:4: a6_0= parse_org_feature_multi_perspective_classification_Classification
             	    {
-            	    // Clt.g:697:3: (a6_0= parse_org_feature_multi_perspective_classification_Classification )
-            	    // Clt.g:698:4: a6_0= parse_org_feature_multi_perspective_classification_Classification
-            	    {
-            	    pushFollow(FOLLOW_parse_org_feature_multi_perspective_classification_Classification_in_parse_org_feature_multi_perspective_classification_ClassificationModel358);
+            	    pushFollow(FOLLOW_parse_org_feature_multi_perspective_classification_Classification_in_parse_org_feature_multi_perspective_classification_ClassificationModel317);
             	    a6_0=parse_org_feature_multi_perspective_classification_Classification();
 
             	    state._fsp--;
@@ -939,14 +902,14 @@ public class CltParser extends CltANTLRParserBase {
             	    break;
 
             	default :
-            	    break loop3;
+            	    break loop2;
                 }
             } while (true);
 
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[21]);
+            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[11]);
             	}
 
             }
@@ -969,7 +932,7 @@ public class CltParser extends CltANTLRParserBase {
 
 
     // $ANTLR start "parse_org_feature_multi_perspective_classification_Classification"
-    // Clt.g:726:1: parse_org_feature_multi_perspective_classification_Classification returns [org.feature.multi.perspective.classification.Classification element = null] : a0= 'stage' (a1= QUOTED_60_62 ) a2= 'on' ( ( (a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )? ) | (a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )? ) ) )? a11= ':' ( (a12_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* ( (a13= 'autocomplete' a14= '{' ( (a15_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* a16= '}' ) )? ;
+    // Clt.g:714:1: parse_org_feature_multi_perspective_classification_Classification returns [org.feature.multi.perspective.classification.Classification element = null] : a0= 'stage' (a1= QUOTED_60_62 ) a2= 'on' ( ( (a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )? ) | (a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )? ) ) )? a11= ':' ( (a12_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* ( (a13= 'afeatures' (a14= TEXT ) |a15= 'dfeatures' (a16= TEXT ) |a17= 'ufeatures' (a18= TEXT ) ) )* ( (a19= 'autocomplete' a20= '{' (a21_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) ( (a22_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* a23= '}' ) )? ;
     public final org.feature.multi.perspective.classification.Classification parse_org_feature_multi_perspective_classification_Classification() throws RecognitionException {
         org.feature.multi.perspective.classification.Classification element =  null;
 
@@ -989,10 +952,18 @@ public class CltParser extends CltANTLRParserBase {
         Token a11=null;
         Token a13=null;
         Token a14=null;
+        Token a15=null;
         Token a16=null;
+        Token a17=null;
+        Token a18=null;
+        Token a19=null;
+        Token a20=null;
+        Token a23=null;
         org.feature.multi.perspective.classification.ClassifiedFeature a12_0 =null;
 
-        org.feature.multi.perspective.classification.ClassifiedFeature a15_0 =null;
+        org.feature.multi.perspective.classification.ClassifiedFeature a21_0 =null;
+
+        org.feature.multi.perspective.classification.ClassifiedFeature a22_0 =null;
 
 
 
@@ -1000,10 +971,10 @@ public class CltParser extends CltANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 3) ) { return element; }
 
-            // Clt.g:729:2: (a0= 'stage' (a1= QUOTED_60_62 ) a2= 'on' ( ( (a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )? ) | (a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )? ) ) )? a11= ':' ( (a12_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* ( (a13= 'autocomplete' a14= '{' ( (a15_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* a16= '}' ) )? )
-            // Clt.g:730:2: a0= 'stage' (a1= QUOTED_60_62 ) a2= 'on' ( ( (a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )? ) | (a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )? ) ) )? a11= ':' ( (a12_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* ( (a13= 'autocomplete' a14= '{' ( (a15_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* a16= '}' ) )?
+            // Clt.g:717:2: (a0= 'stage' (a1= QUOTED_60_62 ) a2= 'on' ( ( (a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )? ) | (a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )? ) ) )? a11= ':' ( (a12_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* ( (a13= 'afeatures' (a14= TEXT ) |a15= 'dfeatures' (a16= TEXT ) |a17= 'ufeatures' (a18= TEXT ) ) )* ( (a19= 'autocomplete' a20= '{' (a21_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) ( (a22_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* a23= '}' ) )? )
+            // Clt.g:718:2: a0= 'stage' (a1= QUOTED_60_62 ) a2= 'on' ( ( (a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )? ) | (a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )? ) ) )? a11= ':' ( (a12_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* ( (a13= 'afeatures' (a14= TEXT ) |a15= 'dfeatures' (a16= TEXT ) |a17= 'ufeatures' (a18= TEXT ) ) )* ( (a19= 'autocomplete' a20= '{' (a21_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) ( (a22_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* a23= '}' ) )?
             {
-            a0=(Token)match(input,21,FOLLOW_21_in_parse_org_feature_multi_perspective_classification_Classification399); if (state.failed) return element;
+            a0=(Token)match(input,23,FOLLOW_23_in_parse_org_feature_multi_perspective_classification_Classification358); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -1017,13 +988,13 @@ public class CltParser extends CltANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[22]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[12]);
             	}
 
-            // Clt.g:744:2: (a1= QUOTED_60_62 )
-            // Clt.g:745:3: a1= QUOTED_60_62
+            // Clt.g:732:2: (a1= QUOTED_60_62 )
+            // Clt.g:733:3: a1= QUOTED_60_62
             {
-            a1=(Token)match(input,QUOTED_60_62,FOLLOW_QUOTED_60_62_in_parse_org_feature_multi_perspective_classification_Classification417); if (state.failed) return element;
+            a1=(Token)match(input,QUOTED_60_62,FOLLOW_QUOTED_60_62_in_parse_org_feature_multi_perspective_classification_Classification376); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -1059,10 +1030,10 @@ public class CltParser extends CltANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[23]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[13]);
             	}
 
-            a2=(Token)match(input,19,FOLLOW_19_in_parse_org_feature_multi_perspective_classification_Classification438); if (state.failed) return element;
+            a2=(Token)match(input,21,FOLLOW_21_in_parse_org_feature_multi_perspective_classification_Classification397); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -1076,48 +1047,48 @@ public class CltParser extends CltANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[24]);
-            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[25]);
-            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[26]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[14]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[15]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[16]);
             	}
 
-            // Clt.g:796:2: ( ( (a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )? ) | (a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )? ) ) )?
-            int alt9=2;
-            int LA9_0 = input.LA(1);
+            // Clt.g:784:2: ( ( (a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )? ) | (a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )? ) ) )?
+            int alt8=2;
+            int LA8_0 = input.LA(1);
 
-            if ( (LA9_0==22||LA9_0==24) ) {
-                alt9=1;
+            if ( (LA8_0==24||LA8_0==27) ) {
+                alt8=1;
             }
-            switch (alt9) {
+            switch (alt8) {
                 case 1 :
-                    // Clt.g:797:3: ( (a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )? ) | (a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )? ) )
+                    // Clt.g:785:3: ( (a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )? ) | (a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )? ) )
                     {
-                    // Clt.g:797:3: ( (a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )? ) | (a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )? ) )
-                    int alt8=2;
-                    int LA8_0 = input.LA(1);
+                    // Clt.g:785:3: ( (a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )? ) | (a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )? ) )
+                    int alt7=2;
+                    int LA7_0 = input.LA(1);
 
-                    if ( (LA8_0==24) ) {
-                        alt8=1;
+                    if ( (LA7_0==27) ) {
+                        alt7=1;
                     }
-                    else if ( (LA8_0==22) ) {
-                        alt8=2;
+                    else if ( (LA7_0==24) ) {
+                        alt7=2;
                     }
                     else {
                         if (state.backtracking>0) {state.failed=true; return element;}
                         NoViableAltException nvae =
-                            new NoViableAltException("", 8, 0, input);
+                            new NoViableAltException("", 7, 0, input);
 
                         throw nvae;
 
                     }
-                    switch (alt8) {
+                    switch (alt7) {
                         case 1 :
-                            // Clt.g:798:4: (a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )? )
+                            // Clt.g:786:4: (a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )? )
                             {
-                            // Clt.g:798:4: (a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )? )
-                            // Clt.g:799:5: a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )?
+                            // Clt.g:786:4: (a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )? )
+                            // Clt.g:787:5: a3= 'views' ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )?
                             {
-                            a3=(Token)match(input,24,FOLLOW_24_in_parse_org_feature_multi_perspective_classification_Classification467); if (state.failed) return element;
+                            a3=(Token)match(input,27,FOLLOW_27_in_parse_org_feature_multi_perspective_classification_Classification426); if (state.failed) return element;
 
                             if ( state.backtracking==0 ) {
                             					if (element == null) {
@@ -1131,28 +1102,28 @@ public class CltParser extends CltANTLRParserBase {
 
                             if ( state.backtracking==0 ) {
                             					// expected elements (follow set)
-                            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[27]);
-                            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[28]);
+                            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[17]);
+                            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[18]);
                             				}
 
-                            // Clt.g:814:5: ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )?
-                            int alt5=2;
-                            int LA5_0 = input.LA(1);
+                            // Clt.g:802:5: ( ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* ) )?
+                            int alt4=2;
+                            int LA4_0 = input.LA(1);
 
-                            if ( (LA5_0==QUOTED_34_34) ) {
-                                alt5=1;
+                            if ( (LA4_0==QUOTED_34_34) ) {
+                                alt4=1;
                             }
-                            switch (alt5) {
+                            switch (alt4) {
                                 case 1 :
-                                    // Clt.g:815:6: ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* )
+                                    // Clt.g:803:6: ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* )
                                     {
-                                    // Clt.g:815:6: ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* )
-                                    // Clt.g:816:7: (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )*
+                                    // Clt.g:803:6: ( (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )* )
+                                    // Clt.g:804:7: (a4= QUOTED_34_34 ) ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )*
                                     {
-                                    // Clt.g:816:7: (a4= QUOTED_34_34 )
-                                    // Clt.g:817:8: a4= QUOTED_34_34
+                                    // Clt.g:804:7: (a4= QUOTED_34_34 )
+                                    // Clt.g:805:8: a4= QUOTED_34_34
                                     {
-                                    a4=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_Classification514); if (state.failed) return element;
+                                    a4=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_Classification473); if (state.failed) return element;
 
                                     if ( state.backtracking==0 ) {
                                     								if (terminateParsing) {
@@ -1192,32 +1163,32 @@ public class CltParser extends CltANTLRParserBase {
 
                                     if ( state.backtracking==0 ) {
                                     							// expected elements (follow set)
-                                    							addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[29]);
-                                    							addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[30]);
+                                    							addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[19]);
+                                    							addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[20]);
                                     						}
 
-                                    // Clt.g:857:7: ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )*
-                                    loop4:
+                                    // Clt.g:845:7: ( ( (a5= COMMA ) (a6= QUOTED_34_34 ) ) )*
+                                    loop3:
                                     do {
-                                        int alt4=2;
-                                        int LA4_0 = input.LA(1);
+                                        int alt3=2;
+                                        int LA3_0 = input.LA(1);
 
-                                        if ( (LA4_0==COMMA) ) {
-                                            alt4=1;
+                                        if ( (LA3_0==COMMA) ) {
+                                            alt3=1;
                                         }
 
 
-                                        switch (alt4) {
+                                        switch (alt3) {
                                     	case 1 :
-                                    	    // Clt.g:858:8: ( (a5= COMMA ) (a6= QUOTED_34_34 ) )
+                                    	    // Clt.g:846:8: ( (a5= COMMA ) (a6= QUOTED_34_34 ) )
                                     	    {
-                                    	    // Clt.g:858:8: ( (a5= COMMA ) (a6= QUOTED_34_34 ) )
-                                    	    // Clt.g:859:9: (a5= COMMA ) (a6= QUOTED_34_34 )
+                                    	    // Clt.g:846:8: ( (a5= COMMA ) (a6= QUOTED_34_34 ) )
+                                    	    // Clt.g:847:9: (a5= COMMA ) (a6= QUOTED_34_34 )
                                     	    {
-                                    	    // Clt.g:859:9: (a5= COMMA )
-                                    	    // Clt.g:860:10: a5= COMMA
+                                    	    // Clt.g:847:9: (a5= COMMA )
+                                    	    // Clt.g:848:10: a5= COMMA
                                     	    {
-                                    	    a5=(Token)match(input,COMMA,FOLLOW_COMMA_in_parse_org_feature_multi_perspective_classification_Classification595); if (state.failed) return element;
+                                    	    a5=(Token)match(input,COMMA,FOLLOW_COMMA_in_parse_org_feature_multi_perspective_classification_Classification554); if (state.failed) return element;
 
                                     	    }
 
@@ -1228,13 +1199,13 @@ public class CltParser extends CltANTLRParserBase {
 
                                     	    if ( state.backtracking==0 ) {
                                     	    									// expected elements (follow set)
-                                    	    									addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[31]);
+                                    	    									addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[21]);
                                     	    								}
 
-                                    	    // Clt.g:870:9: (a6= QUOTED_34_34 )
-                                    	    // Clt.g:871:10: a6= QUOTED_34_34
+                                    	    // Clt.g:858:9: (a6= QUOTED_34_34 )
+                                    	    // Clt.g:859:10: a6= QUOTED_34_34
                                     	    {
-                                    	    a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_Classification668); if (state.failed) return element;
+                                    	    a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_Classification627); if (state.failed) return element;
 
                                     	    if ( state.backtracking==0 ) {
                                     	    										if (terminateParsing) {
@@ -1274,8 +1245,8 @@ public class CltParser extends CltANTLRParserBase {
 
                                     	    if ( state.backtracking==0 ) {
                                     	    									// expected elements (follow set)
-                                    	    									addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[32]);
-                                    	    									addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[33]);
+                                    	    									addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[22]);
+                                    	    									addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[23]);
                                     	    								}
 
                                     	    }
@@ -1285,15 +1256,15 @@ public class CltParser extends CltANTLRParserBase {
                                     	    break;
 
                                     	default :
-                                    	    break loop4;
+                                    	    break loop3;
                                         }
                                     } while (true);
 
 
                                     if ( state.backtracking==0 ) {
                                     							// expected elements (follow set)
-                                    							addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[34]);
-                                    							addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[35]);
+                                    							addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[24]);
+                                    							addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[25]);
                                     						}
 
                                     }
@@ -1307,7 +1278,7 @@ public class CltParser extends CltANTLRParserBase {
 
                             if ( state.backtracking==0 ) {
                             					// expected elements (follow set)
-                            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[36]);
+                            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[26]);
                             				}
 
                             }
@@ -1315,18 +1286,18 @@ public class CltParser extends CltANTLRParserBase {
 
                             if ( state.backtracking==0 ) {
                             				// expected elements (follow set)
-                            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[37]);
+                            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[27]);
                             			}
 
                             }
                             break;
                         case 2 :
-                            // Clt.g:933:8: (a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )? )
+                            // Clt.g:921:8: (a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )? )
                             {
-                            // Clt.g:933:8: (a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )? )
-                            // Clt.g:934:5: a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )?
+                            // Clt.g:921:8: (a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )? )
+                            // Clt.g:922:5: a7= 'stages' ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )?
                             {
-                            a7=(Token)match(input,22,FOLLOW_22_in_parse_org_feature_multi_perspective_classification_Classification824); if (state.failed) return element;
+                            a7=(Token)match(input,24,FOLLOW_24_in_parse_org_feature_multi_perspective_classification_Classification783); if (state.failed) return element;
 
                             if ( state.backtracking==0 ) {
                             					if (element == null) {
@@ -1340,28 +1311,28 @@ public class CltParser extends CltANTLRParserBase {
 
                             if ( state.backtracking==0 ) {
                             					// expected elements (follow set)
-                            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[38]);
-                            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[39]);
+                            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[28]);
+                            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[29]);
                             				}
 
-                            // Clt.g:949:5: ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )?
-                            int alt7=2;
-                            int LA7_0 = input.LA(1);
+                            // Clt.g:937:5: ( ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* ) )?
+                            int alt6=2;
+                            int LA6_0 = input.LA(1);
 
-                            if ( (LA7_0==QUOTED_34_34) ) {
-                                alt7=1;
+                            if ( (LA6_0==QUOTED_34_34) ) {
+                                alt6=1;
                             }
-                            switch (alt7) {
+                            switch (alt6) {
                                 case 1 :
-                                    // Clt.g:950:6: ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* )
+                                    // Clt.g:938:6: ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* )
                                     {
-                                    // Clt.g:950:6: ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* )
-                                    // Clt.g:951:7: (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )*
+                                    // Clt.g:938:6: ( (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )* )
+                                    // Clt.g:939:7: (a8= QUOTED_34_34 ) ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )*
                                     {
-                                    // Clt.g:951:7: (a8= QUOTED_34_34 )
-                                    // Clt.g:952:8: a8= QUOTED_34_34
+                                    // Clt.g:939:7: (a8= QUOTED_34_34 )
+                                    // Clt.g:940:8: a8= QUOTED_34_34
                                     {
-                                    a8=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_Classification871); if (state.failed) return element;
+                                    a8=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_Classification830); if (state.failed) return element;
 
                                     if ( state.backtracking==0 ) {
                                     								if (terminateParsing) {
@@ -1401,32 +1372,32 @@ public class CltParser extends CltANTLRParserBase {
 
                                     if ( state.backtracking==0 ) {
                                     							// expected elements (follow set)
-                                    							addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[40]);
-                                    							addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[41]);
+                                    							addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[30]);
+                                    							addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[31]);
                                     						}
 
-                                    // Clt.g:992:7: ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )*
-                                    loop6:
+                                    // Clt.g:980:7: ( ( (a9= COMMA ) (a10= QUOTED_34_34 ) ) )*
+                                    loop5:
                                     do {
-                                        int alt6=2;
-                                        int LA6_0 = input.LA(1);
+                                        int alt5=2;
+                                        int LA5_0 = input.LA(1);
 
-                                        if ( (LA6_0==COMMA) ) {
-                                            alt6=1;
+                                        if ( (LA5_0==COMMA) ) {
+                                            alt5=1;
                                         }
 
 
-                                        switch (alt6) {
+                                        switch (alt5) {
                                     	case 1 :
-                                    	    // Clt.g:993:8: ( (a9= COMMA ) (a10= QUOTED_34_34 ) )
+                                    	    // Clt.g:981:8: ( (a9= COMMA ) (a10= QUOTED_34_34 ) )
                                     	    {
-                                    	    // Clt.g:993:8: ( (a9= COMMA ) (a10= QUOTED_34_34 ) )
-                                    	    // Clt.g:994:9: (a9= COMMA ) (a10= QUOTED_34_34 )
+                                    	    // Clt.g:981:8: ( (a9= COMMA ) (a10= QUOTED_34_34 ) )
+                                    	    // Clt.g:982:9: (a9= COMMA ) (a10= QUOTED_34_34 )
                                     	    {
-                                    	    // Clt.g:994:9: (a9= COMMA )
-                                    	    // Clt.g:995:10: a9= COMMA
+                                    	    // Clt.g:982:9: (a9= COMMA )
+                                    	    // Clt.g:983:10: a9= COMMA
                                     	    {
-                                    	    a9=(Token)match(input,COMMA,FOLLOW_COMMA_in_parse_org_feature_multi_perspective_classification_Classification952); if (state.failed) return element;
+                                    	    a9=(Token)match(input,COMMA,FOLLOW_COMMA_in_parse_org_feature_multi_perspective_classification_Classification911); if (state.failed) return element;
 
                                     	    }
 
@@ -1437,13 +1408,13 @@ public class CltParser extends CltANTLRParserBase {
 
                                     	    if ( state.backtracking==0 ) {
                                     	    									// expected elements (follow set)
-                                    	    									addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[42]);
+                                    	    									addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[32]);
                                     	    								}
 
-                                    	    // Clt.g:1005:9: (a10= QUOTED_34_34 )
-                                    	    // Clt.g:1006:10: a10= QUOTED_34_34
+                                    	    // Clt.g:993:9: (a10= QUOTED_34_34 )
+                                    	    // Clt.g:994:10: a10= QUOTED_34_34
                                     	    {
-                                    	    a10=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_Classification1025); if (state.failed) return element;
+                                    	    a10=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_Classification984); if (state.failed) return element;
 
                                     	    if ( state.backtracking==0 ) {
                                     	    										if (terminateParsing) {
@@ -1483,8 +1454,8 @@ public class CltParser extends CltANTLRParserBase {
 
                                     	    if ( state.backtracking==0 ) {
                                     	    									// expected elements (follow set)
-                                    	    									addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[43]);
-                                    	    									addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[44]);
+                                    	    									addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[33]);
+                                    	    									addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[34]);
                                     	    								}
 
                                     	    }
@@ -1494,15 +1465,15 @@ public class CltParser extends CltANTLRParserBase {
                                     	    break;
 
                                     	default :
-                                    	    break loop6;
+                                    	    break loop5;
                                         }
                                     } while (true);
 
 
                                     if ( state.backtracking==0 ) {
                                     							// expected elements (follow set)
-                                    							addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[45]);
-                                    							addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[46]);
+                                    							addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[35]);
+                                    							addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[36]);
                                     						}
 
                                     }
@@ -1516,7 +1487,7 @@ public class CltParser extends CltANTLRParserBase {
 
                             if ( state.backtracking==0 ) {
                             					// expected elements (follow set)
-                            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[47]);
+                            					addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[37]);
                             				}
 
                             }
@@ -1524,7 +1495,7 @@ public class CltParser extends CltANTLRParserBase {
 
                             if ( state.backtracking==0 ) {
                             				// expected elements (follow set)
-                            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[48]);
+                            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[38]);
                             			}
 
                             }
@@ -1541,10 +1512,10 @@ public class CltParser extends CltANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[49]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[39]);
             	}
 
-            a11=(Token)match(input,11,FOLLOW_11_in_parse_org_feature_multi_perspective_classification_Classification1180); if (state.failed) return element;
+            a11=(Token)match(input,11,FOLLOW_11_in_parse_org_feature_multi_perspective_classification_Classification1139); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -1558,30 +1529,33 @@ public class CltParser extends CltANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[50]);
-            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[51]);
-            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[52]);
+            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[40]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[41]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[42]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[43]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[44]);
+            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[45]);
             	}
 
-            // Clt.g:1090:2: ( (a12_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )*
-            loop10:
+            // Clt.g:1081:2: ( (a12_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )*
+            loop9:
             do {
-                int alt10=2;
-                int LA10_0 = input.LA(1);
+                int alt9=2;
+                int LA9_0 = input.LA(1);
 
-                if ( (LA10_0==16) ) {
-                    alt10=1;
+                if ( (LA9_0==18) ) {
+                    alt9=1;
                 }
 
 
-                switch (alt10) {
+                switch (alt9) {
             	case 1 :
-            	    // Clt.g:1091:3: (a12_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature )
+            	    // Clt.g:1082:3: (a12_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature )
             	    {
-            	    // Clt.g:1091:3: (a12_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature )
-            	    // Clt.g:1092:4: a12_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature
+            	    // Clt.g:1082:3: (a12_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature )
+            	    // Clt.g:1083:4: a12_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature
             	    {
-            	    pushFollow(FOLLOW_parse_org_feature_multi_perspective_classification_ClassifiedFeature_in_parse_org_feature_multi_perspective_classification_Classification1203);
+            	    pushFollow(FOLLOW_parse_org_feature_multi_perspective_classification_ClassifiedFeature_in_parse_org_feature_multi_perspective_classification_Classification1162);
             	    a12_0=parse_org_feature_multi_perspective_classification_ClassifiedFeature();
 
             	    state._fsp--;
@@ -1614,33 +1588,317 @@ public class CltParser extends CltANTLRParserBase {
             	    break;
 
             	default :
-            	    break loop10;
+            	    break loop9;
                 }
             } while (true);
 
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[53]);
-            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[54]);
-            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[55]);
+            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[46]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[47]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[48]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[49]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[50]);
+            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[51]);
             	}
 
-            // Clt.g:1120:2: ( (a13= 'autocomplete' a14= '{' ( (a15_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* a16= '}' ) )?
-            int alt12=2;
-            int LA12_0 = input.LA(1);
+            // Clt.g:1114:2: ( (a13= 'afeatures' (a14= TEXT ) |a15= 'dfeatures' (a16= TEXT ) |a17= 'ufeatures' (a18= TEXT ) ) )*
+            loop11:
+            do {
+                int alt11=2;
+                int LA11_0 = input.LA(1);
 
-            if ( (LA12_0==13) ) {
-                alt12=1;
+                if ( (LA11_0==12||LA11_0==17||LA11_0==25) ) {
+                    alt11=1;
+                }
+
+
+                switch (alt11) {
+            	case 1 :
+            	    // Clt.g:1115:3: (a13= 'afeatures' (a14= TEXT ) |a15= 'dfeatures' (a16= TEXT ) |a17= 'ufeatures' (a18= TEXT ) )
+            	    {
+            	    // Clt.g:1115:3: (a13= 'afeatures' (a14= TEXT ) |a15= 'dfeatures' (a16= TEXT ) |a17= 'ufeatures' (a18= TEXT ) )
+            	    int alt10=3;
+            	    switch ( input.LA(1) ) {
+            	    case 12:
+            	        {
+            	        alt10=1;
+            	        }
+            	        break;
+            	    case 17:
+            	        {
+            	        alt10=2;
+            	        }
+            	        break;
+            	    case 25:
+            	        {
+            	        alt10=3;
+            	        }
+            	        break;
+            	    default:
+            	        if (state.backtracking>0) {state.failed=true; return element;}
+            	        NoViableAltException nvae =
+            	            new NoViableAltException("", 10, 0, input);
+
+            	        throw nvae;
+
+            	    }
+
+            	    switch (alt10) {
+            	        case 1 :
+            	            // Clt.g:1116:4: a13= 'afeatures' (a14= TEXT )
+            	            {
+            	            a13=(Token)match(input,12,FOLLOW_12_in_parse_org_feature_multi_perspective_classification_Classification1197); if (state.failed) return element;
+
+            	            if ( state.backtracking==0 ) {
+            	            				if (element == null) {
+            	            					element = org.feature.multi.perspective.classification.ClassificationFactory.eINSTANCE.createClassification();
+            	            					startIncompleteElement(element);
+            	            				}
+            	            				collectHiddenTokens(element);
+            	            				retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_0_0, null, true);
+            	            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a13, element);
+            	            			}
+
+            	            if ( state.backtracking==0 ) {
+            	            				// expected elements (follow set)
+            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[52]);
+            	            			}
+
+            	            // Clt.g:1130:4: (a14= TEXT )
+            	            // Clt.g:1131:5: a14= TEXT
+            	            {
+            	            a14=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_org_feature_multi_perspective_classification_Classification1223); if (state.failed) return element;
+
+            	            if ( state.backtracking==0 ) {
+            	            					if (terminateParsing) {
+            	            						throw new org.feature.multi.perspective.classification.resource.clt.mopp.CltTerminateParsingException();
+            	            					}
+            	            					if (element == null) {
+            	            						element = org.feature.multi.perspective.classification.ClassificationFactory.eINSTANCE.createClassification();
+            	            						startIncompleteElement(element);
+            	            					}
+            	            					if (a14 != null) {
+            	            						org.feature.multi.perspective.classification.resource.clt.ICltTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
+            	            						tokenResolver.setOptions(getOptions());
+            	            						org.feature.multi.perspective.classification.resource.clt.ICltTokenResolveResult result = getFreshTokenResolveResult();
+            	            						tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__ALIVE_FEATURES), result);
+            	            						Object resolvedObject = result.getResolvedToken();
+            	            						if (resolvedObject == null) {
+            	            							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a14).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a14).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a14).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a14).getStopIndex());
+            	            						}
+            	            						String resolved = (String) resolvedObject;
+            	            						org.featuremapper.models.feature.Feature proxy = org.featuremapper.models.feature.FeatureFactory.eINSTANCE.createFeature();
+            	            						collectHiddenTokens(element);
+            	            						registerContextDependentProxy(new org.feature.multi.perspective.classification.resource.clt.mopp.CltContextDependentURIFragmentFactory<org.feature.multi.perspective.classification.Classification, org.featuremapper.models.feature.Feature>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getClassificationAliveFeaturesReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__ALIVE_FEATURES), resolved, proxy);
+            	            						if (proxy != null) {
+            	            							Object value = proxy;
+            	            							addObjectToList(element, org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__ALIVE_FEATURES, value);
+            	            							completedElement(value, false);
+            	            						}
+            	            						collectHiddenTokens(element);
+            	            						retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_0_1, proxy, true);
+            	            						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a14, element);
+            	            						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a14, proxy);
+            	            					}
+            	            				}
+
+            	            }
+
+
+            	            if ( state.backtracking==0 ) {
+            	            				// expected elements (follow set)
+            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[53]);
+            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[54]);
+            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[55]);
+            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[56]);
+            	            				addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[57]);
+            	            			}
+
+            	            }
+            	            break;
+            	        case 2 :
+            	            // Clt.g:1175:8: a15= 'dfeatures' (a16= TEXT )
+            	            {
+            	            a15=(Token)match(input,17,FOLLOW_17_in_parse_org_feature_multi_perspective_classification_Classification1264); if (state.failed) return element;
+
+            	            if ( state.backtracking==0 ) {
+            	            				if (element == null) {
+            	            					element = org.feature.multi.perspective.classification.ClassificationFactory.eINSTANCE.createClassification();
+            	            					startIncompleteElement(element);
+            	            				}
+            	            				collectHiddenTokens(element);
+            	            				retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_1_0, null, true);
+            	            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a15, element);
+            	            			}
+
+            	            if ( state.backtracking==0 ) {
+            	            				// expected elements (follow set)
+            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[58]);
+            	            			}
+
+            	            // Clt.g:1189:4: (a16= TEXT )
+            	            // Clt.g:1190:5: a16= TEXT
+            	            {
+            	            a16=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_org_feature_multi_perspective_classification_Classification1290); if (state.failed) return element;
+
+            	            if ( state.backtracking==0 ) {
+            	            					if (terminateParsing) {
+            	            						throw new org.feature.multi.perspective.classification.resource.clt.mopp.CltTerminateParsingException();
+            	            					}
+            	            					if (element == null) {
+            	            						element = org.feature.multi.perspective.classification.ClassificationFactory.eINSTANCE.createClassification();
+            	            						startIncompleteElement(element);
+            	            					}
+            	            					if (a16 != null) {
+            	            						org.feature.multi.perspective.classification.resource.clt.ICltTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
+            	            						tokenResolver.setOptions(getOptions());
+            	            						org.feature.multi.perspective.classification.resource.clt.ICltTokenResolveResult result = getFreshTokenResolveResult();
+            	            						tokenResolver.resolve(a16.getText(), element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__DEAD_FEATURES), result);
+            	            						Object resolvedObject = result.getResolvedToken();
+            	            						if (resolvedObject == null) {
+            	            							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a16).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a16).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a16).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a16).getStopIndex());
+            	            						}
+            	            						String resolved = (String) resolvedObject;
+            	            						org.featuremapper.models.feature.Feature proxy = org.featuremapper.models.feature.FeatureFactory.eINSTANCE.createFeature();
+            	            						collectHiddenTokens(element);
+            	            						registerContextDependentProxy(new org.feature.multi.perspective.classification.resource.clt.mopp.CltContextDependentURIFragmentFactory<org.feature.multi.perspective.classification.Classification, org.featuremapper.models.feature.Feature>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getClassificationDeadFeaturesReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__DEAD_FEATURES), resolved, proxy);
+            	            						if (proxy != null) {
+            	            							Object value = proxy;
+            	            							addObjectToList(element, org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__DEAD_FEATURES, value);
+            	            							completedElement(value, false);
+            	            						}
+            	            						collectHiddenTokens(element);
+            	            						retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_1_1, proxy, true);
+            	            						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a16, element);
+            	            						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a16, proxy);
+            	            					}
+            	            				}
+
+            	            }
+
+
+            	            if ( state.backtracking==0 ) {
+            	            				// expected elements (follow set)
+            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[59]);
+            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[60]);
+            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[61]);
+            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[62]);
+            	            				addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[63]);
+            	            			}
+
+            	            }
+            	            break;
+            	        case 3 :
+            	            // Clt.g:1234:8: a17= 'ufeatures' (a18= TEXT )
+            	            {
+            	            a17=(Token)match(input,25,FOLLOW_25_in_parse_org_feature_multi_perspective_classification_Classification1331); if (state.failed) return element;
+
+            	            if ( state.backtracking==0 ) {
+            	            				if (element == null) {
+            	            					element = org.feature.multi.perspective.classification.ClassificationFactory.eINSTANCE.createClassification();
+            	            					startIncompleteElement(element);
+            	            				}
+            	            				collectHiddenTokens(element);
+            	            				retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_2_0, null, true);
+            	            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a17, element);
+            	            			}
+
+            	            if ( state.backtracking==0 ) {
+            	            				// expected elements (follow set)
+            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[64]);
+            	            			}
+
+            	            // Clt.g:1248:4: (a18= TEXT )
+            	            // Clt.g:1249:5: a18= TEXT
+            	            {
+            	            a18=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_org_feature_multi_perspective_classification_Classification1357); if (state.failed) return element;
+
+            	            if ( state.backtracking==0 ) {
+            	            					if (terminateParsing) {
+            	            						throw new org.feature.multi.perspective.classification.resource.clt.mopp.CltTerminateParsingException();
+            	            					}
+            	            					if (element == null) {
+            	            						element = org.feature.multi.perspective.classification.ClassificationFactory.eINSTANCE.createClassification();
+            	            						startIncompleteElement(element);
+            	            					}
+            	            					if (a18 != null) {
+            	            						org.feature.multi.perspective.classification.resource.clt.ICltTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
+            	            						tokenResolver.setOptions(getOptions());
+            	            						org.feature.multi.perspective.classification.resource.clt.ICltTokenResolveResult result = getFreshTokenResolveResult();
+            	            						tokenResolver.resolve(a18.getText(), element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__UNBOUND_FEATURES), result);
+            	            						Object resolvedObject = result.getResolvedToken();
+            	            						if (resolvedObject == null) {
+            	            							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a18).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a18).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a18).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a18).getStopIndex());
+            	            						}
+            	            						String resolved = (String) resolvedObject;
+            	            						org.featuremapper.models.feature.Feature proxy = org.featuremapper.models.feature.FeatureFactory.eINSTANCE.createFeature();
+            	            						collectHiddenTokens(element);
+            	            						registerContextDependentProxy(new org.feature.multi.perspective.classification.resource.clt.mopp.CltContextDependentURIFragmentFactory<org.feature.multi.perspective.classification.Classification, org.featuremapper.models.feature.Feature>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getClassificationUnboundFeaturesReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__UNBOUND_FEATURES), resolved, proxy);
+            	            						if (proxy != null) {
+            	            							Object value = proxy;
+            	            							addObjectToList(element, org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__UNBOUND_FEATURES, value);
+            	            							completedElement(value, false);
+            	            						}
+            	            						collectHiddenTokens(element);
+            	            						retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_2_1, proxy, true);
+            	            						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a18, element);
+            	            						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a18, proxy);
+            	            					}
+            	            				}
+
+            	            }
+
+
+            	            if ( state.backtracking==0 ) {
+            	            				// expected elements (follow set)
+            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[65]);
+            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[66]);
+            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[67]);
+            	            				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[68]);
+            	            				addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[69]);
+            	            			}
+
+            	            }
+            	            break;
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop11;
+                }
+            } while (true);
+
+
+            if ( state.backtracking==0 ) {
+            		// expected elements (follow set)
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[70]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[71]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[72]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[73]);
+            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[74]);
+            	}
+
+            // Clt.g:1303:2: ( (a19= 'autocomplete' a20= '{' (a21_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) ( (a22_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* a23= '}' ) )?
+            int alt13=2;
+            int LA13_0 = input.LA(1);
+
+            if ( (LA13_0==14) ) {
+                alt13=1;
             }
-            switch (alt12) {
+            switch (alt13) {
                 case 1 :
-                    // Clt.g:1121:3: (a13= 'autocomplete' a14= '{' ( (a15_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* a16= '}' )
+                    // Clt.g:1304:3: (a19= 'autocomplete' a20= '{' (a21_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) ( (a22_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* a23= '}' )
                     {
-                    // Clt.g:1121:3: (a13= 'autocomplete' a14= '{' ( (a15_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* a16= '}' )
-                    // Clt.g:1122:4: a13= 'autocomplete' a14= '{' ( (a15_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* a16= '}'
+                    // Clt.g:1304:3: (a19= 'autocomplete' a20= '{' (a21_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) ( (a22_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* a23= '}' )
+                    // Clt.g:1305:4: a19= 'autocomplete' a20= '{' (a21_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) ( (a22_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )* a23= '}'
                     {
-                    a13=(Token)match(input,13,FOLLOW_13_in_parse_org_feature_multi_perspective_classification_Classification1238); if (state.failed) return element;
+                    a19=(Token)match(input,14,FOLLOW_14_in_parse_org_feature_multi_perspective_classification_Classification1412); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     				if (element == null) {
@@ -1648,16 +1906,16 @@ public class CltParser extends CltANTLRParserBase {
                     					startIncompleteElement(element);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_0_1, null, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a13, element);
+                    				retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_10_0_0_1, null, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a19, element);
                     			}
 
                     if ( state.backtracking==0 ) {
                     				// expected elements (follow set)
-                    				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[56]);
+                    				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[75]);
                     			}
 
-                    a14=(Token)match(input,25,FOLLOW_25_in_parse_org_feature_multi_perspective_classification_Classification1258); if (state.failed) return element;
+                    a20=(Token)match(input,28,FOLLOW_28_in_parse_org_feature_multi_perspective_classification_Classification1432); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     				if (element == null) {
@@ -1665,36 +1923,73 @@ public class CltParser extends CltANTLRParserBase {
                     					startIncompleteElement(element);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_0_3, null, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a14, element);
+                    				retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_10_0_0_3, null, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a20, element);
                     			}
 
                     if ( state.backtracking==0 ) {
                     				// expected elements (follow set)
-                    				addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[57]);
-                    				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[58]);
+                    				addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[76]);
                     			}
 
-                    // Clt.g:1151:4: ( (a15_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )*
-                    loop11:
+                    // Clt.g:1333:4: (a21_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature )
+                    // Clt.g:1334:5: a21_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature
+                    {
+                    pushFollow(FOLLOW_parse_org_feature_multi_perspective_classification_ClassifiedFeature_in_parse_org_feature_multi_perspective_classification_Classification1458);
+                    a21_0=parse_org_feature_multi_perspective_classification_ClassifiedFeature();
+
+                    state._fsp--;
+                    if (state.failed) return element;
+
+                    if ( state.backtracking==0 ) {
+                    					if (terminateParsing) {
+                    						throw new org.feature.multi.perspective.classification.resource.clt.mopp.CltTerminateParsingException();
+                    					}
+                    					if (element == null) {
+                    						element = org.feature.multi.perspective.classification.ClassificationFactory.eINSTANCE.createClassification();
+                    						startIncompleteElement(element);
+                    					}
+                    					if (a21_0 != null) {
+                    						if (a21_0 != null) {
+                    							Object value = a21_0;
+                    							addObjectToList(element, org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__AUTO_COMPLETE_FEATURES, value);
+                    							completedElement(value, true);
+                    						}
+                    						collectHiddenTokens(element);
+                    						retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_10_0_0_5, a21_0, true);
+                    						copyLocalizationInfos(a21_0, element);
+                    					}
+                    				}
+
+                    }
+
+
+                    if ( state.backtracking==0 ) {
+                    				// expected elements (follow set)
+                    				addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[77]);
+                    				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[78]);
+                    			}
+
+                    // Clt.g:1360:4: ( (a22_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature ) )*
+                    loop12:
                     do {
-                        int alt11=2;
-                        int LA11_0 = input.LA(1);
+                        int alt12=2;
+                        int LA12_0 = input.LA(1);
 
-                        if ( (LA11_0==16) ) {
-                            alt11=1;
+                        if ( (LA12_0==18) ) {
+                            alt12=1;
                         }
 
 
-                        switch (alt11) {
+                        switch (alt12) {
                     	case 1 :
-                    	    // Clt.g:1152:5: (a15_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature )
+                    	    // Clt.g:1361:5: (a22_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature )
                     	    {
-                    	    // Clt.g:1152:5: (a15_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature )
-                    	    // Clt.g:1153:6: a15_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature
+                    	    // Clt.g:1361:5: (a22_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature )
+                    	    // Clt.g:1362:6: a22_0= parse_org_feature_multi_perspective_classification_ClassifiedFeature
                     	    {
-                    	    pushFollow(FOLLOW_parse_org_feature_multi_perspective_classification_ClassifiedFeature_in_parse_org_feature_multi_perspective_classification_Classification1291);
-                    	    a15_0=parse_org_feature_multi_perspective_classification_ClassifiedFeature();
+                    	    pushFollow(FOLLOW_parse_org_feature_multi_perspective_classification_ClassifiedFeature_in_parse_org_feature_multi_perspective_classification_Classification1499);
+                    	    a22_0=parse_org_feature_multi_perspective_classification_ClassifiedFeature();
 
                     	    state._fsp--;
                     	    if (state.failed) return element;
@@ -1707,15 +2002,15 @@ public class CltParser extends CltANTLRParserBase {
                     	    							element = org.feature.multi.perspective.classification.ClassificationFactory.eINSTANCE.createClassification();
                     	    							startIncompleteElement(element);
                     	    						}
-                    	    						if (a15_0 != null) {
-                    	    							if (a15_0 != null) {
-                    	    								Object value = a15_0;
+                    	    						if (a22_0 != null) {
+                    	    							if (a22_0 != null) {
+                    	    								Object value = a22_0;
                     	    								addObjectToList(element, org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__AUTO_COMPLETE_FEATURES, value);
                     	    								completedElement(value, true);
                     	    							}
                     	    							collectHiddenTokens(element);
-                    	    							retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_0_5, a15_0, true);
-                    	    							copyLocalizationInfos(a15_0, element);
+                    	    							retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_10_0_0_6, a22_0, true);
+                    	    							copyLocalizationInfos(a22_0, element);
                     	    						}
                     	    					}
 
@@ -1726,18 +2021,18 @@ public class CltParser extends CltANTLRParserBase {
                     	    break;
 
                     	default :
-                    	    break loop11;
+                    	    break loop12;
                         }
                     } while (true);
 
 
                     if ( state.backtracking==0 ) {
                     				// expected elements (follow set)
-                    				addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[59]);
-                    				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[60]);
+                    				addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[79]);
+                    				addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[80]);
                     			}
 
-                    a16=(Token)match(input,26,FOLLOW_26_in_parse_org_feature_multi_perspective_classification_Classification1331); if (state.failed) return element;
+                    a23=(Token)match(input,29,FOLLOW_29_in_parse_org_feature_multi_perspective_classification_Classification1539); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     				if (element == null) {
@@ -1745,13 +2040,13 @@ public class CltParser extends CltANTLRParserBase {
                     					startIncompleteElement(element);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_0_7, null, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a16, element);
+                    				retrieveLayoutInformation(element, org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_10_0_0_8, null, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a23, element);
                     			}
 
                     if ( state.backtracking==0 ) {
                     				// expected elements (follow set)
-                    				addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[61]);
+                    				addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[81]);
                     			}
 
                     }
@@ -1765,7 +2060,7 @@ public class CltParser extends CltANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[62]);
+            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[82]);
             	}
 
             }
@@ -1788,7 +2083,7 @@ public class CltParser extends CltANTLRParserBase {
 
 
     // $ANTLR start "parse_org_feature_multi_perspective_classification_ClassifiedFeature"
-    // Clt.g:1203:1: parse_org_feature_multi_perspective_classification_ClassifiedFeature returns [org.feature.multi.perspective.classification.ClassifiedFeature element = null] : (a0= 'feature' (a1= QUOTED_34_34 ) ( (a2= 'unbound' |a3= 'dead' |a4= 'alive' )? ) ) ;
+    // Clt.g:1412:1: parse_org_feature_multi_perspective_classification_ClassifiedFeature returns [org.feature.multi.perspective.classification.ClassifiedFeature element = null] : (a0= 'feature' (a1= QUOTED_34_34 ) ( (a2= 'unbound' |a3= 'dead' |a4= 'alive' )? ) ) ;
     public final org.feature.multi.perspective.classification.ClassifiedFeature parse_org_feature_multi_perspective_classification_ClassifiedFeature() throws RecognitionException {
         org.feature.multi.perspective.classification.ClassifiedFeature element =  null;
 
@@ -1805,13 +2100,13 @@ public class CltParser extends CltANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 4) ) { return element; }
 
-            // Clt.g:1206:2: ( (a0= 'feature' (a1= QUOTED_34_34 ) ( (a2= 'unbound' |a3= 'dead' |a4= 'alive' )? ) ) )
-            // Clt.g:1207:2: (a0= 'feature' (a1= QUOTED_34_34 ) ( (a2= 'unbound' |a3= 'dead' |a4= 'alive' )? ) )
+            // Clt.g:1415:2: ( (a0= 'feature' (a1= QUOTED_34_34 ) ( (a2= 'unbound' |a3= 'dead' |a4= 'alive' )? ) ) )
+            // Clt.g:1416:2: (a0= 'feature' (a1= QUOTED_34_34 ) ( (a2= 'unbound' |a3= 'dead' |a4= 'alive' )? ) )
             {
-            // Clt.g:1207:2: (a0= 'feature' (a1= QUOTED_34_34 ) ( (a2= 'unbound' |a3= 'dead' |a4= 'alive' )? ) )
-            // Clt.g:1208:3: a0= 'feature' (a1= QUOTED_34_34 ) ( (a2= 'unbound' |a3= 'dead' |a4= 'alive' )? )
+            // Clt.g:1416:2: (a0= 'feature' (a1= QUOTED_34_34 ) ( (a2= 'unbound' |a3= 'dead' |a4= 'alive' )? ) )
+            // Clt.g:1417:3: a0= 'feature' (a1= QUOTED_34_34 ) ( (a2= 'unbound' |a3= 'dead' |a4= 'alive' )? )
             {
-            a0=(Token)match(input,16,FOLLOW_16_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1383); if (state.failed) return element;
+            a0=(Token)match(input,18,FOLLOW_18_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1591); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (element == null) {
@@ -1828,13 +2123,13 @@ public class CltParser extends CltANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             			// expected elements (follow set)
-            			addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[63]);
+            			addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[83]);
             		}
 
-            // Clt.g:1225:3: (a1= QUOTED_34_34 )
-            // Clt.g:1226:4: a1= QUOTED_34_34
+            // Clt.g:1434:3: (a1= QUOTED_34_34 )
+            // Clt.g:1435:4: a1= QUOTED_34_34
             {
-            a1=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1405); if (state.failed) return element;
+            a1=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1613); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             				if (terminateParsing) {
@@ -1877,37 +2172,37 @@ public class CltParser extends CltANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             			// expected elements (follow set)
-            			addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[64]);
+            			addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[84]);
             		}
 
-            // Clt.g:1268:3: ( (a2= 'unbound' |a3= 'dead' |a4= 'alive' )? )
-            // Clt.g:1269:4: (a2= 'unbound' |a3= 'dead' |a4= 'alive' )?
+            // Clt.g:1477:3: ( (a2= 'unbound' |a3= 'dead' |a4= 'alive' )? )
+            // Clt.g:1478:4: (a2= 'unbound' |a3= 'dead' |a4= 'alive' )?
             {
-            // Clt.g:1269:4: (a2= 'unbound' |a3= 'dead' |a4= 'alive' )?
-            int alt13=4;
+            // Clt.g:1478:4: (a2= 'unbound' |a3= 'dead' |a4= 'alive' )?
+            int alt14=4;
             switch ( input.LA(1) ) {
-                case 23:
+                case 26:
                     {
-                    alt13=1;
+                    alt14=1;
                     }
                     break;
-                case 15:
+                case 16:
                     {
-                    alt13=2;
+                    alt14=2;
                     }
                     break;
-                case 12:
+                case 13:
                     {
-                    alt13=3;
+                    alt14=3;
                     }
                     break;
             }
 
-            switch (alt13) {
+            switch (alt14) {
                 case 1 :
-                    // Clt.g:1270:5: a2= 'unbound'
+                    // Clt.g:1479:5: a2= 'unbound'
                     {
-                    a2=(Token)match(input,23,FOLLOW_23_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1443); if (state.failed) return element;
+                    a2=(Token)match(input,26,FOLLOW_26_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1651); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     					if (element == null) {
@@ -1929,9 +2224,9 @@ public class CltParser extends CltANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Clt.g:1286:10: a3= 'dead'
+                    // Clt.g:1495:10: a3= 'dead'
                     {
-                    a3=(Token)match(input,15,FOLLOW_15_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1460); if (state.failed) return element;
+                    a3=(Token)match(input,16,FOLLOW_16_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1668); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     					if (element == null) {
@@ -1953,9 +2248,9 @@ public class CltParser extends CltANTLRParserBase {
                     }
                     break;
                 case 3 :
-                    // Clt.g:1302:10: a4= 'alive'
+                    // Clt.g:1511:10: a4= 'alive'
                     {
-                    a4=(Token)match(input,12,FOLLOW_12_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1477); if (state.failed) return element;
+                    a4=(Token)match(input,13,FOLLOW_13_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1685); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     					if (element == null) {
@@ -1985,9 +2280,12 @@ public class CltParser extends CltANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             			// expected elements (follow set)
-            			addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[65]);
-            			addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[66]);
-            			addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[67]);
+            			addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[85]);
+            			addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[86]);
+            			addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[87]);
+            			addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[88]);
+            			addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[89]);
+            			addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[90]);
             		}
 
             }
@@ -1995,9 +2293,12 @@ public class CltParser extends CltANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[68]);
-            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[69]);
-            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[70]);
+            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[91]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[92]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[93]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[94]);
+            		addExpectedElement(null, org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[95]);
+            		addExpectedElement(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassificationModel(), org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectationConstants.EXPECTATIONS[96]);
             	}
 
             }
@@ -2024,34 +2325,41 @@ public class CltParser extends CltANTLRParserBase {
 
     public static final BitSet FOLLOW_parse_org_feature_multi_perspective_classification_ClassificationModel_in_start82 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_start89 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_parse_org_feature_multi_perspective_classification_ClassificationModel115 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_parse_org_feature_multi_perspective_classification_ClassificationModel129 = new BitSet(new long[]{0x0000000000060000L});
-    public static final BitSet FOLLOW_18_in_parse_org_feature_multi_perspective_classification_ClassificationModel158 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_60_62_in_parse_org_feature_multi_perspective_classification_ClassificationModel188 = new BitSet(new long[]{0x0000000000260002L});
-    public static final BitSet FOLLOW_17_in_parse_org_feature_multi_perspective_classification_ClassificationModel254 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_60_62_in_parse_org_feature_multi_perspective_classification_ClassificationModel284 = new BitSet(new long[]{0x0000000000260002L});
-    public static final BitSet FOLLOW_parse_org_feature_multi_perspective_classification_Classification_in_parse_org_feature_multi_perspective_classification_ClassificationModel358 = new BitSet(new long[]{0x0000000000200002L});
-    public static final BitSet FOLLOW_21_in_parse_org_feature_multi_perspective_classification_Classification399 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_60_62_in_parse_org_feature_multi_perspective_classification_Classification417 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_parse_org_feature_multi_perspective_classification_Classification438 = new BitSet(new long[]{0x0000000001400800L});
-    public static final BitSet FOLLOW_24_in_parse_org_feature_multi_perspective_classification_Classification467 = new BitSet(new long[]{0x0000000000000880L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_Classification514 = new BitSet(new long[]{0x0000000000000810L});
-    public static final BitSet FOLLOW_COMMA_in_parse_org_feature_multi_perspective_classification_Classification595 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_Classification668 = new BitSet(new long[]{0x0000000000000810L});
-    public static final BitSet FOLLOW_22_in_parse_org_feature_multi_perspective_classification_Classification824 = new BitSet(new long[]{0x0000000000000880L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_Classification871 = new BitSet(new long[]{0x0000000000000810L});
-    public static final BitSet FOLLOW_COMMA_in_parse_org_feature_multi_perspective_classification_Classification952 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_Classification1025 = new BitSet(new long[]{0x0000000000000810L});
-    public static final BitSet FOLLOW_11_in_parse_org_feature_multi_perspective_classification_Classification1180 = new BitSet(new long[]{0x0000000000012002L});
-    public static final BitSet FOLLOW_parse_org_feature_multi_perspective_classification_ClassifiedFeature_in_parse_org_feature_multi_perspective_classification_Classification1203 = new BitSet(new long[]{0x0000000000012002L});
-    public static final BitSet FOLLOW_13_in_parse_org_feature_multi_perspective_classification_Classification1238 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_25_in_parse_org_feature_multi_perspective_classification_Classification1258 = new BitSet(new long[]{0x0000000004010000L});
-    public static final BitSet FOLLOW_parse_org_feature_multi_perspective_classification_ClassifiedFeature_in_parse_org_feature_multi_perspective_classification_Classification1291 = new BitSet(new long[]{0x0000000004010000L});
-    public static final BitSet FOLLOW_26_in_parse_org_feature_multi_perspective_classification_Classification1331 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1383 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1405 = new BitSet(new long[]{0x0000000000809002L});
-    public static final BitSet FOLLOW_23_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1443 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1460 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1477 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_parse_org_feature_multi_perspective_classification_ClassificationModel115 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_22_in_parse_org_feature_multi_perspective_classification_ClassificationModel129 = new BitSet(new long[]{0x0000000000180000L});
+    public static final BitSet FOLLOW_20_in_parse_org_feature_multi_perspective_classification_ClassificationModel152 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_60_62_in_parse_org_feature_multi_perspective_classification_ClassificationModel178 = new BitSet(new long[]{0x0000000000800002L});
+    public static final BitSet FOLLOW_19_in_parse_org_feature_multi_perspective_classification_ClassificationModel232 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_60_62_in_parse_org_feature_multi_perspective_classification_ClassificationModel258 = new BitSet(new long[]{0x0000000000800002L});
+    public static final BitSet FOLLOW_parse_org_feature_multi_perspective_classification_Classification_in_parse_org_feature_multi_perspective_classification_ClassificationModel317 = new BitSet(new long[]{0x0000000000800002L});
+    public static final BitSet FOLLOW_23_in_parse_org_feature_multi_perspective_classification_Classification358 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_60_62_in_parse_org_feature_multi_perspective_classification_Classification376 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_21_in_parse_org_feature_multi_perspective_classification_Classification397 = new BitSet(new long[]{0x0000000009000800L});
+    public static final BitSet FOLLOW_27_in_parse_org_feature_multi_perspective_classification_Classification426 = new BitSet(new long[]{0x0000000000000880L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_Classification473 = new BitSet(new long[]{0x0000000000000810L});
+    public static final BitSet FOLLOW_COMMA_in_parse_org_feature_multi_perspective_classification_Classification554 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_Classification627 = new BitSet(new long[]{0x0000000000000810L});
+    public static final BitSet FOLLOW_24_in_parse_org_feature_multi_perspective_classification_Classification783 = new BitSet(new long[]{0x0000000000000880L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_Classification830 = new BitSet(new long[]{0x0000000000000810L});
+    public static final BitSet FOLLOW_COMMA_in_parse_org_feature_multi_perspective_classification_Classification911 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_Classification984 = new BitSet(new long[]{0x0000000000000810L});
+    public static final BitSet FOLLOW_11_in_parse_org_feature_multi_perspective_classification_Classification1139 = new BitSet(new long[]{0x0000000002065002L});
+    public static final BitSet FOLLOW_parse_org_feature_multi_perspective_classification_ClassifiedFeature_in_parse_org_feature_multi_perspective_classification_Classification1162 = new BitSet(new long[]{0x0000000002065002L});
+    public static final BitSet FOLLOW_12_in_parse_org_feature_multi_perspective_classification_Classification1197 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_TEXT_in_parse_org_feature_multi_perspective_classification_Classification1223 = new BitSet(new long[]{0x0000000002025002L});
+    public static final BitSet FOLLOW_17_in_parse_org_feature_multi_perspective_classification_Classification1264 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_TEXT_in_parse_org_feature_multi_perspective_classification_Classification1290 = new BitSet(new long[]{0x0000000002025002L});
+    public static final BitSet FOLLOW_25_in_parse_org_feature_multi_perspective_classification_Classification1331 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_TEXT_in_parse_org_feature_multi_perspective_classification_Classification1357 = new BitSet(new long[]{0x0000000002025002L});
+    public static final BitSet FOLLOW_14_in_parse_org_feature_multi_perspective_classification_Classification1412 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_28_in_parse_org_feature_multi_perspective_classification_Classification1432 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_parse_org_feature_multi_perspective_classification_ClassifiedFeature_in_parse_org_feature_multi_perspective_classification_Classification1458 = new BitSet(new long[]{0x0000000020040000L});
+    public static final BitSet FOLLOW_parse_org_feature_multi_perspective_classification_ClassifiedFeature_in_parse_org_feature_multi_perspective_classification_Classification1499 = new BitSet(new long[]{0x0000000020040000L});
+    public static final BitSet FOLLOW_29_in_parse_org_feature_multi_perspective_classification_Classification1539 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1591 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1613 = new BitSet(new long[]{0x0000000004012002L});
+    public static final BitSet FOLLOW_26_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1651 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1668 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_parse_org_feature_multi_perspective_classification_ClassifiedFeature1685 = new BitSet(new long[]{0x0000000000000002L});
 
 }

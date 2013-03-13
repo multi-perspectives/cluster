@@ -12,11 +12,11 @@ package org.feature.multi.perspective.classification.resource.clt.grammar;
  */
 public class CltFollowSetProvider {
 	
-	public final static org.feature.multi.perspective.classification.resource.clt.ICltExpectedElement TERMINALS[] = new org.feature.multi.perspective.classification.resource.clt.ICltExpectedElement[22];
+	public final static org.feature.multi.perspective.classification.resource.clt.ICltExpectedElement TERMINALS[] = new org.feature.multi.perspective.classification.resource.clt.ICltExpectedElement[28];
 	
 	public final static org.eclipse.emf.ecore.EStructuralFeature[] FEATURES = new org.eclipse.emf.ecore.EStructuralFeature[3];
 	
-	public final static org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[] LINKS = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[18];
+	public final static org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[] LINKS = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[23];
 	
 	public final static org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[] EMPTY_LINK_ARRAY = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[0];
 	
@@ -38,11 +38,17 @@ public class CltFollowSetProvider {
 		TERMINALS[14] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedStructuralFeature(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_5_0_1_0_0_0_1_0_0_1);
 		TERMINALS[15] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedStructuralFeature(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_5_0_1_0_0_0_1_0_0_2_0_0_2);
 		TERMINALS[16] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedCsString(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_2_0_0_0_0_0_1);
-		TERMINALS[17] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedCsString(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_0_1);
-		TERMINALS[18] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedCsString(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_0_3);
-		TERMINALS[19] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedCsString(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_0_7);
-		TERMINALS[20] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedStructuralFeature(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_2_0_0_0_0_0_3);
-		TERMINALS[21] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedEnumerationTerminal(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_2_0_0_0_0_0_5);
+		TERMINALS[17] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedCsString(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_0_0);
+		TERMINALS[18] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedCsString(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_1_0);
+		TERMINALS[19] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedCsString(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_2_0);
+		TERMINALS[20] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedCsString(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_10_0_0_1);
+		TERMINALS[21] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedStructuralFeature(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_0_1);
+		TERMINALS[22] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedStructuralFeature(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_1_1);
+		TERMINALS[23] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedStructuralFeature(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_9_0_2_1);
+		TERMINALS[24] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedCsString(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_10_0_0_3);
+		TERMINALS[25] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedCsString(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_1_0_0_10_0_0_8);
+		TERMINALS[26] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedStructuralFeature(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_2_0_0_0_0_0_3);
+		TERMINALS[27] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltExpectedEnumerationTerminal(org.feature.multi.perspective.classification.resource.clt.grammar.CltGrammarInformationProvider.CLT_2_0_0_0_0_0_5);
 	}
 	
 	public static void initializeTerminals() {
@@ -70,14 +76,19 @@ public class CltFollowSetProvider {
 		LINKS[7] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]);
 		LINKS[8] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature(), FEATURES[1]);
 		LINKS[9] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]);
-		LINKS[10] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature(), FEATURES[2]);
-		LINKS[11] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature(), FEATURES[2]);
+		LINKS[10] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]);
+		LINKS[11] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]);
 		LINKS[12] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]);
 		LINKS[13] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]);
-		LINKS[14] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature(), FEATURES[1]);
-		LINKS[15] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]);
-		LINKS[16] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature(), FEATURES[1]);
+		LINKS[14] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature(), FEATURES[2]);
+		LINKS[15] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature(), FEATURES[2]);
+		LINKS[16] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature(), FEATURES[2]);
 		LINKS[17] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]);
+		LINKS[18] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]);
+		LINKS[19] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature(), FEATURES[1]);
+		LINKS[20] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]);
+		LINKS[21] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature(), FEATURES[1]);
+		LINKS[22] = new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]);
 	}
 	
 	public static void initializeLinks() {
@@ -89,12 +100,8 @@ public class CltFollowSetProvider {
 		TERMINALS[1].addFollower(TERMINALS[2], EMPTY_LINK_ARRAY);
 		TERMINALS[1].addFollower(TERMINALS[3], EMPTY_LINK_ARRAY);
 		TERMINALS[2].addFollower(TERMINALS[4], EMPTY_LINK_ARRAY);
-		TERMINALS[4].addFollower(TERMINALS[2], EMPTY_LINK_ARRAY);
-		TERMINALS[4].addFollower(TERMINALS[3], EMPTY_LINK_ARRAY);
 		TERMINALS[4].addFollower(TERMINALS[5], new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[] {new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]), });
 		TERMINALS[3].addFollower(TERMINALS[6], EMPTY_LINK_ARRAY);
-		TERMINALS[6].addFollower(TERMINALS[2], EMPTY_LINK_ARRAY);
-		TERMINALS[6].addFollower(TERMINALS[3], EMPTY_LINK_ARRAY);
 		TERMINALS[6].addFollower(TERMINALS[5], new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[] {new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]), });
 		TERMINALS[5].addFollower(TERMINALS[7], EMPTY_LINK_ARRAY);
 		TERMINALS[7].addFollower(TERMINALS[8], EMPTY_LINK_ARRAY);
@@ -115,13 +122,33 @@ public class CltFollowSetProvider {
 		TERMINALS[15].addFollower(TERMINALS[11], EMPTY_LINK_ARRAY);
 		TERMINALS[11].addFollower(TERMINALS[16], new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[] {new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature(), FEATURES[1]), });
 		TERMINALS[11].addFollower(TERMINALS[17], EMPTY_LINK_ARRAY);
+		TERMINALS[11].addFollower(TERMINALS[18], EMPTY_LINK_ARRAY);
+		TERMINALS[11].addFollower(TERMINALS[19], EMPTY_LINK_ARRAY);
+		TERMINALS[11].addFollower(TERMINALS[20], EMPTY_LINK_ARRAY);
 		TERMINALS[11].addFollower(TERMINALS[5], new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[] {new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]), });
-		TERMINALS[17].addFollower(TERMINALS[18], EMPTY_LINK_ARRAY);
-		TERMINALS[18].addFollower(TERMINALS[16], new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[] {new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature(), FEATURES[2]), });
-		TERMINALS[18].addFollower(TERMINALS[19], EMPTY_LINK_ARRAY);
-		TERMINALS[19].addFollower(TERMINALS[5], new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[] {new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]), });
-		TERMINALS[16].addFollower(TERMINALS[20], EMPTY_LINK_ARRAY);
-		TERMINALS[20].addFollower(TERMINALS[21], EMPTY_LINK_ARRAY);
+		TERMINALS[17].addFollower(TERMINALS[21], EMPTY_LINK_ARRAY);
+		TERMINALS[21].addFollower(TERMINALS[17], EMPTY_LINK_ARRAY);
+		TERMINALS[21].addFollower(TERMINALS[18], EMPTY_LINK_ARRAY);
+		TERMINALS[21].addFollower(TERMINALS[19], EMPTY_LINK_ARRAY);
+		TERMINALS[21].addFollower(TERMINALS[20], EMPTY_LINK_ARRAY);
+		TERMINALS[21].addFollower(TERMINALS[5], new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[] {new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]), });
+		TERMINALS[18].addFollower(TERMINALS[22], EMPTY_LINK_ARRAY);
+		TERMINALS[22].addFollower(TERMINALS[17], EMPTY_LINK_ARRAY);
+		TERMINALS[22].addFollower(TERMINALS[18], EMPTY_LINK_ARRAY);
+		TERMINALS[22].addFollower(TERMINALS[19], EMPTY_LINK_ARRAY);
+		TERMINALS[22].addFollower(TERMINALS[20], EMPTY_LINK_ARRAY);
+		TERMINALS[22].addFollower(TERMINALS[5], new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[] {new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]), });
+		TERMINALS[19].addFollower(TERMINALS[23], EMPTY_LINK_ARRAY);
+		TERMINALS[23].addFollower(TERMINALS[17], EMPTY_LINK_ARRAY);
+		TERMINALS[23].addFollower(TERMINALS[18], EMPTY_LINK_ARRAY);
+		TERMINALS[23].addFollower(TERMINALS[19], EMPTY_LINK_ARRAY);
+		TERMINALS[23].addFollower(TERMINALS[20], EMPTY_LINK_ARRAY);
+		TERMINALS[23].addFollower(TERMINALS[5], new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[] {new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]), });
+		TERMINALS[20].addFollower(TERMINALS[24], EMPTY_LINK_ARRAY);
+		TERMINALS[24].addFollower(TERMINALS[16], new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[] {new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassifiedFeature(), FEATURES[2]), });
+		TERMINALS[25].addFollower(TERMINALS[5], new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature[] {new org.feature.multi.perspective.classification.resource.clt.mopp.CltContainedFeature(org.feature.multi.perspective.classification.ClassificationPackage.eINSTANCE.getClassification(), FEATURES[0]), });
+		TERMINALS[16].addFollower(TERMINALS[26], EMPTY_LINK_ARRAY);
+		TERMINALS[26].addFollower(TERMINALS[27], EMPTY_LINK_ARRAY);
 	}
 	
 	public static void wire() {

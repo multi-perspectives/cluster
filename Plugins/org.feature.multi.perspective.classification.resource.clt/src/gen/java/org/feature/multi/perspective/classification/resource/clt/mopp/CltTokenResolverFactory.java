@@ -24,6 +24,7 @@ public class CltTokenResolverFactory implements org.feature.multi.perspective.cl
 		tokenName2TokenResolver = new java.util.LinkedHashMap<String, org.feature.multi.perspective.classification.resource.clt.ICltTokenResolver>();
 		featureName2CollectInTokenResolver = new java.util.LinkedHashMap<String, org.feature.multi.perspective.classification.resource.clt.ICltTokenResolver>();
 		registerTokenResolver("COMMA", new org.feature.multi.perspective.classification.resource.clt.analysis.CltCOMMATokenResolver());
+		registerTokenResolver("TEXT", new org.feature.multi.perspective.classification.resource.clt.analysis.CltTEXTTokenResolver());
 		registerTokenResolver("QUOTED_60_62", new org.feature.multi.perspective.classification.resource.clt.analysis.CltQUOTED_60_62TokenResolver());
 		registerTokenResolver("QUOTED_34_34", new org.feature.multi.perspective.classification.resource.clt.analysis.CltQUOTED_34_34TokenResolver());
 	}

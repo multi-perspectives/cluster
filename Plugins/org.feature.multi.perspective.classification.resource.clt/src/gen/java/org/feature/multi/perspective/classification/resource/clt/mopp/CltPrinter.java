@@ -131,10 +131,6 @@ public class CltPrinter implements org.feature.multi.perspective.classification.
 		printCountingMap.put("viewMapping", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
-		boolean iterate = true;
-		java.io.StringWriter sWriter = null;
-		java.io.PrintWriter out1 = null;
-		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("classification");
 		out.print(" ");
@@ -147,22 +143,6 @@ public class CltPrinter implements org.feature.multi.perspective.classification.
 		out.print(" ");
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_org_feature_multi_perspective_classification_ClassificationModel_0(element, localtab, out, printCountingMap);
-		iterate = true;
-		while (iterate) {
-			sWriter = new java.io.StringWriter();
-			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
-			print_org_feature_multi_perspective_classification_ClassificationModel_0(element, localtab, out1, printCountingMap1);
-			if (printCountingMap.equals(printCountingMap1)) {
-				iterate = false;
-				out1.close();
-			} else {
-				out1.flush();
-				out1.close();
-				out.print(sWriter.toString());
-				printCountingMap.putAll(printCountingMap1);
-			}
-		}
 		// DEFINITION PART BEGINS (LineBreak)
 		out.println();
 		out.print(localtab);
@@ -276,6 +256,7 @@ public class CltPrinter implements org.feature.multi.perspective.classification.
 		printCountingMap.put("compose", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		// print collected hidden tokens
 		int count;
+		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
 		java.util.Map<String, Integer> printCountingMap1 = null;
@@ -334,10 +315,27 @@ public class CltPrinter implements org.feature.multi.perspective.classification.
 			printCountingMap.put("classifiedFeatures", 0);
 		}
 		// DEFINITION PART BEGINS (CompoundDefinition)
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_org_feature_multi_perspective_classification_Classification_1(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
 		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
-		print_org_feature_multi_perspective_classification_Classification_1(element, localtab, out1, printCountingMap1);
+		print_org_feature_multi_perspective_classification_Classification_2(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
 		} else {
@@ -570,6 +568,98 @@ public class CltPrinter implements org.feature.multi.perspective.classification.
 	}
 	
 	public void print_org_feature_multi_perspective_classification_Classification_1(org.feature.multi.perspective.classification.Classification element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		int alt = -1;
+		alt = 0;
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"aliveFeatures"		));
+		int tempMatchCount;
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"deadFeatures"		));
+		if (tempMatchCount > matches) {
+			alt = 1;
+			matches = tempMatchCount;
+		}
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"unboundFeatures"		));
+		if (tempMatchCount > matches) {
+			alt = 2;
+			matches = tempMatchCount;
+		}
+		switch(alt) {
+			case 1:			{
+				// DEFINITION PART BEGINS (CsString)
+				out.print("dfeatures");
+				out.print(" ");
+				// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+				count = printCountingMap.get("deadFeatures");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__DEAD_FEATURES));
+					java.util.List<?> list = (java.util.List<?>) o;
+					int index = list.size() - count;
+					if (index >= 0) {
+						o = list.get(index);
+					} else {
+						o = null;
+					}
+					if (o != null) {
+						org.feature.multi.perspective.classification.resource.clt.ICltTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+						resolver.setOptions(getOptions());
+						out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getClassificationDeadFeaturesReferenceResolver().deResolve((org.featuremapper.models.feature.Feature) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__DEAD_FEATURES)), element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__DEAD_FEATURES), element));
+						out.print(" ");
+					}
+					printCountingMap.put("deadFeatures", count - 1);
+				}
+			}
+			break;
+			case 2:			{
+				// DEFINITION PART BEGINS (CsString)
+				out.print("ufeatures");
+				out.print(" ");
+				// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+				count = printCountingMap.get("unboundFeatures");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__UNBOUND_FEATURES));
+					java.util.List<?> list = (java.util.List<?>) o;
+					int index = list.size() - count;
+					if (index >= 0) {
+						o = list.get(index);
+					} else {
+						o = null;
+					}
+					if (o != null) {
+						org.feature.multi.perspective.classification.resource.clt.ICltTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+						resolver.setOptions(getOptions());
+						out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getClassificationUnboundFeaturesReferenceResolver().deResolve((org.featuremapper.models.feature.Feature) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__UNBOUND_FEATURES)), element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__UNBOUND_FEATURES), element));
+						out.print(" ");
+					}
+					printCountingMap.put("unboundFeatures", count - 1);
+				}
+			}
+			break;
+			default:			// DEFINITION PART BEGINS (CsString)
+			out.print("afeatures");
+			out.print(" ");
+			// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+			count = printCountingMap.get("aliveFeatures");
+			if (count > 0) {
+				Object o = element.eGet(element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__ALIVE_FEATURES));
+				java.util.List<?> list = (java.util.List<?>) o;
+				int index = list.size() - count;
+				if (index >= 0) {
+					o = list.get(index);
+				} else {
+					o = null;
+				}
+				if (o != null) {
+					org.feature.multi.perspective.classification.resource.clt.ICltTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+					resolver.setOptions(getOptions());
+					out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getClassificationAliveFeaturesReferenceResolver().deResolve((org.featuremapper.models.feature.Feature) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__ALIVE_FEATURES)), element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__ALIVE_FEATURES), element));
+					out.print(" ");
+				}
+				printCountingMap.put("aliveFeatures", count - 1);
+			}
+		}
+	}
+	
+	public void print_org_feature_multi_perspective_classification_Classification_2(org.feature.multi.perspective.classification.Classification element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (WhiteSpaces)
@@ -584,6 +674,22 @@ public class CltPrinter implements org.feature.multi.perspective.classification.
 		// DEFINITION PART BEGINS (LineBreak)
 		out.println();
 		out.print(localtab);
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("autoCompleteFeatures");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(org.feature.multi.perspective.classification.ClassificationPackage.CLASSIFICATION__AUTO_COMPLETE_FEATURES));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("autoCompleteFeatures", count - 1);
+		}
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("autoCompleteFeatures");
 		if (count > 0) {
