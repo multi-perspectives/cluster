@@ -158,7 +158,7 @@ public class CslPrinter implements org.feature.model.constraint.resource.csl.ICs
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(org.feature.model.constraint.ConstraintPackage.REQUIRE__LEFT_FEATURE));
 			if (o != null) {
-				org.feature.model.constraint.resource.csl.ICslTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				org.feature.model.constraint.resource.csl.ICslTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_39_39");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getFeatureExpressionLeftFeatureReferenceResolver().deResolve((org.featuremapper.models.feature.Feature) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(org.feature.model.constraint.ConstraintPackage.REQUIRE__LEFT_FEATURE)), element.eClass().getEStructuralFeature(org.feature.model.constraint.ConstraintPackage.REQUIRE__LEFT_FEATURE), element));
 			}

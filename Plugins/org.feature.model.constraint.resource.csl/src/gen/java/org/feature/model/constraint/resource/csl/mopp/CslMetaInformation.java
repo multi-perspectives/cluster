@@ -45,7 +45,7 @@ public class CslMetaInformation implements org.feature.model.constraint.resource
 	}
 	
 	public String getPathToCSDefinition() {
-		return "org.feature.model.constraints/src/main/model/constraint.cs";
+		return "org.feature.model.constraint/src/main/model/constraint.cs";
 	}
 	
 	public String[] getTokenNames() {

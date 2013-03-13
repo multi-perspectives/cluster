@@ -17,6 +17,9 @@ public class CslTokenStyleInformationProvider {
 		if ("excludes".equals(tokenName)) {
 			return new org.feature.model.constraint.resource.csl.mopp.CslTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
+		if ("QUOTED_39_39".equals(tokenName)) {
+			return new org.feature.model.constraint.resource.csl.mopp.CslTokenStyle(new int[] {0x2A, 0x00, 0xFF}, null, false, false, false, false);
+		}
 		if ("QUOTED_34_34".equals(tokenName)) {
 			return new org.feature.model.constraint.resource.csl.mopp.CslTokenStyle(new int[] {0x2A, 0x00, 0xFF}, null, false, false, false, false);
 		}

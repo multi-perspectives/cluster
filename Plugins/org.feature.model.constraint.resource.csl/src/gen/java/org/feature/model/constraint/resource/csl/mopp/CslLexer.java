@@ -11,12 +11,13 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class CslLexer extends Lexer {
     public static final int EOF=-1;
-    public static final int T__8=8;
     public static final int T__9=9;
+    public static final int T__10=10;
     public static final int LINEBREAK=4;
     public static final int QUOTED_34_34=5;
-    public static final int TEXT=6;
-    public static final int WHITESPACE=7;
+    public static final int QUOTED_39_39=6;
+    public static final int TEXT=7;
+    public static final int WHITESPACE=8;
 
     	public java.util.List<org.antlr.runtime3_4_0.RecognitionException> lexerExceptions  = new java.util.ArrayList<org.antlr.runtime3_4_0.RecognitionException>();
     	public java.util.List<Integer> lexerExceptionsPosition = new java.util.ArrayList<Integer>();
@@ -42,10 +43,10 @@ public class CslLexer extends Lexer {
     }
     public String getGrammarFileName() { return "Csl.g"; }
 
-    // $ANTLR start "T__8"
-    public final void mT__8() throws RecognitionException {
+    // $ANTLR start "T__9"
+    public final void mT__9() throws RecognitionException {
         try {
-            int _type = T__8;
+            int _type = T__9;
             int _channel = DEFAULT_TOKEN_CHANNEL;
             // Csl.g:15:6: ( 'excludes' )
             // Csl.g:15:8: 'excludes'
@@ -63,15 +64,15 @@ public class CslLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__8"
+    // $ANTLR end "T__9"
 
-    // $ANTLR start "T__9"
-    public final void mT__9() throws RecognitionException {
+    // $ANTLR start "T__10"
+    public final void mT__10() throws RecognitionException {
         try {
-            int _type = T__9;
+            int _type = T__10;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Csl.g:16:6: ( 'requires' )
-            // Csl.g:16:8: 'requires'
+            // Csl.g:16:7: ( 'requires' )
+            // Csl.g:16:9: 'requires'
             {
             match("requires"); 
 
@@ -86,7 +87,7 @@ public class CslLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__9"
+    // $ANTLR end "T__10"
 
     // $ANTLR start "TEXT"
     public final void mTEXT() throws RecognitionException {
@@ -264,32 +265,32 @@ public class CslLexer extends Lexer {
     }
     // $ANTLR end "LINEBREAK"
 
-    // $ANTLR start "QUOTED_34_34"
-    public final void mQUOTED_34_34() throws RecognitionException {
+    // $ANTLR start "QUOTED_39_39"
+    public final void mQUOTED_39_39() throws RecognitionException {
         try {
-            int _type = QUOTED_34_34;
+            int _type = QUOTED_39_39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Csl.g:770:13: ( ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) ) )
-            // Csl.g:771:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Csl.g:770:13: ( ( ( '\\'' ) (~ ( '\\'' ) )* ( '\\'' ) ) )
+            // Csl.g:771:2: ( ( '\\'' ) (~ ( '\\'' ) )* ( '\\'' ) )
             {
-            // Csl.g:771:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
-            // Csl.g:771:3: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
+            // Csl.g:771:2: ( ( '\\'' ) (~ ( '\\'' ) )* ( '\\'' ) )
+            // Csl.g:771:3: ( '\\'' ) (~ ( '\\'' ) )* ( '\\'' )
             {
-            // Csl.g:771:3: ( '\"' )
-            // Csl.g:771:4: '\"'
+            // Csl.g:771:3: ( '\\'' )
+            // Csl.g:771:4: '\\''
             {
-            match('\"'); 
+            match('\''); 
 
             }
 
 
-            // Csl.g:771:8: (~ ( '\"' ) )*
+            // Csl.g:771:9: (~ ( '\\'' ) )*
             loop3:
             do {
                 int alt3=2;
                 int LA3_0 = input.LA(1);
 
-                if ( ((LA3_0 >= '\u0000' && LA3_0 <= '!')||(LA3_0 >= '#' && LA3_0 <= '\uFFFF')) ) {
+                if ( ((LA3_0 >= '\u0000' && LA3_0 <= '&')||(LA3_0 >= '(' && LA3_0 <= '\uFFFF')) ) {
                     alt3=1;
                 }
 
@@ -298,7 +299,7 @@ public class CslLexer extends Lexer {
             	case 1 :
             	    // Csl.g:
             	    {
-            	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '\uFFFF') ) {
+            	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '&')||(input.LA(1) >= '(' && input.LA(1) <= '\uFFFF') ) {
             	        input.consume();
             	    }
             	    else {
@@ -317,8 +318,83 @@ public class CslLexer extends Lexer {
             } while (true);
 
 
-            // Csl.g:771:17: ( '\"' )
-            // Csl.g:771:18: '\"'
+            // Csl.g:771:19: ( '\\'' )
+            // Csl.g:771:20: '\\''
+            {
+            match('\''); 
+
+            }
+
+
+            }
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "QUOTED_39_39"
+
+    // $ANTLR start "QUOTED_34_34"
+    public final void mQUOTED_34_34() throws RecognitionException {
+        try {
+            int _type = QUOTED_34_34;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // Csl.g:773:13: ( ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) ) )
+            // Csl.g:774:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            {
+            // Csl.g:774:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Csl.g:774:3: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
+            {
+            // Csl.g:774:3: ( '\"' )
+            // Csl.g:774:4: '\"'
+            {
+            match('\"'); 
+
+            }
+
+
+            // Csl.g:774:8: (~ ( '\"' ) )*
+            loop4:
+            do {
+                int alt4=2;
+                int LA4_0 = input.LA(1);
+
+                if ( ((LA4_0 >= '\u0000' && LA4_0 <= '!')||(LA4_0 >= '#' && LA4_0 <= '\uFFFF')) ) {
+                    alt4=1;
+                }
+
+
+                switch (alt4) {
+            	case 1 :
+            	    // Csl.g:
+            	    {
+            	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '\uFFFF') ) {
+            	        input.consume();
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop4;
+                }
+            } while (true);
+
+
+            // Csl.g:774:17: ( '\"' )
+            // Csl.g:774:18: '\"'
             {
             match('\"'); 
 
@@ -340,128 +416,128 @@ public class CslLexer extends Lexer {
     // $ANTLR end "QUOTED_34_34"
 
     public void mTokens() throws RecognitionException {
-        // Csl.g:1:8: ( T__8 | T__9 | TEXT | WHITESPACE | LINEBREAK | QUOTED_34_34 )
-        int alt4=6;
+        // Csl.g:1:8: ( T__9 | T__10 | TEXT | WHITESPACE | LINEBREAK | QUOTED_39_39 | QUOTED_34_34 )
+        int alt5=7;
         switch ( input.LA(1) ) {
         case 'e':
             {
-            int LA4_1 = input.LA(2);
+            int LA5_1 = input.LA(2);
 
-            if ( (LA4_1=='x') ) {
-                int LA4_7 = input.LA(3);
+            if ( (LA5_1=='x') ) {
+                int LA5_8 = input.LA(3);
 
-                if ( (LA4_7=='c') ) {
-                    int LA4_9 = input.LA(4);
+                if ( (LA5_8=='c') ) {
+                    int LA5_10 = input.LA(4);
 
-                    if ( (LA4_9=='l') ) {
-                        int LA4_11 = input.LA(5);
+                    if ( (LA5_10=='l') ) {
+                        int LA5_12 = input.LA(5);
 
-                        if ( (LA4_11=='u') ) {
-                            int LA4_13 = input.LA(6);
+                        if ( (LA5_12=='u') ) {
+                            int LA5_14 = input.LA(6);
 
-                            if ( (LA4_13=='d') ) {
-                                int LA4_15 = input.LA(7);
+                            if ( (LA5_14=='d') ) {
+                                int LA5_16 = input.LA(7);
 
-                                if ( (LA4_15=='e') ) {
-                                    int LA4_17 = input.LA(8);
+                                if ( (LA5_16=='e') ) {
+                                    int LA5_18 = input.LA(8);
 
-                                    if ( (LA4_17=='s') ) {
-                                        int LA4_19 = input.LA(9);
+                                    if ( (LA5_18=='s') ) {
+                                        int LA5_20 = input.LA(9);
 
-                                        if ( (LA4_19=='-'||(LA4_19 >= '0' && LA4_19 <= '9')||(LA4_19 >= 'A' && LA4_19 <= 'Z')||LA4_19=='_'||(LA4_19 >= 'a' && LA4_19 <= 'z')) ) {
-                                            alt4=3;
+                                        if ( (LA5_20=='-'||(LA5_20 >= '0' && LA5_20 <= '9')||(LA5_20 >= 'A' && LA5_20 <= 'Z')||LA5_20=='_'||(LA5_20 >= 'a' && LA5_20 <= 'z')) ) {
+                                            alt5=3;
                                         }
                                         else {
-                                            alt4=1;
+                                            alt5=1;
                                         }
                                     }
                                     else {
-                                        alt4=3;
+                                        alt5=3;
                                     }
                                 }
                                 else {
-                                    alt4=3;
+                                    alt5=3;
                                 }
                             }
                             else {
-                                alt4=3;
+                                alt5=3;
                             }
                         }
                         else {
-                            alt4=3;
+                            alt5=3;
                         }
                     }
                     else {
-                        alt4=3;
+                        alt5=3;
                     }
                 }
                 else {
-                    alt4=3;
+                    alt5=3;
                 }
             }
             else {
-                alt4=3;
+                alt5=3;
             }
             }
             break;
         case 'r':
             {
-            int LA4_2 = input.LA(2);
+            int LA5_2 = input.LA(2);
 
-            if ( (LA4_2=='e') ) {
-                int LA4_8 = input.LA(3);
+            if ( (LA5_2=='e') ) {
+                int LA5_9 = input.LA(3);
 
-                if ( (LA4_8=='q') ) {
-                    int LA4_10 = input.LA(4);
+                if ( (LA5_9=='q') ) {
+                    int LA5_11 = input.LA(4);
 
-                    if ( (LA4_10=='u') ) {
-                        int LA4_12 = input.LA(5);
+                    if ( (LA5_11=='u') ) {
+                        int LA5_13 = input.LA(5);
 
-                        if ( (LA4_12=='i') ) {
-                            int LA4_14 = input.LA(6);
+                        if ( (LA5_13=='i') ) {
+                            int LA5_15 = input.LA(6);
 
-                            if ( (LA4_14=='r') ) {
-                                int LA4_16 = input.LA(7);
+                            if ( (LA5_15=='r') ) {
+                                int LA5_17 = input.LA(7);
 
-                                if ( (LA4_16=='e') ) {
-                                    int LA4_18 = input.LA(8);
+                                if ( (LA5_17=='e') ) {
+                                    int LA5_19 = input.LA(8);
 
-                                    if ( (LA4_18=='s') ) {
-                                        int LA4_20 = input.LA(9);
+                                    if ( (LA5_19=='s') ) {
+                                        int LA5_21 = input.LA(9);
 
-                                        if ( (LA4_20=='-'||(LA4_20 >= '0' && LA4_20 <= '9')||(LA4_20 >= 'A' && LA4_20 <= 'Z')||LA4_20=='_'||(LA4_20 >= 'a' && LA4_20 <= 'z')) ) {
-                                            alt4=3;
+                                        if ( (LA5_21=='-'||(LA5_21 >= '0' && LA5_21 <= '9')||(LA5_21 >= 'A' && LA5_21 <= 'Z')||LA5_21=='_'||(LA5_21 >= 'a' && LA5_21 <= 'z')) ) {
+                                            alt5=3;
                                         }
                                         else {
-                                            alt4=2;
+                                            alt5=2;
                                         }
                                     }
                                     else {
-                                        alt4=3;
+                                        alt5=3;
                                     }
                                 }
                                 else {
-                                    alt4=3;
+                                    alt5=3;
                                 }
                             }
                             else {
-                                alt4=3;
+                                alt5=3;
                             }
                         }
                         else {
-                            alt4=3;
+                            alt5=3;
                         }
                     }
                     else {
-                        alt4=3;
+                        alt5=3;
                     }
                 }
                 else {
-                    alt4=3;
+                    alt5=3;
                 }
             }
             else {
-                alt4=3;
+                alt5=3;
             }
             }
             break;
@@ -528,54 +604,59 @@ public class CslLexer extends Lexer {
         case 'y':
         case 'z':
             {
-            alt4=3;
+            alt5=3;
             }
             break;
         case '\t':
         case '\f':
         case ' ':
             {
-            alt4=4;
+            alt5=4;
             }
             break;
         case '\n':
         case '\r':
             {
-            alt4=5;
+            alt5=5;
+            }
+            break;
+        case '\'':
+            {
+            alt5=6;
             }
             break;
         case '\"':
             {
-            alt4=6;
+            alt5=7;
             }
             break;
         default:
             NoViableAltException nvae =
-                new NoViableAltException("", 4, 0, input);
+                new NoViableAltException("", 5, 0, input);
 
             throw nvae;
 
         }
 
-        switch (alt4) {
+        switch (alt5) {
             case 1 :
-                // Csl.g:1:10: T__8
-                {
-                mT__8(); 
-
-
-                }
-                break;
-            case 2 :
-                // Csl.g:1:15: T__9
+                // Csl.g:1:10: T__9
                 {
                 mT__9(); 
 
 
                 }
                 break;
+            case 2 :
+                // Csl.g:1:15: T__10
+                {
+                mT__10(); 
+
+
+                }
+                break;
             case 3 :
-                // Csl.g:1:20: TEXT
+                // Csl.g:1:21: TEXT
                 {
                 mTEXT(); 
 
@@ -583,7 +664,7 @@ public class CslLexer extends Lexer {
                 }
                 break;
             case 4 :
-                // Csl.g:1:25: WHITESPACE
+                // Csl.g:1:26: WHITESPACE
                 {
                 mWHITESPACE(); 
 
@@ -591,7 +672,7 @@ public class CslLexer extends Lexer {
                 }
                 break;
             case 5 :
-                // Csl.g:1:36: LINEBREAK
+                // Csl.g:1:37: LINEBREAK
                 {
                 mLINEBREAK(); 
 
@@ -599,7 +680,15 @@ public class CslLexer extends Lexer {
                 }
                 break;
             case 6 :
-                // Csl.g:1:46: QUOTED_34_34
+                // Csl.g:1:47: QUOTED_39_39
+                {
+                mQUOTED_39_39(); 
+
+
+                }
+                break;
+            case 7 :
+                // Csl.g:1:60: QUOTED_34_34
                 {
                 mQUOTED_34_34(); 
 

@@ -555,7 +555,7 @@ parse_org_feature_model_constraint_Require returns [org.feature.model.constraint
 }
 :
 	(
-		a0 = QUOTED_34_34		
+		a0 = QUOTED_39_39		
 		{
 			if (terminateParsing) {
 				throw new org.feature.model.constraint.resource.csl.mopp.CslTerminateParsingException();
@@ -565,7 +565,7 @@ parse_org_feature_model_constraint_Require returns [org.feature.model.constraint
 				startIncompleteElement(element);
 			}
 			if (a0 != null) {
-				org.feature.model.constraint.resource.csl.ICslTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				org.feature.model.constraint.resource.csl.ICslTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_39_39");
 				tokenResolver.setOptions(getOptions());
 				org.feature.model.constraint.resource.csl.ICslTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.feature.model.constraint.ConstraintPackage.REQUIRE__LEFT_FEATURE), result);
@@ -766,6 +766,9 @@ WHITESPACE:
 LINEBREAK:
 	(('\r\n' | '\r' | '\n'))
 	{ _channel = 99; }
+;
+QUOTED_39_39:
+	(('\'')(~('\''))*('\''))
 ;
 QUOTED_34_34:
 	(('"')(~('"'))*('"'))

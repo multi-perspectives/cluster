@@ -23,6 +23,7 @@ public class CslTokenResolverFactory implements org.feature.model.constraint.res
 	public CslTokenResolverFactory() {
 		tokenName2TokenResolver = new java.util.LinkedHashMap<String, org.feature.model.constraint.resource.csl.ICslTokenResolver>();
 		featureName2CollectInTokenResolver = new java.util.LinkedHashMap<String, org.feature.model.constraint.resource.csl.ICslTokenResolver>();
+		registerTokenResolver("QUOTED_39_39", new org.feature.model.constraint.resource.csl.analysis.CslQUOTED_39_39TokenResolver());
 		registerTokenResolver("QUOTED_34_34", new org.feature.model.constraint.resource.csl.analysis.CslQUOTED_34_34TokenResolver());
 	}
 	

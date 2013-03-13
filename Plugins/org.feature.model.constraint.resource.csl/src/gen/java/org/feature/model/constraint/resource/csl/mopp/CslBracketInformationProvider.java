@@ -36,6 +36,7 @@ public class CslBracketInformationProvider {
 	
 	public java.util.Collection<org.feature.model.constraint.resource.csl.ICslBracketPair> getBracketPairs() {
 		java.util.Collection<org.feature.model.constraint.resource.csl.ICslBracketPair> result = new java.util.ArrayList<org.feature.model.constraint.resource.csl.ICslBracketPair>();
+		result.add(new BracketPair("'", "'", false));
 		result.add(new BracketPair("\"", "\"", false));
 		return result;
 	}

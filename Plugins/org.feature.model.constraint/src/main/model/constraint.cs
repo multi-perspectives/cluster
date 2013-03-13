@@ -27,6 +27,6 @@ RULES {
 	// syntax definition for class 'Constraint'
 	  Constraint ::= expression ;
 	
-	Require ::= leftFeature['"','"'] #1 "requires" #1 rightFeature['"','"'];
+	Require ::= leftFeature['\'','\''] #1 "requires" #1 rightFeature['"','"'];
 	Exclude ::= leftFeature['"','"'] #1 "excludes" #1 rightFeature['"','"'];
 }

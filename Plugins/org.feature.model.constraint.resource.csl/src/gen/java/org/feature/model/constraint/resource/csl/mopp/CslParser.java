@@ -13,16 +13,17 @@ import java.util.HashMap;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class CslParser extends CslANTLRParserBase {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "LINEBREAK", "QUOTED_34_34", "TEXT", "WHITESPACE", "'excludes'", "'requires'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "LINEBREAK", "QUOTED_34_34", "QUOTED_39_39", "TEXT", "WHITESPACE", "'excludes'", "'requires'"
     };
 
     public static final int EOF=-1;
-    public static final int T__8=8;
     public static final int T__9=9;
+    public static final int T__10=10;
     public static final int LINEBREAK=4;
     public static final int QUOTED_34_34=5;
-    public static final int TEXT=6;
-    public static final int WHITESPACE=7;
+    public static final int QUOTED_39_39=6;
+    public static final int TEXT=7;
+    public static final int WHITESPACE=8;
 
     // delegates
     public CslANTLRParserBase[] getDelegates() {
@@ -661,7 +662,7 @@ public class CslParser extends CslANTLRParserBase {
 
 
     // $ANTLR start "parse_org_feature_model_constraint_Require"
-    // Csl.g:553:1: parse_org_feature_model_constraint_Require returns [org.feature.model.constraint.Require element = null] : (a0= QUOTED_34_34 ) a1= 'requires' (a2= QUOTED_34_34 ) ;
+    // Csl.g:553:1: parse_org_feature_model_constraint_Require returns [org.feature.model.constraint.Require element = null] : (a0= QUOTED_39_39 ) a1= 'requires' (a2= QUOTED_34_34 ) ;
     public final org.feature.model.constraint.Require parse_org_feature_model_constraint_Require() throws RecognitionException {
         org.feature.model.constraint.Require element =  null;
 
@@ -676,13 +677,13 @@ public class CslParser extends CslANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 3) ) { return element; }
 
-            // Csl.g:556:2: ( (a0= QUOTED_34_34 ) a1= 'requires' (a2= QUOTED_34_34 ) )
-            // Csl.g:557:2: (a0= QUOTED_34_34 ) a1= 'requires' (a2= QUOTED_34_34 )
+            // Csl.g:556:2: ( (a0= QUOTED_39_39 ) a1= 'requires' (a2= QUOTED_34_34 ) )
+            // Csl.g:557:2: (a0= QUOTED_39_39 ) a1= 'requires' (a2= QUOTED_34_34 )
             {
-            // Csl.g:557:2: (a0= QUOTED_34_34 )
-            // Csl.g:558:3: a0= QUOTED_34_34
+            // Csl.g:557:2: (a0= QUOTED_39_39 )
+            // Csl.g:558:3: a0= QUOTED_39_39
             {
-            a0=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_feature_model_constraint_Require156); if (state.failed) return element;
+            a0=(Token)match(input,QUOTED_39_39,FOLLOW_QUOTED_39_39_in_parse_org_feature_model_constraint_Require156); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -693,7 +694,7 @@ public class CslParser extends CslANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a0 != null) {
-            				org.feature.model.constraint.resource.csl.ICslTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				org.feature.model.constraint.resource.csl.ICslTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_39_39");
             				tokenResolver.setOptions(getOptions());
             				org.feature.model.constraint.resource.csl.ICslTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(org.feature.model.constraint.ConstraintPackage.REQUIRE__LEFT_FEATURE), result);
@@ -725,7 +726,7 @@ public class CslParser extends CslANTLRParserBase {
             		addExpectedElement(null, org.feature.model.constraint.resource.csl.mopp.CslExpectationConstants.EXPECTATIONS[2]);
             	}
 
-            a1=(Token)match(input,9,FOLLOW_9_in_parse_org_feature_model_constraint_Require177); if (state.failed) return element;
+            a1=(Token)match(input,10,FOLLOW_10_in_parse_org_feature_model_constraint_Require177); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -871,7 +872,7 @@ public class CslParser extends CslANTLRParserBase {
             		addExpectedElement(null, org.feature.model.constraint.resource.csl.mopp.CslExpectationConstants.EXPECTATIONS[4]);
             	}
 
-            a1=(Token)match(input,8,FOLLOW_8_in_parse_org_feature_model_constraint_Exclude256); if (state.failed) return element;
+            a1=(Token)match(input,9,FOLLOW_9_in_parse_org_feature_model_constraint_Exclude256); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -971,23 +972,11 @@ public class CslParser extends CslANTLRParserBase {
             int alt1=2;
             int LA1_0 = input.LA(1);
 
-            if ( (LA1_0==QUOTED_34_34) ) {
-                int LA1_1 = input.LA(2);
-
-                if ( (LA1_1==9) ) {
-                    alt1=1;
-                }
-                else if ( (LA1_1==8) ) {
-                    alt1=2;
-                }
-                else {
-                    if (state.backtracking>0) {state.failed=true; return element;}
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 1, 1, input);
-
-                    throw nvae;
-
-                }
+            if ( (LA1_0==QUOTED_39_39) ) {
+                alt1=1;
+            }
+            else if ( (LA1_0==QUOTED_34_34) ) {
+                alt1=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return element;}
@@ -1049,11 +1038,11 @@ public class CslParser extends CslANTLRParserBase {
     public static final BitSet FOLLOW_parse_org_feature_model_constraint_Constraint_in_start82 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_start89 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_parse_org_feature_model_constraint_FeatureExpression_in_parse_org_feature_model_constraint_Constraint119 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_feature_model_constraint_Require156 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_9_in_parse_org_feature_model_constraint_Require177 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_39_39_in_parse_org_feature_model_constraint_Require156 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_org_feature_model_constraint_Require177 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_feature_model_constraint_Require195 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_feature_model_constraint_Exclude235 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_8_in_parse_org_feature_model_constraint_Exclude256 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_feature_model_constraint_Exclude235 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_parse_org_feature_model_constraint_Exclude256 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_feature_model_constraint_Exclude274 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_parse_org_feature_model_constraint_Require_in_parse_org_feature_model_constraint_FeatureExpression306 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_parse_org_feature_model_constraint_Exclude_in_parse_org_feature_model_constraint_FeatureExpression316 = new BitSet(new long[]{0x0000000000000002L});
