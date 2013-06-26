@@ -18,7 +18,6 @@ import org.feature.model.utilities.WorkbenchUtil;
 import org.feature.multi.perspective.mapping.viewmapping.MappingModel;
 import org.feature.multi.perspective.model.viewmodel.ViewPoint;
 import org.feature.multi.perspective.model.editor.editors.ViewmodelMultiPageEditor;
-import org.featuremapper.models.featuremapping.FeatureMappingModel;
 
 /**
  * Handler of the Incremental Algorithm
