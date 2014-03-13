@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewmodel:GroupModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewmodel="http://org.feature.multi.perspective.model/schema/1.0">
+  <coreGroup name="Core">
+    <groups name="Basic" viewPointReference="//@viewPointContainer/@viewPoints.0 //@viewPointContainer/@viewPoints.1 //@viewPointContainer/@viewPoints.2">
+      <groups name="Customized" viewPointReference="//@viewPointContainer/@viewPoints.3"/>
+    </groups>
+    <groups name="Premium" viewPointReference="//@viewPointContainer/@viewPoints.3">
+      <groups name="Silver" viewPointReference="//@viewPointContainer/@viewPoints.1 //@viewPointContainer/@viewPoints.2"/>
+      <groups name="Gold" viewPointReference="//@viewPointContainer/@viewPoints.2"/>
+    </groups>
+  </coreGroup>
+  <viewPointContainer>
+    <viewPoints name="BasicUser" containedInGroup="//@coreGroup/@groups.0"/>
+    <viewPoints name="SilverUser" containedInGroup="//@coreGroup/@groups.1/@groups.0 //@coreGroup/@groups.0"/>
+    <viewPoints name="GoldUser" containedInGroup="//@coreGroup/@groups.1/@groups.0 //@coreGroup/@groups.1/@groups.1 //@coreGroup/@groups.0"/>
+    <viewPoints name="SpecialUser" containedInGroup="//@coreGroup/@groups.0/@groups.0 //@coreGroup/@groups.1"/>
+  </viewPointContainer>
+</viewmodel:GroupModel>
